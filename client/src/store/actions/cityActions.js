@@ -27,13 +27,13 @@ export const getCities = () => dispatch => {
 }
 
 
-export const addCity = (id) => {
+export const addCity = (newCity) => {
 	//with thunk I return function, not obj
 	return (dispatch, getState) => {
-		// FALTA make async call to database
+		// FALTA make async call to database to add it to the db
 		dispatch({
 			type: "ADD_CITY",
-			id: id
+			newCity: newCity
 		})
 	}
 };

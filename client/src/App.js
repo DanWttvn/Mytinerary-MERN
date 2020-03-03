@@ -17,7 +17,6 @@ class App extends Component {
 			<BrowserRouter>
 				<div className="App">
 					{/* <h1>My itinerary</h1> cambiar por logo */}
-					
 					<Switch>
 						<Route exact path="/" component={LandingPage} />
 						<Route path="/sign_in" component={SignInPage} />
@@ -29,7 +28,6 @@ class App extends Component {
 						<Route exact path="/favorites" component={FavoritesPage} />
 						{/* <Route path="/welcome" component={Welcomepage}></Route> */}
 					</Switch>
-	
 				</div>
 			</BrowserRouter>
 		);

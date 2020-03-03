@@ -12,13 +12,14 @@ const citiesReducer = (state = initState, action) => {
 			}
 		
 		case "ADD_CITY":
-			console.log("adding city");
+			console.log("adding city", action.newCity);
 			break
 
 		case "FILTER_CITIES":
 			console.log("filtering");
 			let cities = state.cities.filter(city => {
 				return city.name.toLowerCase().startsWith(action.searchTerm)
+				// çççç
 			});
 			return {
 				...state,
@@ -28,6 +29,7 @@ const citiesReducer = (state = initState, action) => {
 		default:
 			return state;
 	}
+	return state
 }
 
 export default citiesReducer;
