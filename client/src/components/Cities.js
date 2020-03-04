@@ -5,7 +5,7 @@ import React from 'react'
 
 const Cities = ({cities}) => {
 
-	console.log(cities);
+	// console.log(cities);
 	
 	const citiesGallery = cities.map((city, i) => {		
 		return (

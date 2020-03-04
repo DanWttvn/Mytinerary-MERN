@@ -1,4 +1,5 @@
 const initState = {
+	citiesDB: [], 
 	cities: []
 }
 
@@ -8,19 +9,21 @@ const citiesReducer = (state = initState, action) => {
 			console.log("fetching Data");
 			return {
 				...state,
+				citiesDB: action.payload,
 				cities: action.payload
 			}
 		
 		case "ADD_CITY":
 			console.log("adding city", action.newCity);
-			break
+			return {
+				...state,
+				cities: [...state.cities, action.newCity]
+			};
 
 		case "FILTER_CITIES":
-			console.log("filtering");
-			let cities = state.cities.filter(city => {
-				return city.name.toLowerCase().startsWith(action.searchTerm)
-				// çççç
-			});
+			console.log("filtering", action.searchTerm);
+			let cities = state.citiesDB
+			cities = state.citiesDB.filter(city => city.name.toLowerCase().startsWith(action.searchTerm));
 			return {
 				...state,
 				cities
@@ -29,7 +32,7 @@ const citiesReducer = (state = initState, action) => {
 		default:
 			return state;
 	}
-	return state
+	// return state
 }
 
 export default citiesReducer;

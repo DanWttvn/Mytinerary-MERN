@@ -2,20 +2,24 @@ import React, { Component } from "react"
 
 
 class Searchbar extends Component {
+	// state = {
+	// 	searchTerm: ""
+	// }
 
-	handleChange = (e) => {
-		this.props.searchCity(e.target.value.toLowerCase()); 
-		//como mando el searcchTerm?
-		// searchCity es el nombre del props que le he puesto en city page, es decir, la funcion
+	handleSearchTerm = (e) => {
+		let searchTerm = e.target.value.toLowerCase(); 
+		console.log(searchTerm);
+		
+		this.props.getSearchTerm(searchTerm); //sending searchterm through getSearchTerm
 	}
 	
 	render() {
-		console.log(this.props);
-		console.log(this.props.searchCity);
+		// console.log(this.props);
+		// console.log(this.props.getSearchTerm);
 		
 		return (
 			<div id="searchbar" className="searchbar">
-				<input type="text" onChange={this.handleChange} className="" placeholder="Search a city..."/>
+				<input type="text" onChange={this.handleSearchTerm} placeholder="Search a city..."/>
 			</div>	
 		)	
 	}

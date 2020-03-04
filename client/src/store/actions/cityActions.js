@@ -1,17 +1,3 @@
-// getData = () => {
-// 	this.setState({...this.state, isFetching: true})
-// 	fetch("/cities/all")
-// 		.then(response => response.json())
-// 		.then(data => {
-// 			console.log(data);
-// 			this.setState({
-// 				cities: data,
-// 				filteredCities: data,
-// 				isFetching: false
-// 			})
-// 		})
-// }
-
 import axios from "axios";
 
 // con axios dispatch
@@ -33,18 +19,16 @@ export const addCity = (newCity) => {
 		// FALTA make async call to database to add it to the db
 		dispatch({
 			type: "ADD_CITY",
-			newCity: newCity
+			newCity
 		})
 	}
 };
 
-export const filterCities = (searchTerm) => {
-	return (dispatch, getState) => {
-		// FALTA make async call to database
-		dispatch({
-			type: "FILTER_CITIES",
-			payload: searchTerm
-		})
-	}
+
+export const filterCities = (searchTerm) => dispatch => {
+	dispatch({
+		type: "FILTER_CITIES",
+		searchTerm: searchTerm
+	})
 };
 
