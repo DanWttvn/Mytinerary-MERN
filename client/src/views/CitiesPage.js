@@ -4,41 +4,22 @@ import Logo from "../components/Logo"
 import Navbar from "../components/Navbar"
 import Searchbar from "../components/Searchbar"
 import Cities from "../components/Cities"
+import AddCityForm from "../components/AddCityForm"
 
 import { connect } from "react-redux"
 import { addCity, getCities, filterCities } from "../store/actions/cityActions"
 
 
 class CitiesPage extends Component {
-	state = {
-		newCity: "",
-		newCityCountry: "",
-	}
 
 	componentDidMount () {
 		this.props.getCities()
 		// console.log(this.state.cities)
 	}
 
-	//ADD CITY
-	handleAddCityChange = (e) => {
-		this.setState({
-			[e.target.id]: e.target.value //id es newCity y newCityCountry, perfect para varios campos
-		})
+	addWithInput = (newCity) => {
+		this.props.addCity(newCity)
 	}
-
-	handleAddCitySubmit = (e) => {
-		e.preventDefault();
-		this.props.addCity(this.state)
-	}
-
-	//FILTER
-	// handleSearchTerm = (e) => {
-	// 	let searchTerm = e.target.value.toLowerCase(); 
-	// 	console.log(searchTerm);
-		
-	// 	this.props.filterCities(searchTerm);
-	// }
 
 	filterWithSearchTerm = (searchTerm) => {
 		console.log(searchTerm);
@@ -54,19 +35,12 @@ class CitiesPage extends Component {
 				<Logo/>
 				<h3>Where are you going?</h3>
 
-				<form id="addCityForm" onSubmit={this.handleAddCitySubmit}>
-					<span className="Add a new city"></span>
-					<div className="input">
-						<label htmlFor="newCity"></label>
-						<input type="text" id="newCity" onChange={this.handleAddCityChange} />
-						<input type="text" id="newCityCountry" onChange={this.handleAddCityChange} />
-						<button>Add City</button>
-					</div>
-				</form>
+				<AddCityForm getNewCity={this.addWithInput} />
 
 				<Searchbar getSearchTerm={this.filterWithSearchTerm} />
 
 				<Cities cities={this.props.cities} />	
+				
 				<Navbar/>
 			</div>
 		)
