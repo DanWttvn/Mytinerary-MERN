@@ -10,12 +10,13 @@ const Cities = ({cities}) => {
 	const citiesGallery = cities.map(city=> {		
 		return (
 			// con las comillas `` !!! aqui hago una ruta variable segun el nombre de la ciudad
-			<Link to={`cities/${city.name}`} key={city._id}> 
+			<Link to={`${city.name}`} key={city._id}> 
 				<div className="cityCard" >
 					<div className="thumbnail" style={
 						{backgroundImage: 'url(\'' + city.img + '\')', 
-						backgroundPosition: 'center ce nter', 
+						backgroundPosition: 'center center', 
 						backgroundSize: 'cover'}}></div>
+					{/* <img className="thumbnail" src={city.img} alt=""/> lo mismo */}
 					<p className="cityNameThumb">{city.name}</p>
 				</div>
 			</Link>

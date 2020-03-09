@@ -1,5 +1,14 @@
 import React from 'react'
-// import thumbPrueba from "../img/amsterdam/a (1).jpg"
+
+// import ExtraInfoIT from "../components//ExtraInfoIT"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart as fasHeart} from '@fortawesome/free-solid-svg-icons'
+import { faHeart as farHeart} from '@fortawesome/free-regular-svg-icons'
+import { faThumbsUp } from '@fortawesome/free-regular-svg-icons'
+import { faClock } from '@fortawesome/free-regular-svg-icons'
+// import { faDollarSign } from '@fortawesome/free-solid-svg-icons'
+
+
 
 
 const Itineraries = ({itineraries}) => {
@@ -9,17 +18,51 @@ const Itineraries = ({itineraries}) => {
 	const itinsCarrousel = itineraries.map((itin, i) => {
 		return (
 			<div className="itinCard" key={i}>
-				<div className="thumbnail" style={
-					{backgroundImage: 'url(\'' + itin.cover + '\')', 
+				<div className="itinPrev" style={
+					{backgroundImage: 'url(\'' + itin.img
+					+ '\')', 
 					backgroundPosition: 'center center', 
-					backgroundSize: 'cover'}}></div>
-				<p className="itinNameThumb">{itin.name}</p>
+					backgroundSize: 'cover'}}>
+						<FontAwesomeIcon icon={farHeart} className="faHeart farHeart"/>
+						<FontAwesomeIcon hidden icon={fasHeart} className="faHeart fasHeart"/>
+						<div className="itinInfoPrev">
+							<p className="shortenedSummary">{itin.summary}</p>
+						</div>
+				</div>
+
+				<div className="extraInfoBox">
+					<div className="extraInfoIconsBox">
+						<div className="extraInfoIcon">
+							<FontAwesomeIcon icon={faThumbsUp} className="faExtraInfo"/>
+							<span>25</span>
+						</div>
+						<div className="extraInfoIcon">
+							<FontAwesomeIcon icon={faClock} className="faExtraInfo"/>
+							<span> {itin.duration}</span>
+						</div>
+						<div className="extraInfoIcon">
+							<span>{itin.price}</span>
+							{/* <FontAwesomeIcon icon={faDollarSign} className="faExtraInfo"/>
+							<FontAwesomeIcon icon={faDollarSign} className="faExtraInfo"/> */}
+						</div>
+					</div>
+					<span className="title">{itin.title}</span>
+
+					<div className="hastagsBox">
+						<span className="hastag">#history</span>
+						<span className="hastag">#restaurants</span>
+					</div>
+				</div>
+
 			</div>
 		)
 	})
 	return (
-		<div className="citiesGallery">
+		<div className="itinsCarrousel">
+			{/* <h3 className="cityName">{itineraries[0].city}</h3> */}
+
 			{itinsCarrousel}
+			
 		</div>
 	)
 }

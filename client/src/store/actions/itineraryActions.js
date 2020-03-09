@@ -12,6 +12,17 @@ export const getAllItineraries = () => dispatch => {
 	})
 }
 
+export const getItinerariesByCity = () => dispatch => {
+	axios.get("/itineraries/:city") // çççç !! aqui (con/Amsteradm funciona)
+		.then(res => {
+			console.log(res.data);
+			dispatch ({
+				type: "GET_ITINERARIES_BY_CITY",
+				payload: res.data
+		});
+	})
+}
+
 
 // export const addCity = (newCity) => dispatch => {
 // 	axios.post("http://localhost:5000/cities", newCity)

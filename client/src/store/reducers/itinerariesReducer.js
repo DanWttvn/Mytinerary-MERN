@@ -10,6 +10,13 @@ const itinerariesReducer = (state = initState, action) => {
 				...state,
 				itineraries: action.payload
 			}
+
+		case "GET_ITINERARIES_BY_CITY":
+			console.log("getting itineraries BY CITY", action.payload);
+			return {
+				...state,
+				itineraries: action.payload
+			}
 		
 		default:
 			return state;			

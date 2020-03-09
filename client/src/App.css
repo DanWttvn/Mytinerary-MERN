@@ -44,7 +44,7 @@ h1 {
 
 h3 {
 	font-family: "Gotham Black";
-	font-size: 45px;
+	font-size: 30px;
 }
 h4 {
 	font-family: "Gotham Bold";
@@ -396,7 +396,7 @@ a {
 /* -------- CITY ITINS -------- */
 
 .cityName {
-	margin-top: 20px;
+	margin-top: 10px;
 }
 
 .itinsCarrousel {
@@ -409,7 +409,7 @@ a {
 
 	width: 100%;
 	margin-top: 15px;
-	padding: 20px;
+	/* padding: 20px; */
 
 }
 
@@ -452,9 +452,17 @@ a {
 	color: #fff;
 }
 
-.itinInfoPrev .title {
+.extraInfoBox .title {
 	font-family: "Futura Medium";
 	font-size: 20px;
+
+}
+.itinInfoPrev .shortenedSummary {
+	overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* num of lines displayed */
+  -webkit-box-orient: vertical;
+	
 }
 
 .extraInfoBox {
@@ -477,6 +485,14 @@ a {
 	font-family: "Gotham Bold";
 	font-size: 20px;
 	margin-left: 27px;
+	margin-right: 27px;
+
+	/* no sobresalga: çç */
+	display:block;
+	white-space: nowrap;
+  	overflow: hidden;
+ 	text-overflow: ellipsis;
+
 }
 
 .extraInfoBox .hastagsBox {
