@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react'
+// import { Switch, Route } from "react-router-dom";
+import { connect } from "react-redux"
+import { getAllItineraries } from "../store/actions/itineraryActions"
+
 import thumbPrueba from "../img/amsterdam/a (1).jpg"
 import Navbar from "../components//Navbar"
 import Logo from "../components//Logo"
 import ExtraInfoIT from "../components//ExtraInfoIT"
+import Itineraries from "../components//Itineraries"
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as fasHeart} from '@fortawesome/free-solid-svg-icons'
@@ -12,19 +17,26 @@ import { faHeart as farHeart} from '@fortawesome/free-regular-svg-icons'
 // import HeartIcon from "./HeartIcon"
 
 
-const CityPage = () => {
+class CityPage extends Component {
 
-	// const itinsCarrousel = itinsFromParent.map((itin, i) => {
-	// 	return (
-	// 		<div className="itinCard" key={i}>
-				// <div className="thumbnail" style={
-				// 	{backgroundImage: 'url(\'' + itin.cover + '\')', 
-				// 	backgroundPosition: 'center center', 
-				// 	backgroundSize: 'cover'}}></div>
-// 				<p className="itinNameThumb">{itin.name}</p>
-	// 		</div>
-	// 	)
-	// })
+	// que me saque los nombres de la ciudad y segun eso display
+
+	componentDidMount() {
+		this.props.getAllItineraries()
+		// console.log(this.props.getAllItineraries);		
+	}
+
+	// PARA LOS DATOS DE ESA CIUDAD 
+
+	// const Users = ({ city }) => (
+	// 	<Switch>
+	// 		<Route exact path={`${city.url}`} component={AllUsers} />
+	// 		<Route path={`${city.url}/:id`} component={Profile} />
+	// 	</Switch>
+	// );
+
+	
+
 
 	// return (
 	// 	<div className="container">
@@ -34,61 +46,45 @@ const CityPage = () => {
 	// 	</div>
 	// )
 
+	render () {
+		return (
+			<div className="container">
+				<Logo/>
+				{/* <h3 className="cityName">Amsterdam</h3>
 
-	return (
-		<div className="container">
-			<Logo/>
-			<h3 className="cityName">Amsterdam</h3>
+				<div className="itinsCarrousel"> */}
+			{/* MAS CARROUSEL, NO SCROLL, QUE SOBRESALGA ALGO PERO SE QUEDE PILLADO */}
+					{/* <div className="itinCard">
+						<div className="itinPrev" style={{backgroundImage: 'url(\'' + thumbPrueba + '\')', backgroundPosition: 'center center', backgroundSize: 'cover'}}>
+							<FontAwesomeIcon icon={farHeart} className="faHeart farHeart"/>
+							<FontAwesomeIcon hidden icon={fasHeart} className="faHeart fasHeart"/>
+							<div className="itinInfoPrev">
+								<p className="title">Amsterdam</p>
+								<p className="">Lorem ipsum dolor sitamet cotur adipisicing elit y algo mas.</p>
+							</div>		
+						</div>
+						<ExtraInfoIT/>
+					</div>		 */}
+				{/* </div> */}
 
-			<div className="itinsCarrousel">
-		{/* MAS CARROUSEL, NO SCROLL, QUE SOBRESALGA ALGO PERO SE QUEDE PILLADO */}
-				<div className="itinCard">
-					<div className="itinPrev" style={{backgroundImage: 'url(\'' + thumbPrueba + '\')', backgroundPosition: 'center center', backgroundSize: 'cover'}}>
-						<FontAwesomeIcon icon={farHeart} className="faHeart farHeart"/>
-						<FontAwesomeIcon hidden icon={fasHeart} className="faHeart fasHeart"/>
-						<div className="itinInfoPrev">
-							<p className="title">Amsterdam</p>
-							<p className="">Lorem ipsum dolor sitamet cotur adipisicing elit y algo mas.</p>
-						</div>		
-					</div>
-					<ExtraInfoIT/>
-				</div>
+				<Itineraries/>
 
-				<div className="itinCard">
-					<div className="itinPrev" style={{backgroundImage: 'url(\'' + thumbPrueba + '\')', backgroundPosition: 'center center', backgroundSize: 'cover'}}>
-						<FontAwesomeIcon icon={farHeart} className="faHeart farHeart"/>
-						<FontAwesomeIcon hidden icon={fasHeart} className="faHeart fasHeart"/>
-						<div className="itinInfoPrev">
-							<p className="title">Amsterdam</p>
-							<p className="">Lorem ipsum dolor sitamet cotur adipisicing elit y algo mas.</p>
-						</div>		
-					</div>
-					<ExtraInfoIT/>
-				</div>
-
-				<div className="itinCard">
-					<div className="itinPrev" style={{backgroundImage: 'url(\'' + thumbPrueba + '\')', backgroundPosition: 'center center', backgroundSize: 'cover'}}>
-						<FontAwesomeIcon icon={farHeart} className="faHeart farHeart"/>
-						<FontAwesomeIcon hidden icon={fasHeart} className="faHeart fasHeart"/>
-						<div className="itinInfoPrev">
-							<p className="title">Amsterdam</p>
-							<p className="">Lorem ipsum dolor sitamet cotur adipisicing elit y algo mas.</p>
-						</div>		
-					</div>
-					<ExtraInfoIT/>
-				</div>
-
-				
-
-				
-			
+				<Navbar/>
 			</div>
-
-			<Navbar/>
-		</div>
-	)
+		)
+	}
 }
 
+const mapStateToProps = (state) => {
+	return {
+		itineraries: state.itineraries.itineraries //nombre del reducer
+	}
+}
 
+const mapDispatchToProps = (dispatch) => {
+	return {
+		getAllItineraries: (itineraries) => dispatch(getAllItineraries(itineraries))
+	}
+}
 
-export default CityPage;
+export default connect(mapStateToProps, mapDispatchToProps)(CityPage);

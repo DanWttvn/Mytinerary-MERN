@@ -1,8 +1,11 @@
 //combine all the reducers:
 import { combineReducers } from "redux";
 import citiesReducer from "./citiesReducer";
+import itinerariesReducer from "./itinerariesReducer"
+
 const rootReducer = combineReducers ({
-	cities: citiesReducer
+	cities: citiesReducer,
+	itineraries: itinerariesReducer
 	// activities: activiesRecuer
 	//otros red
 

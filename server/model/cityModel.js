@@ -8,9 +8,15 @@ const citySchema = new mongoose.Schema({
 	country: {
 		type: String,
 		required: true
+	},
+	img: {
+		type: String,
+		// required: false
 	}
 })
 
 //name of module is the singular version (city) of the database name (cities)
 module.exports = mongoose.model("city", citySchema)
 //We set the export to a variable ‘city’ and define it as a call to mongoose.Model().
+
+

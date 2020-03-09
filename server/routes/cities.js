@@ -1,16 +1,13 @@
+// TODO ESTO ES A PARTIR DE /CITIES....
 const express = require("express");
 
 const router = express.Router();
 
 const cityModel = require("../model/cityModel");
 
-// ADD TEST ROUTE
-// router.get("/test", (req, res) => {
-// 	res.send({ msg: 'Cities test route.' });
-// });
-
-// GET ALL CITIES
-let getCities = router.get("/all", (req, res) => {
+// ---- GET ALL CITIES
+// @route GET /cities/all
+router.get("/all", (req, res) => { // = cities/all
 	cityModel.find({})
 		.then(files => {
 			res.send(files)
@@ -18,26 +15,14 @@ let getCities = router.get("/all", (req, res) => {
 		.catch(err => console.log(err))
 });
 
-// TO ADD NEW CITIES
-// router.post("/", (req, res) => {
-// 	const newCity = new cityModel({
-// 		name: req.body.name,
-// 		country: req.body.country
-// 	})
-	
-// 	newCity.save()
-// 		.then(city => {
-// 			res.send(city)
-// 		})
-// 		.catch(err => {
-// 			res.status(500).send("Server error")
-// 		})
-// });
+// ---- ADD NEW CITY and PREVENT DUPLICATES
+// @route POST /cities/
 
-// ADD NEW CITY and PREVENT DUPLICATES
 router.post("/", (req, res) => {
+	console.log("llamada post");
+	
 	const newName = req.body.name; //Extract title from input form
-	cityModel.findOne({name: newName}, function(err, newCity) {
+	cityModel.findOne({ name: newName }, function(err, newCity) {
 		if(err) {console.log(err)}
 		
 		if (newCity) {

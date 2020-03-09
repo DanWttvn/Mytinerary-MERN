@@ -14,16 +14,18 @@ const citiesReducer = (state = initState, action) => {
 			}
 		
 		case "ADD_CITY":
-			console.log("adding city", action.newCity);
+			console.log("adding city", action.payload);
 			return {
 				...state,
-				cities: [...state.cities, action.newCity]
+				cities: [...state.cities, action.payload]
 			};
 
 		case "FILTER_CITIES":
 			console.log("filtering", action.searchTerm);
 			let cities = state.citiesDB
 			cities = state.citiesDB.filter(city => city.name.toLowerCase().startsWith(action.searchTerm));
+			console.log("Ciudades filtradas: ")
+			console.log(cities)
 			return {
 				...state,
 				cities
