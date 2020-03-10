@@ -19,15 +19,19 @@ class CityPage extends Component {
 		// this.props.getAllItineraries()
 		// console.log(this.props.getAllItineraries);	
 		
-		this.props.getItinerariesByCity()
-		
+		this.props.getItinerariesByCity(this.props.match.params.city)		
 	}
 
 	render () {
+		console.log(this.props.itineraries);
+		console.log(this.props.match.params.city);
+		
+		
 		return (
 			<div className="container">
 				<Logo/>
-				<h3 className="cityName">Amsterdam</h3>
+
+				<h3 className="cityName">{this.props.match.params.city}</h3>
 
 				{/* lo que le paso aqui que sean esas ciudades */}
 				<Itineraries itineraries={this.props.itineraries}/>
@@ -46,9 +50,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		// getAllItineraries: (itineraries) => dispatch(getAllItineraries(itineraries))
+		// getAllItineraries: () => dispatch(getAllItineraries())
 
-		getItinerariesByCity: (itineraries) => dispatch(getItinerariesByCity(itineraries))
+		getItinerariesByCity: (city) => dispatch(getItinerariesByCity(city))
 	}
 }
 

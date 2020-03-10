@@ -1,14 +1,10 @@
 import React from 'react'
 
-// import ExtraInfoIT from "../components//ExtraInfoIT"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as fasHeart} from '@fortawesome/free-solid-svg-icons'
 import { faHeart as farHeart} from '@fortawesome/free-regular-svg-icons'
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons'
 import { faClock } from '@fortawesome/free-regular-svg-icons'
-// import { faDollarSign } from '@fortawesome/free-solid-svg-icons'
-
-
 
 
 const Itineraries = ({itineraries}) => {
@@ -59,7 +55,7 @@ const Itineraries = ({itineraries}) => {
 	})
 	return (
 		<div className="itinsCarrousel">
-			{/* <h3 className="cityName">{itineraries[0].city}</h3> */}
+			<h3 className="cityName">{itineraries.city}</h3>
 
 			{itinsCarrousel}
 			

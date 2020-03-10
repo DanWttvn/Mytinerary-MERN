@@ -16,6 +16,7 @@ app.use(
 	})
 );
 app.use(cors());
+app.use(express.json());
 
 
 app.listen(port, () => {
@@ -26,6 +27,7 @@ app.listen(port, () => {
 app.use("/cities", require("./routes/cities")); // routes cities conected con endpoint cities ? . 
 // Crea un puerto al que me voy a poder conectar desde el front end. si me llega una peticion a 5000/cities me conecta con ese archivo de router
 app.use("/itineraries", require("./routes/itineraries")); 
+app.use("/user", require("./routes/user")); 
 
 mongoose.connect(db, { // db = my key
 	useNewUrlParser: true, 

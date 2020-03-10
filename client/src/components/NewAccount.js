@@ -2,9 +2,9 @@ import React, { Component } from "react"
 
 class NewAccount extends Component {
 	state = {
-		userName: "",
+		username: "",
 		password: "",
-		contactEmail: ""
+		email: ""
 	}
 
 	// [e.target.name]: e.target.value
@@ -15,7 +15,8 @@ class NewAccount extends Component {
 	}
 
 	onSubmit = (e) => {
-		alert("user submited: " + this.state.userName + " " + this.state.password + " " +  this.state.contactEmail)
+		alert("user submited: " + this.state.username + " " + this.state.password + " " +  this.state.email)
+
 	}
 
 	render() {
@@ -23,7 +24,7 @@ class NewAccount extends Component {
 			<form onSubmit={this.onSubmit} className="formBox">
 
 				<div  className="formSection">
-					<input onChange={this.handleInput} type="text" name="userName" id="user_name" required/>
+					<input onChange={this.handleInput} type="text" name="username" id="user_name" required/>
 					<label htmlFor="user_name"  className="labelBox">
 						<span className="labelContent">User Name</span>
 					</label>
@@ -37,8 +38,8 @@ class NewAccount extends Component {
 				</div>
 
 				<div className="formSection">
-					<input onChange={this.handleInput} type="text" name="contactEmail" id="contact_email" required />
-					<label htmlFor="contact_email" className="labelBox">
+					<input onChange={this.handleInput} type="text" name="email" id="email" required />
+					<label htmlFor="email" className="labelBox">
 						<span className="labelContent">Contact Email</span>
 					</label>
 				</div>

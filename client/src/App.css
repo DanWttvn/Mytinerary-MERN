@@ -76,7 +76,8 @@ a {
 /* -------- LOGO -------- */
 
 #logo {
-	margin: 0 auto;
+	text-align: center;
+	width: 100%;
 }
 
 .logo a {
@@ -397,6 +398,7 @@ a {
 
 .cityName {
 	margin-top: 10px;
+	margin-left: 10px;
 }
 
 .itinsCarrousel {
@@ -424,7 +426,7 @@ a {
 	display: flex;
 	flex-flow: column wrap;
 
-	margin-left: 20px;
+	margin-left: 15px;
 
 	background: #fff;
 	overflow: hidden;
@@ -443,6 +445,7 @@ a {
 	display: flex;
 	flex-flow: column wrap;
 	justify-content: space-between;
+
 }
 
 .itinInfoPrev {
