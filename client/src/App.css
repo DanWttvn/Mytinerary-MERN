@@ -110,7 +110,7 @@ a {
 
 #navbar .active svg { /* por que no funciona?? ççç */
 	color: rgb(253, 94, 94);
-	background: gren;
+	background: green;
 }
 
 
@@ -233,11 +233,10 @@ a {
 
 	overflow: hidden; /* para esconder lo que sobra de la linea de subrayado */
 	z-index: 200;
-
 }
 
 .formSection input {
-	width: 100%;
+	width: 50%; /* ÇÇÇÇÇÇ */
 	height: 100%;
 	/* color: #595f6e; */
 	color: #fff;
@@ -246,7 +245,6 @@ a {
 	border: none;
 	outline: none;
 	background: transparent;
-
 }
 
 .formSection label {
@@ -255,12 +253,11 @@ a {
 	bottom: 0;
 	left: 0;
 	width: 100%;
-	height: 100%;
+	/* height: 100%; */
 	pointer-events: none;	/* hace que no reaccione al raton, por lo que puedo clickar en el input aunque este encima esto */
 	border-bottom: 1px solid white;
 
 	background: transparent;
-
 }
 
 .formSection label::after {
@@ -276,14 +273,34 @@ a {
 	transition: transform 0.3s ease;
 }
 
+/* .labelBox {
+	display: flex;
+	flex-flow: row nowrap;
+} */
+
 .labelContent {
 	position: absolute;
 
-	width: 100%;
+	width: 70%;
 	font-size: 20px;
 	bottom: 5px;
 	left: 0;
 	transition: all 0.3s ease;
+}
+
+.visibilityIcon {
+	position: absolute;
+	right: 10px;
+	bottom: 20px;
+	float: right;
+	transform: scale(1.1);
+	color: #fff;
+
+	z-index: 100;
+}
+
+.visibilityBlue {
+	color: #5fa8d3;
 }
 
 .formSection input:focus + .labelBox .labelContent, /* el + indica que el que esté debajo. cuando clickamos en el input, afecta al label así: */
@@ -312,7 +329,6 @@ a {
 	width: 130px;
 	height: 50px;
 }
-
 
 .sendButton:active {
 	background: rgba(255, 255, 255, 0.15);

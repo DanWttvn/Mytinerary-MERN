@@ -18,7 +18,7 @@ class CitiesPage extends Component {
 	}
 
 	addWithInput = (newCity) => {
-		this.props.addCity(newCity)
+		this.props.addCity(newCity) // pasar a dento del component?? ççç
 	}
 
 	filterWithSearchTerm = (searchTerm) => {

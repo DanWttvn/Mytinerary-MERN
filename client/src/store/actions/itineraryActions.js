@@ -13,7 +13,6 @@ export const getAllItineraries = () => dispatch => {
 }
 
 export const getItinerariesByCity = (city) => dispatch => {
-	// axios.get(`/itineraries/${city}`) 
 	axios.get(`http://localhost:5000/itineraries/${city}`) // çççç !! aqui (con/Amsteradm funciona)
 		.then(res => {
 			console.log(res.data);

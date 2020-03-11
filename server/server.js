@@ -2,21 +2,20 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000; //el puerto que sea y, si no hay ninguno, el 5000
 
-const bodyParser = require("body-parser");
+const bodyParser = require("body-parser"); //ahora express icluye bodyparse, pero bueno. habria que cambiar el app.use(bodyp->express.json())
 const cors = require("cors");
 
 const db = require("./keys").mongoURI;
 const mongoose = require("mongoose");
 
 
-app.use(bodyParser.json());
+app.use(bodyParser.json()); //para poder leer ,manda json
 app.use(
-	bodyParser.urlencoded({
+	bodyParser.urlencoded({ //urlencoded es que te pone name&apellido?xxx en lugar de un json object
 		extended: true
 	})
 );
 app.use(cors());
-app.use(express.json());
 
 
 app.listen(port, () => {

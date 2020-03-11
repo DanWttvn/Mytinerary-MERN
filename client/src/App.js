@@ -23,7 +23,7 @@ class App extends Component {
 						<Route path="/sign_up" component={SignUpPage} />
 						<Route exact path="/cities" component={CitiesPage} />
 						<Route exact path="/cities/all" component={CitiesPage} />
-						<Route path="/cities/:city" component={CityPage} />
+						<Route path="/cities/:city" component={CityPage} /> {/* el :city es el this.props.match.*/}
 						<Route exact path="/profile" component={ProfilePage} />
 						<Route exact path="/favorites" component={FavoritesPage} />
 						{/* <Route path="/welcome" component={Welcomepage}></Route> */}

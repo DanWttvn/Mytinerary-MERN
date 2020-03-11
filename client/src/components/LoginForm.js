@@ -1,14 +1,14 @@
 import React, { Component } from "react"
-import { connect } from "react-redux"
-import { createUser } from "../store/actions/userActions"
+// import { connect } from "react-redux"
+// import { createUser } from "../store/actions/userActions"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-regular-svg-icons'
 
-class NewAccount extends Component {
+
+class LoginForm extends Component {
 	state = {
 		username: "",
-		password: "",
-		email: ""
+		password: ""
 	}
 
 	// [e.target.name]: e.target.value
@@ -20,13 +20,11 @@ class NewAccount extends Component {
 
 	onSubmit = (e) => {
 		e.preventDefault();
-		console.log("user submited: " + this.state.username + " " + this.state.password + " " +  this.state.email)
-		this.props.createUser(this.state);
-		// this.props.history.push("/some/Path");
-		// console.log(this.props);
+		console.log("sent account data: " + this.state.username + " " + this.state.password)
+		// this.props.createUser(this.state)
 	}
 
-	changeVisibility = (e) => {		
+	changeVisibility = (e) => {
 		const password = document.getElementById("password");
 		const icon = document.getElementById("visibilityIcon");
 
@@ -42,15 +40,14 @@ class NewAccount extends Component {
 	render() {
 		return (
 			<form onSubmit={this.onSubmit} className="formBox">
-				{/*  method="post"  ??? */}
 
-				<div  className="formSection">
-					<input onChange={this.handleInput} type="text" name="username" id="user_name" required/>
-					<label htmlFor="user_name"  className="labelBox">
-						<span className="labelContent">User Name</span>
+				<div className="formSection">
+					<input onChange={this.handleInput} type="email" name="email" id="email" required />
+					<label htmlFor="email" className="labelBox">
+						<span className="labelContent">Contact Email</span>
 					</label>
 				</div>
-
+		
 				<div  className="formSection">
 					<input onChange={this.handleInput} type="password" name="password" id="password" required/>
 					<label htmlFor="password" className="labelBox">
@@ -59,12 +56,12 @@ class NewAccount extends Component {
 					<FontAwesomeIcon onClick={this.changeVisibility} icon={faEye} className="visibilityIcon" id="visibilityIcon"/>
 				</div>
 
-				<div className="formSection">
-					<input onChange={this.handleInput} type="email" name="email" id="email" required />
+				{/* <div className="formSection">
+					<input onChange={this.handleInput} type="text" name="email" id="email" required />
 					<label htmlFor="email" className="labelBox">
 						<span className="labelContent">Contact Email</span>
 					</label>
-				</div>
+				</div> */}
 
 				<input className="sendButton" type="submit" name="submit" value="Send"></input>
 			</form>
@@ -72,17 +69,19 @@ class NewAccount extends Component {
 	}
 }
 
-const mapStateToProps = (state) => {
-	console.log(state);
-	return {
-		user: state.users.user
-	}
-}
+// const mapStateToProps = (state) => {
+// 	console.log(state);
+// 	return {
+// 		user: state.users.user
+// 	}
+	
+// }
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		createUser: (newUser) => dispatch(createUser(newUser))
-	}
-}
+// const mapDispatchToProps = (dispatch) => {
+// 	return {
+// 		createUser: (newUser) => dispatch(createUser(newUser))
+// 	}
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewAccount);
+// export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+export default LoginForm;

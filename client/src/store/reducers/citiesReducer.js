@@ -6,7 +6,7 @@ const initState = {
 const citiesReducer = (state = initState, action) => {
 	switch (action.type) {
 		case "GET_CITIES":
-			console.log("fetching Data");
+			console.log("fetching Data ACTION");
 			return {
 				...state,
 				citiesDB: action.payload,
@@ -14,18 +14,17 @@ const citiesReducer = (state = initState, action) => {
 			}
 		
 		case "ADD_CITY":
-			console.log("adding city", action.payload);
+			console.log("adding city ACTION", action.payload);
 			return {
 				...state,
 				cities: [...state.cities, action.payload]
 			};
 
 		case "FILTER_CITIES":
-			console.log("filtering", action.searchTerm);
+			console.log("filtering ACTION", action.searchTerm);
 			let cities = state.citiesDB
 			cities = state.citiesDB.filter(city => city.name.toLowerCase().startsWith(action.searchTerm));
-			console.log("Ciudades filtradas: ")
-			console.log(cities)
+			console.log("Ciudades filtradas: ", cities)
 			return {
 				...state,
 				cities
@@ -39,14 +38,3 @@ const citiesReducer = (state = initState, action) => {
 
 export default citiesReducer;
 
-
-
-// filterCities = (searchTerm) => {
-// 	let filteredCities = this.state.cities;
-// 	filteredCities = filteredCities.filter((city) => city.name.toLowerCase().startsWith(searchTerm));
-// 	this.setState({
-// 		filteredCities
-// 	})
-
-// 	console.log(this.state.filteredCities);
-// }

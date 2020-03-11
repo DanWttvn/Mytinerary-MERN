@@ -1,5 +1,6 @@
 import React from "react"
 import LandingBg from "../components/LandingBg"
+import LoginForm from "../components/LoginForm"
 
 
 const SignInPage = () => {
@@ -7,8 +8,11 @@ const SignInPage = () => {
 		<div id="signIn" className="fixedHeight">
 			<h1>SIGN IN</h1>
 
-			<LandingBg/>
+			<LoginForm/>
 
+			<div className="mascaraExtra"></div>
+			
+			<LandingBg/>
 		</div>
 	)
 }

@@ -53,6 +53,7 @@ const Itineraries = ({itineraries}) => {
 			</div>
 		)
 	})
+	
 	return (
 		<div className="itinsCarrousel">
 			<h3 className="cityName">{itineraries.city}</h3>
