@@ -5,3 +5,5 @@ node_modules/
 /keys.js
 /keys.js/
 keys.js/
+config/keys.js
+/config/keys.js
