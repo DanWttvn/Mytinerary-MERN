@@ -74,4 +74,16 @@ router.get("/google", passport.authenticate("google", {
 	scope: ["profile"] //what we want to retrieve from the users profile
 })); //#8 8:40
 
+// callback route for google to redirect
+// @route POST 5000/auth/google/redirect
+router.get("/google/redirect", (req, res) => {
+	res.send("aqui estoy")
+	
+});
+
+
+
+
+
+
 module.exports = router; 
