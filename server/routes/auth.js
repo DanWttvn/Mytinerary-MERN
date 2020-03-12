@@ -74,4 +74,4 @@ router.get("/google", passport.authenticate("google", {
 	scope: ["profile"] //what we want to retrieve from the users profile
 })); //#8 8:40
 
-module.exports = router;
+module.exports = router; 
