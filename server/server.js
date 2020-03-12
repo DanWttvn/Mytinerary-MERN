@@ -5,8 +5,10 @@ const port = process.env.PORT || 5000; //el puerto que sea y, si no hay ninguno,
 const bodyParser = require("body-parser"); //ahora express icluye bodyparse, pero bueno. habria que cambiar el app.use(bodyp->express.json())
 const cors = require("cors");
 
-const db = require("./keys").mongoURI;
+const db = require("./config/keys").mongoURI;
 const mongoose = require("mongoose");
+
+const passportSetup = require("./config/passport-setup"); // fires
 
 
 app.use(bodyParser.json()); //para poder leer ,manda json
@@ -27,6 +29,7 @@ app.use("/cities", require("./routes/cities")); // routes cities conected con en
 // Crea un puerto al que me voy a poder conectar desde el front end. si me llega una peticion a 5000/cities me conecta con ese archivo de router
 app.use("/itineraries", require("./routes/itineraries")); 
 app.use("/user", require("./routes/user")); 
+app.use("/auth", require("./routes/auth")); // 5000/auth
 
 mongoose.connect(db, { // db = my key
 	useNewUrlParser: true, 

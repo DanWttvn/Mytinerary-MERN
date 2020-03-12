@@ -1,13 +1,13 @@
 import React, { Component } from "react"
-// import { connect } from "react-redux"
-// import { createUser } from "../store/actions/userActions"
+import { connect } from "react-redux"
+import { loginUser } from "../store/actions/authActions"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-regular-svg-icons'
 
 
 class LoginForm extends Component {
 	state = {
-		username: "",
+		email: "",
 		password: ""
 	}
 
@@ -20,8 +20,9 @@ class LoginForm extends Component {
 
 	onSubmit = (e) => {
 		e.preventDefault();
-		console.log("sent account data: " + this.state.username + " " + this.state.password)
-		// this.props.createUser(this.state)
+		console.log("sent account data: " + this.state.email + " " + this.state.password)
+
+		this.props.loginUser(this.state)
 	}
 
 	changeVisibility = (e) => {
@@ -39,49 +40,57 @@ class LoginForm extends Component {
 
 	render() {
 		return (
-			<form onSubmit={this.onSubmit} className="formBox">
+			<div>
+				{/* REGULAR LOGIN */}
+				<form onSubmit={this.onSubmit} className="formBox">
+	
+					<div className="formSection">
+						<input onChange={this.handleInput} type="email" name="email" id="email" required />
+						<label htmlFor="email" className="labelBox">
+							<span className="labelContent">Contact Email</span>
+						</label>
+					</div>
+			
+					<div  className="formSection">
+						<input onChange={this.handleInput} type="password" name="password" id="password" required/>
+						<label htmlFor="password" className="labelBox">
+							<span className="labelContent">Password</span>
+						</label>
+						<FontAwesomeIcon onClick={this.changeVisibility} icon={faEye} className="visibilityIcon" id="visibilityIcon"/>
+					</div>
+	
+					{/* <div className="formSection">
+						<input onChange={this.handleInput} type="text" name="email" id="email" required />
+						<label htmlFor="email" className="labelBox">
+							<span className="labelContent">Contact Email</span>
+						</label>
+					</div> */}
+	
+					<input className="sendButton" type="submit" name="submit" value="Send"></input>
+				</form>
+	
+				{/* GOOGLE LOGIN */}
+				<a className="google-btn" href="http://localhost:5000/auth/google">Google+</a> {/* 3000/auth/google */}+
 
-				<div className="formSection">
-					<input onChange={this.handleInput} type="email" name="email" id="email" required />
-					<label htmlFor="email" className="labelBox">
-						<span className="labelContent">Contact Email</span>
-					</label>
-				</div>
-		
-				<div  className="formSection">
-					<input onChange={this.handleInput} type="password" name="password" id="password" required/>
-					<label htmlFor="password" className="labelBox">
-						<span className="labelContent">Password</span>
-					</label>
-					<FontAwesomeIcon onClick={this.changeVisibility} icon={faEye} className="visibilityIcon" id="visibilityIcon"/>
-				</div>
 
-				{/* <div className="formSection">
-					<input onChange={this.handleInput} type="text" name="email" id="email" required />
-					<label htmlFor="email" className="labelBox">
-						<span className="labelContent">Contact Email</span>
-					</label>
-				</div> */}
-
-				<input className="sendButton" type="submit" name="submit" value="Send"></input>
-			</form>
+			</div>
 		)
 	}
 }
 
-// const mapStateToProps = (state) => {
-// 	console.log(state);
-// 	return {
-// 		user: state.users.user
-// 	}
+const mapStateToProps = (state) => {
+	console.log(state);
+	return {
+		user: state.auth.user
+	}
 	
-// }
+}
 
-// const mapDispatchToProps = (dispatch) => {
-// 	return {
-// 		createUser: (newUser) => dispatch(createUser(newUser))
-// 	}
-// }
+const mapDispatchToProps = (dispatch) => {
+	return {
+		loginUser: (newUser) => dispatch(loginUser(newUser))
+	}
+}
 
-// export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
-export default LoginForm;
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
+// export default LoginForm;

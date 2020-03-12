@@ -334,6 +334,20 @@ a {
 	background: rgba(255, 255, 255, 0.15);
 }
 
+.google-btn {
+	font-size: 22px;
+	position: relative;
+	top: 100px;
+	align-self: center;
+
+	background: transparent;
+	color: white;
+	z-index: 100;
+	border: 2px solid #fff;
+	width: 130px;
+	height: 50px;
+}
+
 /* -------- SEARCHBAR -------- */
 
 #searchbar {
