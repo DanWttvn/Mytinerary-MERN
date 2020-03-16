@@ -2,5 +2,9 @@
 
 # dependencies
 node_modules/
-config/keys.js
 /keys.js
+/keys.js/
+keys.js/
+config/keys.js
+/config/keys.js
+

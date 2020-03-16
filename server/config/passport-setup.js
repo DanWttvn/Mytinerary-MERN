@@ -91,8 +91,6 @@ passport.use(
 						});
 				}
 			})		
-	})
-)
 
 passport.serializeUser((user, done) => { //cuando esté done, viene aqui
 	done(null, user.id); //if error null, if not we pass de id in the db
