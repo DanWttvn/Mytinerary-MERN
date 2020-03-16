@@ -3,16 +3,19 @@ const mongoose = require("mongoose");
 const userModel = new mongoose.Schema({
 	username: {
 		type: String, //lo que acepta
-		required: true, //obligatorio
-		unique: true
+		// required: true //obligatorio.loquito para hacer comprobacion en otro lado. si lo pongo me da error
+		// unique: true
+	},
+	googleID: {
+		type: String
 	},
 	password: {
 		type: String,
-		required: true
+		// required: true lo puedo quitar porque lo requiero desde el FE
 	},
 	email: {
 		type: String,
-		required: true,
+		// required: true, lo puedo quitar porque lo requiero desde el FE
 		unique: true
 	},
 	profilePic: {

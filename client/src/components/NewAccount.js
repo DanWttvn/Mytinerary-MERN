@@ -1,15 +1,42 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { createUser } from "../store/actions/userActions"
+// import { createUser } from "../store/actions/userActions"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-regular-svg-icons'
+import { Alert } from "reactstrap"
+import PropTypes from "prop-types"
+import { register } from "../store/actions/authActions"
+import { clearErrors } from "../store/actions/errorActions"
 
 class NewAccount extends Component {
 	state = {
 		username: "",
 		password: "",
-		email: ""
+		email: "", 
+		msg: null
+	};
+
+	static propTypes = {
+		isAuthenticated: PropTypes.bool,
+		error: PropTypes.object.isRequired,
+		register: PropTypes.func.isRequired,
+		// clearErrors: PropTypes.func.isRequired
 	}
+
+	// TRAVERSY 11 min 17:30
+	componentDidUpdate(prevProps) {
+		const { error } = this.props; // state this.prop.error
+		if(error !== prevProps.error) {
+			// Check for register error
+			if(error.id === "REGISTER_FAIL") {
+				console.log(error.msg); // son dos
+				this.setState({ msg: error.msg.msg })
+			} else {
+				this.setState({ msg: null })
+			}
+		}
+	}
+
 
 	// [e.target.name]: e.target.value
 	handleInput = (e) => {
@@ -21,9 +48,16 @@ class NewAccount extends Component {
 	onSubmit = (e) => {
 		e.preventDefault();
 		console.log("user submited: " + this.state.username + " " + this.state.password + " " +  this.state.email)
-		this.props.createUser(this.state);
-		// this.props.history.push("/some/Path");
-		// console.log(this.props);
+		const { username, email, password } = this.state;
+		//Create user Obj
+		const newUser = {
+			username,
+			email, 
+			password
+		};
+		// Attempt to register
+		this.props.register(newUser);
+		this.props.clearErrors(); // ? yo. traversy lo pone en el modal
 	}
 
 	changeVisibility = (e) => {		
@@ -42,7 +76,7 @@ class NewAccount extends Component {
 	render() {
 		return (
 			<form onSubmit={this.onSubmit} className="formBox">
-				{/*  method="post"  ??? */}
+				{ this.state.msg ? <Alert color="danger">{ this.state.msg }</Alert> : null }
 
 				<div  className="formSection">
 					<input onChange={this.handleInput} type="text" name="username" id="user_name" required/>
@@ -60,7 +94,7 @@ class NewAccount extends Component {
 				</div>
 
 				<div className="formSection">
-					<input onChange={this.handleInput} type="email" name="email" id="email" required />
+					<input onChange={this.handleInput} type="email" name="email" id="email" required/>
 					<label htmlFor="email" className="labelBox">
 						<span className="labelContent">Contact Email</span>
 					</label>
@@ -75,13 +109,16 @@ class NewAccount extends Component {
 const mapStateToProps = (state) => {
 	console.log(state);
 	return {
-		user: state.users.user
+		isAuthenticated: state.auth.isAuthenticated,
+		error: state.error //error reducer
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		createUser: (newUser) => dispatch(createUser(newUser))
+		// createUser: (newUser) => dispatch(createUser(newUser))
+		register: (newUser) => dispatch(register(newUser)),
+		clearErrors: (newUser) => dispatch(clearErrors(newUser))
 	}
 }
 

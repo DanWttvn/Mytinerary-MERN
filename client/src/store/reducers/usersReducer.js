@@ -1,20 +1,29 @@
-const initState = {
-	user: []
-}
+// const initState = {
+// 	user: [],
+// 	token: ""
+// }
 
-const usersReducer = (state = initState, action) => {
-	switch (action.type) {
-		case "CREATE_USER":
-			console.log("creating user", action.payload);
-			return {
-				...state,
-				user: action.payload
-			};
+// const usersReducer = (state = initState, action) => {
+// 	switch (action.type) {
+// 		case "LOGIN_USER":
+// 			console.log("loggin user REDUCER", action.payload);
+// 			return {
+// 				...state,
+// 				user: action.payload.user,
+// 				token: action.payload.token
+// 			};
 
-		default:
-			return state;
-	}
-	// return state
-}
+// 		case "LOGOUT_USER":
+// 			console.log("logging out user", action.payload);
+// 			return {
+// 				user: [],
+// 				token: ""
+// 			};
 
-export default usersReducer;
+// 		default:
+// 			return state;
+// 	}
+// 	// return state
+// }
+
+// export default usersReducer;

@@ -2,76 +2,54 @@ const express = require("express");
 // const { check, validationResult } = require("express-validator");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const key = require("../config/keys");
+const keys = require("../config/keys");
 const jwt = require("jsonwebtoken");
 const passport  = require("passport"); // imporoting this I also import the google strategy cause I attached it by passport.use
 
 const userModel = require("../model/userModel");
 
-// --------- AUTH user
-// @route POST /auth/login
-router.post("/login", (req, res) => {
-	console.log("sending to auth");
-	
-	const { email, password } = req.body;
-	userModel.findOne({ email })
+// // --------- AUTH user JWT create TOKEN
+// // @route POST /auth/login
+// router.post("/login", async (req, res) => {  EN USER.JS
+
+
+// --------- CHECK IF USER IS LOGGED jwt --------- //
+// TEST! para que me devuelva info del user (profile)
+// @route GET /auth/user
+// private
+// esto es lo que voy a tner que poer en as rutas si tengo que autentiicarlas ????
+router.get("/user", passport.authenticate("jwt", {session: false}), (req, res) => {
+	userModel.findOne({ _id: req.user.id })
 		.then(user => {
-			if(!user) {
-				console.log("This user is not registered");
-				res.status(500).json({ msg: "This user is not registered, email not found" }) 
-			} else {
-				bcrypt.compare(req.body.password, user.password, function(err, isMatch) {
-					if (!isMatch) { // if res = true, the passwords match
-						console.log("password do not match");
-						return res.status(400).json({ msg: "invalid credentials" })
-					}
-
-					const payload = { 
-						id: user.id,
-						username: user.username
-					};
-
-					jwt.sign (
-						payload,  //the payload we want to add. this can be anything we want pero para identificar
-						key.secretOrKey,
-						{ expiresIn: 2592000 },
-
-						(err, token) => {
-							if(err) throw err;
-
-							res.json({
-								token: token,
-								user: {
-									id: user.id, //es la primera vez que lo pongo, pero parece que crea uno solito
-									username: user.username,
-									email: user.email
-								},
-								success: true,
-								message: "Logged user succesfull"
-							})
-							console.log("logged succesfully");
-						}
-					)
-				})
-
-			}
+			res.json(user)
 		})
-
-})
+		.catch(err => res.status(404).json({ error: "user does not exist!" }));
+});
 
 
 // ---------- NINJA: PASSPORT #4
-
-// ---------- LOG OUT
-// @route POST /auth/logout
-router.get("/logout", (req, res) => {
-	res.send("logging out")
-})
+// // ---------- LOG OUT
+// // @route POST /auth/logout
+// router.get("/logout", (req, res) => {
+// 	res.send("logging out")
+// })
 
 // ---------- AUTH GOOGLE
-// @route POST 5000/auth/google
+// @route GET 5000/auth/google
 router.get("/google", passport.authenticate("google", {
 	scope: ["profile"] //what we want to retrieve from the users profile
 })); //#8 8:40
 
-module.exports = router;
+// callback route for google to redirect
+// @route POST 5000/auth/google/redirect
+router.get("/google/redirect", passport.authenticate("google"), (req, res) => { // esta vez que autentificamos con google, ya tenemos un code en el url. passport entende que entonces ya hemos pasado por la primera pagina. fires the cb function en pass-setup
+	res.send("aqui estoy")
+});
+
+
+
+
+
+
+
+module.exports = router; 

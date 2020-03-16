@@ -19,7 +19,6 @@ app.use(
 );
 app.use(cors());
 
-
 app.listen(port, () => {
 	console.log("Server running on " + port + " port");
 });
@@ -30,6 +29,9 @@ app.use("/cities", require("./routes/cities")); // routes cities conected con en
 app.use("/itineraries", require("./routes/itineraries")); 
 app.use("/user", require("./routes/user")); 
 app.use("/auth", require("./routes/auth")); // 5000/auth
+
+// PASSPORT (para jwt)
+app.use(passportSetup.initialize());
 
 mongoose.connect(db, { // db = my key
 	useNewUrlParser: true, 

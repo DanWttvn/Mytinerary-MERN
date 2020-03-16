@@ -10,8 +10,15 @@ import CityPage from "./views/CityPage"
 import LandingPage from "./views/LandingPage"
 import SignInPage from "./views/SignInPage"
 import SignUpPage from "./views/SignUpPage"
+// import { loadUser } from './store/actions/authActions';
 
 class App extends Component {
+
+	// çççççç LO AÑADE TRAVERSY AQUI, PERO AQUI NO TENGO LA STORE Y EN INDEX.JS NNO TENGO COMPONENT
+	// componentDidMount() {
+	// 	store.dispatch(loadUser());
+	// }
+
 	render() {
 		return (
 			<BrowserRouter>

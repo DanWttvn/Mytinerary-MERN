@@ -146,6 +146,9 @@ a {
 	position: absolute;
 }
 
+.alert {
+	z-index: 100;
+}
 
 .textOnTop {
 	position: relative;
