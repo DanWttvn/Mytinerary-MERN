@@ -15,7 +15,7 @@ passport.use(
 		callbackURL: "/auth/google/redirect", // where I redirect after the auth (also set in the google credentials)
 		clientID: keys.google.clientID,
 		clientSecret: keys.google.clientSecret
-	}, (accessToken, refreshToken, profile, done) => {
+		}, (accessToken, refreshToken, profile, done) => {
 		//passport callback function. fired after the first auth page and comes with a code
 		console.log("cb fired");
 		// check if user already exists
@@ -90,7 +90,8 @@ passport.use(
 							done(null, newUser);
 						});
 				}
-			})		
+			})	
+}));	
 
 passport.serializeUser((user, done) => { //cuando esté done, viene aqui
 	done(null, user.id); //if error null, if not we pass de id in the db
@@ -129,4 +130,4 @@ module.exports = passport.use(
 
 
 ///////////////////////////////////////////
-// https://www.youtube.com/watch?v=qyomEaXQJFk&list=PLillGF-RfqbbiTGgA77tGO426V3hRF9iE&index=10
+// https://www.youtube.com/watch?v=qyomEaXQJFk&list=PLillGF-RfqbbiTGgA77tGO426V3hRF9iE&index=10 

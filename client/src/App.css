@@ -239,7 +239,7 @@ a {
 }
 
 .formSection input {
-	width: 50%; /* ÇÇÇÇÇÇ */
+	width: 100%; 
 	height: 100%;
 	/* color: #595f6e; */
 	color: #fff;
@@ -314,11 +314,18 @@ a {
 	transform: translateX(0%);
 }
 
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:active {
-	background-color: transparent;
+/* autocomplete transparent background */
+@keyframes autofill {
+    0%,100% {
+        color: #fff;
+        background: transparent;
+    }
+}
+
+input:-webkit-autofill {
+    -webkit-animation-delay: 1s; 
+    -webkit-animation-name: autofill;
+    -webkit-animation-fill-mode: both;
 }
 
 .sendButton {

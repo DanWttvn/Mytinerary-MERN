@@ -24,6 +24,23 @@ export const loadUser = () => (dispatch, getState) => {
 		})
 }
 
+// Setup config-headers and token. se va a uar cada vez que uqiera comprobar el token
+export const tokenConfig = getState => {
+	// Get token from localstorage
+	const token = getState().auth.token //authReducer -> localstorage
+	// Headers. se añade al header ?
+	const config = {
+		headers: {
+			"Content-type" : "application/json"
+		}
+	}
+	// If token, add to headers
+	if (token) {
+		config.headers["x-auth-token"] = token;
+	}
+	return config
+}
+
 // Register user
 export const register = ({ username, email, password }) => dispatch => {
 	// Headers
@@ -46,26 +63,6 @@ export const register = ({ username, email, password }) => dispatch => {
 				type: REGISTER_FAIL
 			})
 		})
-}
-
-// Setup config-headers and token. se va a uar cada vez que uqiera comprobar el token
-export const tokenConfig = getState => {
-	// Get token from localstorage
-	const token = getState().auth.token //authReducer -> localstorage
-
-	// Headers. se añade al header ?
-	const config = {
-		headers: {
-			"Content-type" : "application/json"
-		}
-	}
-
-	// If token, add to headers
-	if (token) {
-		config.headers["x-auth-token"] = token;
-	}
-
-	return config
 }
 
 //  Log in User

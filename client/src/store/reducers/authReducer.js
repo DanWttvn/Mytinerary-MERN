@@ -7,24 +7,8 @@ const initState = {
 	user: null
 }
 
-const usersReducer = (state = initState, action) => {
+const authReducer = (state = initState, action) => {
 	switch (action.type) {
-		// -- ANTES MIO
-		// case "LOGIN_USER":
-		// 	console.log("loggin user REDUCER", action.payload);
-		// 	return {
-		// 		...state,
-		// 		user: action.payload.user,
-		// 		token: action.payload.token
-		// 	};
-
-		// case "LOGOUT_USER":
-		// 	console.log("logging out user", action.payload);
-		// 	return {
-		// 		user: [],
-		// 		token: ""
-		// 	};
-
 		// -- TRAVERSY
 		case USER_LOADING:
 			return {
@@ -70,4 +54,4 @@ const usersReducer = (state = initState, action) => {
 	// return state
 }
 
-export default usersReducer;
+export default authReducer;

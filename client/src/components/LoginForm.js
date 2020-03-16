@@ -15,7 +15,7 @@ class LoginForm extends Component {
 
 	static propTypes = {
 		isAuthenticated: PropTypes.bool,
-		error: PropTypes.object.isRequired,
+		error: PropTypes.object,
 		login: PropTypes.func.isRequired,
 		clearErrors: PropTypes.func.isRequired
 	}
@@ -93,7 +93,6 @@ class LoginForm extends Component {
 	
 				{/* GOOGLE LOGIN */}
 				<a className="google-btn" href="http://localhost:5000/auth/google">Google+</a> {/* 3000/auth/google */}+
-
 
 			</div>
 		)

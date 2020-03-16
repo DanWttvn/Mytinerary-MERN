@@ -58,7 +58,7 @@ router.post("/sign_up", [
 							//create token when signed up so its notnecesarry to sign in afterwards
 							jwt.sign (
 								payload,  //the payload we want to add. this can be anything we want pero para identificar
-								key.secretOrKey,
+								keys.secretOrKey,
 								{ expiresIn: 2592000 },
 
 								(err, token) => {
