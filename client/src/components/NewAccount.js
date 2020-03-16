@@ -1,6 +1,5 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-// import { createUser } from "../store/actions/userActions"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-regular-svg-icons'
 import { Alert } from "reactstrap"
@@ -20,7 +19,7 @@ class NewAccount extends Component {
 		isAuthenticated: PropTypes.bool,
 		error: PropTypes.object.isRequired,
 		register: PropTypes.func.isRequired,
-		// clearErrors: PropTypes.func.isRequired
+		clearErrors: PropTypes.func.isRequired
 	}
 
 	// TRAVERSY 11 min 17:30
@@ -116,7 +115,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		// createUser: (newUser) => dispatch(createUser(newUser))
 		register: (newUser) => dispatch(register(newUser)),
 		clearErrors: (newUser) => dispatch(clearErrors(newUser))
 	}

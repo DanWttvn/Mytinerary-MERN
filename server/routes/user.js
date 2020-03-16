@@ -2,7 +2,7 @@ const express = require("express");
 const { check, validationResult } = require("express-validator");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const key = require("../config/keys");
+const keys = require("../config/keys");
 const jwt = require("jsonwebtoken");
 
 const userModel = require("../model/userModel");
@@ -23,11 +23,9 @@ router.post("/sign_up", [
 		console.log(errors);
 		// return res.status(422).json({ msg: errors.array() }) //mirar como display y donde se guarda ççç
 		return res.status(422).json({ msg: "client error" }) //mirar como display y donde se guarda ççç
-
 	}
 
 	//--------- CHECK IF ALREADY EXISTS
-
 	const { username, password, email } = req.body // extraigo del body
 
 	userModel.findOne({ email })

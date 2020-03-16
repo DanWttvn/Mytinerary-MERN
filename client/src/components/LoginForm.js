@@ -1,17 +1,39 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { loginUser } from "../store/actions/userActions"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-regular-svg-icons'
-
+import { login } from "../store/actions/authActions"
+import { clearErrors } from "../store/actions/errorActions"
+import PropTypes from "prop-types"
 
 class LoginForm extends Component {
 	state = {
 		email: "",
-		password: ""
+		password: "",
+		msg: null
 	}
 
-	// [e.target.name]: e.target.value
+	static propTypes = {
+		isAuthenticated: PropTypes.bool,
+		error: PropTypes.object.isRequired,
+		login: PropTypes.func.isRequired,
+		clearErrors: PropTypes.func.isRequired
+	}
+
+	// TRAVERSY 11 min 17:30
+	componentDidUpdate(prevProps) {
+		const { error } = this.props; // state this.prop.error
+		if(error !== prevProps.error) {
+			// Check for register error
+			if(error.id === "LOGIN_FAIL") {
+				console.log(error.msg); // son dos si express validatos
+				this.setState({ msg: error.msg.msg })
+			} else {
+				this.setState({ msg: null })
+			}
+		}
+	}
+
 	handleInput = (e) => {
 		this.setState({
 			[e.target.name]: e.target.value
@@ -22,7 +44,14 @@ class LoginForm extends Component {
 		e.preventDefault();
 		console.log("sent account data: " + this.state.email + " " + this.state.password)
 
-		this.props.loginUser(this.state)
+		const { email, password } = this.state;
+
+		const currentUser = {
+			email,
+			password
+		}
+		// Attempt to login
+		this.props.login(currentUser)
 	}
 
 	changeVisibility = (e) => {
@@ -59,13 +88,6 @@ class LoginForm extends Component {
 						<FontAwesomeIcon onClick={this.changeVisibility} icon={faEye} className="visibilityIcon" id="visibilityIcon"/>
 					</div>
 	
-					{/* <div className="formSection">
-						<input onChange={this.handleInput} type="text" name="email" id="email" required />
-						<label htmlFor="email" className="labelBox">
-							<span className="labelContent">Contact Email</span>
-						</label>
-					</div> */}
-	
 					<input className="sendButton" type="submit" name="submit" value="Send"></input>
 				</form>
 	
@@ -88,9 +110,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		loginUser: (newUser) => dispatch(loginUser(newUser))
+		login: (newUser) => dispatch(login(newUser)),
+		clearErrors: (newUser) => dispatch(clearErrors(newUser))
 	}
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
-// export default LoginForm;

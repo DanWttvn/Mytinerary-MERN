@@ -276,11 +276,6 @@ a {
 	transition: transform 0.3s ease;
 }
 
-/* .labelBox {
-	display: flex;
-	flex-flow: row nowrap;
-} */
-
 .labelContent {
 	position: absolute;
 
@@ -317,6 +312,13 @@ a {
 .formSection input:focus + .labelBox::after,
 .formSection input:valid + .labelBox::after {
 	transform: translateX(0%);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	background-color: transparent;
 }
 
 .sendButton {

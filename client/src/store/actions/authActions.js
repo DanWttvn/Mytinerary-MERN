@@ -68,6 +68,29 @@ export const tokenConfig = getState => {
 	return config
 }
 
+//  Log in User
+export const login = ({ email, password }) => dispatch => {
+	// Headers
+	const config = {
+		headers: {
+			"Content-type" : "application/json"
+		}
+	}
+	// Request body
+	const body = JSON.stringify({ email, password });
+
+	axios.post("/user/login", body, config)
+		.then(res => dispatch({
+			type: LOGIN_SUCCESS, // isAuth = true
+			payload: res.data // usr data + token en localstorage
+		}))
+		.catch(err => {
+			dispatch(returnErrors(err.response.data, err.response.status, "LOGIN_FAIL")); // un obj como el de abajo pero conmas params. pasa lo de erroActions
+			dispatch({
+				type: LOGIN_FAIL
+			})
+		})
+} 
 
 //  Log out User
 export const logout = () => {
