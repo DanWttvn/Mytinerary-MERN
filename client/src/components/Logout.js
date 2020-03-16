@@ -32,3 +32,5 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(null, mapDispatchToProps)(NewAccount);
+
+// BORRAR ESTE COMENTARIO
