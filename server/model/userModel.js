@@ -9,6 +9,9 @@ const userModel = new mongoose.Schema({
 	googleID: {
 		type: String
 	},
+	facebookID: {
+		type: String
+	},
 	password: {
 		type: String,
 		// required: true lo puedo quitar porque lo requiero desde el FE
@@ -16,7 +19,7 @@ const userModel = new mongoose.Schema({
 	email: {
 		type: String,
 		// required: true, lo puedo quitar porque lo requiero desde el FE
-		unique: true
+		// unique: true
 	},
 	profilePic: {
 		type: String,

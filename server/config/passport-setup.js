@@ -1,6 +1,7 @@
 const passport = require("passport");
 
 const GoogleStrategy = require("passport-google-oauth20");
+const FacebookStrategy = require("passport-facebook");
 const jwt = require("jsonwebtoken");
 
 const JwtStrategy = require("passport-jwt").Strategy;
@@ -26,7 +27,7 @@ module.exports = passport.use(
 				if (currentUser) {
 					const payload = { 
 						id: currentUser.id,
-						username: currentUser.username
+						username: currentUser.displayName
 					};
 					jwt.sign (
 						payload, 
@@ -38,7 +39,7 @@ module.exports = passport.use(
 								token: token,
 								user: {
 									id: currentUser.id, //es la primera vez que lo pongo, pero parece que crea uno solito
-									username: currentUser.username,
+									username: currentUser.displayName,
 									email: currentUser.email
 								},
 							})
@@ -56,8 +57,8 @@ module.exports = passport.use(
 						.then((newUser) => {
 							// ··· create TOKEN ?? ççç como lo attach al newUser???
 							const payload = { 
-								id: currentUser.id,
-								username: currentUser.username
+								id: newUser.id,
+								username: newUser.displayName
 							};
 							jwt.sign (
 								payload, 
@@ -68,11 +69,86 @@ module.exports = passport.use(
 									res.json({
 										token: token,
 										user: {
-											id: currentUser.id, //es la primera vez que lo pongo, pero parece que crea uno solito
-											username: currentUser.username,
-											email: currentUser.email
+											id: newUser.id, //es la primera vez que lo pongo, pero parece que crea uno solito
+											username: newUser.displayName,
+											email: newUser.email
 										},
-										success: true,
+									})
+									console.log("logged succesfully");
+								}
+							)
+							console.log("new user:" + newUser);
+							done(null, newUser);
+						});
+				}
+			})	
+}));	
+
+// ---------- FACEBOOK 
+
+module.exports = passport.use(
+	new FacebookStrategy({
+		callbackURL: "/auth/facebook/redirect", // where I redirect after the auth (also set in the google credentials)
+		clientID: keys.facebook.clientID,
+		clientSecret: keys.facebook.clientSecret
+		}, (accessToken, refreshToken, profile, done) => {
+		//passport callback function. fired after the first auth page and comes with a code
+		console.log("cb fb fired");
+		// check if user already exists
+		userModel.findOne({ facebookID: profile.id })
+			.then((currentUser) => {
+				if (currentUser) {
+					const payload = { 
+						id: currentUser.id,
+						username: currentUser.displayName
+					};
+					jwt.sign (
+						payload, 
+						keys.secretOrKey,
+						{ expiresIn: 2592000 },
+						(err, token) => {
+							if(err) throw err;
+							res.json({
+								token: token,
+								user: {
+									id: currentUser.id, //es la primera vez que lo pongo, pero parece que crea uno solito
+									username: currentUser.displayName,
+									email: currentUser.email
+								},
+							})
+							console.log("logged succesfully");
+						}
+					)
+					console.log("already exists. user is:", currentUser);
+					done(null, currentUser);
+				} else {
+					console.log("user does not exist YET");
+					console.log(profile);
+							
+					// create new user in OUR db  with googles data
+					new userModel({
+						username: profile.displayName,
+						facebookID: profile.id
+					}).save()
+						.then((newUser) => {
+							// ··· create TOKEN ?? ççç como lo attach al newUser???
+							const payload = { 
+								id: newUser.id,
+								username: newUser.displayName
+							};
+							jwt.sign (
+								payload, 
+								keys.secretOrKey,
+								{ expiresIn: 2592000 },
+								(err, token) => {
+									if(err) throw err;
+									res.json({
+										token: token,
+										user: {
+											id: newUser.id, //es la primera vez que lo pongo, pero parece que crea uno solito
+											username: newUser.displayName,
+											email: newUser.email
+										},
 									})
 									console.log("logged succesfully");
 								}

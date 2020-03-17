@@ -99,13 +99,13 @@ class SignInPage extends Component {
 					<div className="sendCreateBtnsBox">
 						<input className="sendButton" type="submit" name="submit" value="Send"></input>
 						
-						<a className="createAccountBtn" href="/sign_up">Create Account</a> {/* 3000/auth/google */}
+						<a className="createAccountBtn" href="/sign_up">Create Account</a>
 					</div>
 				
 					{/* GOOGLE FB LOGIN */}
 					<div className="signInWithThirds">
-						<a className="GFB-btns google-btn" href="http://localhost:5000/auth/google">sign in with Google+</a> {/* 3000/auth/google */}
-						<a className="GFB-btns fb-btn" href="http://localhost:5000/auth/fb">sign in with Facebook</a> {/* 3000/auth/google */}
+						<a className="GFB-btns google-btn" href="http://localhost:5000/auth/google">sign in with Google+</a>
+						<a className="GFB-btns fb-btn" href="http://localhost:5000/auth/facebook">sign in with Facebook</a>
 					</div>
 				</form>				
 
