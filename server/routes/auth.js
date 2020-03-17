@@ -10,7 +10,7 @@ const userModel = require("../model/userModel");
 // --------- CHECK IF USER IS LOGGED jwt --------- //
 // @route GET /auth/user
 // private
-// check everytime if the user is logged in
+// check everytime if the user is logged in. Así protejo la ruta. Al poner passp.auth, voy a tener que pasarle el TOKEN en la peticion axios(en authActions)
 router.get("/user", passport.authenticate("jwt", {session: false}), (req, res) => {
 	userModel.findOne({ _id: req.user.id })
 		.then(user => {

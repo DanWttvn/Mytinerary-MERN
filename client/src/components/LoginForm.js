@@ -20,7 +20,6 @@ class LoginForm extends Component {
 		clearErrors: PropTypes.func.isRequired
 	}
 
-	// TRAVERSY 11 min 17:30
 	componentDidUpdate(prevProps) {
 		const { error } = this.props; // state this.prop.error
 		if(error !== prevProps.error) {
@@ -40,18 +39,24 @@ class LoginForm extends Component {
 		})
 	}
 
-	onSubmit = (e) => {
+	onSubmit = async e => {
 		e.preventDefault();
 		console.log("sent account data: " + this.state.email + " " + this.state.password)
+		
+		try {
+			const { email, password } = this.state;
+			const currentUser = {
+				email,
+				password
+			}
+			// Attempt to login
+			await this.props.login(currentUser);
+			console.log(this.props);
+			// this.props.history.push("/cities"); // he perdido la referencia del router porque esta muy nested. buscar otro metodo çççç
+		} catch (e) {
+			console.log(e.message);
+		}		
 
-		const { email, password } = this.state;
-
-		const currentUser = {
-			email,
-			password
-		}
-		// Attempt to login
-		this.props.login(currentUser)
 	}
 
 	changeVisibility = (e) => {

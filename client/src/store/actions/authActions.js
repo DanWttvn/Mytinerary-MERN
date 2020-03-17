@@ -11,7 +11,8 @@ export const loadUser = () => (dispatch, getState) => {
 		type: USER_LOADING //is loadign to true
 	});
 
-	axios.get("/auth/user", tokenConfig(getState)) // la comrpobacion del token que la he puesto a parte porqeu se va arepetir mucho
+	axios.get("http://localhost:5000//auth/user", tokenConfig(getState)) // la comrpobacion del token que la he puesto a parte porqeu se va arepetir mucho çççççççççç METER TOKEN, pero no esta ya???? en tokenconfig
+	// axios.get("http://localhost:5000/auth/user"
 		.then(res => dispatch({
 			type: USER_LOADED, // isAuthenticated true
 			payload: res.data
@@ -28,6 +29,7 @@ export const loadUser = () => (dispatch, getState) => {
 export const tokenConfig = getState => {
 	// Get token from localstorage
 	const token = getState().auth.token //authReducer -> localstorage
+	// localStorage.getItem("token") ??
 	// Headers. se añade al header ?
 	const config = {
 		headers: {
@@ -77,10 +79,13 @@ export const login = ({ email, password }) => dispatch => {
 	const body = JSON.stringify({ email, password });
 
 	axios.post("/user/login", body, config)
-		.then(res => dispatch({
-			type: LOGIN_SUCCESS, // isAuth = true
-			payload: res.data // usr data + token en localstorage
-		}))
+		.then(res => {
+			dispatch({
+				type: LOGIN_SUCCESS, // isAuth = true
+				payload: res.data // usr data + token en localstorage
+			})
+			// res.redirect("/cities")
+		})
 		.catch(err => {
 			dispatch(returnErrors(err.response.data, err.response.status, "LOGIN_FAIL")); // un obj como el de abajo pero conmas params. pasa lo de erroActions
 			dispatch({

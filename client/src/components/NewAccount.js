@@ -44,10 +44,11 @@ class NewAccount extends Component {
 		})
 	}
 
-	onSubmit = (e) => {
+	onSubmit = async (e) => {
 		e.preventDefault();
 		console.log("user submited: " + this.state.username + " " + this.state.password + " " +  this.state.email)
 		const { username, email, password } = this.state;
+		
 		//Create user Obj
 		const newUser = {
 			username,
@@ -55,8 +56,9 @@ class NewAccount extends Component {
 			password
 		};
 		// Attempt to register
-		this.props.register(newUser);
+		await this.props.register(newUser);
 		// this.props.clearErrors(); // ? yo. traversy lo pone en el modal
+		console.log(this.props); // this.props.history.push("/cities"); // he perdido la referencia del router porque esta muy nested. buscar otro metodo çççç		
 	}
 
 	changeVisibility = (e) => {		

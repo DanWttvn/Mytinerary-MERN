@@ -23,7 +23,7 @@ class Profile extends Component {
 					// Profile info 
 					<div id="LoggedInInfo">
 						<Navbar/>
-						{`Welcome ${user.username}`}
+						{`Welcome, ${user.username}`}
 						{/* { user.username } */}
 						<Logout/>
 					</div>
