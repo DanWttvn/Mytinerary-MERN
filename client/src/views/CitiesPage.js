@@ -18,8 +18,7 @@ class CitiesPage extends Component {
 	}
 
 	filterWithSearchTerm = (searchTerm) => {
-		console.log(searchTerm);
-		
+		// console.log(searchTerm);
 		this.props.filterCities(searchTerm);
 	}
 

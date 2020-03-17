@@ -75,8 +75,7 @@ class NewAccount extends Component {
 	}
 
 	render() {
-		console.log("neww account");
-		
+		console.log("new account:");
 		console.log(localStorage.getItem("token"));
 		
 		return (

@@ -9,7 +9,8 @@ const db = require("./config/keys").mongoURI;
 const mongoose = require("mongoose");
 
 const passport = require("passport");
-const passportSetup = require("./config/passport-setup"); // fires
+const passportSetup = require("./config/passport-setup"); 
+
 
 
 app.use(bodyParser.json()); //para poder leer ,manda json
@@ -29,8 +30,7 @@ mongoose.connect(db, { // db = my key
     .catch(err => console.log(err));
 
 	
-// PASSPORT (para jwt)
-// app.use(passport.initialize()); // esto lo he añadido despues, no se si hace falta
+// PASSPORT
 app.use(passportSetup.initialize());
 
 

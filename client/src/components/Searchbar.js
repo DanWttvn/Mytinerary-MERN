@@ -8,7 +8,7 @@ class Searchbar extends Component {
 
 	handleSearchTerm = (e) => {
 		let searchTerm = e.target.value.toLowerCase(); 
-		console.log(searchTerm);
+		// console.log(searchTerm);
 		
 		this.props.getSearchTerm(searchTerm); //sending searchterm through getSearchTerm
 	}

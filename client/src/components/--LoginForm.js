@@ -98,14 +98,15 @@ class LoginForm extends Component {
 						
 						<a className="createAccountBtn" href="/sign_up">Create Account</a> {/* 3000/auth/google */}
 					</div>
-
+				
+					{/* GOOGLE FB LOGIN */}
 					<div className="signInWithThirds">
 						<a className="GFB-btns google-btn" href="http://localhost:5000/auth/google">sign in with Google+</a> {/* 3000/auth/google */}
 						<a className="GFB-btns fb-btn" href="http://localhost:5000/auth/fb">sign in with Facebook</a> {/* 3000/auth/google */}
 					</div>
 
 				</form>
-				{/* GOOGLE LOGIN */}
+
 				
 			</div>
 		)
