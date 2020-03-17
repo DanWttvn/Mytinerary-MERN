@@ -96,7 +96,6 @@ a {
 	flex-flow: row nowrap;
 	justify-content: space-around;
 
-
 	background: rgb(230, 230, 230);
 	width: 100%;
 	padding: 10px 0;
@@ -110,17 +109,10 @@ a {
 
 #navbar .active svg { /* por que no funciona?? ççç */
 	color: rgb(253, 94, 94);
-	background: green;
 }
 
 
 /* -------- LANDING PAGE -------- */
-
-/* 
-.fixedHeight {
-	height: 100vh;
-} */
-
 
 .bg {
 	width: 100%;
@@ -133,7 +125,6 @@ a {
 .bg-img {
 	height: 100%;	
 	/* z-index: 0; */
-
 }
 
 .mascara {
@@ -164,7 +155,6 @@ a {
 .welcomeMessage {
 	position: relative;
 	top: 100px;
-
 }
 .signingBox {
 	align-self: center;
@@ -189,20 +179,7 @@ a {
 	color: #fff;
 }
 
-.createAccountBtn {
-	position: relative;
-	top: 7px;
 
-	background: transparent;
-	border: none;
-	border-bottom: 1.2px solid #fff;
-	padding: 0 0 2px;
-	color: #fff;
-	font-size: 15px;
-	font-weight: 300;
-	text-align: center;
-	width: 105px;
-}
 
 
 /* -------- SIGN IN FORM -------- */
@@ -328,15 +305,21 @@ input:-webkit-autofill {
     -webkit-animation-fill-mode: both;
 }
 
-.sendButton {
-	font-size: 22px;
+.sendCreateBtnsBox {
 	position: relative;
 	top: 100px;
-	align-self: center;
+	z-index: 100;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 
+.sendButton {
+	font-size: 22px;
+	
+	z-index: 100;
 	background: transparent;
 	color: white;
-	z-index: 100;
 	border: 2px solid #fff;
 	width: 130px;
 	height: 50px;
@@ -346,19 +329,51 @@ input:-webkit-autofill {
 	background: rgba(255, 255, 255, 0.15);
 }
 
-.google-btn {
-	font-size: 22px;
+.createAccountBtn {
+	z-index: 10;
 	position: relative;
-	top: 100px;
-	align-self: center;
-
+	top: 7px;
 	background: transparent;
+	border: none;
+	border-bottom: 1.2px solid #fff;
+	padding: 0 0 2px;
+	color: #fff;
+	font-size: 15px;
+	font-weight: 300;
+	text-align: center;
+	width: 105px;
+}
+.signInWithThirds {
+	display: flex;
+	flex-direction: column;
+}
+
+.GFB-btns {
+	font-size: 18px;
+	position: relative;
+	padding: 2px 20px;
+	margin-bottom: 3px;
+	top: 120px;
+	align-self: center;
+	text-align: center;
+
 	color: white;
 	z-index: 100;
 	border: 2px solid #fff;
-	width: 130px;
-	height: 50px;
+	/* width: 160px; */
+	/* height: 40px; */
 }
+
+.google-btn {
+	background: rgba(253, 94, 94, 0.6);
+}
+
+.fb-btn {
+	background: rgba(90, 94, 250, 0.6);
+}
+
+
+
 
 /* -------- SEARCHBAR -------- */
 
@@ -565,4 +580,16 @@ input:-webkit-autofill {
 }
 .fasHeart {
 	color: rgb(204, 29, 29);
+}
+
+/* -------- ADD NEW -------- */
+
+.addNewBox {
+	
+}
+
+.addNewBtn {
+	background: rgb(204, 29, 29);;
+	color: #fff;
+	border-radius: 50%;
 }

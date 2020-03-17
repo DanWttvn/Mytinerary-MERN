@@ -34,15 +34,12 @@ router.post("/sign_up", [
 				console.log("User already exists");
 				return res.status(400).json ({ msg: "User already exists"});
 			}
-
 			const newUser = new userModel({
 				username,
 				password,
 				email
 			});
-
 			//--------- AUTHENTICATION with bcrypt
-
 			// create salt & hash
 			bcrypt.genSalt(10, (err, salt) => {
 				bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -60,10 +57,8 @@ router.post("/sign_up", [
 								payload,  //the payload we want to add. this can be anything we want pero para identificar
 								keys.secretOrKey,
 								{ expiresIn: 2592000 },
-
 								(err, token) => {
 									if(err) throw err;
-
 									res.json({
 										token: token,
 										user: {
@@ -75,9 +70,8 @@ router.post("/sign_up", [
 									})
 								}
 							)
-											
 							console.log("created new user", user);
-							// res.redirect("/cities"); no funciona, pero en medium esta asi
+							// res.redirect("http://localhost:3000/cities"); //no funciona, pero en medium esta asi
 						})
 				})
 			})
@@ -89,7 +83,6 @@ router.post("/sign_up", [
 // @route POST /user/login
 router.post("/login", async (req, res) => { 
 	console.log("sending to authenticate and compare passwords");
-	
 	const { email, password } = req.body;
 	userModel.findOne({ email })
 		.then(user => {
@@ -108,15 +101,12 @@ router.post("/login", async (req, res) => {
 						id: user.id,
 						username: user.username
 					};
-
 					jwt.sign (
 						payload,  //the payload we want to add. this can be anything we want pero para identificar
 						keys.secretOrKey,
 						{ expiresIn: 2592000 },
-
 						(err, token) => {
 							if(err) throw err;
-							
 							res.json({
 								token: token,
 								user: {
@@ -129,7 +119,6 @@ router.post("/login", async (req, res) => {
 						}
 					)
 				})
-
 			}
 		})
 })

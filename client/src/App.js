@@ -17,6 +17,7 @@ import store from "./store/store"
 
 class App extends Component {
 
+	// CLAVE: a cada cambio va a comprobar si el user esta conectado
 	componentDidMount() {
 		store.dispatch(loadUser());
 	}

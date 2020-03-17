@@ -8,6 +8,7 @@ const cors = require("cors");
 const db = require("./config/keys").mongoURI;
 const mongoose = require("mongoose");
 
+const passport = require("passport");
 const passportSetup = require("./config/passport-setup"); // fires
 
 
@@ -19,20 +20,6 @@ app.use(
 );
 app.use(cors());
 
-app.listen(port, () => {
-	console.log("Server running on " + port + " port");
-});
-
-// ENDPOINT ? relativo a esto ahora? ççççç
-app.use("/cities", require("./routes/cities")); // routes cities conected con endpoint cities ? . 
-// Crea un puerto al que me voy a poder conectar desde el front end. si me llega una peticion a 5000/cities me conecta con ese archivo de router
-app.use("/itineraries", require("./routes/itineraries")); 
-app.use("/user", require("./routes/user")); 
-app.use("/auth", require("./routes/auth")); // 5000/auth
-
-// PASSPORT (para jwt)
-app.use(passportSetup.initialize());
-
 mongoose.connect(db, { // db = my key
 	useNewUrlParser: true, 
 	useCreateIndex: true, 
@@ -41,4 +28,20 @@ mongoose.connect(db, { // db = my key
     .then(() => console.log('Connection to Mongo DB established'))
     .catch(err => console.log(err));
 
+	
+// PASSPORT (para jwt)
+// app.use(passport.initialize()); // esto lo he añadido despues, no se si hace falta
+app.use(passportSetup.initialize());
 
+
+// ENDPOINT ? relativo a esto ahora? ççççç
+app.use("/cities", require("./routes/cities")); // routes cities conected con endpoint cities ? . 
+// Crea un puerto al que me voy a poder conectar desde el front end. si me llega una peticion a 5000/cities me conecta con ese archivo de router
+app.use("/itineraries", require("./routes/itineraries")); 
+app.use("/user", require("./routes/user")); 
+app.use("/auth", require("./routes/auth")); // 5000/auth
+
+
+app.listen(port, () => {
+	console.log("Server running on " + port + " port");
+});

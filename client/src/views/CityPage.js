@@ -13,29 +13,24 @@ import Itineraries from "../components//Itineraries"
 
 class CityPage extends Component {
 
-	// que me saque los nombres de la ciudad y segun eso display
 
 	componentDidMount() {
 		// this.props.getAllItineraries()
 		// console.log(this.props.getAllItineraries);	
-		
 		this.props.getItinerariesByCity(this.props.match.params.city) //this comes from the route: :city. that's the city
 	}
 
 	render () {
 		console.log(this.props.itineraries);
+		// the city Im in
 		console.log(this.props.match.params.city);
 		
 		
 		return (
 			<div className="container">
 				<Logo/>
-
 				<h3 className="cityName">{this.props.match.params.city}</h3>
-
-				{/* lo que le paso aqui que sean esas ciudades */}
 				<Itineraries itineraries={this.props.itineraries}/>
-
 				<Navbar/>
 			</div>
 		)
@@ -51,7 +46,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		// getAllItineraries: () => dispatch(getAllItineraries())
-
 		getItinerariesByCity: (city) => dispatch(getItinerariesByCity(city))
 	}
 }

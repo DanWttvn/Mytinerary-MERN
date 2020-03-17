@@ -1,6 +1,7 @@
 const passport = require("passport");
 
 const GoogleStrategy = require("passport-google-oauth20");
+const jwt = require("jsonwebtoken");
 
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
@@ -10,7 +11,8 @@ const keys = require("./keys")
 const userModel = require("../model/userModel")
 
 // --------------- GOOGLE --------------- //
-passport.use(
+
+module.exports = passport.use(
 	new GoogleStrategy({
 		callbackURL: "/auth/google/redirect", // where I redirect after the auth (also set in the google credentials)
 		clientID: keys.google.clientID,
@@ -22,20 +24,16 @@ passport.use(
 		userModel.findOne({ googleID: profile.id })
 			.then((currentUser) => {
 				if (currentUser) {
-					// ··· create TOKEN ?? ççç como lo attach al currentUsesr???
 					const payload = { 
 						id: currentUser.id,
 						username: currentUser.username
 					};
-
 					jwt.sign (
 						payload, 
-						key.secretOrKey,
+						keys.secretOrKey,
 						{ expiresIn: 2592000 },
-
 						(err, token) => {
 							if(err) throw err;
-							
 							res.json({
 								token: token,
 								user: {
@@ -43,15 +41,12 @@ passport.use(
 									username: currentUser.username,
 									email: currentUser.email
 								},
-								success: true,
 							})
 							console.log("logged succesfully");
 						}
 					)
-
 					console.log("already exists. user is:", currentUser);
 					done(null, currentUser);
-
 				} else {
 					// create new user in OUR db  with googles data
 					new userModel({
@@ -64,15 +59,12 @@ passport.use(
 								id: currentUser.id,
 								username: currentUser.username
 							};
-
 							jwt.sign (
 								payload, 
-								key.secretOrKey,
+								keys.secretOrKey,
 								{ expiresIn: 2592000 },
-
 								(err, token) => {
 									if(err) throw err;
-									
 									res.json({
 										token: token,
 										user: {
@@ -85,24 +77,12 @@ passport.use(
 									console.log("logged succesfully");
 								}
 							)
-
 							console.log("new user:" + newUser);
 							done(null, newUser);
 						});
 				}
 			})	
 }));	
-
-passport.serializeUser((user, done) => { //cuando esté done, viene aqui
-	done(null, user.id); //if error null, if not we pass de id in the db
-});
-
-passport.deserializeUser((id, done) => { //despues del serializer
-	userModel.findById(id)
-		.then((user) => {
-			done(null, user); 
-		})
-});
 
 
 // --------------- JWT --------------- //
@@ -126,8 +106,3 @@ module.exports = passport.use(
 			}).catch(err => console.log(err));
 	})
 ); // estoy exportando el user. ahora en auth.js en la llamada puedo usar user porque lo imporo y comparo al poner  passport.authenticate("jwt"... 
-
-
-
-///////////////////////////////////////////
-// https://www.youtube.com/watch?v=qyomEaXQJFk&list=PLillGF-RfqbbiTGgA77tGO426V3hRF9iE&index=10 

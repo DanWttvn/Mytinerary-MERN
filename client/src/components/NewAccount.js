@@ -56,7 +56,7 @@ class NewAccount extends Component {
 		};
 		// Attempt to register
 		this.props.register(newUser);
-		this.props.clearErrors(); // ? yo. traversy lo pone en el modal
+		// this.props.clearErrors(); // ? yo. traversy lo pone en el modal
 	}
 
 	changeVisibility = (e) => {		
@@ -73,6 +73,10 @@ class NewAccount extends Component {
 	}
 
 	render() {
+		console.log("neww account");
+		
+		console.log(localStorage.getItem("token"));
+		
 		return (
 			<form onSubmit={this.onSubmit} className="formBox">
 				{ this.state.msg ? <Alert color="danger">{ this.state.msg }</Alert> : null }

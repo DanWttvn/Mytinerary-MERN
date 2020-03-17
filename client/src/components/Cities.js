@@ -1,11 +1,14 @@
 import React from 'react'
 // import thumbPrueba from "../img/amsterdam/a (1).jpg"
 import { Link } from "react-router-dom"
+import AddItineraryModal from "../components/AddItineraryModal"
 
 
 const Cities = ({cities}) => {
 
-	// console.log(cities);
+	// addWithInput = (newCity) => {
+	// 	this.props.addCity(newCity) // pasar a dento del component?? ççç
+	// }
 	
 	const citiesGallery = cities.map(city => {		
 		return (
@@ -26,6 +29,10 @@ const Cities = ({cities}) => {
 	return (
 		<div className="citiesGallery">
 			{citiesGallery}
+
+			{/* <AddItineraryModal addNewItinerary={this.addWithInput} />  */}
+			{/* esta en lista ciudades, añadir despues a cada it */}
+
 		</div>
 	)
 }
