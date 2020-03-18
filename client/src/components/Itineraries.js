@@ -1,17 +1,23 @@
-import React from 'react'
-
+import React, { Component } from 'react'
+import { connect } from "react-redux"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as fasHeart} from '@fortawesome/free-solid-svg-icons'
 import { faHeart as farHeart} from '@fortawesome/free-regular-svg-icons'
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons'
 import { faClock } from '@fortawesome/free-regular-svg-icons'
+import { addToFavorites } from "../store/actions/authActions"
 
 
-const Itineraries = ({itineraries}) => {
+// const Itineraries = ({itineraries}) => {
+class Itineraries extends Component {
 
 	// console.log(itineraries);
+	handleClick = (itinID) => {
+		this.props.addToFavorites(itinID);
+	}
 	
-	const itinsCarrousel = itineraries.map((itin, i) => {
+	render () {
+			const itinsCarrousel = this.props.itineraries.map((itin, i) => {
 		return (
 			<div className="itinCard" key={i}>
 				<div className="itinPrev" style={
@@ -19,7 +25,7 @@ const Itineraries = ({itineraries}) => {
 					+ '\')', 
 					backgroundPosition: 'center center', 
 					backgroundSize: 'cover'}}>
-						<FontAwesomeIcon icon={farHeart} className="faHeart farHeart"/>
+						<FontAwesomeIcon onClick={()=>{this.handleClick(itin.title)}} icon={farHeart} className="faHeart farHeart"/>
 						<FontAwesomeIcon hidden icon={fasHeart} className="faHeart fasHeart"/>
 						<div className="itinInfoPrev">
 							<p className="shortenedSummary">{itin.summary}</p>
@@ -55,13 +61,17 @@ const Itineraries = ({itineraries}) => {
 	})
 	
 	return (
-		<div className="itinsCarrousel">
-			<h3 className="cityName">{itineraries.city}</h3>
-
-			{itinsCarrousel}
-			
-		</div>
-	)
+			<div className="itinsCarrousel">
+				{itinsCarrousel}
+			</div>
+		)
+	}
 }
 
-export default Itineraries;
+const mapDispatchToProps = dispatch => {
+	return {
+		addToFavorites: (itinID) => dispatch(addToFavorites(itinID))
+	}
+}
+
+export default connect(null, mapDispatchToProps)(Itineraries);

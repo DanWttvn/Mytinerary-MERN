@@ -65,6 +65,14 @@ const authReducer = (state = initState, action) => {
 				isLoading: false
 			}
 
+		case "UPDATE_ITINERARIES": 
+			// console.log("modifyinf favs", action.payload);
+			return {
+				...state,
+				user: action.payload
+			}
+			
+
 		default:
 			return state;
 	}

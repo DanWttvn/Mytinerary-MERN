@@ -4,7 +4,7 @@ const initState = {
 
 const itinerariesReducer = (state = initState, action) => {
 	switch (action.type) {
-		case "GET_ITINERARIES": // All, ByCity y ByFavs
+		case "GET_ITINERARIES": // All, ByCity y ByFavs y AddFavs?
 			console.log("getting itineraries");
 			return {
 				...state,
@@ -17,7 +17,7 @@ const itinerariesReducer = (state = initState, action) => {
 				...state,
 				itineraries: action.payload
 			}
-		
+
 		default:
 			return state;			
 	}

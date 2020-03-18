@@ -37,9 +37,15 @@ lo que envio en la url
 // @route PUT /user/favorites
 // private access
 router.put("/favorites", passport.authenticate("jwt", {session: false}), (req, res) => {
-	console.log("PUT /favorites route");
+	console.log("PUT user/favorites route");
 	// comprobacion si ya favorito: 
 	const indexItin = req.user.favorites.indexOf(req.body.id) // ese id es del itinerario
+
+	console.log("req.body", req); 
+	console.log("req.body", req.body); 
+	console.log("req.body.id", req.body.id);
+	console.log("indexItin", indexItin);
+	
 	if (indexItin !== -1) {
 		// quitar de favs
 		req.user.favorites.splice(indexItin, 1) //(a partir del indexItin, borro 1)
@@ -54,6 +60,7 @@ router.put("/favorites", passport.authenticate("jwt", {session: false}), (req, r
 		.then(() => { // si cargo aqui, me manda la version antigua, por eso find otra vez
 			userModel.findOne({_id: req.user._id})
 				.then(userUpdated => {
+					// console.log("lo que mando del BackendPUT:", userUpdated);
 					res.json(userUpdated)
 				})
 		})
@@ -63,9 +70,7 @@ router.put("/favorites", passport.authenticate("jwt", {session: false}), (req, r
 // @route GET /user/favorites
 // private access
 router.get("/favorites", passport.authenticate("jwt", {session: false}), (req, res) => {
-	
-	console.log("get itins by user.favorites");
-		
+	console.log("get itins by user.favorites");		
 	// cojo mi logged user
 	userModel.findOne({_id: req.user._id})
 		.then(currentUser => {

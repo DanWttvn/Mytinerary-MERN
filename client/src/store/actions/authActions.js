@@ -2,32 +2,9 @@ import axios from "axios";
 import { USER_LOADED, USER_LOADING, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCCESS, REGISTER_SUCCESS, REGISTER_FAIL } from "./types"
 import { returnErrors } from "./errorActions"
 
-// --- TRAVERSY
-
-// Check token and load user
-export const loadUser = () => (dispatch, getState) => {
-	console.log("loadUser de authActions");
-	
-	// user loading
-	dispatch({
-		type: USER_LOADING //is loading to true
-	});
-
-	axios.get("http://localhost:5000/auth/user", tokenConfig(getState)) // la comrpobacion del token que la he puesto a parte porqeu se va arepetir mucho
-		.then(res => dispatch({
-			type: USER_LOADED, // isAuthenticated true
-			payload: res.data
-		}))
-		.catch(err => {
-			dispatch(returnErrors(err.response.data, err.response.status)); // un obj como el de abajo pero conmas params. pasa lo de erroActions
-			dispatch({
-				type: AUTH_ERROR // everything erasesd
-			})
-		})
-}
 
 // Setup config-headers and token. se va a uar cada vez que quiera comprobar el token
-export const tokenConfig = getState => {
+export const tokenConfigGET = getState => {
 	// Get token from localstorage
 	const token = getState().auth.token //authReducer -> localstorage
 	const config = {
@@ -40,6 +17,45 @@ export const tokenConfig = getState => {
 		config.headers["Authorization"] = "bearer " + token;
 	}
 	return config
+}
+
+
+export const tokenConfigPUT = getState => {
+	// Get token from localstorage
+	const token = getState().auth.token //authReducer -> localstorage
+	const config = {
+		headers: {
+			"Content-type" : 'application/x-www-form-urlencoded'
+		}
+	}
+	// If token, add to headers
+	if (token) {
+		config.headers["Authorization"] = "bearer " + token;
+	}
+	return config
+}
+
+
+// Check token and load user
+export const loadUser = () => (dispatch, getState) => {
+	console.log("loadUser de authActions");
+	
+	// user loading
+	dispatch({
+		type: USER_LOADING //is loading to true
+	});
+
+	axios.get("http://localhost:5000/auth/user", tokenConfigGET(getState)) // la comrpobacion del token que la he puesto a parte porqeu se va arepetir mucho
+		.then(res => dispatch({
+			type: USER_LOADED, // isAuthenticated true
+			payload: res.data
+		}))
+		.catch(err => {
+			dispatch(returnErrors(err.response.data, err.response.status)); // un obj como el de abajo pero conmas params. pasa lo de erroActions
+			dispatch({
+				type: AUTH_ERROR // everything erasesd
+			})
+		})
 }
 
 // Register user
@@ -84,7 +100,6 @@ export const login = ({ email, password }) => dispatch => {
 				type: LOGIN_SUCCESS, // isAuth = true
 				payload: res.data // usr data + token en localstorage
 			})
-			// res.redirect("/cities")
 		})
 		.catch(err => {
 			dispatch(returnErrors(err.response.data, err.response.status, "LOGIN_FAIL")); // un obj como el de abajo pero conmas params. pasa lo de erroActions
@@ -101,24 +116,7 @@ export const logout = () => {
 		type: LOGOUT_SUCCESS // cleans tken and isAut = false
 	}
 } 
-
-
-// -- GET FAVS
-export const getItinerariesByFavs = ()  => (dispatch, getState) => {
-	axios.get("http://localhost:5000/user/favorites", tokenConfig(getState)) 
-		.then(res => {
-			// console.log("favorites by user", res.data);
-			dispatch ({
-				// type: "GET_ITINERARIES_BY_FAVS",
-				type: "GET_ITINERARIES", // prueba si nuevo reducer
-				payload: res.data
-		});
-	})
-}
-
-// --- ANTES MIO 
-
-
+// ANTES MIO 
 // export const logoutUser = (currentUser) => dispatch => {
 // 	axios.post("/auth/logout", currentUser)
 // 		.then(res => {
@@ -128,3 +126,50 @@ export const getItinerariesByFavs = ()  => (dispatch, getState) => {
 // 			});
 // 	})
 // };
+
+// -- GET FAVS
+export const getItinerariesByFavs = ()  => (dispatch, getState) => {
+	axios.get("http://localhost:5000/user/favorites", tokenConfigGET(getState)) 
+		.then(res => {
+			console.log("favorites by user", res.data);
+			dispatch ({
+				type: "GET_ITINERARIES", /// me vale el mismo reducer
+				payload: res.data
+		});
+	})
+}
+
+// -- ADD FAVS ççççççççççççççççç
+export const addToFavorites = (id) => (dispatch, getState) => {
+	console.log("id:", id); // si, es el titulo
+	// const body = JSON.stringify({ id });
+	// const body = JSON.stringify( ejemploID );
+	const body = JSON.stringify({ id }); // lo que .stringify es un obj. como el mio no lo es, le pongo {}
+	console.log("body:", body);
+	
+	
+	axios.put("http://localhost:5000/user/favorites",
+		{
+			id: "Hop on your bike"
+		}, 
+		// body,
+		// ({ id }),
+		// {id},
+		tokenConfigPUT(getState))
+
+		.then(res => {
+			// me llega en res todo el user modificado con nuevos FAVS
+			// console.log("lo que me llega del BackEndPUT:", res.data);
+			dispatch({
+				type: "UPDATE_ITINERARIES",
+				payload: res.data
+			})
+			// console.log("despues de dispatch");
+		})
+	// -> Sí que se actualiza el state bien. El fallo está en el id, que no lo manda y me sale null
+}
+
+
+
+
+
