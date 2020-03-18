@@ -6,6 +6,8 @@ import { returnErrors } from "./errorActions"
 
 // Check token and load user
 export const loadUser = () => (dispatch, getState) => {
+	console.log("loadUser de authActions");
+	
 	// user loading
 	dispatch({
 		type: USER_LOADING //is loading to true
@@ -100,6 +102,19 @@ export const logout = () => {
 	}
 } 
 
+
+// -- GET FAVS
+export const getItinerariesByFavs = ()  => (dispatch, getState) => {
+	axios.get("http://localhost:5000/user/favorites", tokenConfig(getState)) 
+		.then(res => {
+			// console.log("favorites by user", res.data);
+			dispatch ({
+				// type: "GET_ITINERARIES_BY_FAVS",
+				type: "GET_ITINERARIES", // prueba si nuevo reducer
+				payload: res.data
+		});
+	})
+}
 
 // --- ANTES MIO 
 

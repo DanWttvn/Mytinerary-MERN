@@ -4,7 +4,7 @@ import axios from "axios";
 export const getAllItineraries = () => dispatch => {
 	axios.get("/itineraries/all")
 		.then(res => {
-			console.log(res.data);
+			// console.log(res.data);
 			dispatch ({
 				type: "GET_ITINERARIES",
 				payload: res.data
@@ -15,13 +15,14 @@ export const getAllItineraries = () => dispatch => {
 export const getItinerariesByCity = (city) => dispatch => {
 	axios.get(`http://localhost:5000/itineraries/${city}`) 
 		.then(res => {
-			console.log(res.data);
+			// console.log(res.data);
 			dispatch ({
 				type: "GET_ITINERARIES_BY_CITY",
 				payload: res.data
 		});
 	})
 }
+
 
 
 // export const addCity = (newCity) => dispatch => {
