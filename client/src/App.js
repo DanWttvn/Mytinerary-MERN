@@ -59,9 +59,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps,null)(App);
-
-// ççççççççççççççççç
-/* <Route exact path="/">
-  {loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />}
-</Route> */
-

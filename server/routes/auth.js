@@ -41,22 +41,6 @@ router.get("/facebook/redirect", passport.authenticate("facebook", {session: fal
 	res.redirect("http://localhost:3000/cities") 
 });
 
-// --------- SAVE FAVS --------- //
-router.post("/favorites", passport.authenticate("jwt", {session: false}), (req, res) => {
-	console.log("POST /favorites route");
-	
-	// encuentro mi usuario
-	// const { email } = ?;
-	// const { itinerary } = req.body;
-	// userModel.findOne({ email })
-	// 	.then(user => {
-	// 		// accedo a favs y meto nuevo
-	// 		user.favorites.push()
-	// 		res.json(itinerary)
-	// 	})
-	// 	.catch(err => res.status(404).json({ error: "" }));
-});
-
 
 
 

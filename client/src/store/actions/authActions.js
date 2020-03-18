@@ -8,11 +8,10 @@ import { returnErrors } from "./errorActions"
 export const loadUser = () => (dispatch, getState) => {
 	// user loading
 	dispatch({
-		type: USER_LOADING //is loadign to true
+		type: USER_LOADING //is loading to true
 	});
 
-	axios.get("http://localhost:5000/auth/user", tokenConfig(getState)) // la comrpobacion del token que la he puesto a parte porqeu se va arepetir mucho çççççççççç METER TOKEN, pero no esta ya???? en tokenconfig
-	// axios.get("http://localhost:5000/auth/user"
+	axios.get("http://localhost:5000/auth/user", tokenConfig(getState)) // la comrpobacion del token que la he puesto a parte porqeu se va arepetir mucho
 		.then(res => dispatch({
 			type: USER_LOADED, // isAuthenticated true
 			payload: res.data
@@ -20,18 +19,15 @@ export const loadUser = () => (dispatch, getState) => {
 		.catch(err => {
 			dispatch(returnErrors(err.response.data, err.response.status)); // un obj como el de abajo pero conmas params. pasa lo de erroActions
 			dispatch({
-				type: AUTH_ERROR // everyting erasesd
+				type: AUTH_ERROR // everything erasesd
 			})
 		})
 }
-// ççççççççççç
 
-// Setup config-headers and token. se va a uar cada vez que uqiera comprobar el token
+// Setup config-headers and token. se va a uar cada vez que quiera comprobar el token
 export const tokenConfig = getState => {
 	// Get token from localstorage
 	const token = getState().auth.token //authReducer -> localstorage
-	// localStorage.getItem("token") ??
-	// Headers. se añade al header ?
 	const config = {
 		headers: {
 			"Content-type" : "application/json"

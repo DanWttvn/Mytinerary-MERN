@@ -24,10 +24,11 @@ module.exports = passport.use(
 		// check if user already exists
 		userModel.findOne({ googleID: profile.id })
 			.then((currentUser) => {
+				// YA REGISTRADO
 				if (currentUser) {
 					const payload = { 
 						id: currentUser.id,
-						username: currentUser.displayName
+						username: currentUser.username
 					};
 					jwt.sign (
 						payload, 
@@ -38,9 +39,12 @@ module.exports = passport.use(
 							res.json({
 								token: token,
 								user: {
+									// de los datos de mi db
 									id: currentUser.id, //es la primera vez que lo pongo, pero parece que crea uno solito
-									username: currentUser.displayName,
-									email: currentUser.email
+									username: currentUser.username,
+									email: currentUser.email,
+									profilePic: currentUser.profilePic,
+									favorites: currentUser.favorites
 								},
 							})
 							console.log("logged succesfully");
@@ -52,13 +56,14 @@ module.exports = passport.use(
 					// create new user in OUR db  with googles data
 					new userModel({
 						username: profile.displayName,
-						googleID: profile.id
+						googleID: profile.id,
+						profilePic: "",
+						favorites: []
 					}).save()
 						.then((newUser) => {
-							// ··· create TOKEN ?? ççç como lo attach al newUser???
 							const payload = { 
 								id: newUser.id,
-								username: newUser.displayName
+								username: newUser.username
 							};
 							jwt.sign (
 								payload, 
@@ -69,9 +74,12 @@ module.exports = passport.use(
 									res.json({
 										token: token,
 										user: {
+											// de los datos de google
 											id: newUser.id, //es la primera vez que lo pongo, pero parece que crea uno solito
-											username: newUser.displayName,
-											email: newUser.email
+											username: newUser.username,
+											email: newUser.email,
+											profilePic: "",
+											favorites: []
 										},
 									})
 									console.log("logged succesfully");
@@ -98,9 +106,10 @@ module.exports = passport.use(
 		userModel.findOne({ facebookID: profile.id })
 			.then((currentUser) => {
 				if (currentUser) {
+					console.log("already exists. user is:", currentUser);
 					const payload = { 
 						id: currentUser.id,
-						username: currentUser.displayName
+						username: currentUser.username
 					};
 					jwt.sign (
 						payload, 
@@ -111,30 +120,31 @@ module.exports = passport.use(
 							res.json({
 								token: token,
 								user: {
+									// lo qu pillo de los datos de mi db
 									id: currentUser.id, //es la primera vez que lo pongo, pero parece que crea uno solito
-									username: currentUser.displayName,
-									email: currentUser.email
+									username: currentUser.username,
+									profilePic: currentUser.profilePic,
+									favorites: currentUser.favorites
 								},
 							})
 							console.log("logged succesfully");
 						}
 					)
-					console.log("already exists. user is:", currentUser);
 					done(null, currentUser);
 				} else {
 					console.log("user does not exist YET");
-					console.log(profile);
 							
-					// create new user in OUR db  with googles data
+					// create new user in OUR db  with fb data
 					new userModel({
 						username: profile.displayName,
-						facebookID: profile.id
+						facebookID: profile.id,
+						profilePic: "",
+						favorites: []
 					}).save()
 						.then((newUser) => {
-							// ··· create TOKEN ?? ççç como lo attach al newUser???
 							const payload = { 
 								id: newUser.id,
-								username: newUser.displayName
+								username: newUser.username
 							};
 							jwt.sign (
 								payload, 
@@ -145,9 +155,11 @@ module.exports = passport.use(
 									res.json({
 										token: token,
 										user: {
+											// lo que pillo de los datos de fb
 											id: newUser.id, //es la primera vez que lo pongo, pero parece que crea uno solito
 											username: newUser.displayName,
-											email: newUser.email
+											profilePic: "",
+											favorites: []
 										},
 									})
 									console.log("logged succesfully");
