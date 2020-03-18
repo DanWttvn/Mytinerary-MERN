@@ -1,7 +1,5 @@
 const express = require("express");
-
 const router = express.Router();
-
 const itineraryModel = require("../model/itineraryModel");
 
 // ---- GET ALL ITINS

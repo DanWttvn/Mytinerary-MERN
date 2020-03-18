@@ -21,7 +21,7 @@ class CityPage extends Component {
 	}
 
 	render () {
-		console.log(this.props.itineraries);
+		// console.log(this.props.itineraries);
 		// the city Im in
 		console.log(this.props.match.params.city);
 		

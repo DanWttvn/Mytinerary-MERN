@@ -13,7 +13,7 @@ export const getAllItineraries = () => dispatch => {
 }
 
 export const getItinerariesByCity = (city) => dispatch => {
-	axios.get(`http://localhost:5000/itineraries/${city}`) // çççç !! aqui (con/Amsteradm funciona)
+	axios.get(`http://localhost:5000/itineraries/${city}`) 
 		.then(res => {
 			console.log(res.data);
 			dispatch ({
@@ -21,15 +21,6 @@ export const getItinerariesByCity = (city) => dispatch => {
 				payload: res.data
 		});
 	})
-
-	// axios.get('http://localhost:5000/itineraries/:city') // çççç !! aqui (con/Amsteradm funciona)
-	// 	.then(res => {
-	// 		console.log(res.data);
-	// 		dispatch ({
-	// 			type: "GET_ITINERARIES_BY_CITY",
-	// 			payload: res.data
-	// 	});
-	// })
 }
 
 

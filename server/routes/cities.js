@@ -1,8 +1,6 @@
 // TODO ESTO ES A PARTIR DE /CITIES....
 const express = require("express");
-
 const router = express.Router();
-
 const cityModel = require("../model/cityModel");
 
 // ---- GET ALL CITIES
@@ -15,7 +13,7 @@ router.get("/all", (req, res) => { // = cities/all
 		.catch(err => console.log(err))
 });
 
-// ---- ADD NEW CITY and PREVENT DUPLICATES
+// ---- ADD NEW CITY and PREVENT DUPLICATES (change to postItins, doesnt workçççç)
 // @route POST /cities/
 
 router.post("/", (req, res) => {

@@ -52,6 +52,7 @@ export const register = ({ username, email, password }) => dispatch => {
 	const body = JSON.stringify({ username, email, password });
 
 	axios.post("/user/sign_up", body, config)
+	
 		.then(res => dispatch({
 			type: REGISTER_SUCCESS, // isAuth = true
 			payload: res.data // usr data + token
@@ -93,26 +94,15 @@ export const login = ({ email, password }) => dispatch => {
 
 //  Log out User
 export const logout = () => {
+	// por que no hay dispatch? por que no conecta con el post?
 	return {
 		type: LOGOUT_SUCCESS // cleans tken and isAut = false
 	}
 } 
 
 
-
-
-
 // --- ANTES MIO 
 
-// export const loginUser = (newUser) => dispatch => {
-// 	axios.post("/auth/login", newUser) //5000
-// 		.then(res => {
-// 			dispatch({
-// 				type: "LOGIN_USER",
-// 				payload: res.data
-// 			});
-// 	})
-// };
 
 // export const logoutUser = (currentUser) => dispatch => {
 // 	axios.post("/auth/logout", currentUser)

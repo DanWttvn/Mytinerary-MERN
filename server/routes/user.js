@@ -7,42 +7,82 @@ const jwt = require("jsonwebtoken");
 const passport  = require("passport");
 
 const userModel = require("../model/userModel");
+const itineraryModel = require("../model/itineraryModel");
 
+/* REQS INFO
+REQ.USER
+{
+	"_id": "5e71fde10b0a0636b89d6bd5",
+	"username": "a@a.com",
+	"password": "$2b$10$A5qGEAHOs3i04CdsTyUmNeX9UIne2DoaFiFGvj/EF8VbX6Bx9z0NC",
+	"email": "a@a.com",
+	"profilePic": "",
+	"favorites": [],
+	"register_date": "2020-03-18T10:54:25.485Z",
+	"__v": 0
+}
+
+REQ.BODY: lo que le mande
+{
+	lo que le mande desde FE, eneste caso en la action desde el componente, en este caso quiero el itinerary
+}
+
+REQ.PARAMS
+lo que envio en la url
+*/
 
 ////////////////////////// FAVS //////////////////////////////
-// !! CREO QUE ES EL AUTH/USER Y AHO TENGO TODA MI INFO
-
-// --------- GET FAVS --------- //
-// router.get("/favorites"), (req, res) => {
-// 	userModel.find({})
-// 		.then()
-
-// }
-
 
 // --------- SAVE FAVS --------- //
 // @route PUT /user/favorites
 // private access
 router.put("/favorites", passport.authenticate("jwt", {session: false}), (req, res) => {
-	console.log("POST /favorites route");
-	console.log("req.user:", req.user);
-	res.json(req.user)
+	console.log("PUT /favorites route");
+	// comprobacion si ya favorito: 
+	const indexItin = req.user.favorites.indexOf(req.body.id) // ese id es del itinerario
+	if (indexItin !== -1) {
+		// quitar de favs
+		req.user.favorites.splice(indexItin, 1) //(a partir del indexItin, borro 1)
+	} else {
+		// añadir a favs
+		req.user.favorites.push(req.body.id)
+	}
 
-	userModel.findByIdAndUpdate({_id: req.params.id})
-	
-	// encuentro mi usuario
-	// const { email } = ?;
-	// const { itinerary } = req.body;
-	// userModel.findOne({ email })
-	// 	.then(user => {
-	// 		// accedo a favs y meto nuevo
-	// 		user.favorites.push()
-	// 		res.json(itinerary)
-	// 	})
-	// 	.catch(err => res.status(404).json({ error: "" }));
+	// Find the user logged, con qué quieres modificar (ya he modificado el req.user antes)
+	userModel.findByIdAndUpdate({_id: req.user._id}, req.user)
+		// despues de update, mandar el user de vuelta al client
+		.then(() => { // si cargo aqui, me manda la version antigua, por eso find otra vez
+			userModel.findOne({_id: req.user._id})
+				.then(userUpdated => {
+					res.json(userUpdated)
+				})
+		})
 });
 
+// --------- GET FAVS --------- //
+// @route GET /user/favorites
+// private access
+router.get("/favorites", passport.authenticate("jwt", {session: false}), (req, res) => {
+	
+	console.log("get itins by user.favorites");
+		
+	// cojo mi logged user
+	userModel.findOne({_id: req.user._id})
+		.then(currentUser => {
+			// console.log("1", currentUser);
+			// console.log("2", currentUser.favorites);
+			
+			// cojo los itins cuyos ids coincidan con los favorites ids del user ({ nombreEnItidDB: lo que busco})
+			// itineraryModel.find({ _id: '5d0371ff4cfe9c104c3328b0' }) con id no funciona
+			itineraryModel.find({ title: currentUser.favorites })
+				.then(favoriteItins => {
+				// console.log("3", favoriteItins);
+					res.json(favoriteItins)
+				})
+		})
+}); 
 
+//--------- para borrar, o me vale el de PUT?
 
 
 

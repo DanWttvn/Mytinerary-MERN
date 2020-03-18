@@ -46,6 +46,7 @@ const authReducer = (state = initState, action) => {
 			}
 		
 		case AUTH_ERROR:
+			localStorage.removeItem("token");
 			return {
 				...state,
 				token: null,
