@@ -7,6 +7,23 @@ const jwt = require("jsonwebtoken");
 
 const userModel = require("../model/userModel");
 
+
+////////////////////////// FAVS //////////////////////////////
+// !! CREO QUE ES EL AUTH/USER Y AHO TENGO TODA MI INFO
+
+// --------- GET FAVS --------- //
+// router.get("/favorites"), (req, res) => {
+// 	userModel.find({})
+// 		.then()
+
+// }
+
+// --------- SAVE FAVS --------- //
+
+
+
+////////////////////////// ACCESS ACCOUNT //////////////////////////////
+
 // --------- CREATE USER with TOKEN --------- // (traversy)
 // @route POST /user/sign_up
 // public access

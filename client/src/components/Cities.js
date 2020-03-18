@@ -30,6 +30,7 @@ const Cities = ({cities}) => {
 		<div className="citiesGallery">
 			{citiesGallery}
 
+			<AddItineraryModal /> 
 			{/* <AddItineraryModal addNewItinerary={this.addWithInput} />  */}
 			{/* esta en lista ciudades, añadir despues a cada it */}
 

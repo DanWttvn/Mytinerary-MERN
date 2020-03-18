@@ -28,6 +28,10 @@ const userModel = new mongoose.Schema({
 	register_date: {
 		type: Date,
 		default: Date.now
+	},
+	favorites: {
+		type: Object,
+		required: false
 	}
 
 })

@@ -19,7 +19,7 @@ router.get("/user", passport.authenticate("jwt", {session: false}), (req, res) =
 		.catch(err => res.status(404).json({ error: "user does not exist!" }));
 });
 
-// ---------- AUTH GOOGLE
+// ---------- AUTH GOOGLE --------- //
 // @route GET 5000/auth/google
 router.get("/google", passport.authenticate("google", {
 	scope: ["profile"] //what we want to retrieve from the users profile
@@ -31,7 +31,7 @@ router.get("/google/redirect", passport.authenticate("google", {session: false})
 	res.redirect("http://localhost:3000/cities") 
 });
 
-// ---------- AUTH FACEBOOK
+// ---------- AUTH FACEBOOK --------- //
 // @route GET 5000/auth/facebook
 router.get("/facebook", passport.authenticate("facebook"));
 
@@ -40,6 +40,23 @@ router.get("/facebook", passport.authenticate("facebook"));
 router.get("/facebook/redirect", passport.authenticate("facebook", {session: false}), (req, res) => { // esta vez que autentificamos con google, ya tenemos un code en el url. passport entende que entonces ya hemos pasado por la primera pagina. fires the cb function en pass-setup
 	res.redirect("http://localhost:3000/cities") 
 });
+
+// --------- SAVE FAVS --------- //
+router.post("/favorites", passport.authenticate("jwt", {session: false}), (req, res) => {
+	console.log("POST /favorites route");
+	
+	// encuentro mi usuario
+	// const { email } = ?;
+	// const { itinerary } = req.body;
+	// userModel.findOne({ email })
+	// 	.then(user => {
+	// 		// accedo a favs y meto nuevo
+	// 		user.favorites.push()
+	// 		res.json(itinerary)
+	// 	})
+	// 	.catch(err => res.status(404).json({ error: "" }));
+});
+
 
 
 

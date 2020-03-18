@@ -11,7 +11,7 @@ export const loadUser = () => (dispatch, getState) => {
 		type: USER_LOADING //is loadign to true
 	});
 
-	axios.get("http://localhost:5000//auth/user", tokenConfig(getState)) // la comrpobacion del token que la he puesto a parte porqeu se va arepetir mucho çççççççççç METER TOKEN, pero no esta ya???? en tokenconfig
+	axios.get("http://localhost:5000/auth/user", tokenConfig(getState)) // la comrpobacion del token que la he puesto a parte porqeu se va arepetir mucho çççççççççç METER TOKEN, pero no esta ya???? en tokenconfig
 	// axios.get("http://localhost:5000/auth/user"
 		.then(res => dispatch({
 			type: USER_LOADED, // isAuthenticated true
@@ -24,6 +24,7 @@ export const loadUser = () => (dispatch, getState) => {
 			})
 		})
 }
+// ççççççççççç
 
 // Setup config-headers and token. se va a uar cada vez que uqiera comprobar el token
 export const tokenConfig = getState => {
@@ -38,7 +39,7 @@ export const tokenConfig = getState => {
 	}
 	// If token, add to headers
 	if (token) {
-		config.headers["x-auth-token"] = token;
+		config.headers["Authorization"] = "bearer " + token;
 	}
 	return config
 }

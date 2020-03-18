@@ -13,6 +13,7 @@ import SignInPage from "./views/SignInPage"
 import SignUpPage from "./views/SignUpPage"
 import { loadUser } from './store/actions/authActions';
 import store from "./store/store"
+import ActivitiesPage from './views/ActivitiesPage';
 
 
 
@@ -21,6 +22,8 @@ class App extends Component {
 	// CLAVE: a cada cambio va a comprobar si el user esta conectado
 	componentDidMount() {
 		store.dispatch(loadUser());
+		console.log(this.props.isAuthenticated);
+		
 	}
 
 	render() {
@@ -35,6 +38,7 @@ class App extends Component {
 							<Route exact path="/cities" component={CitiesPage} />
 							{/* <Route exact path="/cities/all" component={CitiesPage} /> */}
 							<Route path="/cities/:city" component={CityPage} /> {/* el :city es el this.props.match.*/}
+							<Route path="/cities/:city/:itin" component={ActivitiesPage} /> {/* el :city es el this.props.match.*/}
 							<Route exact path="/profile">
 								{ this.props.isAuthenticated ? <ProfilePage/> : <Redirect to="/sign_in"/> }
 							</Route>

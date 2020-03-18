@@ -23,4 +23,5 @@ const itinerariesReducer = (state = initState, action) => {
 	}
 }
 
+
 export default itinerariesReducer;

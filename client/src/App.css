@@ -49,6 +49,16 @@ h3 {
 h4 {
 	font-family: "Gotham Bold";
 	font-size: 45px;
+	/* font-size: 75px; */
+	font-weight: 900;
+	color: white;
+}
+
+h6 {
+	font-family: "Gotham Bold";
+	font-size: 20px;
+	/* font-size: 75px; */
+	font-weight: 900;
 }
 
 #citiesPageCities h3 {
@@ -56,12 +66,6 @@ h4 {
 	padding-left: 20px;
 }
 
-
-h4 {
-	font-size: 75px;
-	font-weight: 900;
-	color: white;
-}
 .container {
 	padding: 10px;
 	display: flex;
@@ -396,10 +400,11 @@ input:-webkit-autofill {
 /* -------- CITIES LIST -------- */
 
 .citiesGallery {
-	/* margin-top: 250px; */
+	margin-bottom: 50px;
 
 	display: flex;
-	flex-flow: row wrap;
+	flex-flow: column wrap;
+	align-items: center;
 
 	padding: 20px;
 	width: 100%;
@@ -585,11 +590,42 @@ input:-webkit-autofill {
 /* -------- ADD NEW -------- */
 
 .addNewBox {
-	
+	margin-top: 10px;	
 }
 
 .addNewBtn {
-	background: rgb(204, 29, 29);;
+	background: rgb(204, 29, 29);
+	width: 40px;
+	height: 40px;
 	color: #fff;
 	border-radius: 50%;
+}
+
+.addNewBox span {
+	margin-left: 5px;	
+	font-weight: 400;
+}
+
+.modal-content {
+	width: 80%;
+	margin: auto;
+	padding: 20px;
+
+	display: flex;
+	flex-flow: column wrap;
+}
+
+.modal-content button {
+	margin-top: 20px;
+}
+
+.addItinForm input {
+	width: 100%;
+	margin-bottom: 10px;
+}
+.addItinForm input:focus {
+	outline: #5fa8d3 solid 1px;
+}
+.addItinForm label {
+	margin-bottom: 5px;
 }

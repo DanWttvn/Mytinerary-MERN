@@ -1,15 +1,6 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import {
-	Modal, 
-	// Button,
-	// ModalHeader,
-	// ModalBody,
-	// Form,
-	// FormGroup,
-	// Label,
-	// Input
-} from "reactstrap";
+import { Modal } from "reactstrap";
 import { addCity } from "../store/actions/cityActions"
 
 
@@ -17,7 +8,7 @@ import { addCity } from "../store/actions/cityActions"
 class AddItineraryModal extends Component {
 	state = {
 		isOpen: false,
-		newCity: "",
+		newTitle: "",
 		newCityCountry: "",
 	}
 
@@ -35,11 +26,10 @@ class AddItineraryModal extends Component {
 
 	onSubmit = (e) => {
 		e.preventDefault();
-		// this.props.getNewCity(this.state) NO
 
-		const newItin = {
-			// name: this.state.name title? copiar datos
-		}
+		// const newItin = {
+		// 	name: this.state.name title? copiar datos
+		// }
 		// this.props.addNewItinerary(newItin)
 	}
 	
@@ -48,7 +38,7 @@ class AddItineraryModal extends Component {
 		const { isAuthenticated } = this.props.auth
 
 		return (
-			<div id="newItineraryModal">
+			<div id="newItinerary">
 				<div className="addNewBox">
 					<button className="addNewBtn" onClick={this.toggle}>+</button>
 					<span>Add new itinerary</span>
@@ -56,22 +46,25 @@ class AddItineraryModal extends Component {
 	
 				<Modal isOpen={this.state.isOpen} toggle={this.toggle}>
 					{ isAuthenticated ? (
-						<form id="addCityForm" onSubmit={this.onSubmit}>
-							<span className="Add a new city"></span>
+						// ADD CITY 
+						<form className="addItinForm" onSubmit={this.onSubmit}>
+							<h6>Add a new itinerary</h6>
 							<div className="input">
-								<label htmlFor="newCity"></label>
+								<label htmlFor="newTitle">Title</label>
+								<input type="text" id="newTitle" onChange={this.handleAddCityChange} />
+								<label htmlFor="newTitle">City</label>
 								<input type="text" id="newCity" onChange={this.handleAddCityChange} />
-								<input type="text" id="newCityCountry" onChange={this.handleAddCityChange} />
 								{/* <button>Add City</button> */}
-								<input type="submit" id="submitItinBtn" />
+								<input className="submitItinBtn" type="submit" name="submit" value="Send"></input>
 							</div>
 						</form>
 					) : (
+						// LOG IN
 						<div>
 							<p>Sign in to add new itineraries</p>
-							<button><a href="/profile"></a></button>
+							<button><a href="/profile">Sign in</a></button>
 						</div>
-					)}
+					)} 
 				</Modal>
 			
 			</div>

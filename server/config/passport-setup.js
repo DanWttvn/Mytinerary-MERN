@@ -85,7 +85,7 @@ module.exports = passport.use(
 }));	
 
 // ---------- FACEBOOK 
-
+// https://developers.facebook.com/apps/2529892880664148/settings/basic/
 module.exports = passport.use(
 	new FacebookStrategy({
 		callbackURL: "/auth/facebook/redirect", // where I redirect after the auth (also set in the google credentials)
