@@ -6,37 +6,12 @@ import { faHeart as farHeart} from '@fortawesome/free-regular-svg-icons'
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons'
 import { faClock } from '@fortawesome/free-regular-svg-icons'
 
-
+// POR SI QUIERO OTRO FORMATO
 const Favorites = ({favoriteItins}) => {
-
-	// const ARRAYPRUEBA = [
-	// 	"1",
-	// 	"2",
-	// 	"3"
-	// ]
-	// const MAP_PRUEBA = ARRAYPRUEBA.map((itin, i) => {
-	// 	return (
-	// 		<div>
-	// 			<p>{itin}</p>
-	// 		</div>
-	// 	)	
-	// })
-
-	// console.log(favoriteItins);
-	// const MAP_PRUEBA2 = favoriteItins.map((itin, i) => {
-	// 	console.log(itin);
-		
-	// 	return (
-	// 		<div>
-	// 			<p>{itin}</p>
-	// 		</div>
-	// 	)	
-	// })
 	
 	const itinsCarrousel = favoriteItins.map((itin, i) => {
 		console.log(itin)
 		return (
-			// <p>{itin}</p>
 			<div className="itinCard" key={i}>
 				<div className="itinPrev" style={
 					{backgroundImage: 'url(\'' + itin.img
@@ -83,9 +58,6 @@ const Favorites = ({favoriteItins}) => {
 		<div className="itinsCarrousel">
 
 			{itinsCarrousel}
-
-			{/* {MAP_PRUEBA} */}
-			{/* {MAP_PRUEBA2} */}
 			
 		</div>
 	)

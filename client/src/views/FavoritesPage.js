@@ -2,7 +2,7 @@ import React, {Component} from "react"
 import Navbar from "../components/Navbar"
 import { connect } from "react-redux"
 import { getItinerariesByFavs } from "../store/actions/authActions"
-import Favorites from "../components/Favorites"
+// import Favorites from "../components/Favorites"
 import Itineraries from "../components/Itineraries"
 
 
@@ -13,20 +13,6 @@ class FavoritesPage extends Component {
 	}
 
 	render () {
-		// console.log(this.props.user);
-		
-		if (this.props.isAuthenticated) {
-			console.log("lo que estoy pasando al Componente:", this.props.favItineraries);
-			// const favoritesGallery = this.props.user.favorites.map((itin, i) => {		
-			// 	return (
-			// 		<div key={i}>
-			// 			<p>{itin}</p>
-			// 		</div>
-			// 	)
-			// })
-			// console.log(favoritesGallery);
-		}
-
 
 		return (
 			<div id="FavoritesPage">
@@ -34,8 +20,8 @@ class FavoritesPage extends Component {
 				{ this.props.isAuthenticated 
 					? 
 						<div>
-							{/* { favoritesGallery } */}
-							<Favorites favoriteItins={this.props.favItineraries}/>
+							{/* <Favorites favoriteItins={this.props.favItineraries}/> POR SI QUIERO OTRO FORMATO */}
+							<Itineraries itineraries={this.props.favItineraries}/>
 						</div>
 					: 
 						<p>Log in para ver esto</p>
@@ -48,9 +34,6 @@ class FavoritesPage extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		// cada vez que loadUser recarga, carga ya todos los datos del user.favorites, pero SOLO LOS TITULOS, no me vale!
-		// lo que yo quiero es el resultardo del getItinsByFav, que NO VOY A TENER EN LA STORE
-		// user: state.auth.user,
 		isAuthenticated: state.auth.isAuthenticated,
 		favItineraries: state.itineraries.itineraries
 	}
