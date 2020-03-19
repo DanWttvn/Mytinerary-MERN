@@ -116,7 +116,7 @@ export const logout = () => {
 export const getItinerariesByFavs = ()  => (dispatch, getState) => {
 	axios.get("http://localhost:5000/user/favorites", tokenConfig(getState)) 
 		.then(res => {
-			console.log("favorites by user", res.data);
+			// console.log("favorites by user", res.data);
 			dispatch ({
 				type: "GET_ITINERARIES", /// me vale el mismo reducer
 				payload: res.data

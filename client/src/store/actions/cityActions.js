@@ -4,7 +4,7 @@ import axios from "axios";
 export const getCities = () => dispatch => {
 	axios.get("/cities/all")
 		.then(res => {
-			console.log(res.data);
+			// console.log(res.data);
 			dispatch ({
 				type: "GET_CITIES",
 				payload: res.data
