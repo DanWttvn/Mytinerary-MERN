@@ -4,7 +4,7 @@ import { returnErrors } from "./errorActions"
 
 
 // Setup config-headers and token. se va a uar cada vez que quiera comprobar el token
-export const tokenConfigGET = getState => {
+export const tokenConfig = getState => {
 	// Get token from localstorage
 	const token = getState().auth.token //authReducer -> localstorage
 	const config = {
@@ -20,21 +20,6 @@ export const tokenConfigGET = getState => {
 }
 
 
-export const tokenConfigPUT = getState => {
-	// Get token from localstorage
-	const token = getState().auth.token //authReducer -> localstorage
-	const config = {
-		headers: {
-			"Content-type" : 'application/x-www-form-urlencoded'
-		}
-	}
-	// If token, add to headers
-	if (token) {
-		config.headers["Authorization"] = "bearer " + token;
-	}
-	return config
-}
-
 
 // Check token and load user
 export const loadUser = () => (dispatch, getState) => {
@@ -45,7 +30,7 @@ export const loadUser = () => (dispatch, getState) => {
 		type: USER_LOADING //is loading to true
 	});
 
-	axios.get("http://localhost:5000/auth/user", tokenConfigGET(getState)) // la comrpobacion del token que la he puesto a parte porqeu se va arepetir mucho
+	axios.get("http://localhost:5000/auth/user", tokenConfig(getState)) // la comrpobacion del token que la he puesto a parte porqeu se va arepetir mucho
 		.then(res => dispatch({
 			type: USER_LOADED, // isAuthenticated true
 			payload: res.data
@@ -129,7 +114,7 @@ export const logout = () => {
 
 // -- GET FAVS
 export const getItinerariesByFavs = ()  => (dispatch, getState) => {
-	axios.get("http://localhost:5000/user/favorites", tokenConfigGET(getState)) 
+	axios.get("http://localhost:5000/user/favorites", tokenConfig(getState)) 
 		.then(res => {
 			console.log("favorites by user", res.data);
 			dispatch ({
@@ -139,23 +124,13 @@ export const getItinerariesByFavs = ()  => (dispatch, getState) => {
 	})
 }
 
-// -- ADD FAVS ççççççççççççççççç
 export const addToFavorites = (id) => (dispatch, getState) => {
 	console.log("id:", id); // si, es el titulo
-	// const body = JSON.stringify({ id });
-	// const body = JSON.stringify( ejemploID );
 	const body = JSON.stringify({ id }); // lo que .stringify es un obj. como el mio no lo es, le pongo {}
-	console.log("body:", body);
+	// console.log("body:", body);
 	
 	
-	axios.put("http://localhost:5000/user/favorites",
-		{
-			id: "Hop on your bike"
-		}, 
-		// body,
-		// ({ id }),
-		// {id},
-		tokenConfigPUT(getState))
+	axios.put("http://localhost:5000/user/favorites", body, tokenConfig(getState))
 
 		.then(res => {
 			// me llega en res todo el user modificado con nuevos FAVS
@@ -166,7 +141,6 @@ export const addToFavorites = (id) => (dispatch, getState) => {
 			})
 			// console.log("despues de dispatch");
 		})
-	// -> Sí que se actualiza el state bien. El fallo está en el id, que no lo manda y me sale null
 }
 
 

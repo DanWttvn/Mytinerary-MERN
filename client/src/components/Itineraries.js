@@ -5,15 +5,21 @@ import { faHeart as fasHeart} from '@fortawesome/free-solid-svg-icons'
 import { faHeart as farHeart} from '@fortawesome/free-regular-svg-icons'
 import { faThumbsUp } from '@fortawesome/free-regular-svg-icons'
 import { faClock } from '@fortawesome/free-regular-svg-icons'
-import { addToFavorites } from "../store/actions/authActions"
+import { addToFavorites, getItinerariesByFavs } from "../store/actions/authActions"
 
 
 // const Itineraries = ({itineraries}) => {
 class Itineraries extends Component {
 
 	// console.log(itineraries);
-	handleClick = (itinID) => {
-		this.props.addToFavorites(itinID);
+	handleClick = async (itinID) => {
+		await this.props.addToFavorites(itinID);
+		
+		// solo si esta in FavsPage, update displaye itineraries
+		if (this.props.inFavsPage) {
+			// alert("in favs page")
+			this.props.getItinerariesByFavs()
+		}
 	}
 	
 	render () {
@@ -70,7 +76,8 @@ class Itineraries extends Component {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		addToFavorites: (itinID) => dispatch(addToFavorites(itinID))
+		addToFavorites: (itinID) => dispatch(addToFavorites(itinID)),
+		getItinerariesByFavs: () => dispatch(getItinerariesByFavs())
 	}
 }
 

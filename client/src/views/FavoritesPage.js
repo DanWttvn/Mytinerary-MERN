@@ -13,7 +13,6 @@ class FavoritesPage extends Component {
 	}
 
 	render () {
-
 		return (
 			<div id="FavoritesPage">
 				<h3>FavoritesPage</h3>
@@ -21,7 +20,7 @@ class FavoritesPage extends Component {
 					? 
 						<div>
 							{/* <Favorites favoriteItins={this.props.favItineraries}/> POR SI QUIERO OTRO FORMATO */}
-							<Itineraries itineraries={this.props.favItineraries}/>
+							<Itineraries inFavsPage={"inFavsPage"} itineraries={this.props.favItineraries}/>
 						</div>
 					: 
 						<p>Log in para ver esto</p>
@@ -41,7 +40,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		getItinerariesByFavs: (city) => dispatch(getItinerariesByFavs(city))
+		getItinerariesByFavs: () => dispatch(getItinerariesByFavs())
 	}
 }
 

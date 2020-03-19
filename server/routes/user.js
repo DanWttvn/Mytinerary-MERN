@@ -41,10 +41,9 @@ router.put("/favorites", passport.authenticate("jwt", {session: false}), (req, r
 	// comprobacion si ya favorito: 
 	const indexItin = req.user.favorites.indexOf(req.body.id) // ese id es del itinerario
 
-	console.log("req.body", req); 
 	console.log("req.body", req.body); 
-	console.log("req.body.id", req.body.id);
-	console.log("indexItin", indexItin);
+	// console.log("req.body.id", req.body.id);
+	// console.log("indexItin", indexItin);
 	
 	if (indexItin !== -1) {
 		// quitar de favs

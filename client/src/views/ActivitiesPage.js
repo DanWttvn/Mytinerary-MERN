@@ -26,7 +26,7 @@ class ActivitiesPage extends Component {
 		return (
 			<div className="container">
 				<Logo/>
-				{/* <h3 className="cityName">{this.props.match.params.itin}</h3> */}
+				<h3 className="cityName">{this.props.match.params.itin}</h3>
 				{/* <Activities activities={this.props.activities}/> */}
 				<h3>ACTIVITIE SPAGE</h3>
 				<Navbar/>
@@ -37,7 +37,7 @@ class ActivitiesPage extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		activities: state.activities.activities //nombre del reducer
+		// activities: state.activities.activities //nombre del reducer
 	}
 }
 
