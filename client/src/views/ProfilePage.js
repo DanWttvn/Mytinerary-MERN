@@ -1,6 +1,6 @@
 import React, {Component} from "react"
-import Navbar from "../components/Navbar"
-import Logout from "../components/Logout"
+import Navbar from "../components/UI_Components/Navbar"
+import Logout from "../components/display_Components/BtnLogout"
 import { connect } from "react-redux"
 import PropTypes from "prop-types"
 // import SignInPage from "../views/SignInPage"

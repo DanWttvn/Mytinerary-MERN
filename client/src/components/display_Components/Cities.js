@@ -1,7 +1,7 @@
 import React from 'react'
 // import thumbPrueba from "../img/amsterdam/a (1).jpg"
 import { Link } from "react-router-dom"
-import AddItineraryModal from "../components/AddItineraryModal"
+import AddItineraryModal from "./AddItineraryModal"
 
 
 const Cities = ({cities}) => {

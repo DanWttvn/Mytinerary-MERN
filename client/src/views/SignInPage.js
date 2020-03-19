@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import LandingBg from "../components/LandingBg"
+import LandingBg from "../components/UI_Components/LandingBg"
 // import LoginForm from "../components/--LoginForm"
 import { connect } from "react-redux"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

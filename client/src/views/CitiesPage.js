@@ -1,9 +1,9 @@
 import React, { Component } from "react"
 // import {NavLink} from "react-router-dom"
-import Logo from "../components/Logo"
-import Navbar from "../components/Navbar"
-import Searchbar from "../components/Searchbar"
-import Cities from "../components/Cities"
+import Logo from "../components/UI_Components/Logo"
+import Navbar from "../components/UI_Components/Navbar"
+import Searchbar from "../components/UI_Components/Searchbar"
+import Cities from "../components/display_Components/Cities"
 import { connect } from "react-redux"
 import { 
 	// addCity, 

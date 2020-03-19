@@ -1,6 +1,6 @@
 import React from "react"
 import {NavLink} from "react-router-dom"
-import LandingBg from "../components/LandingBg"
+import LandingBg from "../components/UI_Components/LandingBg"
 
 
 const LandingPage = () => {

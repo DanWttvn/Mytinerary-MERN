@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { logout } from "../store/actions/authActions"
-import {  } from "../store/actions/errorActions"
+import { logout } from "../../store/actions/authActions"
+import {  } from "../../store/actions/errorActions"
 import PropTypes from "prop-types"
 
 class NewAccount extends Component {
@@ -18,13 +18,6 @@ class NewAccount extends Component {
 	}
 }
 
-// const mapStateToProps = (state) => {
-// 	console.log(state);
-// 	return {
-
-// 	}
-// }
-
 const mapDispatchToProps = (dispatch) => {
 	return {
 		logout: (currentUser) => dispatch(logout(currentUser))
@@ -32,5 +25,3 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 export default connect(null, mapDispatchToProps)(NewAccount);
-
-// BORRAR ESTE COMENTARIO

@@ -37,8 +37,8 @@ class App extends Component {
 							<Route path="/sign_up" component={SignUpPage} />
 							<Route exact path="/cities" component={CitiesPage} />
 							{/* <Route exact path="/cities/all" component={CitiesPage} /> */}
-							<Route path="/cities/:city" component={CityPage} /> {/* el :city es el this.props.match.*/}
-							<Route path="/cities/:city/:itin" component={ActivitiesPage} /> {/* el :city es el this.props.match.*/}
+							<Route exact path="/cities/:city" component={CityPage} /> {/* el :city es el this.props.match.*/}
+							<Route exact path="/cities/:city/:itinID" component={ActivitiesPage} /> {/* el :city es el this.props.match.*/}
 							<Route exact path="/profile">
 								{ this.props.isAuthenticated ? <ProfilePage/> : <Redirect to="/sign_in"/> }
 							</Route>

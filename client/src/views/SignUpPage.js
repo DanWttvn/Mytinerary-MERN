@@ -6,7 +6,7 @@ import { Alert } from "reactstrap"
 import PropTypes from "prop-types"
 import { register } from "../store/actions/authActions"
 import { clearErrors } from "../store/actions/errorActions"
-import LandingBg from "../components/LandingBg"
+import LandingBg from "../components/UI_Components/LandingBg"
 // import NewAccount from "../components/NewAccount"
 
 class SignUpPage extends Component {

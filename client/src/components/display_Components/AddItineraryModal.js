@@ -1,7 +1,8 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Modal } from "reactstrap";
-import { addCity } from "../store/actions/cityActions"
+import { addCity } from "../../store/actions/cityActions"
+import BtnSignInInside from "../UI_Components/BtnSignInInside"
 
 
 
@@ -62,7 +63,7 @@ class AddItineraryModal extends Component {
 						// LOG IN
 						<div>
 							<p>Sign in to add new itineraries</p>
-							<button><a href="/profile">Sign in</a></button>
+							<BtnSignInInside/>
 						</div>
 					)} 
 				</Modal>

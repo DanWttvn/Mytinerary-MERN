@@ -1,18 +1,12 @@
 import React, { Component } from 'react'
-// import { Switch, Route } from "react-router-dom";
 import { connect } from "react-redux"
 // import { getAllItineraries } from "../store/actions/itineraryActions"
 import { getItinerariesByCity } from "../store/actions/itineraryActions"
-
-
-import Navbar from "../components//Navbar"
-import Logo from "../components//Logo"
-import Itineraries from "../components//Itineraries"
-
-
+import Navbar from "../components/UI_Components/Navbar"
+import Logo from "../components/UI_Components/Logo"
+import Itineraries from "../components/display_Components/Itineraries"
 
 class CityPage extends Component {
-
 
 	componentDidMount() {
 		// this.props.getAllItineraries()
@@ -21,11 +15,7 @@ class CityPage extends Component {
 	}
 
 	render () {
-		// console.log(this.props.itineraries);
-		// the city Im in
-		console.log(this.props.match.params.city);
-		
-		
+		// console.log(this.props.match.params.city);
 		return (
 			<div className="container">
 				<Logo/>
