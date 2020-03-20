@@ -11,6 +11,8 @@ class CityPage extends Component {
 	componentDidMount() {
 		// this.props.getAllItineraries()
 		// console.log(this.props.getAllItineraries);	
+		console.log(this.props.match.params.city);
+		
 		this.props.getItinerariesByCity(this.props.match.params.city) //this comes from the route: :city. that's the city
 	}
 

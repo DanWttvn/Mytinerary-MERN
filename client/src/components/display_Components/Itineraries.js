@@ -15,6 +15,7 @@ class Itineraries extends Component {
 		await this.props.addToFavorites(itinID);
 		// solo si esta in FavsPage, update displaye itineraries
 		if (this.props.inFavsPage) {
+			// refresh favorites page
 			this.props.getItinerariesByFavs()
 		}
 	}

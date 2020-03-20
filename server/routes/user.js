@@ -86,8 +86,6 @@ router.get("/favorites", passport.authenticate("jwt", {session: false}), (req, r
 		})
 }); 
 
-//--------- para borrar, o me vale el de PUT?
-
 
 
 ////////////////////////// ACCESS ACCOUNT //////////////////////////////

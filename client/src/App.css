@@ -68,6 +68,8 @@ h6 {
 
 .container {
 	padding: 10px;
+	padding-right: 0;
+	padding-left: 0;
 	display: flex;
 	flex-flow: row wrap;
 }
@@ -473,21 +475,19 @@ input:-webkit-autofill {
 
 	width: 100%;
 	margin-top: 15px;
+	/* margin-right: 15px; */
+	/* margin-left: 15px; */
 	/* padding: 20px; */
-
 }
 
 .itinsCarrousel::-webkit-scrollbar {
 	visibility: hidden;
 }
 
-
 .itinCard {
 	flex-shrink: 0;
-
 	display: flex;
 	flex-flow: column wrap;
-
 	margin-left: 15px;
 
 	background: #fff;
@@ -499,7 +499,6 @@ input:-webkit-autofill {
 	height: 350px;
 	width: 280px;
 
-
 	border-radius: 20px;
 	-webkit-box-shadow: 2px 3px 16px -2px rgba(0,0,0,0.4); 
 	box-shadow: 2px 3px 16px -2px rgba(0,0,0,0.4);
@@ -507,7 +506,6 @@ input:-webkit-autofill {
 	display: flex;
 	flex-flow: column wrap;
 	justify-content: space-between;
-
 }
 
 .itinInfoPrev {
@@ -520,14 +518,13 @@ input:-webkit-autofill {
 .extraInfoBox .title {
 	font-family: "Futura Medium";
 	font-size: 20px;
-
 }
+
 .itinInfoPrev .shortenedSummary {
 	overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 4; /* num of lines displayed */
-  -webkit-box-orient: vertical;
-	
+	display: -webkit-box;	
+	-webkit-line-clamp: 4; /* num of lines displayed */
+	-webkit-box-orient: vertical;
 }
 
 .extraInfoBox {

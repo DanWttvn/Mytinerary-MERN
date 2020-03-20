@@ -1,21 +1,22 @@
 const initState = {
-	itineraries: []
+	itineraries: [],
+	itinerary: {}
 }
 
 const itinerariesReducer = (state = initState, action) => {
 	switch (action.type) {
-		case "GET_ITINERARIES": // All, ByCity y ByFavs y AddFavs?
+		case "GET_ITINERARIES": // All, ByCity y ByFavs, AddFavs y get ItinsForActvivities
 			// console.log("getting itineraries");
 			return {
 				...state,
 				itineraries: action.payload
 			}
-
-		case "GET_ITINERARIES_BY_CITY": // reducir a solo 1 ççç
-			// console.log("getting itineraries BY CITY", action.payload);
+		
+			case "GET_ITINERARY": // All, ByCity y ByFavs, AddFavs y get ItinsForActvivities
+			// console.log("getting itineraries");
 			return {
 				...state,
-				itineraries: action.payload
+				itinerary: action.payload
 			}
 
 		default:

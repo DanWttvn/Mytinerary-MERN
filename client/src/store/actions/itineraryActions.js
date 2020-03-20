@@ -12,12 +12,27 @@ export const getAllItineraries = () => dispatch => {
 	})
 }
 
+// --------- GET ITINERARIES BY CITY --------- //
 export const getItinerariesByCity = (city) => dispatch => {
 	axios.get(`http://localhost:5000/itineraries/${city}`) 
 		.then(res => {
 			// console.log(res.data);
 			dispatch ({
-				type: "GET_ITINERARIES_BY_CITY",
+				type: "GET_ITINERARIES",
+				payload: res.data
+		});
+	})
+}
+
+// ---------GET ITINERARY for Activities --------- //
+export const getItinerary = (itinID) => dispatch => {
+	console.log("1");
+	axios.get(`http://localhost:5000/itineraries/itinerary/${itinID}`) 
+		.then(res => {
+			console.log("2");
+			console.log(res.data);
+			dispatch ({
+				type: "GET_ITINERARY",
 				payload: res.data
 		});
 	})
