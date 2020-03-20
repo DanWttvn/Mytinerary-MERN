@@ -4,6 +4,7 @@ import { getActivities, getItinerary, getComments, addComment } from "../store/a
 import Navbar from "../components/UI_Components/Navbar"
 import Activities from "../components/display_Components/Activities"
 import ExtraInfoIcons from "../components/UI_Components/ExtraInfoIcons"
+import BtnSignInInside from '../components/UI_Components/BtnSignInInside'
 
 
 class ActivitiesPage extends Component {
@@ -28,7 +29,8 @@ class ActivitiesPage extends Component {
 		console.log("submiting comment", newComment);
 		this.props.addComment(itinID, newComment);
 		
-		// algo para que se borre el input
+		// clear input form
+		document.getElementById("newCommentForm").reset();
 	}
 
 	addCommentInput = (e) => {
@@ -36,6 +38,16 @@ class ActivitiesPage extends Component {
 			[e.target.name]: e.target.value
 		})
 	}
+
+	// auto-expand comment area
+	autosize = (e) => {
+		const textArea = document.getElementById("addCommentInput");
+		setTimeout(function(){
+			textArea.style.cssText = 'height:2.75em'; // con esto se vuelve a hacer mas pequeño
+			textArea.style.cssText = 'height:' + textArea.scrollHeight + 'px';
+		}, 0);
+	}
+	
 
 	render () {
 		const allComments = this.props.comments.map((comment, i) => {
@@ -56,15 +68,31 @@ class ActivitiesPage extends Component {
 				}
 	
 				<ExtraInfoIcons itin={this.props.itinerary}/>
+
 				<div className="container">
 					<h6 className="itinTitle">{this.props.itinerary.title}</h6>
 					<p className="summary">{this.props.itinerary.summary}</p>
+
 					{/* COMMENTS */}
 					{/* <Comments comments={this.props.comments}/> */}
 					<div className="allCommentsBox">
-						<form onSubmit={this.submitComment} className="addCommentInput">
-							<input type="text" onChange={this.addCommentInput} name="newComment" placeholder="Add comment..."/>
-						</form>
+						<p className="subtitle">Comments</p>
+
+						{ this.props.isAuthenticated ? 
+							<form onSubmit={this.submitComment} id="newCommentForm" className="addCommentBox">
+								{/* <input className="addCommentInput" type="text" onChange={this.addCommentInput} name="newComment" placeholder="Add comment..." required />
+								<input className="sendCommentBtn" type="submit" name="submit" value=">" /> */}
+
+								<textarea className="addCommentInput" id="addCommentInput" type="text" onChange={this.addCommentInput} onKeyDown={this.autosize} name="newComment" placeholder="Add comment..." required />
+								<input className="sendCommentBtn" type="submit" name="submit" value=">" />
+							</form>
+						:   <div className="addCommentBox">
+								<p>Sign in to add comments</p>
+								<BtnSignInInside/>
+							</div>	
+						}
+						
+
 						{allComments}
 					</div>
 				</div>
@@ -79,7 +107,8 @@ const mapStateToProps = (state) => {
 	return {
 		itinerary: state.itineraries.itinerary, //nombre del reducer
 		activities: state.itineraries.activities,
-		comments: state.itineraries.comments
+		comments: state.itineraries.comments,
+		isAuthenticated: state.auth.isAuthenticated
 	}
 }
 

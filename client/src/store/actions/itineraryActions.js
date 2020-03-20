@@ -62,15 +62,11 @@ export const getComments = (itinID)  => dispatch => {
 
 // --------- ADD COMMENTS with ItineraryID --------- //
 export const addComment = (itinID, content) => (dispatch, getState) => {
-	console.log("ACTION add comment");
-	console.log("content", content);
+	// console.log("ACTION add comment");
 	const body = JSON.stringify({ content })
-	console.log("body", body);
-
 	
 	axios.post(`http://localhost:5000/itineraries/comments/${itinID}`, body, tokenConfig(getState))
 		.then(res => {
-			console.log("dispatching from Action");
 			dispatch({
 				type: "ADD_COMMENT",
 				payload: res.data

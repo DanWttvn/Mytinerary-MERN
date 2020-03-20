@@ -72,6 +72,11 @@ h6 {
 	font-size: 15px;
 }
 
+.subtitle {
+	font-family: "Gotham Medium";
+	font-size: 15px;
+}
+
 #citiesPageCities h3 {
 	font-size: 35px;
 	padding-left: 20px;
@@ -680,8 +685,38 @@ input:-webkit-autofill {
 .allCommentsBox {
 	margin-bottom: 80px;
 	width: 100%;
+	margin-top: 10px;
 }
 
+.addCommentBox {
+	position: relative;
+	/* width: 100%; */
+	margin: 10px 0;
+	/* height: fit-content; */
+	border-radius: 10px;
+	overflow: hidden;
+	border: 1px #ccc solid;
+
+
+}
+
+.addCommentInput {
+	width: calc(100% - 30px);
+	/* min-height: 35px; */
+	height: 2.75em; /* initial height */
+	padding: 10px;
+	border: none;
+}
+.addCommentInput:focus {
+	outline: none;
+}
+
+.sendCommentBtn {
+	position: absolute;
+	right: 20px;
+	/* top: calc(50%); */
+	bottom: 5px;
+}
 .commentBox {
 	background: #ccc;
 	margin-bottom: 10px;
@@ -689,3 +724,4 @@ input:-webkit-autofill {
 	padding: 10px;
 	width: 100%;
 }
+

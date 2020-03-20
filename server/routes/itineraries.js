@@ -61,7 +61,7 @@ router.get("/activities/:itinID", (req, res) => {
 router.get("/comments/:itinID", (req, res) => {
 	let itineraryRequested = req.params.itinID
 	console.log("get comments by itinID ROUTER");	
-	console.log("itineraryRequested", itineraryRequested);
+	// console.log("itineraryRequested", itineraryRequested);
 
 	commentayModel.find({ itineraryID: itineraryRequested })
 		.sort({ date: -1 }) // ordeno por fecha
@@ -76,7 +76,6 @@ router.get("/comments/:itinID", (req, res) => {
 // private access
 router.post("/comments/:itinID", passport.authenticate("jwt", {session: false}), (req, res) => {
 	console.log("add comment by itinID ROUTER");
-		console.log("req.body", req.body);
 		
 	const newComment = new commentayModel({
 		content: req.body.content,
