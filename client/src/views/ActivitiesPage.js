@@ -5,7 +5,7 @@ import Navbar from "../components/UI_Components/Navbar"
 import Activities from "../components/display_Components/Activities"
 import ExtraInfoIcons from "../components/UI_Components/ExtraInfoIcons"
 import BtnSignInInside from '../components/UI_Components/BtnSignInInside'
-// import Heart from "../components/UI_Components/Heart" ççç
+import Heart from "../components/UI_Components/Heart"
 
 
 class ActivitiesPage extends Component {
@@ -59,7 +59,7 @@ class ActivitiesPage extends Component {
 
 		
 		return (
-			<div className="containerB">
+			<div id="ActivitiesPage" className="containerB">
 				{ this.props.activities.length ?
 					<Activities activities={this.props.activities}/>
 					: <img className="itineraryImg" src={this.props.itinerary.img} alt="activity"/>
@@ -67,10 +67,13 @@ class ActivitiesPage extends Component {
 	
 				<ExtraInfoIcons itin={this.props.itinerary}/>
 
-				{/* <Heart itin={itin} /> çççç */}
 
 				<div className="container">
-					<h6 className="itinTitle">{this.props.itinerary.title}</h6>
+					<div className="itinTitleBox">
+						<h6 className="itinTitle">{this.props.itinerary.title}</h6>
+						<Heart itin={this.props.itinerary} />
+					</div>
+
 					<p className="summary">{this.props.itinerary.summary}</p>
 
 					{/* COMMENTS */}

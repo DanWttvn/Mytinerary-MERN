@@ -589,12 +589,29 @@ input:-webkit-autofill {
 	margin-right: 20px;
 }
 
+.itinTitleBox {
+	position: relative;
+	width: 100%;
+}
+#ActivitiesPage .itinTitle {
+	/* width: 70%; */
+	display: inline-block;
+}
+
 /* -------- HEART ICON -------- */
 
-.faHeart {
+.itinCard .faHeart {
 	position: absolute;
 	right: 20px;
 	top: 20px;
+	margin: 5px;
+	transform: scale(1.45);
+}
+
+#ActivitiesPage .faHeart {
+	/* position: absolute; */
+	float: right;
+	/* right: 0px; */
 	margin: 5px;
 	transform: scale(1.45);
 }
