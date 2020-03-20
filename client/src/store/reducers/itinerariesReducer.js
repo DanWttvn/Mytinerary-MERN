@@ -36,7 +36,7 @@ const itinerariesReducer = (state = initState, action) => {
 			}
 		
 		case "ADD_COMMENT": 
-			// console.log("adding comments REDUCER");
+			console.log("adding comments REDUCER");
 			return {
 				...state,
 				comments: [action.payload, ...state.comments]
