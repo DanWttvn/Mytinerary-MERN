@@ -4,6 +4,7 @@ const passport  = require("passport");
 const itineraryModel = require("../model/itineraryModel");
 const activityModel = require("../model/activityModel")
 const commentayModel = require("../model/commentModel")
+const userModel = require("../model/userModel")
 
 // ---- GET ALL ITINS
 // @route GET /itinearies/all 
@@ -88,6 +89,22 @@ router.post("/comments/:itinID", passport.authenticate("jwt", {session: false}),
 		// .catch(err => console.log(err))
 
 }); 
+
+// no hace falta porque lo incluyo en get comments??? :getuserforcomment, FUNCIONA
+// --------- GET USER BY ID for comments --------- //
+// @route GET /itineraries/comments/user
+// public access
+// router.get("/comments/user/:userID", (req, res) => {
+// 	let userRequested = req.params.userID
+// 	console.log("get user by comment");	
+
+// 	userModel.findOne({ _id: userRequested })
+// 		.then(user => {
+// 			res.send(user)
+// 		})
+// 		.catch(err => console.log(err));
+// }); 
+ 
 
 
 

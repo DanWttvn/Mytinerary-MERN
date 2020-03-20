@@ -21,7 +21,6 @@ class FavoritesPage extends Component {
 				<h3>FavoritesPage</h3>
 				{ this.props.isAuthenticated ? 
 					<div>
-						{/* <Favorites favoriteItins={this.props.favItineraries}/> POR SI QUIERO OTRO FORMATO */}
 						<Itineraries inFavsPage={"inFavsPage"} itineraries={this.props.favItineraries}/>
 					</div>
 					: <div>

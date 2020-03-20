@@ -1,7 +1,7 @@
 import axios from "axios";
 import {tokenConfig} from "./authActions"
 
-// con axios dispatch
+// --------- GET ALL ITINERARIES --------- //
 export const getAllItineraries = () => dispatch => {
 	axios.get("/itineraries/all")
 		.then(res => {
@@ -41,7 +41,7 @@ export const getItinerary = (itinID) => dispatch => {
 export const getActivities = (itinID) => dispatch => {
 	axios.get(`http://localhost:5000/itineraries/activities/${itinID}`)
 		.then(res => {
-			// console.log("get activities ACTION", res.data);
+			console.log("get activities ACTION", res.data);
 			dispatch ({
 				type: "GET_ACTIVITIES",
 				payload: res.data
@@ -57,7 +57,10 @@ export const getComments = (itinID)  => dispatch => {
 				type: "GET_COMMENTS",
 				payload: res.data
 			})
-		})	
+			// creo que no puede ser aqui :getuserforcomment
+			// console.log("get user for comment ACTION", res.data);
+			// dispatch (getUserData(res.userID));
+		})
 }
 
 // --------- ADD COMMENTS with ItineraryID --------- //
@@ -73,6 +76,17 @@ export const addComment = (itinID, content) => (dispatch, getState) => {
 			})
 		})		
 }
+
+// --------- GET USER by userID for comments --------- // çççççççç :getuserforcomment no se como hacerlo
+// export const getUserData = (userID)  => dispatch => {
+// 	axios.get(`http://localhost:5000/itineraries/comments/user/${userID}`)
+// 		.then(res => {
+// 			dispatch({
+// 				type: "",
+// 				payload: res.data
+// 			})
+// 		})	
+// }
 
 
 // export const addCity = (newCity) => dispatch => {

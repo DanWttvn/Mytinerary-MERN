@@ -2,7 +2,7 @@ const initState = {
 	itineraries: [],
 	itinerary: {},
 	activities: [],
-	comments: []
+	comments: [],
 }
 
 const itinerariesReducer = (state = initState, action) => {

@@ -501,20 +501,29 @@ input:-webkit-autofill {
 	visibility: hidden;
 }
 
-.itinCard {
+
+.itinBox {
 	flex-shrink: 0;
 	display: flex;
 	flex-flow: column wrap;
+
 	margin-left: 15px;
 
 	background: #fff;
 	overflow: hidden;
+	position: relative;
 }
-
-.itinPrev {
-	width: 100%;
+.itinCard {
+	position: relative;	
 	height: 350px;
 	width: 280px;
+}
+
+.itinImgPrev {
+	width: 100%;
+	/* ççççç buscar height porque sse esta deformando */
+	height: 100%;
+	position: absolute;
 
 	border-radius: 20px;
 	-webkit-box-shadow: 2px 3px 16px -2px rgba(0,0,0,0.4); 
@@ -526,7 +535,7 @@ input:-webkit-autofill {
 }
 
 .itinInfoPrev {
-	position: relative;
+	position: absolute;
 	margin: 0 30px;
 	bottom: 20px;
 	color: #fff;
@@ -540,6 +549,7 @@ input:-webkit-autofill {
 }
 
 .extraInfoBox {
+	position: relative;
 	padding-top: 30px;
 	/* background: #ccc; */
 	width: 300px;
@@ -582,10 +592,10 @@ input:-webkit-autofill {
 /* -------- HEART ICON -------- */
 
 .faHeart {
-	align-self: flex-end;
-	position: relative;
-	right: 25px;
-	top: 25px;
+	position: absolute;
+	right: 20px;
+	top: 20px;
+	margin: 5px;
 	transform: scale(1.45);
 }
 

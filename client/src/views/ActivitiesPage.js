@@ -5,6 +5,7 @@ import Navbar from "../components/UI_Components/Navbar"
 import Activities from "../components/display_Components/Activities"
 import ExtraInfoIcons from "../components/UI_Components/ExtraInfoIcons"
 import BtnSignInInside from '../components/UI_Components/BtnSignInInside'
+// import Heart from "../components/UI_Components/Heart" ççç
 
 
 class ActivitiesPage extends Component {
@@ -25,10 +26,7 @@ class ActivitiesPage extends Component {
 		e.preventDefault();
 		const newComment = this.state.newComment
 		const itinID = this.props.match.params.itinID;
-
-		console.log("submiting comment", newComment);
 		this.props.addComment(itinID, newComment);
-		
 		// clear input form
 		document.getElementById("newCommentForm").reset();
 	}
@@ -68,6 +66,8 @@ class ActivitiesPage extends Component {
 				}
 	
 				<ExtraInfoIcons itin={this.props.itinerary}/>
+
+				{/* <Heart itin={itin} /> çççç */}
 
 				<div className="container">
 					<h6 className="itinTitle">{this.props.itinerary.title}</h6>
