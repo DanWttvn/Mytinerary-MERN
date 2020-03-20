@@ -1,15 +1,5 @@
 import axios from "axios";
 
-export const getActivitiesByItinerary = (city) => dispatch => {
-	axios.get(`http://localhost:5000/activities/${city}`) // çççç !! aqui (con/Amsteradm funciona)
-		.then(res => {
-			console.log(res.data);
-			dispatch ({
-				type: "GET_ACTIVITIES_BY_ITIN",
-				payload: res.data
-		});
-	})
-}
 
 
 // export const addCity = (newCity) => dispatch => {

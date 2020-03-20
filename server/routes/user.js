@@ -40,11 +40,6 @@ router.put("/favorites", passport.authenticate("jwt", {session: false}), (req, r
 	console.log("PUT user/favorites route");
 	// comprobacion si ya favorito: 
 	const indexItin = req.user.favorites.indexOf(req.body.id) // ese id es del itinerario
-
-	console.log("req.body", req.body); 
-	// console.log("req.body.id", req.body.id);
-	// console.log("indexItin", indexItin);
-	
 	if (indexItin !== -1) {
 		// quitar de favs
 		req.user.favorites.splice(indexItin, 1) //(a partir del indexItin, borro 1)
@@ -73,14 +68,9 @@ router.get("/favorites", passport.authenticate("jwt", {session: false}), (req, r
 	// cojo mi logged user
 	userModel.findOne({_id: req.user._id})
 		.then(currentUser => {
-			// console.log("1", currentUser);
-			// console.log("2", currentUser.favorites);
-			
 			// cojo los itins cuyos ids coincidan con los favorites ids del user ({ nombreEnItidDB: lo que busco})
-			// itineraryModel.find({ _id: '5d0371ff4cfe9c104c3328b0' }) con id no funciona
-			itineraryModel.find({ title: currentUser.favorites })
+			itineraryModel.find({ _id: currentUser.favorites })
 				.then(favoriteItins => {
-				// console.log("3", favoriteItins);
 					res.json(favoriteItins)
 				})
 		})

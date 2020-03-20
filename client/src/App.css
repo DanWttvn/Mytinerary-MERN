@@ -7,6 +7,14 @@
 	src: url("./fonts/Gotham-Bold.otf");
 }
 @font-face {
+	font-family: "Gotham Light";
+	src: url("./fonts/Gotham-Light.otf");
+}
+@font-face {
+	font-family: "Gotham Medium";
+	src: url("./fonts/GothamMedium.ttf");
+}
+@font-face {
 	font-family: "Futura Black";
 	src: url("./fonts/FutuBd__.ttf");
 }
@@ -50,7 +58,7 @@ h4 {
 	font-family: "Gotham Bold";
 	font-size: 45px;
 	/* font-size: 75px; */
-	font-weight: 900;
+	/* font-weight: 900; */
 	color: white;
 }
 
@@ -58,7 +66,11 @@ h6 {
 	font-family: "Gotham Bold";
 	font-size: 20px;
 	/* font-size: 75px; */
-	font-weight: 900;
+}
+
+.activityTitle {
+	font-family: "Gotham Medium";
+	font-size: 15px;
 }
 
 #citiesPageCities h3 {
@@ -67,11 +79,16 @@ h6 {
 }
 
 .container {
-	padding: 10px;
-	padding-right: 0;
-	padding-left: 0;
+	padding: 0 25px;
 	display: flex;
 	flex-flow: row wrap;
+
+}
+
+.containerB {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 a {
@@ -385,9 +402,6 @@ input:-webkit-autofill {
 
 #searchbar {
 	width: 100%;
-
-	margin: 0 20px;
-
 }
 
 .searchbar input {
@@ -408,7 +422,7 @@ input:-webkit-autofill {
 	flex-flow: column wrap;
 	align-items: center;
 
-	padding: 20px;
+	padding: 20px 0;
 	width: 100%;
 }
 
@@ -461,7 +475,7 @@ input:-webkit-autofill {
 /* -------- CITY ITINS -------- */
 
 .cityName {
-	margin-top: 10px;
+	/* margin-top: 10px; */
 	margin-left: 10px;
 }
 
@@ -515,11 +529,6 @@ input:-webkit-autofill {
 	color: #fff;
 }
 
-.extraInfoBox .title {
-	font-family: "Futura Medium";
-	font-size: 20px;
-}
-
 .itinInfoPrev .shortenedSummary {
 	overflow: hidden;
 	display: -webkit-box;	
@@ -543,18 +552,18 @@ input:-webkit-autofill {
 	color: rgb(85, 85, 85);
 }
 
-.extraInfoBox .title {
+.extraInfoBox .itinTitle {
 	font-family: "Gotham Bold";
 	font-size: 20px;
 	margin-left: 27px;
 	margin-right: 27px;
+	color: black;
 
 	/* no sobresalga: çç */
 	display:block;
 	white-space: nowrap;
   	overflow: hidden;
  	text-overflow: ellipsis;
-
 }
 
 .extraInfoBox .hastagsBox {
@@ -625,4 +634,48 @@ input:-webkit-autofill {
 }
 .addItinForm label {
 	margin-bottom: 5px;
+}
+
+
+/* -------- ACTIVITIES -------- */
+
+.summary {
+	color: rgb(85, 85, 85);
+	text-align: justify;
+	margin: 5px 0;
+}
+
+
+.activityCard {
+	width: 100%;
+	height: 250px;
+	margin-bottom: 15px;
+}
+.activitiesImg {
+	position: absolute;
+	width: 100%;
+	/* height: 100%; */
+	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 30px;
+	overflow: hidden;
+}
+.itineraryImg {
+	width: 100%;
+	/* height: 100%; */
+	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 30px;
+	overflow: hidden;
+}
+.activityTitle {
+	position: absolute;
+	bottom: 25px;
+	right: 30px;
+
+	/* color: rgb(56, 56, 56); */
+	background: rgba(250, 250, 250, 0.4);
+	border-radius: 20px;
+	padding: 5px 10px;
+}
+.carousel-control-next, .carousel-control-prev {
+	opacity: 0.9;
 }

@@ -3,10 +3,9 @@ import { connect } from "react-redux"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as fasHeart} from '@fortawesome/free-solid-svg-icons'
 import { faHeart as farHeart} from '@fortawesome/free-regular-svg-icons'
-import { faThumbsUp } from '@fortawesome/free-regular-svg-icons'
-import { faClock } from '@fortawesome/free-regular-svg-icons'
 import { addToFavorites, getItinerariesByFavs } from "../../store/actions/authActions"
 import { Link } from "react-router-dom"
+import ExtraInfoIcons from "../UI_Components/ExtraInfoIcons"
 
 
 class Itineraries extends Component {
@@ -26,7 +25,7 @@ class Itineraries extends Component {
 			let isFavorite;
 			// if logged in
 			if(this.props.user) {
-				if (this.props.user.favorites.indexOf(itin.title) !== -1) {
+				if (this.props.user.favorites.indexOf(itin._id) !== -1) {
 					isFavorite = true
 				} else {
 					isFavorite = false
@@ -44,16 +43,17 @@ class Itineraries extends Component {
 							backgroundPosition: 'center center', 
 							backgroundSize: 'cover'}}>
 								{ isFavorite ?
-									<FontAwesomeIcon icon={fasHeart} onClick={()=>{this.handleClick(itin.title)}} className="faHeart fasHeart"/>
-									: <FontAwesomeIcon icon={farHeart} onClick={()=>{this.handleClick(itin.title)}} className="faHeart farHeart"/>
+									<FontAwesomeIcon icon={fasHeart} onClick={()=>{this.handleClick(itin._id)}} className="faHeart fasHeart"/>
+									: <FontAwesomeIcon icon={farHeart} onClick={()=>{this.handleClick(itin._id)}} className="faHeart farHeart"/>
 								}
 								<div className="itinInfoPrev">
 									<p className="shortenedSummary">{itin.summary}</p>
 								</div>
 						</div>
 
+
 						<div className="extraInfoBox">
-							<div className="extraInfoIconsBox">
+							{/* <div className="extraInfoIconsBox">
 								<div className="extraInfoIcon">
 									<FontAwesomeIcon icon={faThumbsUp} className="faExtraInfo"/>
 									<span>25</span>
@@ -65,9 +65,9 @@ class Itineraries extends Component {
 								<div className="extraInfoIcon">
 									<span>{itin.price}</span>
 								</div>
-							</div>
-							<span className="title">{itin.title}</span>
-
+							</div> */}
+							<ExtraInfoIcons itin={itin}/>
+							<span className="itinTitle">{itin.title}</span>
 							<div className="hastagsBox">
 								<span className="hastag">#history</span>
 								<span className="hastag">#restaurants</span>

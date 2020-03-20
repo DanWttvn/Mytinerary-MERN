@@ -26,13 +26,23 @@ export const getItinerariesByCity = (city) => dispatch => {
 
 // ---------GET ITINERARY for Activities --------- //
 export const getItinerary = (itinID) => dispatch => {
-	console.log("1");
 	axios.get(`http://localhost:5000/itineraries/itinerary/${itinID}`) 
 		.then(res => {
-			console.log("2");
-			console.log(res.data);
+			// console.log(res.data);
 			dispatch ({
 				type: "GET_ITINERARY",
+				payload: res.data
+		});
+	})
+}
+
+// ---------GET ACTIVITIES by ItineraryID --------- //
+export const getActivities = (itinID) => dispatch => {
+	axios.get(`http://localhost:5000/itineraries/activities/${itinID}`)
+		.then(res => {
+			// console.log("get activities ACTION", res.data);
+			dispatch ({
+				type: "GET_ACTIVITIES",
 				payload: res.data
 		});
 	})

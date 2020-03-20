@@ -19,7 +19,7 @@ class CityPage extends Component {
 	render () {
 		// console.log(this.props.match.params.city);
 		return (
-			<div className="container">
+			<div className="containerB">
 				<Logo/>
 				<h3 className="cityName">{this.props.match.params.city}</h3>
 				<Itineraries itineraries={this.props.itineraries}/>

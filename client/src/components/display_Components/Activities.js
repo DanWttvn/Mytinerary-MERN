@@ -1,67 +1,63 @@
-import React from 'react'
+import React, { Component } from 'react'
+import {
+	Carousel,
+	CarouselItem,
+	CarouselControl
+  } from 'reactstrap';
 
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faHeart as fasHeart} from '@fortawesome/free-solid-svg-icons'
-// import { faHeart as farHeart} from '@fortawesome/free-regular-svg-icons'
-// import { faThumbsUp } from '@fortawesome/free-regular-svg-icons'
-// import { faClock } from '@fortawesome/free-regular-svg-icons'
+class Activities extends Component {
+	state = {
+		activeIndex: 0,
+		animating: false
+	}
 
-
-const Activities = ({activities}) => {
-
-	// FORMATO??
-	// const itinsCarrousel = itineraries.map((itin, i) => {
-	// 	return (
-	// 		<div className="itinCard" key={i}>
-	// 			<div className="itinPrev" style={
-	// 				{backgroundImage: 'url(\'' + itin.img
-	// 				+ '\')', 
-	// 				backgroundPosition: 'center center', 
-	// 				backgroundSize: 'cover'}}>
-	// 					<FontAwesomeIcon icon={farHeart} className="faHeart farHeart"/>
-	// 					<FontAwesomeIcon hidden icon={fasHeart} className="faHeart fasHeart"/>
-	// 					<div className="itinInfoPrev">
-	// 						<p className="shortenedSummary">{itin.summary}</p>
-	// 					</div>
-	// 			</div>
-
-	// 			<div className="extraInfoBox">
-	// 				<div className="extraInfoIconsBox">
-	// 					<div className="extraInfoIcon">
-	// 						<FontAwesomeIcon icon={faThumbsUp} className="faExtraInfo"/>
-	// 						<span>25</span>
-	// 					</div>
-	// 					<div className="extraInfoIcon">
-	// 						<FontAwesomeIcon icon={faClock} className="faExtraInfo"/>
-	// 						<span> {itin.duration}</span>
-	// 					</div>
-	// 					<div className="extraInfoIcon">
-	// 						<span>{itin.price}</span>
-	// 						{/* <FontAwesomeIcon icon={faDollarSign} className="faExtraInfo"/>
-	// 						<FontAwesomeIcon icon={faDollarSign} className="faExtraInfo"/> */}
-	// 					</div>
-	// 				</div>
-	// 				<span className="title">{itin.title}</span>
-
-	// 				<div className="hastagsBox">
-	// 					<span className="hastag">#history</span>
-	// 					<span className="hastag">#restaurants</span>
-	// 				</div>
-	// 			</div>
-
-	// 		</div>
-	// 	)
-	// })
+	setActiveIndex = (activeIndex) => {
+		this.setState({
+			activeIndex
+		})
+	}
+	setAnimating = (boolean) => {
+		this.setState({
+			animating: boolean
+		})
+	}
 	
-	return (
-		<div className="itinsCarrousel">
-			<h3>AQUI LAS ACTIVITIES</h3>
-			{/* <h3 className="cityName">{itineraries.city}</h3>
+	next = () => {
+		if (this.animating) return;
+		const nextIndex = (this.state.activeIndex === (this.props.activities.length - 1)) ?
+			0
+			: this.state.activeIndex + 1
+		this.setActiveIndex(nextIndex)			
+	}
 
-			{itinsCarrousel} */}
-			
-		</div>
-	)
+	previous = () => {
+		if (this.animating) return;
+		const nextIndex = (this.state.activeIndex === 0) ?
+			this.props.activities.length - 1
+			: this.state.activeIndex - 1
+		this.setActiveIndex(nextIndex)			
+	}
+
+	render () {
+		const activitiesCarrousel = this.props.activities.map((activity, i) => {
+			return (
+				<CarouselItem onExiting={() => this.setAnimating(true)} onExited={() => this.setAnimating(false)} key={i}>
+					<div className="activityCard">
+						<img className="activitiesImg" src={activity.img} alt="activity" key={i}/>
+						<span className="activityTitle">{activity.title}</span>
+					</div>
+				</CarouselItem>
+			)
+		})
+		
+		return (
+			<Carousel activeIndex={this.state.activeIndex}>
+				{activitiesCarrousel}
+				<CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
+				<CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
+			</Carousel>
+		)
+	}
 }
 
 export default Activities;

@@ -1,6 +1,7 @@
 const initState = {
 	itineraries: [],
-	itinerary: {}
+	itinerary: {},
+	activities: []
 }
 
 const itinerariesReducer = (state = initState, action) => {
@@ -17,6 +18,13 @@ const itinerariesReducer = (state = initState, action) => {
 			return {
 				...state,
 				itinerary: action.payload
+			}
+
+			case "GET_ACTIVITIES": // All, ByCity y ByFavs, AddFavs y get ItinsForActvivities
+			// console.log("getting activities REDUCER");
+			return {
+				...state,
+				activities: action.payload
 			}
 
 		default:
