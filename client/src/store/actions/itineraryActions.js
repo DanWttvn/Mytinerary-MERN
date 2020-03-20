@@ -1,4 +1,5 @@
 import axios from "axios";
+import {tokenConfig} from "./authActions"
 
 // con axios dispatch
 export const getAllItineraries = () => dispatch => {
@@ -48,6 +49,27 @@ export const getActivities = (itinID) => dispatch => {
 	})
 }
 
+// --------- GET COMMENTS by ItineraryID --------- //
+export const getComments = (itinID)  => dispatch => {
+	axios.get(`http://localhost:5000/itineraries/comments/${itinID}`)
+		.then(res => {
+			dispatch({
+				type: "GET_COMMENTS",
+				payload: res.data
+			})
+		})	
+}
+
+// --------- ADD COMMENTS with ItineraryID --------- //
+export const addComment = (itinID, newComment) => (dispatch, getState) => {
+	axios.post(`http://localhost:5000/itineraries/comments/${itinID}`, newComment, tokenConfig(getState))
+		.then(res => {
+			dispatch({
+				type: "ADD_COMMENT",
+				payload: res.data
+			})
+		})
+}
 
 
 // export const addCity = (newCity) => dispatch => {

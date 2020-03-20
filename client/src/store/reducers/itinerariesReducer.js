@@ -1,7 +1,8 @@
 const initState = {
 	itineraries: [],
 	itinerary: {},
-	activities: []
+	activities: [],
+	comments: []
 }
 
 const itinerariesReducer = (state = initState, action) => {
@@ -13,19 +14,40 @@ const itinerariesReducer = (state = initState, action) => {
 				itineraries: action.payload
 			}
 		
-			case "GET_ITINERARY": // All, ByCity y ByFavs, AddFavs y get ItinsForActvivities
+		case "GET_ITINERARY": // All, ByCity y ByFavs, AddFavs y get ItinsForActvivities
 			// console.log("getting itineraries");
 			return {
 				...state,
 				itinerary: action.payload
 			}
 
-			case "GET_ACTIVITIES": // All, ByCity y ByFavs, AddFavs y get ItinsForActvivities
+		case "GET_ACTIVITIES": 
 			// console.log("getting activities REDUCER");
 			return {
 				...state,
 				activities: action.payload
 			}
+
+		case "GET_COMMENTS": 
+			// console.log("getting comments REDUCER");
+			return {
+				...state,
+				comments: action.payload
+			}
+		
+		case "ADD_COMMENT": 
+			// console.log("adding comments REDUCER");
+			return {
+				...state,
+				comments: [action.payload, ...state.comments]
+			}
+		
+		// AÑADIR 
+		// case DELETE_ITEM:
+		// 	return {
+		// 		...state,
+		// 		comment: state.comment.filter(comment => comment._id !== action.payload)
+		// 	};
 
 		default:
 			return state;			
