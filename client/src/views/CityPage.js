@@ -19,9 +19,9 @@ class CityPage extends Component {
 	render () {
 		// console.log(this.props.match.params.city);
 		return (
-			<div className="containerB">
+			<div id="CityPage" className="containerB">
 				<Logo/>
-				<h3 className="cityName">{this.props.match.params.city}</h3>
+				<p className="titlesT mainTitle containerPadding">{this.props.match.params.city}</p>
 				<Itineraries itineraries={this.props.itineraries}/>
 				<Navbar/>
 			</div>

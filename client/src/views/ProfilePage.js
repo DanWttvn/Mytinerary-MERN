@@ -17,7 +17,7 @@ class Profile extends Component {
 
 		return (
 			<div id="Profile">
-				<h3>Profile</h3>
+				<p className="titlesT mainTitle">Profile</p>
 				<Navbar/>
 				{`Welcome, ${user.username}`}
 				{/* { user.username } */}

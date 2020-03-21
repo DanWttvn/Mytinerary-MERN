@@ -96,10 +96,10 @@ class SignInPage extends Component {
 						<FontAwesomeIcon onClick={this.changeVisibility} icon={faEye} className="visibilityIcon" id="visibilityIcon"/>
 					</div>
 	
-					<div className="sendCreateBtnsBox">
-						<input className="sendButton" type="submit" name="submit" value="Send"></input>
+					<div className="btnsBox2">
+						<input className="transparentBtn" type="submit" name="submit" value="Send"></input>
 						
-						<a className="createAccountBtn" href="/sign_up">Create Account</a>
+						<a className="secondaryBtn" href="/sign_up">Create Account</a>
 					</div>
 				
 					{/* GOOGLE FB LOGIN */}

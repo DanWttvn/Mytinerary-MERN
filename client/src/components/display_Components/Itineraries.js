@@ -27,8 +27,14 @@ class Itineraries extends Component {
 								backgroundSize: 'cover'}}>
 							</div>
 					
+							{/* <div className="itinInfoPrev">
+								<p className="shortenedSummary">{itin.summary}</p>
+							</div> */}
+
 							<div className="itinInfoPrev">
 								<p className="shortenedSummary">{itin.summary}</p>
+								<div className="mascaraCard"></div>
+
 							</div>
 						</Link>
 					
@@ -37,7 +43,7 @@ class Itineraries extends Component {
 
 					<div className="extraInfoBox">
 						<ExtraInfoIcons itin={itin}/>
-						<span className="itinTitle">{itin.title}</span>
+						<span className="subtitlesT subtitle">{itin.title}</span>
 						<div className="hastagsBox">
 							<span className="hastag">#history</span>
 							<span className="hastag">#restaurants</span>

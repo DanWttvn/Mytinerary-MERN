@@ -62,7 +62,9 @@ class ActivitiesPage extends Component {
 			<div id="ActivitiesPage" className="containerB">
 				{ this.props.activities.length ?
 					<Activities activities={this.props.activities}/>
-					: <img className="itineraryImg" src={this.props.itinerary.img} alt="activity"/>
+					: <div className="activityCard">
+						<img className="activitiesImg" src={this.props.itinerary.img} alt="activity"/>
+					</div>
 				}
 	
 				<ExtraInfoIcons itin={this.props.itinerary}/>
@@ -70,22 +72,19 @@ class ActivitiesPage extends Component {
 
 				<div className="container">
 					<div className="itinTitleBox">
-						<h6 className="itinTitle">{this.props.itinerary.title}</h6>
+						<h6 className="subtitlesT subtitle">{this.props.itinerary.title}</h6>
 						<Heart itin={this.props.itinerary} />
 					</div>
 
-					<p className="summary">{this.props.itinerary.summary}</p>
+					<p className="paragraph">{this.props.itinerary.summary}</p>
 
 					{/* COMMENTS */}
 					{/* <Comments comments={this.props.comments}/> */}
 					<div className="allCommentsBox">
-						<p className="subtitle">Comments</p>
+						<p className="sectionTitle">Comments</p>
 
 						{ this.props.isAuthenticated ? 
 							<form onSubmit={this.submitComment} id="newCommentForm" className="addCommentBox">
-								{/* <input className="addCommentInput" type="text" onChange={this.addCommentInput} name="newComment" placeholder="Add comment..." required />
-								<input className="sendCommentBtn" type="submit" name="submit" value=">" /> */}
-
 								<textarea className="addCommentInput" id="addCommentInput" type="text" onChange={this.addCommentInput} onKeyDown={this.autosize} name="newComment" placeholder="Add comment..." required />
 								<input className="sendCommentBtn" type="submit" name="submit" value=">" />
 							</form>

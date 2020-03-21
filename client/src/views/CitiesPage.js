@@ -28,7 +28,7 @@ class CitiesPage extends Component {
 		return (
 			<div id="CitiesPage" className="container">
 				<Logo/>
-				<h3>Where are you going?</h3>
+				<p className="titlesT mainTitle">Where are you going?</p>
 				<Searchbar getSearchTerm={this.filterWithSearchTerm} />
 				<Cities cities={this.props.cities} />	
 				<Navbar/>

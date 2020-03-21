@@ -9,18 +9,19 @@ const LandingPage = () => {
 
 			{/* <h1>Mytinerary</h1> */}
 			<div className="textOnTop">
-				<div className="signInMessage">
-					<h2 className="welcomeMessage">Visit<br/>Explore,<br/>Enjoy!</h2>
-					<div className="signingBox">
-						<button className="signInBtn"><NavLink to="/sign_in">Sign in</NavLink></button>
-						<NavLink className="createAccountBtn" to="/sign_up">Create accout</NavLink>
+				<div className="landingMsg">
+					<p className="titlesL hugeLetters">Visit<br/>Explore,<br/>Enjoy!</p>
+					<div className="btnsBox1">
+						<button className="transparentBtn"><NavLink to="/sign_in">Sign in</NavLink></button>
+						<NavLink className="secondaryBtn" to="/sign_up">Create accout</NavLink>
 					</div>
 				</div>
 
-				<div className="signedInMessage" hidden>
-					<h2 className="welcomeMessage">Welcome, Daniela!</h2>
-					{/* cambiar a 75px */}
-					<button className="signingBox signInBtn"><NavLink to="/cities">Explore ></NavLink></button>
+				<div className="landingMsg" hidden >
+					<p className="titlesL hugeLetters">Welcome, Daniela!</p>
+					<div className="btnsBox1">
+						<button className="transparentBtn"><NavLink to="/cities">Explore ></NavLink></button>
+					</div>
 				</div>
 			</div>
 

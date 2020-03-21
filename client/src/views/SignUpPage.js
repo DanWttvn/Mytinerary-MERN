@@ -108,7 +108,9 @@ class SignUpPage extends Component {
 						</label>
 					</div>
 	
-					<input className="sendButton" type="submit" name="submit" value="Send"></input>
+					<div className="btnsBox2">
+						<input className="transparentBtn" type="submit" name="submit" value="Send"></input>
+					</div>
 				</form>
 	
 				{/* //BACKGROUND */}
