@@ -117,9 +117,10 @@ class SignUpPage extends Component {
 						<a className="secondaryBtn" href="/sign_up">Log in</a>
 					</div>
 
-					<SignInSM/>
-
 				</form>
+				
+				<SignInSM/>
+
 	
 				{/* //BACKGROUND */}
 				<div className="mascaraExtra"></div>

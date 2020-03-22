@@ -101,10 +101,10 @@ class SignInPage extends Component {
 						<input className="transparentBtn" type="submit" name="submit" value="Send"></input>
 						<a className="secondaryBtn" href="/sign_up">Create Account</a>
 					</div>
-				
-					<SignInSM/>
-					
-				</form>				
+									
+				</form>		
+				<SignInSM/>
+
 
 				<div className="mascaraExtra"></div>
 				<LandingBg/>

@@ -85,7 +85,7 @@ p {
 }
 .whiteTitle {
 	font-size: 30px;
-	width: 100%;
+	width: 70%;
 	position: relative;
 	color: #fff;
 	z-index: 100;
@@ -116,6 +116,9 @@ p {
 	padding-right: 25px;
 	padding-left: 25px;
 }
+.fixedHeight {
+	height: 100vh;
+}
 
 a {
 	width: 100%;
@@ -140,7 +143,6 @@ textarea:focus {
 }
 
 .btnsBox2 {
-	/* position: relative; */
 	margin-top: 60px;
 	z-index: 100;
 
@@ -319,32 +321,60 @@ input:-webkit-autofill {
 /* -------- SIGN IN FORM -------- */
 
 .formBox {
-	position: relative;
+	position: absolute;
 	top: 60px;
 
-	width: 70%;
+	width: 100%;
 	margin-right: auto;
 	margin-left: auto;
 
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 #signIn .whiteTitle {
 	margin-bottom: 30px;
 }
-/* 
 
+.signInSMBox {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	/* margin-top: 40px; */
+	position: absolute;
+	margin: 0 auto;
+	bottom: 50px;
+	/* position: relative;
+	top: 90px; */
+}
 
-#signUp .whiteTitle {
-	margin-top: 50px
-	margin-bottom: 60px;
-} */
+.GFB-btns {
+	font-size: 18px;
+	padding-top:2px;
+	padding-bottom:2px;
+	margin-bottom: 3px;
+	width: 250px;
+	align-self: center;
+	text-align: center;
+
+	color: white;
+	z-index: 100;
+	border: 2px solid #fff;
+}
+.google-btn {
+	background: rgba(253, 94, 94, 0.6);
+}
+.fb-btn {
+	background: rgba(90, 94, 250, 0.6);
+}
+
 
 .formSection {
 	position: relative;
 	height: 80px;
-	width: 100%;
+	width: 70%;
 
 	overflow: hidden; /* para esconder lo que sobra de la linea de subrayado */
 	z-index: 200;
@@ -424,32 +454,6 @@ input:-webkit-autofill {
 	transform: translateX(0%);
 }
 
-.signInSMBox {
-	display: flex;
-	flex-direction: column;
-	margin-top: 40px;
-	/* position: relative;
-	top: 90px; */
-
-}
-
-.GFB-btns {
-	font-size: 18px;
-	padding: 2px 20px;
-	margin-bottom: 3px;
-	align-self: center;
-	text-align: center;
-
-	color: white;
-	z-index: 100;
-	border: 2px solid #fff;
-}
-.google-btn {
-	background: rgba(253, 94, 94, 0.6);
-}
-.fb-btn {
-	background: rgba(90, 94, 250, 0.6);
-}
 
 /* -------- SEARCHBAR -------- */
 
