@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import LandingBg from "../components/UI_Components/LandingBg"
+import SignInSM from "../components/UI_Components/SignInSM"
 // import LoginForm from "../components/--LoginForm"
 import { connect } from "react-redux"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -59,13 +60,11 @@ class SignInPage extends Component {
 		} catch (e) {
 			console.log(e.message);
 		}		
-
 	}
 
 	changeVisibility = (e) => {
 		const password = document.getElementById("password");
 		const icon = document.getElementById("visibilityIcon");
-
 		if (password.type === "password") {
 			password.type = "text";
 			icon.classList.add("visibilityBlue");
@@ -78,9 +77,11 @@ class SignInPage extends Component {
 	render() {
 		return (
 			<div id="signIn" className="fixedHeight">
-				<h1>SIGN IN</h1>
 				
 				<form onSubmit={this.onSubmit} className="formBox">
+				
+					<p className="subtitlesT whiteTitle">Log into <br/>your account</p>
+
 					<div className="formSection">
 						<input onChange={this.handleInput} type="email" name="email" id="email" required />
 						<label htmlFor="email" className="labelBox">
@@ -98,15 +99,11 @@ class SignInPage extends Component {
 	
 					<div className="btnsBox2">
 						<input className="transparentBtn" type="submit" name="submit" value="Send"></input>
-						
 						<a className="secondaryBtn" href="/sign_up">Create Account</a>
 					</div>
 				
-					{/* GOOGLE FB LOGIN */}
-					<div className="signInWithThirds">
-						<a className="GFB-btns google-btn" href="http://localhost:5000/auth/google">sign in with Google+</a>
-						<a className="GFB-btns fb-btn" href="http://localhost:5000/auth/facebook">sign in with Facebook</a>
-					</div>
+					<SignInSM/>
+					
 				</form>				
 
 				<div className="mascaraExtra"></div>

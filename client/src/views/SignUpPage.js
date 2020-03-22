@@ -7,6 +7,7 @@ import PropTypes from "prop-types"
 import { register } from "../store/actions/authActions"
 import { clearErrors } from "../store/actions/errorActions"
 import LandingBg from "../components/UI_Components/LandingBg"
+import SignInSM from "../components/UI_Components/SignInSM"
 // import NewAccount from "../components/NewAccount"
 
 class SignUpPage extends Component {
@@ -82,8 +83,11 @@ class SignUpPage extends Component {
 		
 		return (
 			<div id="signUp" className="fixedHeight">
-				{/* // NEW ACCOUNT FORM */}
+
 				<form onSubmit={this.onSubmit} className="formBox">
+					
+					<p className="subtitlesT whiteTitle">Create<br/>your account</p>
+
 					{ this.state.msg ? <Alert color="danger">{ this.state.msg }</Alert> : null }
 	
 					<div  className="formSection">
@@ -110,7 +114,11 @@ class SignUpPage extends Component {
 	
 					<div className="btnsBox2">
 						<input className="transparentBtn" type="submit" name="submit" value="Send"></input>
+						<a className="secondaryBtn" href="/sign_up">Log in</a>
 					</div>
+
+					<SignInSM/>
+
 				</form>
 	
 				{/* //BACKGROUND */}

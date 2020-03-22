@@ -73,6 +73,8 @@ p {
 .mainTitle {
 	font-size: 30px;
 	margin-top: 15px;
+	width: 100%;
+	/* display: block; */
 }
 .subtitle {
 	font-size: 20px;
@@ -80,6 +82,14 @@ p {
 .sectionTitle {
 	font-family: "Gotham Medium";
 	font-size: 15px;
+}
+.whiteTitle {
+	font-size: 30px;
+	width: 100%;
+	position: relative;
+	color: #fff;
+	z-index: 100;
+	line-height: 1.3em;
 }
 
 .paragraph {
@@ -130,8 +140,8 @@ textarea:focus {
 }
 
 .btnsBox2 {
-	position: relative;
-	top: 100px;
+	/* position: relative; */
+	margin-top: 60px;
 	z-index: 100;
 
 	display: flex;
@@ -177,6 +187,22 @@ textarea:focus {
 
 a:active {
 	text-decoration: none;
+}
+
+.btnInside {
+	background: var(--main-red);
+	font-size: 18px;
+	border-radius: 3px;
+	color: #fff;
+	padding: 7px 15px;
+	border: none;
+	-webkit-box-shadow: 2px 3px 5px -2px rgba(0,0,0,0.15); 
+	box-shadow: 2px 3px 5px -2px rgba(0,0,0,0.15);
+}
+
+.center {
+	margin-right: auto;
+	margin-left: auto;
 }
 
 /* autocomplete transparent background */
@@ -294,13 +320,26 @@ input:-webkit-autofill {
 
 .formBox {
 	position: relative;
-	top: 100px;
-	margin: 0 auto;
+	top: 60px;
+
 	width: 70%;
+	margin-right: auto;
+	margin-left: auto;
 
 	display: flex;
 	flex-direction: column;
 }
+
+#signIn .whiteTitle {
+	margin-bottom: 30px;
+}
+/* 
+
+
+#signUp .whiteTitle {
+	margin-top: 50px
+	margin-bottom: 60px;
+} */
 
 .formSection {
 	position: relative;
@@ -385,17 +424,19 @@ input:-webkit-autofill {
 	transform: translateX(0%);
 }
 
-.signInWithThirds {
+.signInSMBox {
 	display: flex;
 	flex-direction: column;
+	margin-top: 40px;
+	/* position: relative;
+	top: 90px; */
+
 }
 
 .GFB-btns {
 	font-size: 18px;
-	position: relative;
 	padding: 2px 20px;
 	margin-bottom: 3px;
-	top: 120px;
 	align-self: center;
 	text-align: center;
 
@@ -428,13 +469,11 @@ input:-webkit-autofill {
 /* -------- CITIES LIST -------- */
 
 .citiesGallery {
-	margin-bottom: 50px;
-
 	display: flex;
 	flex-flow: column wrap;
 	align-items: center;
 
-	padding: 20px 0;
+	padding: 20px 0 10px;
 	width: 100%;
 }
 
@@ -621,15 +660,19 @@ input:-webkit-autofill {
 /* -------- ADD NEW -------- */
 
 .addNewBox {
-	margin-top: 10px;	
+	margin-bottom: 70px;
 }
 
 .addNewBtn {
-	background: var(--intense-red);
+	/* background: var(--intense-red); */
+	background: var(--main-red);
 	width: 40px;
 	height: 40px;
 	color: #fff;
 	border-radius: 50%;
+	border: none;
+	-webkit-box-shadow: 2px 3px 5px -2px rgba(0,0,0,0.15); 
+	box-shadow: 2px 3px 5px -2px rgba(0,0,0,0.15);
 }
 
 .addNewBox span {
@@ -724,5 +767,21 @@ input:-webkit-autofill {
 	border-radius: 10px;
 	padding: 10px;
 	width: 100%;
+}
+
+/* -------- PROFILE -------- */
+
+.profileBox {
+	margin-top: 100px;
+	width: 100%;
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+}
+
+.profileBox p {
+	font-size: 18px;
+	text-align: center;
+	margin-bottom: 10px;
 }
 

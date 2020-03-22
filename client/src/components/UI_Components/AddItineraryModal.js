@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Modal } from "reactstrap";
 import { addCity } from "../../store/actions/cityActions"
-import BtnSignInInside from "../UI_Components/BtnSignInInside"
+import BtnSignInInside from "./BtnSignInInside"
 
 
 
@@ -39,7 +39,7 @@ class AddItineraryModal extends Component {
 		const { isAuthenticated } = this.props.auth
 
 		return (
-			<div id="newItinerary">
+			<div id="newItinerary" className="center">
 				<div className="addNewBox">
 					<button className="addNewBtn" onClick={this.toggle}>+</button>
 					<span>Add new itinerary</span>
@@ -49,14 +49,14 @@ class AddItineraryModal extends Component {
 					{ isAuthenticated ? (
 						// ADD CITY 
 						<form className="addItinForm" onSubmit={this.onSubmit}>
-							<h6>Add a new itinerary</h6>
+							<p className="sectionTitle">Add a new itinerary</p>
 							<div className="input">
 								<label htmlFor="newTitle">Title</label>
 								<input type="text" id="newTitle" onChange={this.handleAddCityChange} />
 								<label htmlFor="newTitle">City</label>
 								<input type="text" id="newCity" onChange={this.handleAddCityChange} />
 								{/* <button>Add City</button> */}
-								<input className="submitItinBtn" type="submit" name="submit" value="Send"></input>
+								<input className="btnInside" type="submit" name="submit" value="Send"></input>
 							</div>
 						</form>
 					) : (

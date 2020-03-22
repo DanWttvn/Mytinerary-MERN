@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import { logout } from "../../store/actions/authActions"
-import {  } from "../../store/actions/errorActions"
 import PropTypes from "prop-types"
 
 class NewAccount extends Component {
@@ -11,9 +10,7 @@ class NewAccount extends Component {
 
 	render() {
 		return (
-			<div>
-				<button onClick={this.props.logout}>Log out</button>
-			</div>
+			<button className="btnInside" onClick={this.props.logout}>Log out</button>
 		)
 	}
 }

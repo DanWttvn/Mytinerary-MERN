@@ -38,10 +38,15 @@ class App extends Component {
 							<Route exact path="/cities" component={CitiesPage} />
 							{/* <Route exact path="/cities/all" component={CitiesPage} /> */}
 							<Route exact path="/cities/:city" component={CityPage} /> {/* el :city es el this.props.match.*/}
-							<Route exact path="/cities/:city/:itinID" component={ActivitiesPage} /> {/* el :city es el this.props.match.*/}
+							<Route exact path="/cities/:city/:itinID" component={ActivitiesPage} /> 
+
+
 							<Route exact path="/profile">
 								{ this.props.isAuthenticated ? <ProfilePage/> : <Redirect to="/sign_in"/> }
 							</Route>
+							{/* <Route exact path="/profile" component={ProfilePage}/> */}
+							
+
 							<Route exact path="/favorites" component={FavoritesPage} />
 							{/* <Route path="/welcome" component={Welcomepage}></Route> */}
 						</Switch>
@@ -54,8 +59,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
 	return {
 		isAuthenticated: state.auth.isAuthenticated
-	}
-	
+	}	
 }
 
 export default connect(mapStateToProps,null)(App);
