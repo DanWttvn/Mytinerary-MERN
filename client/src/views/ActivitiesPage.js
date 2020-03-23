@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
+import axios from "axios"
 import { getActivities, getItinerary, getComments, addComment } from "../store/actions/itineraryActions"
 import Navbar from "../components/UI_Components/Navbar"
 import Activities from "../components/display_Components/Activities"
@@ -10,16 +11,23 @@ import Heart from "../components/UI_Components/Heart"
 
 class ActivitiesPage extends Component {
 	state = {
-		newComment: ""
+		newComment: "",
+		allUsers: []
 	}
 	// como estoy modificando el state, se actualiza solo, sin un update de algo. puedo aplicar essto a update_itineraries y ahorrarmelo??
 
 	componentDidMount() {
 		const itinID = this.props.match.params.itinID; //this comes from the route: :itin. that's the itinId
-		console.log(itinID);
+		// console.log(itinID);
 		this.props.getItinerary(itinID);
 		this.props.getActivities(itinID);	
 		this.props.getComments(itinID);
+
+		axios.get("/user/all").then(res => {
+			this.setState({
+				allUsers: res.data
+			})
+		}) 		
 	}
 
 	submitComment = (e) => {
@@ -45,14 +53,31 @@ class ActivitiesPage extends Component {
 			textArea.style.cssText = 'height:' + textArea.scrollHeight + 'px';
 		}, 0);
 	}
-	
 
 	render () {
-		const allComments = this.props.comments.map((comment, i) => {
+
+		console.log(this.state.allUsers);
+
+		// {/* --- COMMENTS --- */}
+
+		let allComments = this.props.comments;
+		console.log(allComments);
+		
+		// update comment with username
+		allComments.map((comment) => {
+			for (let i = 0; i < this.state.allUsers.length; i++) {
+				if(this.state.allUsers[i]._id === comment.userID) {
+					comment.username = this.state.allUsers[i].username
+				}			
+			}
+		})
+
+		const commentsDisplay = allComments.map((comment, i) => {
 			return (
-				<div className="commentBox">
+				<div className="commentBox" key={i}>
 					<p>{comment.content}</p>
-					<p>Posted by: {comment.userID}</p>
+					{/* <p>Posted by: {comment.userID}</p> */}
+					<p>Posted by: {comment.username}</p>
 				</div>
 			)
 		})
@@ -60,6 +85,8 @@ class ActivitiesPage extends Component {
 		
 		return (
 			<div id="ActivitiesPage" className="containerB">
+
+				{/* --- ACTIVITIES SECTION --- */}
 				{ this.props.activities.length ?
 					<Activities activities={this.props.activities}/>
 					: <div className="activityCard">
@@ -69,7 +96,7 @@ class ActivitiesPage extends Component {
 	
 				<ExtraInfoIcons itin={this.props.itinerary}/>
 
-
+				{/* --- COMMENTS SECTION --- */}
 				<div className="container">
 					<div className="itinTitleBox">
 						<h6 className="subtitlesT subtitle">{this.props.itinerary.title}</h6>
@@ -78,9 +105,8 @@ class ActivitiesPage extends Component {
 
 					<p className="paragraph">{this.props.itinerary.summary}</p>
 
-					{/* COMMENTS */}
-					{/* <Comments comments={this.props.comments}/> */}
 					<div className="allCommentsBox">
+						
 						<p className="sectionTitle">Comments</p>
 
 						{ this.props.isAuthenticated ? 
@@ -93,9 +119,8 @@ class ActivitiesPage extends Component {
 								<BtnSignInInside/>
 							</div>	
 						}
-						
 
-						{allComments}
+						{ commentsDisplay }
 					</div>
 				</div>
 

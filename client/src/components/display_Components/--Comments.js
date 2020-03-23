@@ -11,37 +11,37 @@ import ExtraInfoIcons from "../UI_Components/ExtraInfoIcons"
 
 class Itineraries extends Component {
 
-	handleClick = async (itinID) => {
-		// borrar comentarios y coger user y display
-	}
+// 	handleClick = async (itinID) => {
+// 		// borrar comentarios y coger user y display
+// 	}
 
-	render () {
-		const itinsCarrousel = this.props.itineraries.map((itin, i) => {
+// 	render () {
+// 		const itinsCarrousel = this.props.itineraries.map((itin, i) => {
 			
-			return (
+// 			return (
 				
-			)	
-		})
+// 			)	
+// 		})
 	
-		return (
-			<div className="itinsCarrousel">
-				{itinsCarrousel}
-			</div>
-		)
-	}
-}
+// 		return (
+// 			<div className="itinsCarrousel">
+// 				{itinsCarrousel}
+// 			</div>
+// 		)
+// 	}
+// }
 
-const mapStateToProps = state => {
-	return {
-		user: state.auth.user
-	}
-}
+// const mapStateToProps = state => {
+// 	return {
+// 		user: state.auth.user
+// 	}
+// }
 
-const mapDispatchToProps = dispatch => {
-	return {
-		addToFavorites: (itinID) => dispatch(addToFavorites(itinID)),
-		getItinerariesByFavs: () => dispatch(getItinerariesByFavs())
-	}
-}
+// const mapDispatchToProps = dispatch => {
+// 	return {
+// 		addToFavorites: (itinID) => dispatch(addToFavorites(itinID)),
+// 		getItinerariesByFavs: () => dispatch(getItinerariesByFavs())
+// 	}
+// }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Itineraries);

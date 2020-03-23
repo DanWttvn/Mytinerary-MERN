@@ -31,6 +31,54 @@ REQ.PARAMS
 lo que envio en la url
 */
 
+// --------- GET ALL USERA --------- //
+// @route GET /user/all
+// public access
+router.get("/all", (req, res) => { 
+    userModel.find({})
+        .then(files => {
+            res.send(files)
+        })
+        .catch(err => console.log(err))
+});
+
+
+// --------- GET USER BY ID --------- //
+// @route GET /user/info/:userID
+// public access
+router.get("/info/:userID", (req, res) => {
+	let userRequested = req.params.userID
+	console.log("get user by ID");	
+
+	userModel.findOne({ _id: userRequested })
+		.then(user => {
+			res.send(user)
+		})
+		.catch(err => console.log(err));
+}); 
+
+// --------- EDIT USER / IMAGES --------- //
+// @route PUT /user/info/:userID
+// private access
+router.put("/info/:userID", passport.authenticate("jwt", {session: false}), (req, res) => {
+	console.log("PUT user IMAGES route");
+
+	// meter profilImg
+	req.user.profilePic = req.body.img
+
+	// Find the user logged, con qué quieres modificar (ya he modificado el req.user antes)
+	userModel.findByIdAndUpdate({_id: req.user._id}, req.user)
+		// despues de update, mandar el user de vuelta al client
+		.then(() => { // si cargo aqui, me manda la version antigua, por eso find otra vez
+			userModel.findOne({_id: req.user._id})
+				.then(userUpdated => {
+					// console.log("lo que mando del BackendPUT:", userUpdated);
+					res.json(userUpdated)
+				})
+		})
+});
+ 
+
 ////////////////////////// FAVS //////////////////////////////
 
 // --------- SAVE FAVS --------- //

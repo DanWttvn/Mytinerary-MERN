@@ -6,15 +6,27 @@ import { connect } from "react-redux"
 // import PropTypes from "prop-types"
 // import SignInPage from "../views/SignInPage"
 
+import axios from "axios"
+
 
 class Profile extends Component {
 
-	// static propTypes = {
-	// 	auth: PropTypes.object.isRequired
+	state = {
+		profileImg: null
+	}
+
+	imgSelectHandler = (e) => {
+		this.setState({
+			profileImg: e.target.files[0]
+		})
+	}
+
+	// fileUploadHandler = () => {
+	// 	axios.post("")
+
 	// }
 
 	render () {
-
 		return (
 			<div id="Profile" className="container">
 				<Logo/>
@@ -33,6 +45,9 @@ class Profile extends Component {
 				<div className="center">
 					<Logout/>
 				</div>
+
+				<input type="file" onChange={this.imgSelectHandler}/>
+				<button onClick={this.fileUploadHandler}>Upload</button>
 
 				<Navbar/>
 

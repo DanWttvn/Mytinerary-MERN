@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faHeart as fasHeart} from '@fortawesome/free-solid-svg-icons'
 // import { faHeart as farHeart} from '@fortawesome/free-regular-svg-icons'
-import { addToFavorites, getItinerariesByFavs } from "../../store/actions/authActions"
+import { addToFavorites } from "../../store/actions/authActions"
 import { Link } from "react-router-dom"
 import ExtraInfoIcons from "../UI_Components/ExtraInfoIcons"
 
@@ -15,11 +15,11 @@ class Itineraries extends Component {
 	render () {
 		const isInFavsPage = this.props.inFavsPage
 
-		const itinsCarrousel = this.props.itineraries.map((itin, i) => {
+		const itinsCarrousel = this.props.itineraries.map(itin => {
 			return (				
-				<div className="itinBox">
+				<div className="itinBox" key={itin._id}>
 					<div className="itinCard">
-						<Link to={`cities/${itin.city}/${itin._id}`} key={itin._id}>
+						<Link to={`cities/${itin.city}/${itin._id}`}>
 							<div className="itinImgPrev" style={
 								{backgroundImage: 'url(\'' + itin.img
 								+ '\')', 

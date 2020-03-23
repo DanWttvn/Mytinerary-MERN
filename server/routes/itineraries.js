@@ -56,7 +56,7 @@ router.get("/activities/:itinID", (req, res) => {
 		.catch(err => console.log(err));
 }); 
 
-// --------- GET COMMENTAIES by itineraries --------- //
+// --------- GET COMMENTS by itineraries --------- //
 // @route GET /itineraries/comments/:itinID
 // public access
 router.get("/comments/:itinID", (req, res) => {
@@ -72,7 +72,7 @@ router.get("/comments/:itinID", (req, res) => {
 		.catch(err => console.log(err));
 }); 
 
-// --------- ADD COMMENTAIES by itineraries --------- //
+// --------- ADD COMMENTS by itineraries --------- //
 // @route POST /itineraries/comments/:itinID
 // private access
 router.post("/comments/:itinID", passport.authenticate("jwt", {session: false}), (req, res) => {
@@ -90,21 +90,7 @@ router.post("/comments/:itinID", passport.authenticate("jwt", {session: false}),
 
 }); 
 
-// no hace falta porque lo incluyo en get comments??? :getuserforcomment, FUNCIONA
-// --------- GET USER BY ID for comments --------- //
-// @route GET /itineraries/comments/user
-// public access
-// router.get("/comments/user/:userID", (req, res) => {
-// 	let userRequested = req.params.userID
-// 	console.log("get user by comment");	
 
-// 	userModel.findOne({ _id: userRequested })
-// 		.then(user => {
-// 			res.send(user)
-// 		})
-// 		.catch(err => console.log(err));
-// }); 
- 
 
 
 
