@@ -61,7 +61,7 @@ class SignUpPage extends Component {
 		// Attempt to register
 		await this.props.register(newUser);
 		this.props.clearErrors(); // ? yo. traversy lo pone en el modal
-		this.props.history.push("/cities"); 
+		// this.props.history.push("/"); 
 	}
 
 	changeVisibility = (e) => {		

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Route, Switch, Redirect} from "react-router-dom";
+import {BrowserRouter, Route, Switch } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { connect } from "react-redux"
@@ -23,7 +23,6 @@ class App extends Component {
 	componentDidMount() {
 		store.dispatch(loadUser());
 		console.log(this.props.isAuthenticated);
-		
 	}
 
 	render() {
@@ -41,12 +40,11 @@ class App extends Component {
 							<Route exact path="/cities/:city/:itinID" component={ActivitiesPage} /> 
 
 
-							<Route exact path="/profile">
+							{/* <Route exact path="/profile">
 								{ this.props.isAuthenticated ? <ProfilePage/> : <Redirect to="/sign_in"/> }
-							</Route>
-							{/* <Route exact path="/profile" component={ProfilePage}/> */}
+							</Route> */}
+							<Route exact path="/profile" component={ProfilePage}/>
 							
-
 							<Route exact path="/favorites" component={FavoritesPage} />
 							{/* <Route path="/welcome" component={Welcomepage}></Route> */}
 						</Switch>

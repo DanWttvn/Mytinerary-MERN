@@ -19,7 +19,7 @@ class Itineraries extends Component {
 			return (				
 				<div className="itinBox" key={itin._id}>
 					<div className="itinCard">
-						<Link to={`cities/${itin.city}/${itin._id}`}>
+						<Link to={`${itin.city}/${itin._id}`}>
 							<div className="itinImgPrev" style={
 								{backgroundImage: 'url(\'' + itin.img
 								+ '\')', 

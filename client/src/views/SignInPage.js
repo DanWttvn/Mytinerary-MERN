@@ -56,7 +56,7 @@ class SignInPage extends Component {
 			}
 			// Attempt to login
 			await this.props.login(currentUser);
-			this.props.history.push("/cities"); 
+			this.props.history.push("/"); 
 		} catch (e) {
 			console.log(e.message);
 		}		

@@ -70,6 +70,10 @@ p {
 .hugeLetters {
 	font-size: 70px;
 }
+.bigLetters {
+	font-size: 55px;
+
+}
 .mainTitle {
 	font-size: 30px;
 	margin-top: 15px;
@@ -154,6 +158,15 @@ button:focus {
 	align-items: center;
 }
 
+.btnsBox3 {
+	margin-top: 270px;
+	z-index: 100;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 .transparentBtn {
 	z-index: 100;
 	background: transparent;
@@ -195,6 +208,7 @@ a:active {
 }
 
 .btnInside {
+	margin-top: 10px;
 	background: var(--main-red);
 	font-size: 18px;
 	border-radius: 3px;
@@ -282,6 +296,7 @@ input:-webkit-autofill {
 	display: flex;
 	flex-flow: row nowrap;
 	justify-content: space-around;
+	align-items: center;
 
 	background: rgb(230, 230, 230);
 	width: 100%;
@@ -293,6 +308,22 @@ input:-webkit-autofill {
 	transform: scale(1.25);
 	color: var(--soft-black);
 }
+
+.profileNavbarBox {
+	/* width: 25px; */
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.profileNavbarBox img {
+	width: 25px;
+}
+
+.profileNavbarBox .active { 
+	/* no va çç*/
+	/* border: solid 1px red; */
+}
+
 
 #navbar .active svg { /* por que no funciona?? ççç */
 	color: var(--main-red);
@@ -319,6 +350,7 @@ input:-webkit-autofill {
 .landingMsg {
 	/* position: relative; */
 	top: 100px;
+	/* width: 100%; */
 }
 
 /* -------- SIGN IN FORM -------- */
@@ -646,8 +678,18 @@ input:-webkit-autofill {
 	right: 20px;
 	top: 20px;
 	margin: 5px;
-	transform: scale(1.45);
+	transform: scale(2);
+
 }
+
+.itinCard .faHeart svg {
+	border-radius: 50%;
+	-webkit-box-shadow: 2px 3px 5px -2px rgba(255, 255, 255, 0.3); 
+	box-shadow: 2px 3px 5px -2px rgba(255, 255, 255, 0.3);
+	background: rgba(255, 255, 255, 0.3);
+	padding: 2px;
+}
+
 
 #ActivitiesPage .faHeart {
 	/* position: absolute; */
@@ -776,14 +818,20 @@ input:-webkit-autofill {
 	width: 100%;
 }
 
+.commentName {
+	font-weight: bold;
+	font-size: 15px;
+	text-align: end;
+}
+
 /* -------- PROFILE -------- */
 
 .profileBox {
-	margin-top: 100px;
+	margin-top: 70px;
 	width: 100%;
 	display: flex;
 	flex-flow: column nowrap;
-	justify-content: center;
+	align-items: center;	
 }
 
 .profileBox p {
@@ -792,3 +840,25 @@ input:-webkit-autofill {
 	margin-bottom: 10px;
 }
 
+.profilePicBox {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	overflow: hidden;
+
+	background: var(--bg-grey);
+}
+
+.profilePicBox .faProfileIcon {
+	width: 130px;
+	height: 130px;
+	color: var(--dark-grey);
+}
+
+.profilePicBox img {
+	width: 150px;
+}

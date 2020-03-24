@@ -6,7 +6,8 @@ import { returnErrors } from "./errorActions"
 // Setup config-headers and token. se va a uar cada vez que quiera comprobar el token
 export const tokenConfig = getState => {
 	// Get token from localstorage
-	const token = getState().auth.token //authReducer -> localstorage
+	const token = getState().auth.token //authReducer -> localstorag
+	// const token = localStorage.getItem("token")
 	const config = {
 		headers: {
 			"Content-type" : "application/json"
@@ -18,7 +19,6 @@ export const tokenConfig = getState => {
 	}
 	return config
 }
-
 
 
 // Check token and load user

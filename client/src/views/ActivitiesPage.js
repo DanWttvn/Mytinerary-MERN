@@ -70,14 +70,14 @@ class ActivitiesPage extends Component {
 					comment.username = this.state.allUsers[i].username
 				}			
 			}
+			return comment
 		})
 
 		const commentsDisplay = allComments.map((comment, i) => {
 			return (
 				<div className="commentBox" key={i}>
 					<p>{comment.content}</p>
-					{/* <p>Posted by: {comment.userID}</p> */}
-					<p>Posted by: {comment.username}</p>
+					<p className="commentName">{comment.username}</p>
 				</div>
 			)
 		})

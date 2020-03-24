@@ -14,6 +14,7 @@ const passportSetup = require("./config/passport-setup");
 
 
 app.use(bodyParser.json()); //para poder leer ,manda json
+app.use("/uploads", express.static("uploads")) // make uploads public
 app.use(
 	bodyParser.urlencoded({ //urlencoded es que te pone name&apellido?xxx en lugar de un json object
 		extended: true

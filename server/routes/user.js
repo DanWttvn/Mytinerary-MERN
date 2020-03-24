@@ -9,27 +9,28 @@ const passport  = require("passport");
 const userModel = require("../model/userModel");
 const itineraryModel = require("../model/itineraryModel");
 
-/* REQS INFO
-REQ.USER
-{
-	"_id": "5e71fde10b0a0636b89d6bd5",
-	"username": "a@a.com",
-	"password": "$2b$10$A5qGEAHOs3i04CdsTyUmNeX9UIne2DoaFiFGvj/EF8VbX6Bx9z0NC",
-	"email": "a@a.com",
-	"profilePic": "",
-	"favorites": [],
-	"register_date": "2020-03-18T10:54:25.485Z",
-	"__v": 0
+const multer = require("multer");
+const storage = multer.diskStorage({ // storage config
+	destination: function(req, file, cb) {
+		cb(null, "./uploads/") // aqui se va a store las pics
+	}, 
+	filename: function(req, file, cb) {
+		cb(null, new Date().toISOString().replace(/:/g, "-") + "_" + file.originalname) // this syntaxis to avoid errors in windows
+	}
+});
+const fileFilter = (req, file, cb) => {
+	//reject a file
+	if (file.mimetype === "image/jpg" || file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+		cb(null, true); // saves it
+	} else {
+		cb(null, false); // rejects it
+	}	
 }
-
-REQ.BODY: lo que le mande
-{
-	lo que le mande desde FE, eneste caso en la action desde el componente, en este caso quiero el itinerary
-}
-
-REQ.PARAMS
-lo que envio en la url
-*/
+const upload = multer({
+	storage,
+	limits: { fileSize: 1024 * 1024 * 5 }, //5mb
+	fileFilter
+});
 
 // --------- GET ALL USERA --------- //
 // @route GET /user/all
@@ -60,11 +61,12 @@ router.get("/info/:userID", (req, res) => {
 // --------- EDIT USER / IMAGES --------- //
 // @route PUT /user/info/:userID
 // private access
-router.put("/info/:userID", passport.authenticate("jwt", {session: false}), (req, res) => {
+router.put("/info/profilePic", upload.single("profilePic"), passport.authenticate("jwt", {session: false}), (req, res) => { // .single para solo 1 file
 	console.log("PUT user IMAGES route");
-
-	// meter profilImg
-	req.user.profilePic = req.body.img
+	console.log(req.file);
+	
+	// upload profileImg
+	req.user.profilePic = req.file.path
 
 	// Find the user logged, con qué quieres modificar (ya he modificado el req.user antes)
 	userModel.findByIdAndUpdate({_id: req.user._id}, req.user)
@@ -72,7 +74,6 @@ router.put("/info/:userID", passport.authenticate("jwt", {session: false}), (req
 		.then(() => { // si cargo aqui, me manda la version antigua, por eso find otra vez
 			userModel.findOne({_id: req.user._id})
 				.then(userUpdated => {
-					// console.log("lo que mando del BackendPUT:", userUpdated);
 					res.json(userUpdated)
 				})
 		})

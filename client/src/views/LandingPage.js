@@ -1,34 +1,44 @@
-import React from "react"
+import React, { Component } from "react"
 import {NavLink} from "react-router-dom"
 import LandingBg from "../components/UI_Components/LandingBg"
+import { connect } from "react-redux"
 
+class LandingPage extends Component {
+	render() {
+		const { isAuthenticated, user } = this.props.auth
+		return (
+			<div className="fixedHeight">
+				<div className="textOnTop">
 
-const LandingPage = () => {
-	return (
-		<div className="fixedHeight">
+					{ isAuthenticated ? 
+						<div className="landingMsg" >
+							<p className="titlesT bigLetters">{`Welcome, ${user.username}!`}</p>
+							<div className="btnsBox3">
+								<button className="transparentBtn"><NavLink to="/cities">Explore></NavLink></button>
+							</div>
+						</div>
+						
+						: <div className="landingMsg">
+							  <p className="titlesT hugeLetters">Visit,<br/>Explore,<br/>Enjoy!</p>
+							  <div className="btnsBox1">
+								  <button className="transparentBtn"><NavLink to="/sign_in">Sign in</NavLink></button>
+								{/* <NavLink className="secondaryBtn" to="/sign_up">Create accout</NavLink> */}
+								  <NavLink className="secondaryBtn" to="/cities">Enter as a guest</NavLink>
+							  </div>
+						  </div>
+					}
 
-			{/* <h1>Mytinerary</h1> */}
-			<div className="textOnTop">
-				<div className="landingMsg">
-					<p className="titlesT hugeLetters">Visit,<br/>Explore,<br/>Enjoy!</p>
-					<div className="btnsBox1">
-						<button className="transparentBtn"><NavLink to="/sign_in">Sign in</NavLink></button>
-						<NavLink className="secondaryBtn" to="/sign_up">Create accout</NavLink>
-					</div>
 				</div>
-
-				<div className="landingMsg" hidden >
-					<p className="titlesT hugeLetters">Welcome, Daniela!</p>
-					<div className="btnsBox1">
-						<button className="transparentBtn"><NavLink to="/cities">Explore ></NavLink></button>
-					</div>
-				</div>
+				<LandingBg/>
 			</div>
-
-			<LandingBg/>
-		</div>
-		
-	)
+		)
+	}
 }
 
-export default LandingPage;
+const mapStateToProps = (state) => {
+	return {
+		auth: state.auth
+	}	
+}
+
+export default connect(mapStateToProps, null)(LandingPage);
