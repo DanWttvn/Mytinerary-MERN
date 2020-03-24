@@ -6,6 +6,30 @@ const activityModel = require("../model/activityModel")
 const commentayModel = require("../model/commentModel")
 const userModel = require("../model/userModel")
 
+const multer = require("multer");
+const storage = multer.diskStorage({ // storage config
+	destination: function(req, file, cb) {
+		cb(null, "./uploads/") // aqui se va a store las pics
+	}, 
+	filename: function(req, file, cb) {
+		cb(null, new Date().toISOString().replace(/:/g, "-") + "_" + file.originalname) // this syntaxis to avoid errors in windows
+	}
+});
+const fileFilter = (req, file, cb) => {
+	//reject a file
+	if (file.mimetype === "image/jpg" || file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
+		cb(null, true); // saves it
+	} else {
+		cb(null, false); // rejects it
+	}	
+}
+const upload = multer({
+	storage,
+	limits: { fileSize: 1024 * 1024 * 5 }, //5mb
+	fileFilter
+});
+
+
 // ---- GET ALL ITINS
 // @route GET /itinearies/all 
 router.get("/all", (req, res) => { // = itinearies/all 
@@ -40,6 +64,38 @@ router.get("/itinerary/:itinID", (req, res) => {
 		})
 		.catch(err => console.log(err));
 }); 
+////////////////////////////////////////////////////////////////////////////////////
+
+// --------- ADD ITINERARY --------- //
+// @route POST /itineraries/itinerary/
+// private access
+router.post("/itinerary", upload.single("img"), passport.authenticate("jwt", {session: false}), (req, res) => {
+// router.post("/itinerary", upload.single("img"), (req, res) => {
+	console.log("ROUTE post add itin");
+	console.log(req.body);
+	console.log(req.file);
+
+	const newItin = new itineraryModel({
+		// _id: new mongoose.Types.ObjectId(),
+		city: req.body.city,
+		title: req.body.title,
+		img: req.file.path,
+		summary: req.body.summary,
+		duration: req.body.duration,
+		price: req.body.price,
+		rating: req.body.rating,
+		userID: req.user._id
+	});
+
+	newItin.save()
+		.then(newItin => {
+			res.send(newItin)
+		})
+		.catch(err => console.log(err));
+}); 
+
+////////////////////////////////////////////////////////////////////////////////////
+
 
 // --------- GET ACTIVITIES BY ITINERARY --------- //
 // @route GET /itineraries/activities/:itinID

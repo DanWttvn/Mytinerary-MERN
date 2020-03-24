@@ -4,7 +4,7 @@ import Logo from "../components/UI_Components/Logo"
 import Navbar from "../components/UI_Components/Navbar"
 import Searchbar from "../components/UI_Components/Searchbar"
 import Cities from "../components/display_Components/Cities"
-import AddItineraryModal from "../components/UI_Components/AddItineraryModal"
+import AddItineraryModal from "../components/display_Components/AddItineraryModal"
 import { connect } from "react-redux"
 import { 
 	// addCity, 

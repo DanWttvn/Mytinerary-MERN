@@ -26,9 +26,8 @@ class Profile extends Component {
 		})
 		
 	}
+
 	tokenConfigFiles = () => {
-		console.log("sdhgofhg");
-		
 		// Get token from localstorage
 		const token = localStorage.getItem("token") //authReducer -> localstorage
 		const config = {
@@ -43,15 +42,11 @@ class Profile extends Component {
 		return config
 	}
 
-
 	fileUploadHandler = () => {
-		console.log(this.state.profileImg);
-
 		const fd = new FormData();
 		fd.append("profilePic", this.state.profileImg, this.state.profileImg.name);
 		console.log(fd);
 
-		
 		axios.put("http://localhost:5000/user/info/profilePic", fd, this.tokenConfigFiles())
 			.then(res => {
 				console.log(res);

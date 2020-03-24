@@ -20,6 +20,22 @@ export const tokenConfig = getState => {
 	return config
 }
 
+export const tokenConfigFiles = getState => {
+	// Get token from localstorage
+	const token = getState().auth.token //authReducer -> localstorag
+	// const token = localStorage.getItem("token")
+	const config = {
+		headers: {
+			"Content-type" : "multipart/form-data"
+		}
+	}
+	// If token, add to headers
+	if (token) {
+		config.headers["Authorization"] = "bearer " + token;
+	}
+	return config
+}
+
 
 // Check token and load user
 export const loadUser = () => (dispatch, getState) => {

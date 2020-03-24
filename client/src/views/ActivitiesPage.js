@@ -56,12 +56,9 @@ class ActivitiesPage extends Component {
 
 	render () {
 
-		console.log(this.state.allUsers);
-
 		// {/* --- COMMENTS --- */}
 
 		let allComments = this.props.comments;
-		console.log(allComments);
 		
 		// update comment with username
 		allComments.map((comment) => {
@@ -81,7 +78,6 @@ class ActivitiesPage extends Component {
 				</div>
 			)
 		})
-
 		
 		return (
 			<div id="ActivitiesPage" className="containerB">
