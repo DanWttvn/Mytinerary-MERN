@@ -1,12 +1,10 @@
 import React, {Component} from "react"
+import { connect } from "react-redux"
 import Navbar from "../components/UI_Components/Navbar"
 import Logo from "../components/UI_Components/Logo"
 import Logout from "../components/UI_Components/BtnLogout"
-import { connect } from "react-redux"
-// import PropTypes from "prop-types"
-// import SignInPage from "../views/SignInPage"
 import BtnSignInInside from "../components/UI_Components/BtnSignInInside"
-// import {tokenConfigFiles} from "../store/actions/authActions"
+import { Modal } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {faUser} from '@fortawesome/free-regular-svg-icons'
 
@@ -17,9 +15,17 @@ import axios from "axios"
 
 class Profile extends Component {
 	state = {
+		isOpen: false,
 		profileImg: null
 	}
 
+	toggle = () => {
+		this.setState({
+			isOpen: !this.state.isOpen
+		})
+	}
+
+	// ------ PROFILE IMG CONFIG ------ //
 	imgSelectHandler = (e) => {
 		this.setState({
 			profileImg: e.target.files[0]
@@ -61,13 +67,13 @@ class Profile extends Component {
 		const { isAuthenticated, user } = this.props.auth
 
 		return (
-			<div id="Profile" className="container">
+			<div id="profile" className="container">
 				<Logo/>
 
 				<p className="titlesT mainTitle">Profile</p>
 				
 				{ isAuthenticated ?
-					<div>
+					<div className="center">
 						<div className="profileBox">
 							<p className="subtitlesT subtitle">{`Welcome, ${user.username}`}</p>
 							<div className="profilePicBox">
@@ -76,16 +82,25 @@ class Profile extends Component {
 									: <FontAwesomeIcon icon={faUser} className="faProfileIcon"/>
 								}
 							</div>
+							<button className="btnInside" onClick={this.toggle}>Change pic</button>
+
 							<p>{ user.username }</p>
 							<p>{ user.email }</p>
 						</div>
 		
+						
+						<Modal isOpen={this.state.isOpen} toggle={this.toggle}>
+							<div className="modalProfileBox">
+								<input type="file" onChange={this.imgSelectHandler}/>
+								<button className="btnInside" onClick={this.fileUploadHandler}>Upload</button>
+							</div>
+						</Modal>
+
+
 						<div className="center">
 							<Logout/>
 						</div>
-		
-						<input type="file" onChange={this.imgSelectHandler}/>
-						<button onClick={this.fileUploadHandler}>Upload</button>
+
 					</div>
 					: <div>
 					  	<p>Log in para ver esto</p>

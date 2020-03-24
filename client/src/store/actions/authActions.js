@@ -139,12 +139,11 @@ export const getItinerariesByFavs = ()  => (dispatch, getState) => {
 		});
 	})
 }
-
+// ççç cambiar id por tokenID ?//
 export const addToFavorites = (id) => (dispatch, getState) => {
-	console.log("id:", id); // si, es el titulo
+	// console.log("id:", id);
 	const body = JSON.stringify({ id }); // lo que .stringify es un obj. como el mio no lo es, le pongo {}
 	// console.log("body:", body);
-	
 	
 	axios.put("http://localhost:5000/user/favorites", body, tokenConfig(getState))
 

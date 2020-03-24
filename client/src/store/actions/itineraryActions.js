@@ -1,5 +1,5 @@
 import axios from "axios";
-import {tokenConfig, tokenConfigFiles} from "./authActions"
+import {tokenConfig} from "./authActions"
 
 // --------- GET ALL ITINERARIES --------- //
 export const getAllItineraries = () => dispatch => {
@@ -77,30 +77,4 @@ export const addComment = (itinID, content) => (dispatch, getState) => {
 		})		
 }
 
-// --------- ADD ITINERARY --------- //
-// export const addItinerary = (newItin) => (dispatch, getState) => {
-// 	// console.log("ACTION add comment");
-// 	const body = JSON.stringify({ newItin })
-	
-// 	axios.post(`http://localhost:5000/itineraries/itinerary`, body, tokenConfigFiles(getState))
-// 		.then(res => {
-// 			dispatch({
-// 				type: "ADD_COMMENT",
-// 				payload: res.data
-// 			})
-// 		})		
-// }
-
-
-
-
-
-
-// export const addCity = (newCity) => dispatch => {
-// 	axios.post("http://localhost:5000/cities", newCity)
-// 		.then(res => dispatch({
-// 			type: "ADD_CITY",
-// 			payload: res.data // ese data es el item en router cities.js que paso al save() el newItem. recibe la res
-// 		}))	
-// };
 

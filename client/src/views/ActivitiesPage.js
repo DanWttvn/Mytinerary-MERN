@@ -27,7 +27,7 @@ class ActivitiesPage extends Component {
 			this.setState({
 				allUsers: res.data
 			})
-		}) 		
+		})
 	}
 
 	submitComment = (e) => {

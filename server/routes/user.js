@@ -87,6 +87,8 @@ router.put("/info/profilePic", upload.single("profilePic"), passport.authenticat
 // private access
 router.put("/favorites", passport.authenticate("jwt", {session: false}), (req, res) => {
 	console.log("PUT user/favorites route");
+
+// -------- UPDATE USER --------- //
 	// comprobacion si ya favorito: 
 	const indexItin = req.user.favorites.indexOf(req.body.id) // ese id es del itinerario
 	if (indexItin !== -1) {
@@ -105,8 +107,36 @@ router.put("/favorites", passport.authenticate("jwt", {session: false}), (req, r
 				.then(userUpdated => {
 					// console.log("lo que mando del BackendPUT:", userUpdated);
 					res.json(userUpdated)
+					// console.log(userUpdated)
+
 				})
 		})
+
+// -------- UPDATE ITINERARIES --------- //// ITIN.LIKES ME DA UNDEFINED AUNQUE ITIN SI SALE .LIKES AL LOG
+
+	// itineraryModel.findOne({ _id: req.body.id })
+	// 	.then(itin => {
+	// 		console.log("1", itin, "2", itin.likes);
+			
+	// 		const indexUserID = itin.likes.indexOf(req.user._id)
+	// 		if (indexUserID !== -1) {
+	// 			// quitar de favs
+	// 			itin.likes.splice(indexUserID, 1) //(a partir del indexUserID, borro 1)
+	// 		} else {
+	// 			// añadir a favs
+	// 			itin.likes.push(req.user._id)
+	// 		}
+			
+	// 		itineraryModel.findByIdAndUpdate({_id: req.body.itinID}, itin)
+	// 			.then(() => {
+	// 				console.log("despues de update");
+					
+	// 				itineraryModel.findOne({_id: req.body.itinID})
+	// 					.then(itineraryUpdated => {
+	// 						console.log(itineraryUpdated);
+	// 					})
+	// 			})
+	// 	})
 });
 
 // --------- GET FAVS --------- //

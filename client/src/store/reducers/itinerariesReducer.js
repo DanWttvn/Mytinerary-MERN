@@ -41,13 +41,6 @@ const itinerariesReducer = (state = initState, action) => {
 				...state,
 				comments: [action.payload, ...state.comments]
 			}
-		
-		// AÑADIR 
-		// case DELETE_ITEM:
-		// 	return {
-		// 		...state,
-		// 		comment: state.comment.filter(comment => comment._id !== action.payload)
-		// 	};
 
 		default:
 			return state;			

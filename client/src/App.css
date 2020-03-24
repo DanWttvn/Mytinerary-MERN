@@ -862,3 +862,12 @@ input:-webkit-autofill {
 .profilePicBox img {
 	width: 150px;
 }
+
+.modalProfileBox input {
+	width: 100%;
+	font-size: 11px;
+}
+
+.modalProfileBox button {
+	width: 100%;
+}
