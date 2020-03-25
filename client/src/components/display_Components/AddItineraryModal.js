@@ -10,7 +10,6 @@ class AddItineraryModal extends Component {
 		isOpen: false,
 		city: "",
 		title: "",
-		// img: "",
 		img: null,
 		summary: "",
 		duration: "",
@@ -83,7 +82,7 @@ class AddItineraryModal extends Component {
 				</div>
 	
 				<Modal isOpen={this.state.isOpen} toggle={this.toggle}>
-					{ isAuthenticated ? (
+					{ isAuthenticated ? 
 						// { --- ADD CITY --- } 
 						<form className="addItinForm" onSubmit={this.onSubmit}>
 							<p className="sectionTitle">Add a new itinerary</p>
@@ -115,13 +114,8 @@ class AddItineraryModal extends Component {
 								<button className="btnInside" onClick={this.handleSubmit}>Add itinerary</button>
 							</div>
 						</form>
-					) : (
-						// { -- LOG IN --- }
-						<div>
-							<p>Sign in to add new itineraries</p>
-							<BtnSignInInside/>
-						</div>
-					)} 
+					: <BtnSignInInside/>
+					} 
 				</Modal>
 			
 			</div>

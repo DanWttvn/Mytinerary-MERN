@@ -61,7 +61,6 @@ class SignUpPage extends Component {
 		// Attempt to register
 		await this.props.register(newUser);
 		this.props.clearErrors(); // ? yo. traversy lo pone en el modal
-		// this.props.history.push("/"); 
 	}
 
 	changeVisibility = (e) => {		
@@ -77,10 +76,18 @@ class SignUpPage extends Component {
 		}
 	}
 
+	redirect = () => {
+		if (this.props.isAuthenticated) {
+			this.props.history.push("/")
+		}
+	}
+
 	render() {
+		this.redirect();
+
 		console.log("new account:");
 		console.log(localStorage.getItem("token"));
-		
+				
 		return (
 			<div id="signUp" className="fixedHeight">
 
@@ -88,8 +95,7 @@ class SignUpPage extends Component {
 					
 					<p className="subtitlesT whiteTitle">Create<br/>your account</p>
 
-					{ this.state.msg ? <Alert color="danger">{ this.state.msg }</Alert> : null }
-	
+					{/* --- FORM --- */}	
 					<div  className="formSection">
 						<input onChange={this.handleInput} type="text" name="username" id="user_name" required/>
 						<label htmlFor="user_name"  className="labelBox">
@@ -117,12 +123,15 @@ class SignUpPage extends Component {
 						<a className="secondaryBtn" href="/sign_up">Log in</a>
 					</div>
 
+					{/* --- SHOW ERRORS --- */}
+					{ this.state.msg ? <p className="errorMsg">{ this.state.msg }</p> : null }
+
 				</form>
 				
 				<SignInSM/>
 
 	
-				{/* //BACKGROUND */}
+				{/* --- BACKGROUND --- */}
 				<div className="mascaraExtra"></div>
 				<LandingBg/>
 			</div>

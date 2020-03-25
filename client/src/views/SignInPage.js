@@ -56,7 +56,7 @@ class SignInPage extends Component {
 			}
 			// Attempt to login
 			await this.props.login(currentUser);
-			this.props.history.push("/"); 
+			// this.props.history.push("/"); 
 		} catch (e) {
 			console.log(e.message);
 		}		
@@ -74,7 +74,15 @@ class SignInPage extends Component {
 		}
 	}
 
+	redirect = () => {
+		if (this.props.auth.isAuthenticated) {
+			this.props.history.push("/")
+		}
+	}
+
 	render() {
+		this.redirect()
+
 		return (
 			<div id="signIn" className="fixedHeight">
 				
@@ -101,6 +109,9 @@ class SignInPage extends Component {
 						<input className="transparentBtn" type="submit" name="submit" value="Send"></input>
 						<a className="secondaryBtn" href="/sign_up">Create Account</a>
 					</div>
+
+					{/* --- SHOW ERRORS --- */}
+					{ this.state.msg ? <p className="errorMsg">{ this.state.msg }</p> : null }
 									
 				</form>		
 				<SignInSM/>
@@ -115,7 +126,7 @@ class SignInPage extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		user: state.auth.user
+		auth: state.auth
 	}
 	
 }

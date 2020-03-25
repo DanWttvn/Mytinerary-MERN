@@ -23,10 +23,7 @@ class FavoritesPage extends Component {
 					<div>
 						<Itineraries inFavsPage={"inFavsPage"} itineraries={this.props.favItineraries}/>
 					</div>
-					: <div>
-						  <p>Log in para ver esto</p>
-							<BtnSignInInside/>
-					  </div>
+					: <BtnSignInInside/>
 				}
 				<Navbar/>
 			</div>

@@ -167,6 +167,19 @@ button:focus {
 	align-items: center;
 }
 
+#ProfilePage .btnsBox4,
+#FavoritesPage .btnsBox4 {
+	position: relative;
+	top: 200px;
+}
+.btnsBox4 {
+	width: fit-content;
+}
+.btnsBox4 button{
+	width: 100%;
+
+}
+
 .transparentBtn {
 	z-index: 100;
 	background: transparent;
@@ -405,6 +418,16 @@ input:-webkit-autofill {
 	background: rgba(90, 94, 250, 0.6);
 }
 
+.errorMsg {
+	background-color: rgba(253, 94, 94, 0.6);
+	width: 50%;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	position: relative;
+	z-index: 100;
+	color: white;
+	text-align: center;
+}
 
 .formSection {
 	position: relative;
@@ -684,17 +707,16 @@ input:-webkit-autofill {
 
 .itinCard .faHeart svg {
 	border-radius: 50%;
-	-webkit-box-shadow: 2px 3px 5px -2px rgba(255, 255, 255, 0.3); 
-	box-shadow: 2px 3px 5px -2px rgba(255, 255, 255, 0.3);
+	/* ççççççççççççççççççççççç */
+	-webkit-box-shadow: 0px 0px 30px 20px rgba(255, 255, 255, 0.3); 
+	box-shadow: 0px 0px 30px 20px rgba(255, 255, 255, 0.3);
 	background: rgba(255, 255, 255, 0.3);
 	padding: 2px;
 }
 
 
 #ActivitiesPage .faHeart {
-	/* position: absolute; */
 	float: right;
-	/* right: 0px; */
 	margin: 5px;
 	transform: scale(1.45);
 }

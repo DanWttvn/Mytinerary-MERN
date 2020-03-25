@@ -110,9 +110,9 @@ class ActivitiesPage extends Component {
 								<textarea className="addCommentInput" id="addCommentInput" type="text" onChange={this.addCommentInput} onKeyDown={this.autosize} name="newComment" placeholder="Add comment..." required />
 								<input className="sendCommentBtn" type="submit" name="submit" value=">" />
 							</form>
-						:   <div className="addCommentBox">
+						:   <div className="">
 								<p>Sign in to add comments</p>
-								<BtnSignInInside/>
+								<a href="/sign_in"><button className="btnInside">Sign in</button></a>
 							</div>	
 						}
 

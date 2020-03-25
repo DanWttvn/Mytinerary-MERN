@@ -67,7 +67,7 @@ class Profile extends Component {
 		const { isAuthenticated, user } = this.props.auth
 
 		return (
-			<div id="profile" className="container">
+			<div id="ProfilePage" className="container">
 				<Logo/>
 
 				<p className="titlesT mainTitle">Profile</p>
@@ -87,7 +87,6 @@ class Profile extends Component {
 							<p>{ user.username }</p>
 							<p>{ user.email }</p>
 						</div>
-		
 						
 						<Modal isOpen={this.state.isOpen} toggle={this.toggle}>
 							<div className="modalProfileBox">
@@ -96,16 +95,12 @@ class Profile extends Component {
 							</div>
 						</Modal>
 
-
 						<div className="center">
 							<Logout/>
 						</div>
-
 					</div>
-					: <div>
-					  	<p>Log in para ver esto</p>
-					  	<BtnSignInInside/>
-					  </div>
+
+					: <BtnSignInInside/>
 				}		
 
 				<Navbar/>
