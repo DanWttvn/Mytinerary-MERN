@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import { connect } from "react-redux"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-regular-svg-icons'
-import { Alert } from "reactstrap"
 import PropTypes from "prop-types"
 import { register } from "../store/actions/authActions"
 import { clearErrors } from "../store/actions/errorActions"

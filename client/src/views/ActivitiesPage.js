@@ -5,7 +5,7 @@ import { getActivities, getItinerary, getComments, addComment } from "../store/a
 import Navbar from "../components/UI_Components/Navbar"
 import Activities from "../components/display_Components/Activities"
 import ExtraInfoIcons from "../components/UI_Components/ExtraInfoIcons"
-import BtnSignInInside from '../components/UI_Components/BtnSignInInside'
+// import BtnSignInInside from '../components/UI_Components/BtnSignInInside'
 import Heart from "../components/UI_Components/Heart"
 
 
