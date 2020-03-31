@@ -69,7 +69,8 @@ module.exports = passport.use(
 						facebookID: profile.id,
 						profilePic: "",
 						favorites: []
-					}).save()
+					})
+					.save()
 						.then((newUser) => {
 							console.log("new user:" + newUser);
 							done(null, newUser);

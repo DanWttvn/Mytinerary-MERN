@@ -53,7 +53,7 @@ class Profile extends Component {
 		fd.append("profilePic", this.state.profileImg, this.state.profileImg.name);
 		console.log(fd);
 
-		axios.put("/user/info/profilePic", fd, this.tokenConfigFiles())
+		axios.put("http://localhost:5000/user/info/profilePic", fd, this.tokenConfigFiles())
 			.then(res => {
 				console.log(res);
 			})
@@ -82,7 +82,7 @@ class Profile extends Component {
 									: <FontAwesomeIcon icon={faUser} className="faProfileIcon"/>
 								}
 							</div>
-							<button className="btnInside" onClick={this.toggle}>Change pic</button>
+							<button className="softBtn" onClick={this.toggle}>I</button>
 
 							<p>{ user.username }</p>
 							<p>{ user.email }</p>

@@ -42,8 +42,7 @@ router.get("/google/redirect", passport.authenticate("google", {session: false})
 		(err, token) => {
 			if(err) throw err;
 
-			// res.redirect(`https://mytinerary-client.herokuapp.com/${token}`) 
-			res.redirect("http://localhost:3000/auth/" + token);
+			res.redirect(`http://localhost:3000/auth/${token}`) 
 
 			console.log("logged succesfully");
 		}
@@ -72,8 +71,8 @@ router.get("/facebook/redirect", passport.authenticate("facebook", {session: fal
 		(err, token) => {
 			if(err) throw err;
 
-			// res.redirect(`https://mytinerary-client.herokuapp.com/${token}`) 
-			res.redirect("http://localhost:3000/auth/" + token) 
+			res.redirect(`http://localhost:3000/auth/${token}`) 
+			// res.redirect("http://localhost:3000/auth/" + token) 
 			
 
 			console.log("logged succesfully");

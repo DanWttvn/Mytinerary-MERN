@@ -14,12 +14,20 @@ class Itineraries extends Component {
 
 	render () {
 		const isInFavsPage = this.props.inFavsPage
+		
+		let url = ""
+		if (this.props.inFavsPage) {
+			// refresh favorites page
+			url = "/cities/"
+		} else {
+			url = ""
+		}
 
 		const itinsCarrousel = this.props.itineraries.map(itin => {
 			return (				
 				<div className="itinBox" key={itin._id}>
 					<div className="itinCard">
-						<Link to={`${itin.city}/${itin._id}`}>
+						<Link to={`${url}${itin.city}/${itin._id}`}>
 							<div className="itinImgPrev" style={
 								{backgroundImage: 'url(\'' + itin.img
 								+ '\')', 
@@ -27,10 +35,6 @@ class Itineraries extends Component {
 								backgroundSize: 'cover'}}>
 							</div>
 					
-							{/* <div className="itinInfoPrev">
-								<p className="shortenedSummary">{itin.summary}</p>
-							</div> */}
-
 							<div className="itinInfoPrev">
 								<p className="shortenedSummary">{itin.summary}</p>
 								<div className="mascaraCard"></div>

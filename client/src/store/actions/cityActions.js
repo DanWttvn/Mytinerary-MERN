@@ -2,7 +2,7 @@ import axios from "axios";
 
 // con axios dispatch
 export const getCities = () => dispatch => {
-	axios.get("/cities/all")
+	axios.get("http://localhost:5000/cities/all")
 		.then(res => {
 			// console.log(res.data);
 			dispatch ({
@@ -11,15 +11,6 @@ export const getCities = () => dispatch => {
 		});
 	})
 }
-
-
-export const addCity = (newCity) => dispatch => {
-	axios.post("/cities", newCity) // falta "config" con headersy por eso no funciona (?)
-		.then(res => dispatch({
-			type: "ADD_CITY",
-			payload: res.data // ese data es el item en router cities.js que paso al save() el newItem. recibe la res
-		}))	
-};
 
 
 export const filterCities = (searchTerm) => dispatch => {

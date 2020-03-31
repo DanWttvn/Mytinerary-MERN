@@ -23,7 +23,7 @@ class ActivitiesPage extends Component {
 		this.props.getActivities(itinID);	
 		this.props.getComments(itinID);
 
-		axios.get("/user/all").then(res => {
+		axios.get("http://localhost:5000/user/all").then(res => {
 			this.setState({
 				allUsers: res.data
 			})

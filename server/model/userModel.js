@@ -3,8 +3,20 @@ const mongoose = require("mongoose");
 const userModel = new mongoose.Schema({
 	username: {
 		type: String, //lo que acepta
-		// required: true //obligatorio.loquito para hacer comprobacion en otro lado. si lo pongo me da error
-		// unique: true
+		required: function validate() {
+			if(this.googleID || this.facebookID) {
+				return false;
+			} else {
+				return true;
+			}
+		},
+		unique: function validate() {
+			if(this.googleID || this.facebookID) {
+				return false;
+			} else {
+				return true;
+			}
+		}
 	},
 	// ççççççççççççç IF PASSPORT REQUIRED
 	googleID: {
@@ -15,12 +27,24 @@ const userModel = new mongoose.Schema({
 	},
 	password: {
 		type: String,
-		// required: true lo puedo quitar porque lo requiero desde el FE
+		required: function validate() {
+			if(this.googleID || this.facebookID) {
+				return false;
+			} else {
+				return true;
+			}
+		}
 	},
 	email: {
 		type: String,
-		// required: true, lo puedo quitar porque lo requiero desde el FE
-		// unique: true
+		required: function validate() {
+			if(this.googleID || this.facebookID) {
+				return false;
+			} else {
+				return true;
+			}
+		},
+		unique: true
 	},
 	profilePic: {
 		type: String,
@@ -34,7 +58,6 @@ const userModel = new mongoose.Schema({
 		type: Object,
 		required: false
 	}
-
 })
 
 //name of module is the singular version (itin) of the database name (itineraries). !!! AQUÍ ES DONDE LE ESTOY DICIENDO DONDE CONECTAR EN EL DB. pone mi "" en plural y busca una colection que se llame asi
