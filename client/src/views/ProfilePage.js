@@ -7,6 +7,7 @@ import BtnSignInInside from "../components/UI_Components/BtnSignInInside"
 import { Modal } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {faUser} from '@fortawesome/free-regular-svg-icons'
+import {faPen} from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -82,7 +83,7 @@ class Profile extends Component {
 									: <FontAwesomeIcon icon={faUser} className="faProfileIcon"/>
 								}
 							</div>
-							<button className="softBtn" onClick={this.toggle}>I</button>
+							<button className="editBtn" onClick={this.toggle}><FontAwesomeIcon icon={faPen} /></button>
 
 							<p>{ user.username }</p>
 							<p>{ user.email }</p>

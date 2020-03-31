@@ -14,7 +14,8 @@ class FavoritesPage extends Component {
 		this.props.getItinerariesByFavs()
 	}
 
-	render () {
+	render () {		
+
 		return (
 			<div id="FavoritesPage">
 				<Logo/>

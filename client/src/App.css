@@ -239,25 +239,25 @@ button:active {
 	-webkit-box-shadow: 2px 3px 5px -2px rgba(0,0,0,0.15); 
 	box-shadow: 2px 3px 5px -2px rgba(0,0,0,0.15);
 }
-.softBtn {
-	margin-top: 10px;
-	background: var(--dark-grey);
-	font-size: 18px;
-	border-radius: 3px;
-	color: #fff;
-	padding: 7px 15px;
-	border: none;
 
+.editBtn {
 	position: relative;
-	bottom: 40px;
+	bottom: 35px;
 	left: 40px;
+
+	width: 40px;
+	height: 40px;
+
+	background: var(--dark-grey);
+	border-radius: 50%;
+	border: solid 1.5px white;
+	color: #fff;
 }
 
 .center {
 	width: fit-content;
 	margin-right: auto;
 	margin-left: auto;
-	/* align-content: center; */
 }
 
 /* autocomplete transparent background */

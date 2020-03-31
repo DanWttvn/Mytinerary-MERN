@@ -6,25 +6,20 @@ import Searchbar from "../components/UI_Components/Searchbar"
 import Cities from "../components/display_Components/Cities"
 import AddItineraryModal from "../components/display_Components/AddItineraryModal"
 import { connect } from "react-redux"
-import { 
-	// addCity, 
-	getCities, filterCities } from "../store/actions/cityActions"
+import { getCities, filterCities } from "../store/actions/cityActions"
 
 
 class CitiesPage extends Component {
 
 	componentDidMount () {
 		this.props.getCities()
-		// console.log(this.state.cities)
 	}
 
 	filterWithSearchTerm = (searchTerm) => {
-		// console.log(searchTerm);
 		this.props.filterCities(searchTerm);
 	}
 
 	render() {
-		// console.log(this.props.cities);
 
 		return (
 			<div id="CitiesPage" className="container">
