@@ -35,13 +35,17 @@ module.exports = passport.use(
 						keys.secretOrKey,
 						{ expiresIn: 2592000 },
 						(err, token) => {
+							console.log("inside jwt sign");
+							console.log(token);
+							
 							if(err) throw err;
+
 							res.json({
 								token: token,
 								user: {
 									// de los datos de mi db
-									id: currentUser.id, //es la primera vez que lo pongo, pero parece que crea uno solito
-									username: currentUser.username,
+									id: currentUser.id,
+									username: currentUser.dis,
 									email: currentUser.email,
 									profilePic: currentUser.profilePic,
 									favorites: currentUser.favorites
@@ -70,12 +74,16 @@ module.exports = passport.use(
 								keys.secretOrKey,
 								{ expiresIn: 2592000 },
 								(err, token) => {
+									console.log("inside jwt.sign");
+									console.log("token: ", token);
+									
 									if(err) throw err;
+
 									res.json({
 										token: token,
 										user: {
 											// de los datos de google
-											id: newUser.id, //es la primera vez que lo pongo, pero parece que crea uno solito
+											id: newUser.id,
 											username: newUser.username,
 											email: newUser.email,
 											profilePic: "",

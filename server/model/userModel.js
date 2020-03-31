@@ -6,6 +6,7 @@ const userModel = new mongoose.Schema({
 		// required: true //obligatorio.loquito para hacer comprobacion en otro lado. si lo pongo me da error
 		// unique: true
 	},
+	// ççççççççççççç IF PASSPORT REQUIRED
 	googleID: {
 		type: String
 	},
