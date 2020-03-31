@@ -16,6 +16,16 @@ const authReducer = (state = initState, action) => {
 				isLoading: true
 			};
 
+		case "USER_SM_LOADING":
+			console.log("action.payload en user_sm_oading:", action.payload);
+			
+			localStorage.setItem("token", action.payload);
+			return {
+				...state, 
+				isLoading: true,
+				token: action.payload
+			};
+
 		case USER_LOADED: //runs in every request
 			return {
 				...state,

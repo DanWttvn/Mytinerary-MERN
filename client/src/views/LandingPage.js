@@ -3,24 +3,20 @@ import {NavLink} from "react-router-dom"
 import LandingBg from "../components/UI_Components/LandingBg"
 import { connect } from "react-redux"
 
-import { loadUser } from '../store/actions/authActions';
+import { loadUser, sendTokenSM } from '../store/actions/authActions';
 
 
 class LandingPage extends Component {
 
-	// componentDidMount() {
-
-	// }
-	
-	render() {
+	componentDidMount() {
 		const tokenURL = this.props.match.params.token
 		if(tokenURL) {
-			console.log("updating token");			
-			localStorage.setItem("token", tokenURL);
-			this.props.loadUser();
-			// this.props.history.push("/");
+			console.log("updating token in compoennt:", tokenURL);	
+			this.props.sendTokenSM(tokenURL)
 		}
-
+	}
+	
+	render() {
 		const { isAuthenticated, user } = this.props.auth
 		return (
 			<div className="fixedHeight">
@@ -59,6 +55,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		loadUser: () => dispatch(loadUser()),
+		sendTokenSM: (tokenURL) => dispatch(sendTokenSM(tokenURL)),
 	}
 }
 

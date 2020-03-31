@@ -59,6 +59,19 @@ export const loadUser = () => (dispatch, getState) => {
 		})
 }
 
+// send token when comes in the URL from Social Media
+export const sendTokenSM = (tokenURL) => (dispatch, getState) => {
+	console.log("sendTokenSM de authActions");
+	console.log(tokenURL);
+	
+	// user loading
+	dispatch({
+		type: "USER_SM_LOADING", //is loading to true
+		payload: tokenURL
+	});
+
+}
+
 // Register user
 export const register = ({ username, email, password }) => dispatch => {
 	// Headers

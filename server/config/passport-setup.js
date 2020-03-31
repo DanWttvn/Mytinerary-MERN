@@ -24,41 +24,11 @@ module.exports = passport.use(
 		// check if user already exists
 		userModel.findOne({ googleID: profile.id })
 			.then((currentUser) => {
-				// YA REGISTRADO
 				if (currentUser) {
-					// const payload = { 
-					// 	id: currentUser.id,
-					// 	username: currentUser.username
-					// };
-					// jwt.sign (
-					// 	payload, 
-					// 	keys.secretOrKey,
-					// 	{ expiresIn: 2592000 },
-					// 	(err, token) => {
-					// 		console.log("inside jwt sign");
-					// 		console.log(token);
-							
-					// 		if(err) throw err;
-
-					// 		res.json({
-					// 			token: token,
-					// 			user: {
-					// 				// de los datos de mi db
-					// 				id: currentUser.id,
-					// 				username: currentUser.dis,
-					// 				email: currentUser.email,
-					// 				profilePic: currentUser.profilePic,
-					// 				favorites: currentUser.favorites
-					// 			},
-					// 		})
-					// 		console.log("logged succesfully");
-					// 	}
-					// )
 					console.log("already exists. user is:", currentUser);
 					done(null, currentUser);
 				} else {
 					console.log("this user doesnt exist yet");
-					
 					// create new user in OUR db  with googles data
 					new userModel({
 						username: profile.displayName,
@@ -67,34 +37,6 @@ module.exports = passport.use(
 						favorites: []
 					}).save()
 						.then((newUser) => {
-							// const payload = { 
-							// 	id: newUser.id,
-							// 	username: newUser.username
-							// };
-							// jwt.sign (
-							// 	payload, 
-							// 	keys.secretOrKey,
-							// 	{ expiresIn: 2592000 },
-							// 	(err, token) => {
-							// 		console.log("inside jwt.sign");
-							// 		console.log("token: ", token);
-									
-							// 		if(err) throw err;
-
-							// 		res.json({
-							// 			token: token,
-							// 			user: {
-							// 				// de los datos de google
-							// 				id: newUser.id,
-							// 				username: newUser.username,
-							// 				email: newUser.email,
-							// 				profilePic: "",
-							// 				favorites: []
-							// 			},
-							// 		})
-							// 		console.log("logged succesfully");
-							// 	}
-							// )
 							console.log("new user:" + newUser);
 							done(null, newUser);
 						});
@@ -117,29 +59,6 @@ module.exports = passport.use(
 			.then((currentUser) => {
 				if (currentUser) {
 					console.log("already exists. user is:", currentUser);
-					// const payload = { 
-					// 	id: currentUser.id,
-					// 	username: currentUser.username
-					// };
-					// jwt.sign (
-					// 	payload, 
-					// 	keys.secretOrKey,
-					// 	{ expiresIn: 2592000 },
-					// 	(err, token) => {
-					// 		if(err) throw err;
-					// 		res.json({
-					// 			token: token,
-					// 			user: {
-					// 				// lo qu pillo de los datos de mi db
-					// 				id: currentUser.id, //es la primera vez que lo pongo, pero parece que crea uno solito
-					// 				username: currentUser.username,
-					// 				profilePic: currentUser.profilePic,
-					// 				favorites: currentUser.favorites
-					// 			},
-					// 		})
-					// 		console.log("logged succesfully");
-					// 	}
-					// )
 					done(null, currentUser);
 				} else {
 					console.log("user does not exist YET");
@@ -152,29 +71,6 @@ module.exports = passport.use(
 						favorites: []
 					}).save()
 						.then((newUser) => {
-							// const payload = { 
-							// 	id: newUser.id,
-							// 	username: newUser.username
-							// };
-							// jwt.sign (
-							// 	payload, 
-							// 	keys.secretOrKey,
-							// 	{ expiresIn: 2592000 },
-							// 	(err, token) => {
-							// 		if(err) throw err;
-							// 		res.json({
-							// 			token: token,
-							// 			user: {
-							// 				// lo que pillo de los datos de fb
-							// 				id: newUser.id, //es la primera vez que lo pongo, pero parece que crea uno solito
-							// 				username: newUser.displayName,
-							// 				profilePic: "",
-							// 				favorites: []
-							// 			},
-							// 		})
-							// 		console.log("logged succesfully");
-							// 	}
-							// )
 							console.log("new user:" + newUser);
 							done(null, newUser);
 						});
