@@ -8,7 +8,7 @@
     "start": "node server.js",
     "server": "nodemon server.js --exec babel-node --presets babel-preset-env",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"nodemon server.js\" \"cd ../client && npm start\"",
+    "dev": "concurrently \"nodemon server.js\" \"cd ../client && npm start\""
   },
   "repository": {
     "type": "git"
