@@ -36,7 +36,7 @@ class AddItineraryModal extends Component {
 
 	
 	handleSubmit = (e) => {
-		e.preventDefault()
+		e.preventDefault();
 
 		const formData = new FormData();
 		formData.append("img", this.state.img, this.state.img.name);

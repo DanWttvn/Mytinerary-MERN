@@ -1,5 +1,5 @@
 import React from "react"
-import bgImgEx from "../../img/paris/p (6).jpg"
+import bgImgEx from "../../img/parisBG.jpg"
 
 const LandingBg = () => {
 	return (

@@ -826,8 +826,14 @@ input:-webkit-autofill {
 }
 
 .sendCommentBtn {
+	background: var(--soft-black);
+	color: white;
+	font-weight: bold;
+	border-radius: 50%;
+	border: none;
+
 	position: absolute;
-	right: 20px;
+	right: 10px;
 	/* top: calc(50%); */
 	bottom: 5px;
 }
