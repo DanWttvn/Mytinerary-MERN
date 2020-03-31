@@ -3,8 +3,24 @@ import {NavLink} from "react-router-dom"
 import LandingBg from "../components/UI_Components/LandingBg"
 import { connect } from "react-redux"
 
+import { loadUser } from '../store/actions/authActions';
+
+
 class LandingPage extends Component {
+
+	// componentDidMount() {
+
+	// }
+	
 	render() {
+		const tokenURL = this.props.match.params.token
+		if(tokenURL) {
+			console.log("updating token");			
+			localStorage.setItem("token", tokenURL);
+			this.props.loadUser();
+			// this.props.history.push("/");
+		}
+
 		const { isAuthenticated, user } = this.props.auth
 		return (
 			<div className="fixedHeight">
@@ -22,7 +38,6 @@ class LandingPage extends Component {
 							  <p className="titlesT hugeLetters">Visit,<br/>Explore,<br/>Enjoy!</p>
 							  <div className="btnsBox1">
 								  <button className="transparentBtn"><NavLink to="/sign_in">Sign in</NavLink></button>
-								{/* <NavLink className="secondaryBtn" to="/sign_up">Create accout</NavLink> */}
 								  <NavLink className="secondaryBtn" to="/cities">Enter as a guest</NavLink>
 							  </div>
 						  </div>
@@ -41,4 +56,11 @@ const mapStateToProps = (state) => {
 	}	
 }
 
-export default connect(mapStateToProps, null)(LandingPage);
+const mapDispatchToProps = (dispatch) => {
+	return {
+		loadUser: () => dispatch(loadUser()),
+	}
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);

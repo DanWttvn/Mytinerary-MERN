@@ -28,7 +28,27 @@ router.get("/google", passport.authenticate("google", {
 // callback route for google to redirect
 // @route POST 5000/auth/google/redirect
 router.get("/google/redirect", passport.authenticate("google", {session: false}), (req, res) => { // esta vez que autentificamos con google, ya tenemos un code en el url. passport entende que entonces ya hemos pasado por la primera pagina. fires the cb function en pass-setup
-	res.redirect("http://localhost:3000/") 
+	console.log("redirected page");
+	console.log(req.user);
+	
+	const payload = { 
+		id: req.user.id
+	};
+
+	jwt.sign (
+		payload, 
+		keys.secretOrKey,
+		{ expiresIn: 2592000 },
+		(err, token) => {
+			if(err) throw err;
+
+			// res.redirect(`https://mytinerary-client.herokuapp.com/${token}`) 
+			res.redirect("http://localhost:3000/auth/" + token);
+
+			console.log("logged succesfully");
+		}
+	)	
+	
 });
 
 // ---------- AUTH FACEBOOK --------- //
@@ -38,7 +58,27 @@ router.get("/facebook", passport.authenticate("facebook"));
 // callback route for facebook to redirect
 // @route POST 5000/auth/facebook/redirect
 router.get("/facebook/redirect", passport.authenticate("facebook", {session: false}), (req, res) => { // esta vez que autentificamos con google, ya tenemos un code en el url. passport entende que entonces ya hemos pasado por la primera pagina. fires the cb function en pass-setup
-	res.redirect("http://localhost:3000/") 
+	console.log("redirected page");
+	console.log(req.user);
+	
+	const payload = { 
+		id: req.user.id
+	};
+
+	jwt.sign (
+		payload, 
+		keys.secretOrKey,
+		{ expiresIn: 2592000 },
+		(err, token) => {
+			if(err) throw err;
+
+			// res.redirect(`https://mytinerary-client.herokuapp.com/${token}`) 
+			res.redirect("http://localhost:3000/auth/" + token) 
+			
+
+			console.log("logged succesfully");
+		}
+	)	
 });
 
 

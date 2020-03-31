@@ -46,7 +46,7 @@ export const loadUser = () => (dispatch, getState) => {
 		type: USER_LOADING //is loading to true
 	});
 
-	axios.get("http://localhost:5000/auth/user", tokenConfig(getState)) // la comrpobacion del token que la he puesto a parte porqeu se va arepetir mucho
+	axios.get("/auth/user", tokenConfig(getState)) // la comrpobacion del token que la he puesto a parte porqeu se va arepetir mucho
 		.then(res => dispatch({
 			type: USER_LOADED, // isAuthenticated true
 			payload: res.data
@@ -130,7 +130,7 @@ export const logout = () => {
 
 // -- GET FAVS
 export const getItinerariesByFavs = ()  => (dispatch, getState) => {
-	axios.get("http://localhost:5000/user/favorites", tokenConfig(getState)) 
+	axios.get("/user/favorites", tokenConfig(getState)) 
 		.then(res => {
 			// console.log("favorites by user", res.data);
 			dispatch ({
@@ -145,7 +145,7 @@ export const addToFavorites = (id) => (dispatch, getState) => {
 	const body = JSON.stringify({ id }); // lo que .stringify es un obj. como el mio no lo es, le pongo {}
 	// console.log("body:", body);
 	
-	axios.put("http://localhost:5000/user/favorites", body, tokenConfig(getState))
+	axios.put("/user/favorites", body, tokenConfig(getState))
 
 		.then(res => {
 			// me llega en res todo el user modificado con nuevos FAVS

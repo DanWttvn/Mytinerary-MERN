@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const passport  = require("passport");
 const itineraryModel = require("../model/itineraryModel");
-const activityModel = require("../model/activityModel")
+const activityModel = require("../model/activityModel");
 const commentayModel = require("../model/commentModel")
 const userModel = require("../model/userModel")
 

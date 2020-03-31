@@ -53,7 +53,7 @@ class Profile extends Component {
 		fd.append("profilePic", this.state.profileImg, this.state.profileImg.name);
 		console.log(fd);
 
-		axios.put("http://localhost:5000/user/info/profilePic", fd, this.tokenConfigFiles())
+		axios.put("/user/info/profilePic", fd, this.tokenConfigFiles())
 			.then(res => {
 				console.log(res);
 			})

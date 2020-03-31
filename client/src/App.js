@@ -29,24 +29,19 @@ class App extends Component {
 		return (
 				<BrowserRouter>
 					<div className="App">
-						{/* <h1>My itinerary</h1> cambiar por logo */}
 						<Switch>
+
+							{/* <Route exact path="/" component={LandingPage} /> */}
 							<Route exact path="/" component={LandingPage} />
+							<Route exact path="/auth/:token" component={LandingPage} />
+
 							<Route path="/sign_in" component={SignInPage} />
 							<Route path="/sign_up" component={SignUpPage} />
 							<Route exact path="/cities" component={CitiesPage} />
-							{/* <Route exact path="/cities/all" component={CitiesPage} /> */}
 							<Route exact path="/cities/:city" component={CityPage} /> {/* el :city es el this.props.match.*/}
 							<Route exact path="/cities/:city/:itinID" component={ActivitiesPage} /> 
-
-
-							{/* <Route exact path="/profile">
-								{ this.props.isAuthenticated ? <ProfilePage/> : <Redirect to="/sign_in"/> }
-							</Route> */}
 							<Route exact path="/profile" component={ProfilePage}/>
-							
 							<Route exact path="/favorites" component={FavoritesPage} />
-							{/* <Route path="/welcome" component={Welcomepage}></Route> */}
 						</Switch>
 					</div>
 				</BrowserRouter>

@@ -227,7 +227,6 @@ router.post("/sign_up", [
 								}
 							)
 							console.log("created new user", newUser);
-							// res.redirect("http://localhost:3000/cities"); //no funciona, pero en medium esta asi
 						})
 				})
 			})
