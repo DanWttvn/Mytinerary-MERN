@@ -32,7 +32,7 @@ const upload = multer({
 	fileFilter
 });
 
-// --------- GET ALL USERA --------- //
+// --------- GET ALL USERS --------- //
 // @route GET /user/all
 // public access
 router.get("/all", (req, res) => { 

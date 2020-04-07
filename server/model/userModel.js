@@ -18,7 +18,6 @@ const userModel = new mongoose.Schema({
 			}
 		}
 	},
-	// ççççççççççççç IF PASSPORT REQUIRED
 	googleID: {
 		type: String
 	},
@@ -47,6 +46,7 @@ const userModel = new mongoose.Schema({
 		unique: true
 	},
 	profilePic: {
+		// data: Buffer,
 		type: String,
 		required: false
 	},

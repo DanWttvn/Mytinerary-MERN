@@ -413,12 +413,10 @@ input:-webkit-autofill {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	/* margin-top: 40px; */
 	position: absolute;
 	margin: 0 auto;
-	bottom: 50px;
-	/* position: relative;
-	top: 90px; */
+	/* bottom: 50px; */
+	top: 520px;
 }
 
 .GFB-btns {

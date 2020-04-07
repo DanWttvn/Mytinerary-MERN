@@ -10,7 +10,7 @@
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read https://bit.ly/CRA-PWA
 
-const isLocalhost = Boolean(
+const isLocalhost = Boolean( 
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
     window.location.hostname === '[::1]' ||
@@ -21,7 +21,10 @@ const isLocalhost = Boolean(
 );
 
 export function register(config) {
-  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+  // if (/* process.env.NODE_ENV === 'production' &&  */'serviceWorker' in navigator) { // çççççççç
+    if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+      console.log("entrando"); // çççççç
+
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
     if (publicUrl.origin !== window.location.origin) {
@@ -50,7 +53,10 @@ export function register(config) {
         // Is not localhost. Just register service worker
         registerValidSW(swUrl, config);
       }
-    });
+    });    
+  } 
+  else { // ççççç
+    console.log("wont register sw. current env:", process.env.NODE_ENV);
   }
 }
 
@@ -58,6 +64,10 @@ function registerValidSW(swUrl, config) {
   navigator.serviceWorker
     .register(swUrl)
     .then(registration => {
+
+      console.log("sw is registered"); // ççççççç
+      
+
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         if (installingWorker == null) {
