@@ -10,14 +10,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 class Navbar extends Component {
 
 	render() {
-		const { isAuthenticated, user } = this.props.auth;		
+		const { isAuthenticated, user } = this.props.auth;
+		let profilePic = ""
+		if(isAuthenticated){
+			profilePic = user.profilePic.startsWith("uploads") ? `http://localhost:5000/${user.profilePic}` : user.profilePic;
+		}
 		
 		return (
 			<nav id="navbar">
 
 				{ isAuthenticated && user.profilePic ?
 					<div className="profileNavbarBox" >
-						<NavLink to="/profile"><img src={`http://localhost:5000/${user.profilePic}`} alt="profile pic"/></NavLink>
+						<NavLink to="/profile"><img src={profilePic} alt="profile pic"/></NavLink>
 					</div>
 					: <div>
 						  <NavLink to="/profile"><FontAwesomeIcon icon={faUser} className="faMenuIcon faUserMenu"/></NavLink>

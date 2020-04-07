@@ -19,7 +19,7 @@ class Itineraries extends Component {
 		let noItinerariesMsg = isInFavsPage ? 
 			<div className="btnsBox3 center">
 				<p>You still have no favorites!</p>
-				<div className="btnInside">Explore</div>
+				<div className="btnInside"><a href="/cities">Explore</a></div>
 			</div>
 			: 	<div className="btnsBox3 center">
 					<p>There are still no itineraries for this city</p>

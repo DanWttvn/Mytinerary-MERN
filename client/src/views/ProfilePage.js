@@ -8,10 +8,8 @@ import { Modal } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {faUser} from '@fortawesome/free-regular-svg-icons'
 import {faPen} from '@fortawesome/free-solid-svg-icons'
-
-
-
 import axios from "axios"
+import ImageUploader from "react-images-upload"
 
 
 class Profile extends Component {
@@ -27,11 +25,10 @@ class Profile extends Component {
 	}
 
 	// ------ PROFILE IMG CONFIG ------ //
-	imgSelectHandler = (e) => {
+	imgSelectHandler = (pictureFiles, pictureDataURLs) => {
 		this.setState({
-			profileImg: e.target.files[0]
+			profileImg: pictureFiles[0]
 		})
-		
 	}
 
 	tokenConfigFiles = () => {
@@ -61,11 +58,14 @@ class Profile extends Component {
 			.then(() => {
 				window.location.reload(true)
 			})
-
 	}
 
 	render () {
 		const { isAuthenticated, user } = this.props.auth
+		let profilePic = ""
+		if(isAuthenticated){
+			profilePic = user.profilePic.startsWith("uploads") ? `http://localhost:5000/${user.profilePic}` : user.profilePic;
+		}
 
 		return (
 			<div id="ProfilePage" className="container">
@@ -79,7 +79,7 @@ class Profile extends Component {
 							<p className="subtitlesT subtitle">{`Welcome, ${user.username}`}</p>
 							<div className="profilePicBox">
 								{ user.profilePic ? 
-									<img src={`http://localhost:5000/${user.profilePic}`} alt="profile pic"/>
+									<img src={profilePic} alt="profile pic"/>
 									: <FontAwesomeIcon icon={faUser} className="faProfileIcon"/>
 								}
 							</div>
@@ -91,7 +91,14 @@ class Profile extends Component {
 						
 						<Modal isOpen={this.state.isOpen} toggle={this.toggle}>
 							<div className="modalProfileBox">
-								<input type="file" onChange={this.imgSelectHandler}/>
+								<ImageUploader
+									withIcon={true}
+									buttonText="Choose image"
+									onChange={this.imgSelectHandler}
+									imgExtension={[".jpg", ".jpeg", ".png"]}
+									maxFileSize={10485760}
+									withPreview={true}
+								/>
 								<button className="btnInside" onClick={this.fileUploadHandler}>Upload</button>
 							</div>
 						</Modal>

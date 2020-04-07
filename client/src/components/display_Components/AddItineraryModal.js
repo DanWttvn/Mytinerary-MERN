@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import { Modal } from "reactstrap";
 import BtnSignInInside from "../UI_Components/BtnSignInInside"
 import axios from "axios"
+import ImageUploader from "react-images-upload"
 
 
 class AddItineraryModal extends Component {
@@ -28,12 +29,11 @@ class AddItineraryModal extends Component {
 			[e.target.id]: e.target.value
 		})
 	}
-	handleImgSelect = (e) => {
+	handleImgSelect = (pictureFiles, pictureDataURLs) => {
 		this.setState({
-			img: e.target.files[0]
-		})	
+			img: pictureFiles[0]
+		})
 	}
-
 	
 	handleSubmit = (e) => {
 		e.preventDefault();
@@ -95,8 +95,14 @@ class AddItineraryModal extends Component {
 								<input type="text" id="title" onChange={this.handleAddItin} />
 
 								<label htmlFor="img">Images</label>
-								<input type="file" id="img" onChange={this.handleImgSelect}/>
-								{/* <button onClick={this.fileUploadHandler}>Upload</button> */}
+								<ImageUploader
+									withIcon={true}
+									buttonText="Choose image"
+									onChange={this.handleImgSelect}
+									imgExtension={[".jpg", ".jpeg", ".png"]}
+									maxFileSize={10485760}
+									withPreview={true}
+								/>
 
 								<label htmlFor="summary">Summary</label>
 								<input type="text" id="summary" onChange={this.handleAddItin} required />

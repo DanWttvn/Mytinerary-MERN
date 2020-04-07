@@ -27,13 +27,13 @@ module.exports = passport.use(
 				if (currentUser) {
 					console.log("already exists. user is:", currentUser);
 					done(null, currentUser);
-				} else {
+				} else {					
 					console.log("this user doesnt exist yet");
 					// create new user in OUR db  with googles data
 					new userModel({
 						username: profile.displayName,
 						googleID: profile.id,
-						profilePic: "",
+						profilePic: profile.photos[0].value,
 						favorites: []
 					}).save()
 						.then((newUser) => {

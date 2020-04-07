@@ -219,12 +219,15 @@ button:focus {
 	color: rgb(185, 185, 185)
 }
 
-a:active {
+a:active, a:focus {
 	text-decoration: none;
 	color: white;
 }
 button:active {
 	text-decoration: none;
+	color: white;
+}
+.btnInside a {
 	color: white;
 }
 
