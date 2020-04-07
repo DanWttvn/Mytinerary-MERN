@@ -37,13 +37,18 @@ class Itineraries extends Component {
 
 
 		const itinsCarrousel = this.props.itineraries.map(itin => {
+			const imgURL = "url(http://localhost:5000/" + itin.img + ")"
+			const imgURLDisplay = imgURL.replace(/\\/g, "/");  // the \ gives me an error, so i have to change it to /			
+			
 			return (				
 				<div className="itinBox" key={itin._id}>
 					<div className="itinCard">
 						<Link to={`${url}${itin.city}/${itin._id}`}>
 							<div className="itinImgPrev" style={
-								{backgroundImage: 'url(\'' + itin.img
-								+ '\')', 
+								// {backgroundImage: 'url(\'' + itin.img
+								// + '\')', 
+								// {backgroundImage: imgURL, 
+								{backgroundImage: imgURLDisplay,
 								backgroundPosition: 'center center', 
 								backgroundSize: 'cover'}}>
 							</div>

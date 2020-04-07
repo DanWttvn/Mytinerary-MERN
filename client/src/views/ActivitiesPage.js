@@ -86,7 +86,7 @@ class ActivitiesPage extends Component {
 				{ this.props.activities.length ?
 					<Activities activities={this.props.activities}/>
 					: <div className="activityCard">
-						<img className="activitiesImg" src={this.props.itinerary.img} alt="activity"/>
+						<img className="activitiesImg" src={`http://localhost:5000/${this.props.itinerary.img}`} alt="activity"/>
 					</div>
 				}
 	

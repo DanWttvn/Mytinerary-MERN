@@ -25,7 +25,7 @@ const fileFilter = (req, file, cb) => {
 }
 const upload = multer({
 	storage,
-	limits: { fileSize: 1024 * 1024 * 5 }, //5mb
+	limits: { fileSize: 1024 * 1024 * 10 }, //5mb
 	fileFilter
 });
 
@@ -69,6 +69,7 @@ router.get("/itinerary/:itinID", (req, res) => {
 // --------- ADD ITINERARY --------- //
 // @route POST /itineraries/itinerary/
 // private access
+// ççççç change single
 router.post("/itinerary", upload.single("img"), passport.authenticate("jwt", {session: false}), (req, res) => {
 // router.post("/itinerary", upload.single("img"), (req, res) => {
 	console.log("ROUTE post add itin");

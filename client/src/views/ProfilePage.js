@@ -79,7 +79,7 @@ class Profile extends Component {
 							<p className="subtitlesT subtitle">{`Welcome, ${user.username}`}</p>
 							<div className="profilePicBox">
 								{ user.profilePic ? 
-									<img src={ user.profilePic } alt="profile pic"/>
+									<img src={`http://localhost:5000/${user.profilePic}`} alt="profile pic"/>
 									: <FontAwesomeIcon icon={faUser} className="faProfileIcon"/>
 								}
 							</div>
