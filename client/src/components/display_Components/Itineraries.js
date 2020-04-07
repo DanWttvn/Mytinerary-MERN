@@ -7,7 +7,7 @@ import { addToFavorites } from "../../store/actions/authActions"
 import { Link } from "react-router-dom"
 import ExtraInfoIcons from "../UI_Components/ExtraInfoIcons"
 import AddItineraryModal from "./AddItineraryModal"
-import Heart from "../UI_Components/Heart"
+import Heart from "./Heart"
 
 
 class Itineraries extends Component {
@@ -37,8 +37,14 @@ class Itineraries extends Component {
 
 
 		const itinsCarrousel = this.props.itineraries.map(itin => {
-			const imgURL = "url(http://localhost:5000/" + itin.img + ")"
+			const imgURL = itin.img.startsWith("uploads") ? "url(http://localhost:5000/" + itin.img + ")" : "url(" + itin.img + ")"
 			const imgURLDisplay = imgURL.replace(/\\/g, "/");  // the \ gives me an error, so i have to change it to /			
+
+			const hashtags = itin.hashtags.map(hashtag => {
+				return(
+					<span className="hashtag">#{hashtag}</span>
+				)
+			})
 			
 			return (				
 				<div className="itinBox" key={itin._id}>
@@ -66,9 +72,8 @@ class Itineraries extends Component {
 					<div className="extraInfoBox">
 						<ExtraInfoIcons itin={itin}/>
 						<span className="subtitlesT subtitle">{itin.title}</span>
-						<div className="hastagsBox">
-							<span className="hastag">#history</span>
-							<span className="hastag">#restaurants</span>
+						<div className="hashtagsBox">
+							{ hashtags }
 						</div>
 					</div>
 

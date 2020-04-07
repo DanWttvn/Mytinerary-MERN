@@ -119,7 +119,7 @@ class SignUpPage extends Component {
 	
 					<div className="btnsBox2">
 						<input className="transparentBtn" type="submit" name="submit" value="Send"></input>
-						<a className="secondaryBtn" href="/sign_up">Log in</a>
+						<a className="secondaryBtn" href="/sign_in">Log in</a>
 					</div>
 
 					{/* --- SHOW ERRORS --- */}

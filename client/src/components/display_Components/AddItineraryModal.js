@@ -113,9 +113,8 @@ class AddItineraryModal extends Component {
 								<label htmlFor="price">Price</label>
 								<input type="text" id="price" onChange={this.handleAddItin} required />
 
-								<label htmlFor="rating">Rating</label>
-								<input type="text" id="rating" onChange={this.handleAddItin} required />
-
+								{/* <label htmlFor="rating">Rating</label>
+								<input type="text" id="rating" onChange={this.handleAddItin} required /> */}
 
 								<button className="btnInside" onClick={this.handleSubmit}>Add itinerary</button>
 							</div>

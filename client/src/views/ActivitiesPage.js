@@ -5,8 +5,7 @@ import { getActivities, getItinerary, getComments, addComment } from "../store/a
 import Navbar from "../components/UI_Components/Navbar"
 import Activities from "../components/display_Components/Activities"
 import ExtraInfoIcons from "../components/UI_Components/ExtraInfoIcons"
-// import BtnSignInInside from '../components/UI_Components/BtnSignInInside'
-import Heart from "../components/UI_Components/Heart"
+import Heart from "../components/display_Components/Heart"
 
 
 class ActivitiesPage extends Component {
@@ -57,7 +56,6 @@ class ActivitiesPage extends Component {
 	render () {
 
 		// {/* --- COMMENTS --- */}
-
 		let allComments = this.props.comments;
 		
 		// update comment with username
@@ -78,7 +76,14 @@ class ActivitiesPage extends Component {
 				</div>
 			)
 		})
+		console.log(this.props.itinerary);
 		
+		// {/* --- IMAGES --- */}
+		let imgURL = "";
+		if(this.props.itinerary.img) { //para uqe no de error mientras carga
+			imgURL= this.props.itinerary.img.startsWith("uploads") ? `http://localhost:5000/${this.props.itinerary.img}` : this.props.itinerary.img
+		}
+
 		return (
 			<div id="ActivitiesPage" className="containerB">
 
@@ -86,7 +91,7 @@ class ActivitiesPage extends Component {
 				{ this.props.activities.length ?
 					<Activities activities={this.props.activities}/>
 					: <div className="activityCard">
-						<img className="activitiesImg" src={`http://localhost:5000/${this.props.itinerary.img}`} alt="activity"/>
+						<img className="activitiesImg" src={imgURL} alt="activity"/>
 					</div>
 				}
 	
@@ -102,7 +107,6 @@ class ActivitiesPage extends Component {
 					<p className="paragraph">{this.props.itinerary.summary}</p>
 
 					<div className="allCommentsBox">
-						
 						<p className="sectionTitle">Comments</p>
 
 						{ this.props.isAuthenticated ? 

@@ -6,9 +6,7 @@ const LandingBg = () => {
 		<div id="bg" className="bg">
 				<div className="mascara"></div>
 				<div className="bg-img" style={{
-					backgroundImage: 'url(\'' + bgImgEx + '\')', 
-					backgroundPosition: 'center center', 
-					backgroundSize: 'cover'}}></div>
+					backgroundImage: 'url(\'' + bgImgEx + '\')'}}></div>
 		</div>
 	)
 }

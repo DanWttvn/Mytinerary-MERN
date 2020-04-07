@@ -52,7 +52,7 @@ export const loadUser = () => (dispatch, getState) => {
 			payload: res.data
 		}))
 		.catch(err => {
-			dispatch(returnErrors(err.response.data, err.response.status)); // un obj como el de abajo pero conmas params. pasa lo de erroActions
+			// dispatch(returnErrors(err.response.data, err.response.status)); // un obj como el de abajo pero conmas params. pasa lo de erroActions
 			dispatch({
 				type: AUTH_ERROR // everything erasesd
 			})

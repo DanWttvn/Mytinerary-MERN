@@ -26,7 +26,7 @@ class LandingPage extends Component {
 						<div className="landingMsg" >
 							<p className="titlesT bigLetters">{`Welcome, ${user.username}!`}</p>
 							<div className="btnsBox3">
-								<button className="transparentBtn"><NavLink to="/cities">Explore></NavLink></button>
+								<button className="transparentBtn"><NavLink to="/cities">Explore ></NavLink></button>
 							</div>
 						</div>
 						
