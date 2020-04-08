@@ -17,9 +17,9 @@ class FavoritesPage extends Component {
 	render () {		
 
 		return (
-			<div id="FavoritesPage" className="containerPadding">
+			<div id="FavoritesPage" className="">
 				<Logo/>
-				<p className="titlesT mainTitle">My favorites</p>
+				<p className="titlesT mainTitle containerPadding">My favorites</p>
 				{ this.props.isAuthenticated ? 
 					<div>
 						<Itineraries inFavsPage={"inFavsPage"} itineraries={this.props.favItineraries}/>

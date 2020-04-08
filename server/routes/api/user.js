@@ -2,12 +2,12 @@ const express = require("express");
 const { check, validationResult } = require("express-validator");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const keys = require("../config/keys");
+const keys = require("../../config/keys");
 const jwt = require("jsonwebtoken");
 const passport  = require("passport");
 
-const userModel = require("../model/userModel");
-const itineraryModel = require("../model/itineraryModel");
+const userModel = require("../../model/userModel");
+const itineraryModel = require("../../model/itineraryModel");
 
 const multer = require("multer");
 const storage = multer.diskStorage({ // storage config
@@ -143,7 +143,7 @@ router.put("/favorites", passport.authenticate("jwt", {session: false}), (req, r
 // @route GET /user/favorites
 // private access
 router.get("/favorites", passport.authenticate("jwt", {session: false}), (req, res) => {
-	console.log("get itins by user.favorites");		
+	// console.log("get itins by user.favorites");		
 	// cojo mi logged user
 	userModel.findOne({_id: req.user._id})
 		.then(currentUser => {
@@ -168,7 +168,7 @@ router.post("/sign_up", [
 	check("email").isEmail().normalizeEmail(), //validaciones de express-validator. normalize para lowercase
 	check("password").isLength({ min: 6 })
 ], (req, res) => {
-	console.log("sending user for creation");
+	// console.log("sending user for creation");
 
 	const errors = validationResult(req); //takes the erros
 	if(!errors.isEmpty()) {
@@ -242,7 +242,7 @@ router.post("/login", async (req, res) => {
 	userModel.findOne({ email })
 		.then(currentUser => {
 			if(!currentUser) {
-				console.log("This user is not registered");
+				// console.log("This user is not registered");
 				res.status(400).json({ msg: "This user is not registered, email not found" }) 
 			} 
 			else {
@@ -272,7 +272,7 @@ router.post("/login", async (req, res) => {
 									favorites: currentUser.favorites
 								},
 							})
-							console.log("logged succesfully with token");
+							console.log("logged succesfully");
 						}
 					)
 				})

@@ -22,7 +22,7 @@ class ActivitiesPage extends Component {
 		this.props.getActivities(itinID);	
 		this.props.getComments(itinID);
 
-		axios.get("http://localhost:5000/user/all").then(res => {
+		axios.get("/api/user/all").then(res => {
 			this.setState({
 				allUsers: res.data
 			})
@@ -76,12 +76,12 @@ class ActivitiesPage extends Component {
 				</div>
 			)
 		})
-		console.log(this.props.itinerary);
+		// console.log(this.props.itinerary);
 		
 		// {/* --- IMAGES --- */}
 		let imgURL = "";
 		if(this.props.itinerary.img) { //para uqe no de error mientras carga
-			imgURL= this.props.itinerary.img.startsWith("uploads") ? `http://localhost:5000/${this.props.itinerary.img}` : this.props.itinerary.img
+			imgURL= this.props.itinerary.img.startsWith("uploads") ? `/api/${this.props.itinerary.img}` : this.props.itinerary.img
 		}
 
 		return (

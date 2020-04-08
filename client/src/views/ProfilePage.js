@@ -51,7 +51,7 @@ class Profile extends Component {
 		fd.append("profilePic", this.state.profileImg, this.state.profileImg.name);
 		console.log(fd);
 
-		axios.put("http://localhost:5000/user/info/profilePic", fd, this.tokenConfigFiles())
+		axios.put("/api/user/info/profilePic", fd, this.tokenConfigFiles())
 			.then(res => {
 				console.log(res);
 			})
@@ -64,7 +64,7 @@ class Profile extends Component {
 		const { isAuthenticated, user } = this.props.auth
 		let profilePic = ""
 		if(isAuthenticated){
-			profilePic = user.profilePic.startsWith("uploads") ? `http://localhost:5000/${user.profilePic}` : user.profilePic;
+			profilePic = user.profilePic.startsWith("uploads") ? `/api/${user.profilePic}` : user.profilePic;
 		}
 
 		return (

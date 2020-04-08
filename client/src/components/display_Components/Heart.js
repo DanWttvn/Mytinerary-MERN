@@ -7,7 +7,7 @@ import { addToFavorites, getItinerariesByFavs } from "../../store/actions/authAc
 
 
 
-class Itineraries extends Component {
+class Heart extends Component {
 
 	updateFavorites = (itinID) => {
 		this.props.addToFavorites(itinID);
@@ -56,4 +56,4 @@ const mapDispatchToProps = dispatch => {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Itineraries);
+export default connect(mapStateToProps, mapDispatchToProps)(Heart);

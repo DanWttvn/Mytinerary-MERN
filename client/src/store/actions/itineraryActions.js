@@ -3,7 +3,7 @@ import {tokenConfig} from "./authActions"
 
 // --------- GET ALL ITINERARIES --------- //
 export const getAllItineraries = () => dispatch => {
-	axios.get("http://localhost:5000/itineraries/all")
+	axios.get("/api/itineraries/all")
 		.then(res => {
 			// console.log(res.data);
 			dispatch ({
@@ -15,7 +15,8 @@ export const getAllItineraries = () => dispatch => {
 
 // --------- GET ITINERARIES BY CITY --------- //
 export const getItinerariesByCity = (city) => dispatch => {
-	axios.get(`http://localhost:5000/itineraries/${city}`) 
+	// axios.get(`/api/itineraries/${city}`) // with tis annotation doesnt take the proxy and makes the call to the 5000
+	axios.get("/api/itineraries/" + city) 
 		.then(res => {
 			// console.log(res.data);
 			dispatch ({
@@ -27,7 +28,8 @@ export const getItinerariesByCity = (city) => dispatch => {
 
 // ---------GET ITINERARY for Activities --------- //
 export const getItinerary = (itinID) => dispatch => {
-	axios.get(`http://localhost:5000/itineraries/itinerary/${itinID}`) 
+	// axios.get(`/api/itineraries/itinerary/${itinID}`) 
+	axios.get("/api/itineraries/itinerary/" + itinID) 
 		.then(res => {
 			// console.log(res.data);
 			dispatch ({
@@ -39,9 +41,9 @@ export const getItinerary = (itinID) => dispatch => {
 
 // ---------GET ACTIVITIES by ItineraryID --------- //
 export const getActivities = (itinID) => dispatch => {
-	axios.get(`http://localhost:5000/itineraries/activities/${itinID}`)
+	axios.get("/api/itineraries/activities/" + itinID)
 		.then(res => {
-			console.log("get activities ACTION", res.data);
+			// console.log("get activities ACTION", res.data);
 			dispatch ({
 				type: "GET_ACTIVITIES",
 				payload: res.data
@@ -51,7 +53,7 @@ export const getActivities = (itinID) => dispatch => {
 
 // --------- GET COMMENTS by ItineraryID --------- //
 export const getComments = (itinID)  => dispatch => {
-	axios.get(`http://localhost:5000/itineraries/comments/${itinID}`)
+	axios.get("/api/itineraries/comments/" + itinID)
 		.then(res => {
 			dispatch({
 				type: "GET_COMMENTS",
@@ -68,7 +70,7 @@ export const addComment = (itinID, content) => (dispatch, getState) => {
 	// console.log("ACTION add comment");
 	const body = JSON.stringify({ content })
 	
-	axios.post(`http://localhost:5000/itineraries/comments/${itinID}`, body, tokenConfig(getState))
+	axios.post("/api/itineraries/comments/" + itinID, body, tokenConfig(getState))
 		.then(res => {
 			dispatch({
 				type: "ADD_COMMENT",

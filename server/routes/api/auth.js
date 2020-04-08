@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
-const keys = require("../config/keys");
+const keys = require("../../config/keys");
 const jwt = require("jsonwebtoken");
 const passport  = require("passport"); // imporoting this I also import the google strategy cause I attached it by passport.use
 
-const userModel = require("../model/userModel");
+const userModel = require("../../model/userModel");
 
 // --------- CHECK IF USER IS LOGGED jwt --------- //
 // @route GET /auth/user
@@ -28,8 +28,8 @@ router.get("/google", passport.authenticate("google", {
 // callback route for google to redirect
 // @route POST 5000/auth/google/redirect
 router.get("/google/redirect", passport.authenticate("google", {session: false}), (req, res) => { // esta vez que autentificamos con google, ya tenemos un code en el url. passport entende que entonces ya hemos pasado por la primera pagina. fires the cb function en pass-setup
-	console.log("redirected page");
-	console.log(req.user);
+	// console.log("redirected page");
+	// console.log(req.user);
 	
 	const payload = { 
 		id: req.user.id
@@ -57,8 +57,8 @@ router.get("/facebook", passport.authenticate("facebook"));
 // callback route for facebook to redirect
 // @route POST 5000/auth/facebook/redirect
 router.get("/facebook/redirect", passport.authenticate("facebook", {session: false}), (req, res) => { // esta vez que autentificamos con google, ya tenemos un code en el url. passport entende que entonces ya hemos pasado por la primera pagina. fires the cb function en pass-setup
-	console.log("redirected page");
-	console.log(req.user);
+	// console.log("redirected page");
+	// console.log(req.user);
 	
 	const payload = { 
 		id: req.user.id
@@ -72,8 +72,6 @@ router.get("/facebook/redirect", passport.authenticate("facebook", {session: fal
 			if(err) throw err;
 
 			res.redirect(`http://localhost:3000/auth/${token}`) 
-			// res.redirect("http://localhost:3000/auth/" + token) 
-			
 
 			console.log("logged succesfully");
 		}

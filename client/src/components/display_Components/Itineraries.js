@@ -37,7 +37,7 @@ class Itineraries extends Component {
 
 
 		const itinsCarrousel = this.props.itineraries.map(itin => {
-			const imgURL = itin.img.startsWith("uploads") ? "url(http://localhost:5000/" + itin.img + ")" : "url(" + itin.img + ")"
+			const imgURL = itin.img.startsWith("uploads") ? "url(/api/" + itin.img + ")" : "url(" + itin.img + ")"
 			const imgURLDisplay = imgURL.replace(/\\/g, "/");  // the \ gives me an error, so i have to change it to /			
 
 			const hashtags = itin.hashtags.map(hashtag => {

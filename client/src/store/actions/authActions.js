@@ -46,7 +46,7 @@ export const loadUser = () => (dispatch, getState) => {
 		type: USER_LOADING //is loading to true
 	});
 
-	axios.get("http://localhost:5000/auth/user", tokenConfig(getState)) // la comrpobacion del token que la he puesto a parte porqeu se va arepetir mucho
+	axios.get("/api/auth/user", tokenConfig(getState)) // la comrpobacion del token que la he puesto a parte porqeu se va arepetir mucho
 		.then(res => dispatch({
 			type: USER_LOADED, // isAuthenticated true
 			payload: res.data
@@ -83,7 +83,7 @@ export const register = ({ username, email, password }) => dispatch => {
 	// Request body
 	const body = JSON.stringify({ username, email, password });
 
-	axios.post("http://localhost:5000/user/sign_up", body, config)
+	axios.post("/api/user/sign_up", body, config)
 	
 		.then(res => dispatch({
 			type: REGISTER_SUCCESS, // isAuth = true
@@ -108,7 +108,7 @@ export const login = ({ email, password }) => dispatch => {
 	// Request body
 	const body = JSON.stringify({ email, password });
 
-	axios.post("http://localhost:5000/user/login", body, config)
+	axios.post("/api/user/login", body, config)
 		.then(res => {
 			dispatch({
 				type: LOGIN_SUCCESS, // isAuth = true
@@ -143,7 +143,7 @@ export const logout = () => {
 
 // -- GET FAVS
 export const getItinerariesByFavs = ()  => (dispatch, getState) => {
-	axios.get("http://localhost:5000/user/favorites", tokenConfig(getState)) 
+	axios.get("/api/user/favorites", tokenConfig(getState)) 
 		.then(res => {
 			// console.log("favorites by user", res.data);
 			dispatch ({
@@ -158,7 +158,7 @@ export const addToFavorites = (id) => (dispatch, getState) => {
 	const body = JSON.stringify({ id }); // lo que .stringify es un obj. como el mio no lo es, le pongo {}
 	// console.log("body:", body);
 	
-	axios.put("http://localhost:5000/user/favorites", body, tokenConfig(getState))
+	axios.put("/api/user/favorites", body, tokenConfig(getState))
 
 		.then(res => {
 			// me llega en res todo el user modificado con nuevos FAVS

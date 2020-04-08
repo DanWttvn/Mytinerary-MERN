@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const passport  = require("passport");
-const itineraryModel = require("../model/itineraryModel");
-const activityModel = require("../model/activityModel");
-const commentayModel = require("../model/commentModel")
-const userModel = require("../model/userModel")
+const itineraryModel = require("../../model/itineraryModel");
+const activityModel = require("../../model/activityModel");
+const commentayModel = require("../../model/commentModel")
+const userModel = require("../../model/userModel")
 
 const multer = require("multer");
 const storage = multer.diskStorage({ // storage config
@@ -56,7 +56,7 @@ router.get("/:city", (req, res) => { // : dice que cualquier otra cosa
 // public access
 router.get("/itinerary/:itinID", (req, res) => {
 	let itineraryRequested = req.params.itinID
-	console.log("get itinerary for activities by ID");	
+	// console.log("get itinerary for activities by ID");	
 
 	itineraryModel.findOne({ _id: itineraryRequested })
 		.then(itinerary => {
@@ -72,9 +72,9 @@ router.get("/itinerary/:itinID", (req, res) => {
 // ççççç change single
 router.post("/itinerary", upload.single("img"), passport.authenticate("jwt", {session: false}), (req, res) => {
 // router.post("/itinerary", upload.single("img"), (req, res) => {
-	console.log("ROUTE post add itin");
-	console.log(req.body);
-	console.log(req.file);
+	// console.log("ROUTE post add itin");
+	// console.log(req.body);
+	// console.log(req.file);
 
 	const newItin = new itineraryModel({
 		// _id: new mongoose.Types.ObjectId(),
@@ -103,8 +103,8 @@ router.post("/itinerary", upload.single("img"), passport.authenticate("jwt", {se
 // public access
 router.get("/activities/:itinID", (req, res) => {
 	let itineraryRequested = req.params.itinID
-	console.log("get activities by itinID ROUTER");	
-	console.log("itineraryRequested", itineraryRequested);
+	// console.log("get activities by itinID ROUTER");	
+	// console.log("itineraryRequested", itineraryRequested);
 
 	activityModel.find({ itineraryID: itineraryRequested })
 		.then(activities => {
@@ -118,7 +118,7 @@ router.get("/activities/:itinID", (req, res) => {
 // public access
 router.get("/comments/:itinID", (req, res) => {
 	let itineraryRequested = req.params.itinID
-	console.log("get comments by itinID ROUTER");	
+	// console.log("get comments by itinID ROUTER");	
 	// console.log("itineraryRequested", itineraryRequested);
 
 	commentayModel.find({ itineraryID: itineraryRequested })
@@ -133,7 +133,7 @@ router.get("/comments/:itinID", (req, res) => {
 // @route POST /itineraries/comments/:itinID
 // private access
 router.post("/comments/:itinID", passport.authenticate("jwt", {session: false}), (req, res) => {
-	console.log("add comment by itinID ROUTER");
+	// console.log("add comment by itinID ROUTER");
 		
 	const newComment = new commentayModel({
 		content: req.body.content,

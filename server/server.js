@@ -35,12 +35,13 @@ mongoose.connect(db, { // db = my key
 app.use(passportSetup.initialize());
 
 
-// ENDPOINT ? relativo a esto ahora? ççççç
-app.use("/cities", require("./routes/cities")); // routes cities conected con endpoint cities ? . 
+// ENDPOINTS
+app.use("/api/cities", require("./routes/api/cities")); // routes cities conected con endpoint cities ? . 
+//cuando el client pide api/cities, va a ese archivo
 // Crea un puerto al que me voy a poder conectar desde el front end. si me llega una peticion a 5000/cities me conecta con ese archivo de router
-app.use("/itineraries", require("./routes/itineraries")); 
-app.use("/user", require("./routes/user")); 
-app.use("/auth", require("./routes/auth")); // 5000/auth
+app.use("/api/itineraries", require("./routes/api/itineraries")); 
+app.use("/api/user", require("./routes/api/user")); 
+app.use("/api/auth", require("./routes/api/auth")); // 5000/auth
 
 
 // DEPLOY
