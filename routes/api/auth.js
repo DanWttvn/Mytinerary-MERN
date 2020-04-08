@@ -20,7 +20,7 @@ router.get("/user", passport.authenticate("jwt", {session: false}), (req, res) =
 });
 
 // ---------- AUTH GOOGLE --------- //
-// @route GET 5000/auth/google
+// @route GET 5000/api/auth/google
 router.get("/google", passport.authenticate("google", {
 	scope: ["profile"] //what we want to retrieve from the users profile
 })); 

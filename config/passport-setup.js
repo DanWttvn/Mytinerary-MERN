@@ -15,7 +15,7 @@ const userModel = require("../model/userModel")
 
 module.exports = passport.use(
 	new GoogleStrategy({
-		callbackURL: "/auth/google/redirect", // where I redirect after the auth (also set in the google credentials)
+		callbackURL: "/api/auth/google/redirect", // where I redirect after the auth (also set in the google credentials)
 		clientID: keys.google.clientID,
 		clientSecret: keys.google.clientSecret
 		}, (accessToken, refreshToken, profile, done) => {
@@ -48,7 +48,7 @@ module.exports = passport.use(
 // https://developers.facebook.com/apps/2529892880664148/settings/basic/
 module.exports = passport.use(
 	new FacebookStrategy({
-		callbackURL: "/auth/facebook/redirect", // where I redirect after the auth (also set in the google credentials)
+		callbackURL: "/api/auth/facebook/redirect", // where I redirect after the auth (also set in the google credentials)
 		clientID: keys.facebook.clientID,
 		clientSecret: keys.facebook.clientSecret
 		}, (accessToken, refreshToken, profile, done) => {

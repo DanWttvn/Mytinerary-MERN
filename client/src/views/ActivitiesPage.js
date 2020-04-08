@@ -81,7 +81,8 @@ class ActivitiesPage extends Component {
 		// {/* --- IMAGES --- */}
 		let imgURL = "";
 		if(this.props.itinerary.img) { //para uqe no de error mientras carga
-			imgURL= this.props.itinerary.img.startsWith("uploads") ? `/api/${this.props.itinerary.img}` : this.props.itinerary.img
+			// imgURL= this.props.itinerary.img.startsWith("uploads") ? `/api/${this.props.itinerary.img}` : this.props.itinerary.img
+			imgURL= this.props.itinerary.img
 		}
 
 		return (
