@@ -49,7 +49,7 @@ router.get("/all", (req, res) => {
 // public access
 router.get("/info/:userID", (req, res) => {
 	let userRequested = req.params.userID
-	console.log("get user by ID");	
+	// console.log("get user by ID");	
 
 	userModel.findOne({ _id: userRequested })
 		.then(user => {
@@ -62,8 +62,8 @@ router.get("/info/:userID", (req, res) => {
 // @route PUT /user/info/:userID
 // private access
 router.put("/info/profilePic", upload.single("profilePic"), passport.authenticate("jwt", {session: false}), (req, res) => { // .single para solo 1 file
-	console.log("PUT user IMAGES route");
-	console.log(req.file);
+	// console.log("PUT user IMAGES route");
+	// console.log(req.file);
 	
 	// upload profileImg
 	req.user.profilePic = req.file.path
@@ -86,7 +86,7 @@ router.put("/info/profilePic", upload.single("profilePic"), passport.authenticat
 // @route PUT /user/favorites
 // private access
 router.put("/favorites", passport.authenticate("jwt", {session: false}), (req, res) => {
-	console.log("PUT user/favorites route");
+	// console.log("PUT user/favorites route");
 
 // -------- UPDATE USER --------- //
 	// comprobacion si ya favorito: 
@@ -183,7 +183,7 @@ router.post("/sign_up", [
 	userModel.findOne({ email })
 		.then(user => {
 			if (user) {
-				console.log("User already exists");
+				// console.log("User already exists");
 				return res.status(400).json ({ msg: "User already exists"});
 			}
 			const newUser = new userModel({
@@ -237,7 +237,7 @@ router.post("/sign_up", [
 // --------- LOGIN user, JWT create TOKEN
 // @route POST /user/login
 router.post("/login", async (req, res) => { 
-	console.log("sending to authenticate and compare passwords");
+	// console.log("sending to authenticate and compare passwords");
 	const { email, password } = req.body;
 	userModel.findOne({ email })
 		.then(currentUser => {

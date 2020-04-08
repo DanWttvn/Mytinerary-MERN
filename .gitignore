@@ -1,4 +1,15 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-server/config/keys.js
-server/uploads
+# FOT GITHUB
+/config/keys.js
+/uploads
+client/node_modules/
+node_modules
+
+
+# FOR DEPLOY
+# client/node_modules/
+# node_modules
+CHANGE.txt
+
+

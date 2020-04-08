@@ -23,8 +23,7 @@ router.get("/user", passport.authenticate("jwt", {session: false}), (req, res) =
 // @route GET 5000/auth/google
 router.get("/google", passport.authenticate("google", {
 	scope: ["profile"] //what we want to retrieve from the users profile
-})); //#8 8:40
-
+})); 
 // callback route for google to redirect
 // @route POST 5000/auth/google/redirect
 router.get("/google/redirect", passport.authenticate("google", {session: false}), (req, res) => { // esta vez que autentificamos con google, ya tenemos un code en el url. passport entende que entonces ya hemos pasado por la primera pagina. fires the cb function en pass-setup
@@ -42,7 +41,9 @@ router.get("/google/redirect", passport.authenticate("google", {session: false})
 		(err, token) => {
 			if(err) throw err;
 
+			// CHANGE BEFORE DEPLOY
 			res.redirect(`http://localhost:3000/auth/${token}`) 
+			// res.redirect(`https://mytinerary-pwa.herokuapp.com/auth/${token}`) 
 
 			console.log("logged succesfully");
 		}
@@ -71,7 +72,9 @@ router.get("/facebook/redirect", passport.authenticate("facebook", {session: fal
 		(err, token) => {
 			if(err) throw err;
 
+			// CHANGE BEFORE DEPLOY
 			res.redirect(`http://localhost:3000/auth/${token}`) 
+			// res.redirect(`https://mytinerary-pwa.herokuapp.com/auth/${token}`)  
 
 			console.log("logged succesfully");
 		}
