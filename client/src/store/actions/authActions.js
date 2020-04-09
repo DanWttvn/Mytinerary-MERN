@@ -152,7 +152,7 @@ export const getItinerariesByFavs = ()  => (dispatch, getState) => {
 		});
 	})
 }
-// ççç cambiar id por tokenID ?//
+
 export const addToFavorites = (id) => (dispatch, getState) => {
 	// console.log("id:", id);
 	const body = JSON.stringify({ id }); // lo que .stringify es un obj. como el mio no lo es, le pongo {}
@@ -164,12 +164,50 @@ export const addToFavorites = (id) => (dispatch, getState) => {
 			// me llega en res todo el user modificado con nuevos FAVS
 			// console.log("lo que me llega del BackEndPUT:", res.data);
 			dispatch({
-				type: "UPDATE_ITINERARIES",
+				type: "UPDATE_FAVORITES",
 				payload: res.data
 			})
 			// console.log("despues de dispatch");
 		})
 }
+
+// çççççççççççç prueba likes
+// export const updateLikes = (id) => dispatch => {
+// 	// console.log("id:", id);
+// 	const body = JSON.stringify({ id }); // lo que .stringify es un obj. como el mio no lo es, le pongo {}
+// 	// console.log("body:", body);
+	
+// 	axios.put("/api/itineraries/likes", body)
+// 		.then(res => {
+// 			// me llega en res todo el user modificado con nuevos FAVS
+// 			// console.log("lo que me llega del BackEndPUT:", res.data);
+// 			dispatch({
+// 				type: "UPDATE_ITINERARIES",
+// 				payload: res.data
+// 			})
+// 			// console.log("despues de dispatch");
+// 		})
+// }
+
+
+// ççççççççççç borar
+// export const addLike = (id) => (dispatch, getState) => {
+// 	// console.log("id:", id);
+// 	const body = JSON.stringify({ id }); // lo que .stringify es un obj. como el mio no lo es, le pongo {}
+// 	// console.log("body:", body);
+	
+// 	axios.put("/api/itineraries/likes", body, tokenConfig(getState))
+
+// 		.then(res => {
+// 			// me llega en res todo el itin modificado con los likes
+// 			console.log("lo que me llega del BackEndPUT:", res.data);
+// 			dispatch({
+// 				type: "UPDATE_LIKES",
+// 				payload: res.data
+// 			})
+// 			// console.log("despues de dispatch");
+// 		})
+// }
 
 
 

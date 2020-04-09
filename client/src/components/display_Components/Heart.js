@@ -4,14 +4,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as fasHeart} from '@fortawesome/free-solid-svg-icons'
 import { faHeart as farHeart} from '@fortawesome/free-regular-svg-icons'
 import { addToFavorites, getItinerariesByFavs } from "../../store/actions/authActions"
+import axios from "axios"
 
 
 
 class Heart extends Component {
 
-	updateFavorites = (itinID) => {
-		this.props.addToFavorites(itinID);
-		// solo si esta in FavsPage, update displaye itineraries. se  lo paso desde FavoritesPage
+	updateFavorites = async (itinID) => {
+		await this.props.addToFavorites(itinID);
+		// this.props.updateLikes(itinID);
+
+	//////////////////// çççç prueba metiendolo dentro de add to favorites (actualizar tmb el itinerario de alguna forma con eso?)
+		// update number of likes in the itinerary db
+		// axios.put("/api/itineraries/likes", { itinID })
+	/////////////////////
+	
+		// ççç solo si esta in FavsPage, update displaye itineraries. se  lo paso desde FavoritesPage
 		if (this.props.inFavsPage) {
 			// refresh favorites page
 			this.props.getItinerariesByFavs()
@@ -52,6 +60,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		addToFavorites: (itinID) => dispatch(addToFavorites(itinID)),
+		// updateLikes: (itinID) => dispatch(updateLikes(itinID)),
 		getItinerariesByFavs: () => dispatch(getItinerariesByFavs())
 	}
 }

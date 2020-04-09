@@ -82,13 +82,13 @@ router.put("/info/profilePic", upload.single("profilePic"), passport.authenticat
 
 ////////////////////////// FAVS //////////////////////////////
 
-// --------- SAVE FAVS --------- //
+// --------- UPDATE FAVS --------- //
 // @route PUT /user/favorites
 // private access
 router.put("/favorites", passport.authenticate("jwt", {session: false}), (req, res) => {
 	// console.log("PUT user/favorites route");
 
-// -------- UPDATE USER --------- //
+	// -------- UPDATE USER --------- //
 	// comprobacion si ya favorito: 
 	const indexItin = req.user.favorites.indexOf(req.body.id) // ese id es del itinerario
 	if (indexItin !== -1) {
@@ -105,12 +105,40 @@ router.put("/favorites", passport.authenticate("jwt", {session: false}), (req, r
 		.then(() => { // si cargo aqui, me manda la version antigua, por eso find otra vez
 			userModel.findOne({_id: req.user._id})
 				.then(userUpdated => {
-					// console.log("lo que mando del BackendPUT:", userUpdated);
-					res.json(userUpdated)
-					// console.log(userUpdated)
-
+					// esto es lo qeu mando al dispatcch para que se update en redux
+					res.send(userUpdated)
 				})
 		})
+
+	////////////// PONER AQUI LO DEL .PUT/LIKES???? copiar despues y que se haga a la vez. quitaria todo lo que de heart.js, reducer y action
+
+
+	/*
+		1. copiar aqui
+		2. cambiar body.itinID por lo que este usando antes (req.body.id). 
+			se puede hacer mas de un send?
+		3. probar postman
+		4. actualizar reducer?
+		5. probar frontEnd
+	*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // -------- UPDATE ITINERARIES --------- //// ITIN.LIKES ME DA UNDEFINED AUNQUE ITIN SI SALE .LIKES AL LOG
 

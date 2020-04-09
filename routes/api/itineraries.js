@@ -64,7 +64,7 @@ router.get("/itinerary/:itinID", (req, res) => {
 		})
 		.catch(err => console.log(err));
 }); 
-////////////////////////////////////////////////////////////////////////////////////
+
 
 // --------- ADD ITINERARY --------- //
 // @route POST /itineraries/itinerary/
@@ -95,8 +95,6 @@ router.post("/itinerary", upload.single("img"), passport.authenticate("jwt", {se
 		.catch(err => console.log(err));
 }); 
 
-////////////////////////////////////////////////////////////////////////////////////
-
 
 // --------- GET ACTIVITIES BY ITINERARY --------- //
 // @route GET /itineraries/activities/:itinID
@@ -112,6 +110,61 @@ router.get("/activities/:itinID", (req, res) => {
 		})
 		.catch(err => console.log(err));
 }); 
+
+
+// --------- GET LIKES by itineraries --------- // solo para comprobaciones
+// @route GET api/itineraries/likes/
+// public access
+router.get("/likes/:itinID", (req, res) => {
+	userModel.find({ favorites: req.params.itinID })
+		.then(itins => {
+			// console.log(itins.length);
+			const likes = itins.length.toString()
+			res.send(likes)
+		})
+		.catch(err => console.log(err));
+});
+
+//////////////////////////////////////////////////////////////////////////
+
+// --------- UPDATE LIKES by itineraries --------- //
+// @route GET api/itineraries/likes/
+// public access
+router.put("/likes", async (req, res) => {
+	console.log("updating LIKES in inineraryDB");
+	
+	const itineraryRequested = req.body.itinID
+	// console.log(req.body);
+	// console.log("itineraryRequested", itineraryRequested);
+	
+	let likes = "";
+
+	await userModel.find({ favorites: itineraryRequested })
+		.then(users => {
+			likes = users.length.toString()
+			console.log("likes en DB", likes);
+			return likes
+		})
+		.catch(err => console.log(err));
+
+	// console.log("si?", likes);
+
+	// actualizar el model si es neceesario
+	itineraryModel.findOneAndUpdate({ _id: itineraryRequested }, { likes })
+		.then((itin) => {
+			console.log("dentroooooo")
+			// console.log("itin", itin);
+			console.log(itin.likes, "antes de actualizar")			
+			
+			itineraryModel.findOne({ _id: itineraryRequested })
+				.then(itinUpdated => {
+					console.log(itinUpdated);
+					res.send(itinUpdated)
+				})
+		})		
+});
+
+//////////////////////////////////////////////////////////////////////////
 
 // --------- GET COMMENTS by itineraries --------- //
 // @route GET /itineraries/comments/:itinID
@@ -147,6 +200,49 @@ router.post("/comments/:itinID", passport.authenticate("jwt", {session: false}),
 
 }); 
 
+// // --------- UPDATE LIKES by itineraries --------- //
+// // @route PUT api/itineraries/likes/
+// // private access
+// router.put("/likes", passport.authenticate("jwt", {session: false}), (req, res) => {
+
+// 	// itineraryModel.findOne({ _id: req.body.id })
+// 	// 	.then(itin => {
+// 	// 		console.log("1", itin, "2", itin.likes, "3", itin.likes[5e8c72540196500e3843cc3c]);
+// 	// 		console.log(itin.likes[req.user._id]);
+			
+// 	// 		console.log("userID:", req.user._id);
+// 	// 		res.json(itin)
+// 			// const indexUserID = itin.likes.indexOf(req.user._id)
+// 			// if (indexUserID !== -1) {
+// 			// 	// quitar de favs
+// 			// 	itin.likes.splice(indexUserID, 1) //(a partir del indexUserID, borro 1)
+// 			// } else {
+// 			// 	// añadir a favs
+// 			// 	itin.likes.push(req.user._id)
+// 			// }
+			
+// 			// itineraryModel.findByIdAndUpdate({_id: req.body.id}, itin)
+// 			// 	.then(() => {
+// 			// 		console.log("despues de update");
+					
+// 			// 		itineraryModel.findOne({_id: req.body.id})
+// 			// 			.then(itineraryUpdated => {
+// 			// 				console.log(itineraryUpdated);
+// 			// 				res.json(itineraryUpdated)
+// 			// 			})
+// 			// 	})
+// 		// })
+
+// 	userModel.find({ favorites: req.body.id })
+// 		.then(itins => {
+// 			console.log(itins.length);
+// 			res.json(itins)
+// 		})
+// }); 
+
+
+// user ID: 5e8c72540196500e3843cc3c
+// itinID: 5e73acac1c9d4400000159e2
 
 
 

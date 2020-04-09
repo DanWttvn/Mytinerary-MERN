@@ -22,11 +22,12 @@ class ActivitiesPage extends Component {
 		this.props.getActivities(itinID);	
 		this.props.getComments(itinID);
 
-		axios.get("/api/user/all").then(res => {
-			this.setState({
-				allUsers: res.data
+		axios.get("/api/user/all")
+			.then(res => {
+				this.setState({
+					allUsers: res.data
+				})
 			})
-		})
 	}
 
 	submitComment = (e) => {

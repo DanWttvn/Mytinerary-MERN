@@ -28,6 +28,10 @@ const itineraryModel = new mongoose.Schema({
 	rating: {
 		type: String,
 		required: true
+	},
+	likes: {
+		type: String,
+		default: "0"
 	}
 
 })
