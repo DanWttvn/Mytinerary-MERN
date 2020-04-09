@@ -89,7 +89,6 @@ router.put("/favorites", passport.authenticate("jwt", {session: false}), (req, r
 	// console.log("PUT user/favorites route");
 	const itinID = req.body.id
 
-	// -------- UPDATE USER --------- //
 	// comprobacion si ya favorito: 
 	const indexItin = req.user.favorites.indexOf(itinID) // ese id es del itinerario
 	let addOrRemove = 0; // adds or substracts 1 to the likes counter in the itin
@@ -104,84 +103,31 @@ router.put("/favorites", passport.authenticate("jwt", {session: false}), (req, r
 		addOrRemove = +1
 	}
 
+	// -------- UPDATE ITIN.LIKES --------- //
 	itineraryModel.findOneAndUpdate(
 		{ _id: itinID }, 
 		{ $inc: {likes: addOrRemove } }
 	)
 		.then((itin) => {
-			console.log(itin.likes, "LIKES antes de actualizar")			
-			itineraryModel.findOne({ _id: itinID })
-				.then(itinUpdated => {
-					console.log(itinUpdated.likes, "LIKES despues de actualizar");
-				})
+			// console.log(itin.likes, "LIKES antes de actualizar")			
+			// itineraryModel.findOne({ _id: itinID })
+				// .then(itinUpdated => {
+				// 	console.log(itinUpdated.likes, "LIKES despues de actualizar");
+				// })
 		})
 
+	// -------- UPDATE USER --------- //
 	// Find the user logged, con qué quieres modificar. actualizo la db con mi store de redux que acabo de cambiar
 	userModel.findByIdAndUpdate({_id: req.user._id}, req.user)
 		// despues de update, mandar el user de vuelta al client
 		.then(() => { // si cargo aqui, me manda la version antigua, por eso find otra vez
-			console.log("actualizando user");
-			
+			// console.log("actualizando user");			
 			userModel.findOne({_id: req.user._id})
 				.then(userUpdated => {
 					// esto es lo qeu mando al dispatcch para que se update en redux
 					res.send(userUpdated)
 				})
 		})
-
-	////////////// PONER AQUI LO DEL .PUT/LIKES???? copiar despues y que se haga a la vez. quitaria todo lo que de heart.js, reducer y action
-
-
-	/*
-		1. copiar aqui
-		3. probar postman
-		4. actualizar reducer?
-		5. probar frontEnd
-	*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// -------- UPDATE ITINERARIES --------- //// ITIN.LIKES ME DA UNDEFINED AUNQUE ITIN SI SALE .LIKES AL LOG
-
-	// itineraryModel.findOne({ _id: req.body.id })
-	// 	.then(itin => {
-	// 		console.log("1", itin, "2", itin.likes);
-			
-	// 		const indexUserID = itin.likes.indexOf(req.user._id)
-	// 		if (indexUserID !== -1) {
-	// 			// quitar de favs
-	// 			itin.likes.splice(indexUserID, 1) //(a partir del indexUserID, borro 1)
-	// 		} else {
-	// 			// añadir a favs
-	// 			itin.likes.push(req.user._id)
-	// 		}
-			
-	// 		itineraryModel.findByIdAndUpdate({_id: req.body.itinID}, itin)
-	// 			.then(() => {
-	// 				console.log("despues de update");
-					
-	// 				itineraryModel.findOne({_id: req.body.itinID})
-	// 					.then(itineraryUpdated => {
-	// 						console.log(itineraryUpdated);
-	// 					})
-	// 			})
-	// 	})
 });
 
 // --------- GET FAVS --------- //
