@@ -18,6 +18,8 @@ class Heart extends Component {
 		// update number of likes in the itinerary db
 		// axios.put("/api/itineraries/likes", { itinID })
 	/////////////////////
+	// -----> sumar aqui a mano un 1 o restar
+	///
 	
 		// ççç solo si esta in FavsPage, update displaye itineraries. se  lo paso desde FavoritesPage
 		if (this.props.inFavsPage) {

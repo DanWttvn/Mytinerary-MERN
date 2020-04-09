@@ -30,8 +30,8 @@ const itineraryModel = new mongoose.Schema({
 		required: true
 	},
 	likes: {
-		type: String,
-		default: "0"
+		type: Number,
+		default: 0
 	}
 
 })

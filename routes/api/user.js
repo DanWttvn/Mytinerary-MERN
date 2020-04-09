@@ -87,22 +87,41 @@ router.put("/info/profilePic", upload.single("profilePic"), passport.authenticat
 // private access
 router.put("/favorites", passport.authenticate("jwt", {session: false}), (req, res) => {
 	// console.log("PUT user/favorites route");
+	const itinID = req.body.id
 
 	// -------- UPDATE USER --------- //
 	// comprobacion si ya favorito: 
-	const indexItin = req.user.favorites.indexOf(req.body.id) // ese id es del itinerario
+	const indexItin = req.user.favorites.indexOf(itinID) // ese id es del itinerario
+	let addOrRemove = 0; // adds or substracts 1 to the likes counter in the itin
+
 	if (indexItin !== -1) {
-		// quitar de favs
+		// REMOVE from favorites
 		req.user.favorites.splice(indexItin, 1) //(a partir del indexItin, borro 1)
+		addOrRemove = -1
 	} else {
-		// añadir a favs
-		req.user.favorites.push(req.body.id)
+		// ADD to favorites
+		req.user.favorites.push(itinID)
+		addOrRemove = +1
 	}
 
-	// Find the user logged, con qué quieres modificar (ya he modificado el req.user antes)
+	itineraryModel.findOneAndUpdate(
+		{ _id: itinID }, 
+		{ $inc: {likes: addOrRemove } }
+	)
+		.then((itin) => {
+			console.log(itin.likes, "LIKES antes de actualizar")			
+			itineraryModel.findOne({ _id: itinID })
+				.then(itinUpdated => {
+					console.log(itinUpdated.likes, "LIKES despues de actualizar");
+				})
+		})
+
+	// Find the user logged, con qué quieres modificar. actualizo la db con mi store de redux que acabo de cambiar
 	userModel.findByIdAndUpdate({_id: req.user._id}, req.user)
 		// despues de update, mandar el user de vuelta al client
 		.then(() => { // si cargo aqui, me manda la version antigua, por eso find otra vez
+			console.log("actualizando user");
+			
 			userModel.findOne({_id: req.user._id})
 				.then(userUpdated => {
 					// esto es lo qeu mando al dispatcch para que se update en redux
@@ -115,8 +134,6 @@ router.put("/favorites", passport.authenticate("jwt", {session: false}), (req, r
 
 	/*
 		1. copiar aqui
-		2. cambiar body.itinID por lo que este usando antes (req.body.id). 
-			se puede hacer mas de un send?
 		3. probar postman
 		4. actualizar reducer?
 		5. probar frontEnd
