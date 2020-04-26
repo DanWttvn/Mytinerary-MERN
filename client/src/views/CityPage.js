@@ -11,15 +11,18 @@ class CityPage extends Component {
 	componentDidMount() {
 		// this.props.getAllItineraries()
 		// console.log(this.props.getAllItineraries);	
-		console.log(this.props.match.params.city);
+		// console.log(this.props.match.params.city);
 		
 		this.props.getItinerariesByCity(this.props.match.params.city) //this comes from the route: :city. that's the city
+		// ççç cambiar metodo traversy
+		setTimeout(() => {document.getElementById("CityPage").removeAttribute("hidden")}, 1000)
+		
 	}
 
 	render () {
 		// console.log(this.props.match.params.city);
 		return (
-			<div id="CityPage" className="containerB">
+			<div hidden id="CityPage" className="containerB">
 				<Logo/>
 				<p className="titlesT mainTitle containerPadding">{this.props.match.params.city}</p>
 				<Itineraries itineraries={this.props.itineraries}/>

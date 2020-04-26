@@ -33,7 +33,7 @@ export const getItinerary = (itinID) => dispatch => {
 		.then(res => {
 			// console.log(res.data);
 			dispatch ({
-				type: "GET_ITINERARY",
+				type: "GET_ITINERARY", 
 				payload: res.data
 		});
 	})

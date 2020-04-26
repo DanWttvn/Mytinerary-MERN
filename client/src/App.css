@@ -221,7 +221,7 @@ button:focus {
 
 a:active, a:focus {
 	text-decoration: none;
-	color: white;
+	color: inherit;
 }
 button:active {
 	text-decoration: none;
@@ -290,10 +290,12 @@ input:-webkit-autofill {
 }
 
 .bg-img {
-	height: 930px;	
+	height: 1200px;	
 	/* height: 100%; */
+	background-image: url(./img/parisBG.jpg);
 	background-size: cover;
-	background-position: center center;
+	background-attachment: fixed;
+	background-position: bottom;
 }
 
 .mascara {

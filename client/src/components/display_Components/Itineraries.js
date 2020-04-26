@@ -13,6 +13,8 @@ import Heart from "./Heart"
 class Itineraries extends Component {
 
 	render () {
+		const { user, isAuthenticated } = this.props.auth
+
 		const isInFavsPage = this.props.inFavsPage
 		
 		let url = isInFavsPage ? "/cities/" : "";
@@ -30,7 +32,7 @@ class Itineraries extends Component {
 
 		let areItins = true;
 		if(isInFavsPage) {
-			areItins = this.props.user.favorites[0] ? true : false;
+			areItins = user.favorites[0] ? true : false;
 		} else {
 			areItins = this.props.itineraries[0] ? true : false
 		}
@@ -41,9 +43,9 @@ class Itineraries extends Component {
 			const imgURL = "url(" + itin.img + ")"
 			const imgURLDisplay = imgURL.replace(/\\/g, "/");  // the \ gives me an error, so i have to change it to /			
 
-			const hashtags = itin.hashtags.map(hashtag => {
+			const hashtags = itin.hashtags.map((hashtag, i) => {
 				return(
-					<span className="hashtag">#{hashtag}</span>
+					<span className="hashtag" key={i}>#{hashtag}</span>
 				)
 			})
 			
@@ -66,8 +68,12 @@ class Itineraries extends Component {
 
 							</div>
 						</Link>
-					
-						<Heart onClick={this.updateFavorites} inFavsPage={isInFavsPage} itin={itin} />		
+						
+						{ isAuthenticated ?
+							<Heart onClick={this.updateFavorites} inFavsPage={isInFavsPage} itin={itin} />
+							: null
+						}
+								
 					</div>	
 
 					<div className="extraInfoBox">
@@ -97,7 +103,7 @@ class Itineraries extends Component {
 
 const mapStateToProps = state => {
 	return {
-		user: state.auth.user
+		auth: state.auth
 	}
 }
 

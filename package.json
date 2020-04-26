@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "myitinerary server mern",
   "main": "server.js",
+  "engines": {
+    "node": "12.16.1",
+    "npm": "6.13.4"
+  },
   "scripts": {
     "client-install": "npm install --prefix client",
     "start": "node server.js",

@@ -13,7 +13,7 @@ class Navbar extends Component {
 		const { isAuthenticated, user } = this.props.auth;
 		let profilePic = ""
 		if(isAuthenticated){
-			profilePic = user.profilePic.startsWith("uploads") ? `/api/${user.profilePic}` : user.profilePic;
+			profilePic = user.profilePic.startsWith("uploads") ? `/${user.profilePic}` : user.profilePic;
 		}
 		
 		return (

@@ -130,16 +130,8 @@ export const logout = () => {
 		type: LOGOUT_SUCCESS // cleans tken and isAut = false
 	}
 } 
-// ANTES MIO 
-// export const logoutUser = (currentUser) => dispatch => {
-// 	axios.post("/auth/logout", currentUser)
-// 		.then(res => {
-// 			dispatch({
-// 				type: "LOGOUT_USER",
-// 				payload: res.data
-// 			});
-// 	})
-// };
+
+
 
 // -- GET FAVS
 export const getItinerariesByFavs = ()  => (dispatch, getState) => {

@@ -51,7 +51,9 @@ class Activities extends Component {
 		})
 		
 		return (
-			<Carousel activeIndex={this.state.activeIndex}>
+			<Carousel activeIndex={this.state.activeIndex} 
+			// next={this.next} previous={this.previous} to animate
+			>
 				{activitiesCarrousel}
 				<CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
 				<CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />

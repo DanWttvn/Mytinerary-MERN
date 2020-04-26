@@ -18,8 +18,8 @@ class ActivitiesPage extends Component {
 	componentDidMount() {
 		const itinID = this.props.match.params.itinID; //this comes from the route: :itin. that's the itinId
 		// console.log(itinID);
+		this.props.getActivities(itinID);		
 		this.props.getItinerary(itinID);
-		this.props.getActivities(itinID);	
 		this.props.getComments(itinID);
 
 		axios.get("/api/user/all")
@@ -27,6 +27,10 @@ class ActivitiesPage extends Component {
 				this.setState({
 					allUsers: res.data
 				})
+			})
+			.then(() => {
+				// ÇÇÇ cambiar  METODO TRAVERSY CON REDUX
+				document.getElementById("ActivitiesPage").removeAttribute("hidden")
 			})
 	}
 
@@ -87,7 +91,7 @@ class ActivitiesPage extends Component {
 		}
 
 		return (
-			<div id="ActivitiesPage" className="containerB">
+			<div hidden id="ActivitiesPage" className="containerB">
 
 				{/* --- ACTIVITIES SECTION --- */}
 				{ this.props.activities.length ?
@@ -99,11 +103,18 @@ class ActivitiesPage extends Component {
 	
 				<ExtraInfoIcons itin={this.props.itinerary}/>
 
+				{/* çççççççççççççççççççççççççççççççççç */}
+				{/* <UserItinInfo itin={this.props.itinerary}/>  */}
+
 				{/* --- COMMENTS SECTION --- */}
 				<div className="container">
 					<div className="itinTitleBox">
 						<h6 className="subtitlesT subtitle">{this.props.itinerary.title}</h6>
-						<Heart itin={this.props.itinerary} />
+						{ this.props.isAuthenticated ?
+							<Heart itin={this.props.itinerary} />
+							: null
+						}
+						
 					</div>
 
 					<p className="paragraph">{this.props.itinerary.summary}</p>

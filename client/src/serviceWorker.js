@@ -21,7 +21,7 @@ const isLocalhost = Boolean(
 );
 
 export function register(config) {
-  // if (/* process.env.NODE_ENV === 'production' &&  */'serviceWorker' in navigator) { // çççççççç
+  // if (/* process.env.NODE_ENV === 'production' &&  */'serviceWorker' in navigator) { 
     if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
       console.log("entrando"); // çççççç
 
@@ -65,8 +65,7 @@ function registerValidSW(swUrl, config) {
     .register(swUrl)
     .then(registration => {
 
-      console.log("sw is registered"); // ççççççç
-      
+      // console.log("sw is registered");       
 
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
