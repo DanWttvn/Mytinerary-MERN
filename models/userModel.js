@@ -45,18 +45,25 @@ const userModel = new mongoose.Schema({
 		},
 		unique: true
 	},
-	profilePic: {
+	avatar: {
 		// data: Buffer,
 		type: String,
 		required: false
 	},
+	favorites: [
+		// {
+		// 	type: String
+		// }
+		{
+			itinerary: {
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "itineraries"
+			}
+		}
+	],
 	register_date: {
 		type: Date,
 		default: Date.now
-	},
-	favorites: {
-		type: Object,
-		required: false
 	}
 })
 

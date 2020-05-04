@@ -11,17 +11,17 @@ class Navbar extends Component {
 
 	render() {
 		const { isAuthenticated, user } = this.props.auth;
-		let profilePic = ""
+		let avatar = ""
 		if(isAuthenticated){
-			profilePic = user.profilePic.startsWith("uploads") ? `/${user.profilePic}` : user.profilePic;
+			avatar = user.avatar.startsWith("uploads") ? `/${user.avatar}` : user.avatar;
 		}
 		
 		return (
 			<nav id="navbar">
 
-				{ isAuthenticated && user.profilePic ?
+				{ isAuthenticated && user.avatar ?
 					<div className="profileNavbarBox" >
-						<NavLink to="/profile"><img src={profilePic} alt="profile pic"/></NavLink>
+						<NavLink to="/profile"><img src={avatar} alt="profile pic"/></NavLink>
 					</div>
 					: <div>
 						  <NavLink to="/profile"><FontAwesomeIcon icon={faUser} className="faMenuIcon faUserMenu"/></NavLink>

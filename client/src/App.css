@@ -902,7 +902,7 @@ input:-webkit-autofill {
 	margin-bottom: 10px;
 }
 
-.profilePicBox {
+.avatarBox {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -916,13 +916,13 @@ input:-webkit-autofill {
 	background: var(--bg-grey);
 }
 
-.profilePicBox .faProfileIcon {
+.avatarBox .faProfileIcon {
 	width: 130px;
 	height: 130px;
 	color: var(--dark-grey);
 }
 
-.profilePicBox img {
+.avatarBox img {
 	width: 150px;
 }
 

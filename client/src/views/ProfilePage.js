@@ -48,10 +48,10 @@ class Profile extends Component {
 
 	fileUploadHandler = () => {
 		const fd = new FormData();
-		fd.append("profilePic", this.state.profileImg, this.state.profileImg.name);
+		fd.append("avatar", this.state.profileImg, this.state.profileImg.name);
 		console.log(fd);
 
-		axios.put("/api/user/info/profilePic", fd, this.tokenConfigFiles())
+		axios.put("/api/user/info/avatar", fd, this.tokenConfigFiles())
 			.then(res => {
 				console.log(res);
 			})
@@ -62,9 +62,9 @@ class Profile extends Component {
 
 	render () {
 		const { isAuthenticated, user } = this.props.auth
-		let profilePic = ""
+		let avatar = ""
 		if(isAuthenticated){
-			profilePic = user.profilePic.startsWith("uploads") ? `/${user.profilePic}` : user.profilePic;
+			avatar = user.avatar.startsWith("uploads") ? `/${user.avatar}` : user.avatar;
 		}
 
 		return (
@@ -77,9 +77,9 @@ class Profile extends Component {
 					<div className="center">
 						<div className="profileBox">
 							<p className="subtitlesT subtitle">{`Welcome, ${user.username}`}</p>
-							<div className="profilePicBox">
-								{ user.profilePic ? 
-									<img src={profilePic} alt="profile pic"/>
+							<div className="avatarBox">
+								{ user.avatar ? 
+									<img src={avatar} alt="profile pic"/>
 									: <FontAwesomeIcon icon={faUser} className="faProfileIcon"/>
 								}
 							</div>

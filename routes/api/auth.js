@@ -4,26 +4,90 @@ const bcrypt = require("bcrypt");
 const keys = require("../../config/keys");
 const jwt = require("jsonwebtoken");
 const passport  = require("passport"); // imporoting this I also import the google strategy cause I attached it by passport.use
+const { check, validationResult } = require("express-validator");
+const userModel = require("../../models/userModel");
 
-const userModel = require("../../model/userModel");
 
-// --------- CHECK IF USER IS LOGGED jwt --------- //
-// @route GET /auth/user
-// private
-// check everytime if the user is logged in. Así protejo la ruta. Al poner passp.auth, voy a tener que pasarle el TOKEN en la peticion axios(en authActions)
+
+
+//*WORKS*//
+// @route    GET api/auth
+// @desc     get User by logged user
+// @access   Public
 router.get("/user", passport.authenticate("jwt", {session: false}), (req, res) => {
-	userModel.findOne({ _id: req.user.id })
+	userModel.findById(req.user.id).select("-password")
 		.then(user => {
 			res.json(user)
 		})
-		.catch(err => res.status(404).json({ error: "user does not exist!" }));
+		.catch(err => res.status(500).json("user does not exist!"));
 });
 
-// ---------- AUTH GOOGLE --------- //
-// @route GET 5000/api/auth/google
+
+
+//*WORKS*//
+// @route    POST api/auth/login
+// @desc     Authenticate/login user and get token
+// @access   Public
+router.post("/login", [
+	check("email", "Please, include a valid email")
+		.isEmail(),
+	check("password", "Password is required")
+		.exists()
+], async (req, res) => { 
+	// console.log("sending to authenticate and compare passwords");
+	const errors = validationResult(req)
+	if(!errors.isEmpty()) { // if there are errors
+		return res.status(400).json({ errors: errors.array() })
+	}
+
+	const { email, password } = req.body;
+
+	userModel.findOne({ email })
+		.then(currentUser => {
+			if(!currentUser) {
+				// console.log("This user is not registered");
+				return res.status(400).json({ errors: [{ msg: "Invalid credentials" }] })
+			} 
+
+			bcrypt.compare(password, currentUser.password, function(err, isMatch) {
+				if (!isMatch) { // if res = true, the passwords match
+					console.error("password do not match");
+					return res.status(400).json({ errors: [{ msg: "Invalid credentials" }] })
+				}
+
+				const payload = {
+					user: {
+						id: currentUser.id
+					}
+				};
+
+				jwt.sign (
+					payload,
+					keys.secretOrKey,
+					{ expiresIn: 3600 },
+					(err, token) => {
+						if(err) throw err;
+						res.json({ token }) // CV2: estaba incluido un objeto ser con los datos user
+					}
+				)
+			})
+		})
+		.catch(err => {
+			console.error(err.message);
+			res.status(500).json("Server error")
+		})
+})
+
+
+
+//! CHECK //
+// @route    GET api/auth/google
+// @desc     Login by Google
+// @access   Public
 router.get("/google", passport.authenticate("google", {
 	scope: ["profile"] //what we want to retrieve from the users profile
 })); 
+
 // callback route for google to redirect
 // @route POST 5000/auth/google/redirect
 router.get("/google/redirect", passport.authenticate("google", {session: false}), (req, res) => { // esta vez que autentificamos con google, ya tenemos un code en el url. passport entende que entonces ya hemos pasado por la primera pagina. fires the cb function en pass-setup
@@ -51,8 +115,12 @@ router.get("/google/redirect", passport.authenticate("google", {session: false})
 	
 });
 
-// ---------- AUTH FACEBOOK --------- //
-// @route GET 5000/auth/facebook
+
+
+//! CHECK //
+// @route    GET api/auth/facebook
+// @desc     Login by facebook
+// @access   Public
 router.get("/facebook", passport.authenticate("facebook"));
 
 // callback route for facebook to redirect

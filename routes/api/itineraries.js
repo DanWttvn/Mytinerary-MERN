@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const passport  = require("passport");
-const itineraryModel = require("../../model/itineraryModel");
-const activityModel = require("../../model/activityModel");
-const commentayModel = require("../../model/commentModel")
-const userModel = require("../../model/userModel")
+const { check, validationResult } = require("express-validator");
+const itineraryModel = require("../../models/itineraryModel");
+const userModel = require("../../models/userModel")
+const cityModel = require("../../models/cityModel")
 
 const multer = require("multer");
 const storage = multer.diskStorage({ // storage config
@@ -30,220 +30,319 @@ const upload = multer({
 });
 
 
-// ---- GET ALL ITINS
-// @route GET /itinearies/all 
-router.get("/all", (req, res) => { // = itinearies/all 
-	itineraryModel.find({})
-		.then(files => {
-			res.send(files)
-		})
-		.catch(err => console.log(err))
-});
 
-// ---- GET ITIN BY CITY. send correspondiente info según la ruta
-// @route GET /itinearies/:city
-router.get("/:city", (req, res) => { // : dice que cualquier otra cosa
-	let cityRequested = req.params.city;
-	itineraryModel.find({ city: cityRequested })
+//* WORKS *//
+// @route    GET api/itinearies/ 
+// @desc     Get all itineraries
+// @access   Public
+router.get("/", (req, res) => { // = itinearies/all 
+	itineraryModel.find()
 		.then(itineraries => {
-			res.send(itineraries)
+			res.json(itineraries) // CV2: era res.send
 		})
-		.catch(err => console.log(err));
+		.catch(err => {
+			console.error(err.message);
+			res.status(500).send("Server error")
+		})
 });
 
-// ---------GET ITINERARY for Activities --------- //
-// @route GET /itineraries/itinerary/:itinID
-// public access
-router.get("/itinerary/:itinID", (req, res) => {
-	let itineraryRequested = req.params.itinID
-	// console.log("get itinerary for activities by ID");	
 
-	itineraryModel.findOne({ _id: itineraryRequested })
+
+//* WORKS *//
+// @route    GET api/itinearies/city/:city 
+// @desc     Get itineraries by city
+// @access   Public
+router.get("/city/:city", (req, res) => { // : dice que cualquier otra cosa
+	itineraryModel.find({ city: req.params.city })
+		.then(itineraries => {
+			res.json(itineraries) // CV2: era res.send
+		})
+		.catch(err => {
+			console.error(err.message);
+			res.status(500).send("Server error")
+		})
+});
+
+
+
+//* WORKS *//
+// @route    GET api/itineraries/:id 
+// @desc     Get itineraries by id 
+// @access   Public
+router.get("/:id", (req, res) => {
+	itineraryModel.findById(req.params.id)
 		.then(itinerary => {
-			res.send(itinerary)
+			if(!itinerary) {
+				return res.status(404).json({ msg: "Itinerary not found" })
+			}
+			res.json(itinerary)
 		})
-		.catch(err => console.log(err));
+		.catch(err => {
+			console.error(err.message);
+			if(err.name === "CastError") {
+				return res.status(404).json({ msg: "Itinerary not found" })
+			}
+			res.status(500).send("Server error")
+		});
 }); 
 
 
-// --------- ADD ITINERARY --------- //
-// @route POST /itineraries/itinerary/
-// private access
-// ççççç change single
-router.post("/itinerary", upload.single("img"), passport.authenticate("jwt", {session: false}), (req, res) => {
-// router.post("/itinerary", upload.single("img"), (req, res) => {
-	// console.log("ROUTE post add itin");
-	// console.log(req.body);
-	// console.log(req.file);
 
-	const newItin = new itineraryModel({
-		// _id: new mongoose.Types.ObjectId(),
-		city: req.body.city,
-		title: req.body.title,
-		img: req.file.path,
-		summary: req.body.summary,
-		duration: req.body.duration,
-		price: req.body.price,
-		rating: req.body.rating,
-		userID: req.user._id
-	});
-
-	newItin.save()
-		.then(newItin => {
-			res.send(newItin)
-		})
-		.catch(err => console.log(err));
-}); 
-
-
-// --------- GET ACTIVITIES BY ITINERARY --------- //
-// @route GET /itineraries/activities/:itinID
-// public access
-router.get("/activities/:itinID", (req, res) => {
-	let itineraryRequested = req.params.itinID
-	// console.log("get activities by itinID ROUTER");	
-	// console.log("itineraryRequested", itineraryRequested);
-
-	activityModel.find({ itineraryID: itineraryRequested })
-		.then(activities => {
-			res.send(activities)
-		})
-		.catch(err => console.log(err));
-}); 
-
-
-// --------- GET LIKES by itineraries --------- // solo para comprobaciones
-// @route GET api/itineraries/likes/
-// public access
-router.get("/likes/:itinID", (req, res) => {
-	userModel.find({ favorites: req.params.itinID })
-		.then(itins => {
-			// console.log(itins.length);
-			const likes = itins.length.toString()
-			res.send(likes)
-		})
-		.catch(err => console.log(err));
-});
-
-//////////////////////////////////////////////////////////////////////////
-
-// --------- UPDATE LIKES by itineraries --------- //
-// @route GET api/itineraries/likes/
-// public access
-router.put("/likes", async (req, res) => {
-	console.log("updating LIKES in inineraryDB");
+//* WORKS *//
+// @route    POST api/itineraries
+// @desc     Create an itinerary with img
+// @access   Private
+router.post("/", upload.single("img"), passport.authenticate("jwt", {session: false}), (req, res) => {
+	//todo: add validation de todo ?
 	
-	const itineraryRequested = req.body.itinID
-	// console.log(req.body);
-	// console.log("itineraryRequested", itineraryRequested);
-	
-	let likes = "";
+	userModel.findById(req.user.id).select("-password")
+		.then(user => {
+			const newItin = new itineraryModel({
+				city: req.body.city,
+				country: req.body.country,
+				title: req.body.title,
+				img: req.file.path,
+				summary: req.body.summary,
+				duration: req.body.duration,
+				price: req.body.price,
+				user: req.user.id,
+				username: user.username,
+				avatar: user.avatar				
+			});
 
-	await userModel.find({ favorites: itineraryRequested })
-		.then(users => {
-			likes = users.length.toString()
-			console.log("likes en DB", likes);
-			return likes
-		})
-		.catch(err => console.log(err));
+			newItin.save()
+				// Add city to db if it doesnt exist
+				.then(() => {
+					cityModel.findOne({ name: req.body.city })
+						.then(city => {
+							if(!city) {
+								const newCity = new cityModel({
+									name: req.body.city,
+									country: req.body.country,
+									img: req.file.path
+								})
 
-	// console.log("si?", likes);
-
-	// actualizar el model si es neceesario
-	itineraryModel.findOneAndUpdate({ _id: itineraryRequested }, { likes })
-		.then((itin) => {
-			console.log("dentroooooo")
-			// console.log("itin", itin);
-			console.log(itin.likes, "antes de actualizar")			
-			
-			itineraryModel.findOne({ _id: itineraryRequested })
-				.then(itinUpdated => {
-					console.log(itinUpdated);
-					res.send(itinUpdated)
+								newCity.save() //* falta un return?
+							}
+						})
 				})
-		})		
+				.then(() => res.json(newItin)) // CV2: res.send
+		})
+		.catch(err => {
+			console.error(err.message);
+			res.status(500).send("Server error")	
+		})
+}); 
+
+
+
+//* WORKS *//
+//- ponerlo a parte. en el UI: al añadir itin, redirigir a la pagina propia de ese itin.
+// @route    POST api/itineraries/activity/:itin_id
+// @desc     Add activity to an itinerary with img
+// @access   Private
+router.post("/activity/:itin_id", upload.single("img"), [passport.authenticate("jwt", {session: false}), [
+	check("title", "Title is required").not().isEmpty()
+	// check("img", "Img is required") // vale para img?
+	// 	.not().isEmpty()
+]], (req, res) => {
+
+	const errors = validationResult(req)
+	if(!errors.isEmpty()) {
+		return res.status(400).json({ errors: errors.array() })
+	}
+
+	const newActivity = {
+		title: req.body.title,
+		img: req.file.path
+	}
+
+	itineraryModel.findById(req.params.itin_id)
+		.then(itinerary => {
+
+			if(!itinerary) {
+				return res.status(404).json({ msg: "Itinerary not found" })
+			}
+
+			// Check the user who is adding the activity is the one who posted it
+			if(itinerary.user.toString() !== req.user.id) { 
+				return res.status(401).json({ msg: "User not authorized" })
+			}
+
+			itinerary.activities.unshift(newActivity)
+
+			itinerary.save()
+				.then(() => res.json(itinerary))
+		})
+		.catch(err => {
+			console.error(err.message);
+			res.status(500).send("Server error")	
+		})	
+})
+
+
+
+//* WORKS *//
+// @route    DELETE api/itineraries/activity/:itin_id/:activity_id
+// @desc     Delete activity
+// @access   Private
+router.delete("/activity/:itin_id/:activity_id", passport.authenticate("jwt", {session: false}), (req, res) => {
+	itineraryModel.findById(req.params.itin_id)
+		.then(itinerary => {
+			const removeIndex = itinerary.activities.map(activity => activity.id).indexOf(req.params.activity_id)
+
+			itinerary.activities.splice(removeIndex, 1)
+
+			itinerary.save()
+				.then(() => res.json(itinerary))
+		})
+		.catch(err => {
+			console.error(err.message);
+			res.status(500).send("Server error")	
+		})
+})
+
+
+
+//* WORKS *//
+// @route    DELETE api/itineraries/:id 
+// @desc     Delete an itinerary if yours
+// @access   Private
+router.delete("/:id", passport.authenticate("jwt", {session: false}), (req, res) => {
+	itineraryModel.findById(req.params.id)
+		.then(itinerary => {
+			if(!itinerary) {
+				return res.status(404).json({ msg: "Itinerary not found" })
+			}
+
+			// Check the user who is deleting the post is the one who owns it
+			if(itinerary.user.toString() !== req.user.id) {
+				return res.status(401).json({ msg: "User not authorized" })
+			}
+
+			itinerary.remove()
+				.then(() => {
+					res.json({ msg: "Itinerary Removed" })
+				})
+		})
+		.catch(err => {
+			console.error(err.message);
+			if(err.name === "CastError") {
+				return res.status(404).json({ msg: "Itinerary not found" })
+			}
+			res.status(500).send("Server error")
+		});
+})
+
+
+
+//* WORKS *//
+//- las separo en dos. sólo una funcion action y en esa accion hago dos llamadas axios y cada una dispara un type: uno para actualizazr el reducer del user y otro el reducer del itinerary
+// @route    PUT /api/itineraries/favorites/:id
+// @desc     Favorite: add to itinerary likes
+// @access   Private
+router.put("/favorites/:id", passport.authenticate("jwt", {session: false}), (req, res) => {
+	itineraryModel.findById(req.params.id)
+		.then(itin => {
+			// Check if already been like
+			if(itin.likes.filter(like => like.user.toString() === req.user.id).length > 0) { 
+				// Get remove index
+				const removeIndex = itin.likes.map(like => like.user.toString()).indexOf(req.user.id); //me devuelve todos los ids en forma de string
+											
+				// 2. modifica el itin
+				itin.likes.splice(removeIndex, 1)
+			}else {
+				itin.likes.unshift({ user: req.user.id })
+			}
+
+			itin.save()
+				.then(itin => res.json(itin.likes)) // sends likes array
+		})
+		.catch(err => {
+			console.error(err.message);
+			if(err.name === "CastError") {
+				return res.status(404).json({ msg: "Itinerary not found" })
+			}
+			res.status(500).send("Server error")
+		})
 });
 
-//////////////////////////////////////////////////////////////////////////
 
-// --------- GET COMMENTS by itineraries --------- //
-// @route GET /itineraries/comments/:itinID
-// public access
-router.get("/comments/:itinID", (req, res) => {
-	let itineraryRequested = req.params.itinID
-	// console.log("get comments by itinID ROUTER");	
-	// console.log("itineraryRequested", itineraryRequested);
 
-	commentayModel.find({ itineraryID: itineraryRequested })
-		.sort({ date: -1 }) // ordeno por fecha
-		.then(comments => {
-			res.send(comments)
+//* WORKS *//
+// @route    POST api/itineraries/comment/:itin_id
+// @desc     Comment on an itinerary
+// @access   Private
+router.post("/comment/:itin_id", [passport.authenticate("jwt", {session: false}), [
+	check("content", "content is required").not().isEmpty()
+]], (req, res) => {
+
+	const errors = validationResult(req)
+	if(!errors.isEmpty()) {
+		return res.status(400).json({ errors: errors.array() })
+	}
+
+	userModel.findById(req.user.id).select("-password")
+		.then(user => {
+			itineraryModel.findById(req.params.itin_id)
+				.then(itinerary => {
+
+					const newComment = {
+						content: req.body.content,
+						username: user.username,
+						avatar: user.avatar,
+						user: req.user.id
+					}
+
+					itinerary.comments.unshift(newComment);
+
+					itinerary.save()
+						.then(() => res.json(itinerary.comments)) // mando array con todos los comments
+				})
 		})
-		.catch(err => console.log(err));
+		.catch(err => {
+			console.error(err.message);
+			res.status(500).send("Server error")	
+		})
 }); 
 
-// --------- ADD COMMENTS by itineraries --------- //
-// @route POST /itineraries/comments/:itinID
-// private access
-router.post("/comments/:itinID", passport.authenticate("jwt", {session: false}), (req, res) => {
-	// console.log("add comment by itinID ROUTER");
-		
-	const newComment = new commentayModel({
-		content: req.body.content,
-		itineraryID: req.params.itinID,
-		userID: req.user._id
-	})
 
-	newComment.save()
-		.then(comment => res.json(comment))
-		// .catch(err => console.log(err))
 
+//* WORKS *//
+// @route    DELETE api/itineraries/comment/:itin_id/:comment_id
+// @desc     Delete a comment
+// @access   Private
+router.delete("/comment/:itin_id/:comment_id", passport.authenticate("jwt", {session: false}), (req, res) => {
+
+	itineraryModel.findById(req.params.itin_id)
+		.then(itinerary => {
+			
+			const comment = itinerary.comments.find(comment => comment.id === req.params.comment_id);			
+
+			if(!comment) {
+				return res.status(404).json({ msg: "Comment does not exist" })
+			}
+
+			if(comment.user.toString() !== req.user.id) {
+				return res.status(401).json({ msg: "User not authorized" })
+			}
+
+			// Get remove index
+			const removeIndex = itinerary.comments
+				.map(comment => comment.user.toString()) // returns array of users_id
+				.indexOf(req.user.id);
+
+			itinerary.comments.splice(removeIndex, 1)
+
+			itinerary.save()
+				.then(() => res.json(itinerary.comments))
+
+		})
+		.catch(err => {
+			console.error(err.message);
+			res.status(500).send("Server error")	
+		})
 }); 
-
-// // --------- UPDATE LIKES by itineraries --------- //
-// // @route PUT api/itineraries/likes/
-// // private access
-// router.put("/likes", passport.authenticate("jwt", {session: false}), (req, res) => {
-
-// 	// itineraryModel.findOne({ _id: req.body.id })
-// 	// 	.then(itin => {
-// 	// 		console.log("1", itin, "2", itin.likes, "3", itin.likes[5e8c72540196500e3843cc3c]);
-// 	// 		console.log(itin.likes[req.user._id]);
-			
-// 	// 		console.log("userID:", req.user._id);
-// 	// 		res.json(itin)
-// 			// const indexUserID = itin.likes.indexOf(req.user._id)
-// 			// if (indexUserID !== -1) {
-// 			// 	// quitar de favs
-// 			// 	itin.likes.splice(indexUserID, 1) //(a partir del indexUserID, borro 1)
-// 			// } else {
-// 			// 	// añadir a favs
-// 			// 	itin.likes.push(req.user._id)
-// 			// }
-			
-// 			// itineraryModel.findByIdAndUpdate({_id: req.body.id}, itin)
-// 			// 	.then(() => {
-// 			// 		console.log("despues de update");
-					
-// 			// 		itineraryModel.findOne({_id: req.body.id})
-// 			// 			.then(itineraryUpdated => {
-// 			// 				console.log(itineraryUpdated);
-// 			// 				res.json(itineraryUpdated)
-// 			// 			})
-// 			// 	})
-// 		// })
-
-// 	userModel.find({ favorites: req.body.id })
-// 		.then(itins => {
-// 			console.log(itins.length);
-// 			res.json(itins)
-// 		})
-// }); 
-
-
-// user ID: 5e8c72540196500e3843cc3c
-// itinID: 5e73acac1c9d4400000159e2
-
 
 
 

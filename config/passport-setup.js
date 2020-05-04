@@ -9,10 +9,9 @@ const ExtractJwt = require("passport-jwt").ExtractJwt;
 
 const mongoose = require("mongoose")
 const keys = require("./keys")
-const userModel = require("../model/userModel")
+const userModel = require("../models/userModel")
 
 // --------------- GOOGLE --------------- //
-
 module.exports = passport.use(
 	new GoogleStrategy({
 		callbackURL: "/api/auth/google/redirect", // where I redirect after the auth (also set in the google credentials)
@@ -33,7 +32,7 @@ module.exports = passport.use(
 					new userModel({
 						username: profile.displayName,
 						googleID: profile.id,
-						profilePic: profile.photos[0].value,
+						avatar: profile.photos[0].value,
 						favorites: []
 					}).save()
 						.then((newUser) => {
@@ -44,7 +43,7 @@ module.exports = passport.use(
 			})	
 }));	
 
-// ---------- FACEBOOK 
+// ---------- FACEBOOK --------------- //
 // https://developers.facebook.com/apps/2529892880664148/settings/basic/
 module.exports = passport.use(
 	new FacebookStrategy({
@@ -67,7 +66,7 @@ module.exports = passport.use(
 					new userModel({
 						username: profile.displayName,
 						facebookID: profile.id,
-						profilePic: "",
+						avatar: "",
 						favorites: []
 					})
 					.save()
@@ -82,19 +81,19 @@ module.exports = passport.use(
 
 // --------------- JWT --------------- //
 // new JwtStrategy(options, verify). opts to control how the token is  extracted from the request or verified. verify is a function
-const opts = {}; 
+let opts = {}; 
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken(); // aqui extrae el token del header
 opts.secretOrKey = keys.secretOrKey;
 
 module.exports = passport.use(
 	new JwtStrategy(opts, (jwt_payload, done) => {
-		userModel.findById(jwt_payload.id) // check if decoded token matches a user
+		userModel.findById(jwt_payload.user.id) // check if decoded token matches a user. payload el que he puesto al guardar el obj
 			.then(user => {
-				// TOKEN MATCHES
+				// Token matches
 				if (user) { 
 					return done(null, user)
 				}
-				// TOKEN DOESNT MATCH
+				// Token doesn't match
 				else {
 					return done(null, false)
 				}

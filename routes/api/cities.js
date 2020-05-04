@@ -1,19 +1,24 @@
-// TODO ESTO ES A PARTIR DE /CITIES....
 const express = require("express");
 const router = express.Router();
-const cityModel = require("../../model/cityModel");
+const cityModel = require("../../models/cityModel");
 
-// ---- GET ALL CITIES
-// @route GET /cities/all
-router.get("/all", (req, res) => { // = cities/all
-	cityModel.find({})
-		.then(files => {
-			res.send(files)
+
+
+// @route    GET api/cities
+// @desc     Get all cities
+// @access   Private
+router.get("/", (req, res) => { // = cities/all
+	cityModel.find()
+		.then(cities => {
+			res.json(cities) //CV2: res.send
 		})
 		.catch(err => console.log(err))
 });
 
-// ---- ADD NEW CITY and PREVENT DUPLICATES (change to postItins, doesnt workçççç)
+
+
+//* ADD NEW CITY and PREVENT DUPLICATES (change to postItins, doesnt workçççç)
+//* no ui
 // @route POST /cities/
 
 // router.post("/", (req, res) => {
