@@ -68,6 +68,10 @@ const itineraryModel = new mongoose.Schema({
 			}
 		}
 	],
+	hashtags: {
+		type: [String],
+		required: true
+	},
 	user: {
 		type: mongoose.Schema.Types.ObjectId,
 		ref: "users"

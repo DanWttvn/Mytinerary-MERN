@@ -35,7 +35,7 @@ const upload = multer({
 
 
 //*WORKS*//
-// @route    GET api/user/
+// @route    GET api/users/
 // @desc     Get all users
 // @access   Public
 router.get("/", (req, res) => { 
@@ -53,7 +53,7 @@ router.get("/", (req, res) => {
 
 //*WORKS*//
 // todo: add comprobation unique name
-// @route    POST api/user
+// @route    POST api/users
 // @desc     Register user
 // @access   Public
 router.post("/", [
@@ -178,31 +178,33 @@ router.delete("/", passport.authenticate("jwt", {session: false}), (req, res) =>
 
 
 
-//! check //
+//*WORKS*//
 //* las separo en dos. sólo una funcion action y en esa accion hago dos llamadas axios y cada una dispara un type: uno para actualizazr el educer del user y oro el reducer del itineary
 // @route    PUT /users/favorites/:id
 // @desc     Favorite: add to user favs 
 // @access   Private
 router.put("/favorites/:itin_id", passport.authenticate("jwt", {session: false}), (req, res) => {
-	const itin_id = req.params.id
+	const itin_id = req.params.itin_id
 
 	userModel.findById(req.user.id)
 		.then(user => {
+
 			// Check if already been like
 			if(user.favorites.filter(favorite => favorite.itinerary.toString() === itin_id).length > 0) { 
+				console.log("Already liked");
+				
 				// Get remove index
-				const removeIndex = user.favorites.map(favorite => favorite.itinerary.toString()) //me devuelve todos los ids en forma de string
-											.indexOf(itin_id);
+				const removeIndex = user.favorites.map(favorite => favorite.itinerary.toString()).indexOf(itin_id);
+				
 				// 2. modifica el user
 				user.favorites.splice(removeIndex, 1)
-			}else {
+			} else {
+				console.log("Not liked yet");
 				user.favorites.unshift({ itinerary: itin_id })
 			}
 
 			user.save()
-				.then(user => {
-					res.json(user.favorites) // sends favorites array
-				})
+				.then(user => res.json(user.favorites)) // sends favorites array
 		})
 		.catch(err => {
 			console.error(err.message);
@@ -211,19 +213,22 @@ router.put("/favorites/:itin_id", passport.authenticate("jwt", {session: false})
 			// }
 			res.status(500).send("Server error")
 		})
-
 });
 
 
 
-//! no funciona // comprobar como antes
+//*WORKS*//
 // @route    GET /users/favorites
 // @desc     Get favorites by user
 // @access   Private
-router.get("/favorites", passport.authenticate("jwt", {session: false}), (req, res) => {
+router.get("/favorites/:a", passport.authenticate("jwt", {session: false}), (req, res) => {
+
 	userModel.findById(req.user.id)
 		.then(currentUser => {
-			itineraryModel.find({ id: currentUser.favorites.itinerary }) //!favs.itinerary?
+			// Array of favorites Ids
+			const favsIds = currentUser.favorites.map(favorite => favorite.itinerary.toString())
+			
+			itineraryModel.find({ _id: favsIds })
 				.then(favoriteItins => {
 					if(!favoriteItins) {
 						return res.status(400).json({ msg: "No favorites" })
@@ -235,10 +240,7 @@ router.get("/favorites", passport.authenticate("jwt", {session: false}), (req, r
 			console.error(err.message);
 			res.status(500).send("Server error")
 		})
-}); 
-
-
-
+});
 
 
 

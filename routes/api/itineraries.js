@@ -105,6 +105,9 @@ router.post("/", upload.single("img"), passport.authenticate("jwt", {session: fa
 				summary: req.body.summary,
 				duration: req.body.duration,
 				price: req.body.price,
+				hashtags: Array.isArray(req.body.hashtags) 
+					? req.body.hashtags
+					: req.body.hashtags.split(",").map(hashtag => "" + hashtag.trim()),
 				user: req.user.id,
 				username: user.username,
 				avatar: user.avatar				
@@ -251,7 +254,7 @@ router.put("/favorites/:id", passport.authenticate("jwt", {session: false}), (re
 											
 				// 2. modifica el itin
 				itin.likes.splice(removeIndex, 1)
-			}else {
+			} else {
 				itin.likes.unshift({ user: req.user.id })
 			}
 

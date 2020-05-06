@@ -17,41 +17,34 @@ router.get("/", (req, res) => { // = cities/all
 
 
 
-//* ADD NEW CITY and PREVENT DUPLICATES (change to postItins, doesnt workçççç)
-//* no ui
-// @route POST /cities/
+//* se añade automaticamente al añadir itin
+// @route    POST api/cities
+// @desc     Add cities (test)
+// @access   Public
+router.post("/", (req, res) => {
 
-// router.post("/", (req, res) => {
-// 	console.log("llamada post");
-	
-// 	const newName = req.body.name; //Extract title from input form
-// 	cityModel.findOne({ name: newName }, function(err, newCity) {
-// 		if(err) {console.log(err)}
-		
-// 		if (newCity) {
-// 			console.log("This has already been saved");
-// 			res.status(500).send("This has already been saved")
+	cityModel.findOne({ name: req.body.name })
+		.then(city => {
+			if (city) {
+				return res.status(500).send("This city already exists")
+			} 
 			
-// 		} else {
-// 			const newCity = new cityModel ({
-// 				name: req.body.name,
-// 				country: req.body.country
-// 			})
-// 			// const newCity = new cityModel (req.body)
+			const newCity = new cityModel ({
+				name: req.body.name,
+				country: req.body.country,
+				img: req.body.img
+			})
 
-// 			newCity.save()
-// 				.then(city => {
-// 					res.send(city);
-// 					console.log("New city created");
-// 					res.redirect("/");
-// 				})
-// 				.catch(err => {
-// 					res.status(500).send("Server error")
-// 				})
-			
-// 		}
-// 	});
-// });
+			newCity.save()
+				.then(city => res.send(city))
+
+		})
+		.catch(err => {
+			console.error(err.message);
+			res.status(500).send("Server error")	
+		})	
+})
+
 
 
 module.exports = router;
