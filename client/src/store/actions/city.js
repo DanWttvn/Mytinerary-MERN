@@ -1,12 +1,12 @@
 import axios from "axios";
+import { GET_CITIES } from "./types"
 
 // con axios dispatch
 export const getCities = () => dispatch => {
-	axios.get("/api/cities/all")
+	axios.get("/api/cities")
 		.then(res => {
-			// console.log(res.data);
 			dispatch ({
-				type: "GET_CITIES",
+				type: GET_CITIES,
 				payload: res.data
 		});
 	})

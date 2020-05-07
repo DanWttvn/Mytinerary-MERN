@@ -10,6 +10,7 @@ import {faUser} from '@fortawesome/free-regular-svg-icons'
 import {faPen} from '@fortawesome/free-solid-svg-icons'
 import axios from "axios"
 import ImageUploader from "react-images-upload"
+import { updateAvatar } from "../store/actions/auth"
 
 
 class Profile extends Component {
@@ -31,33 +32,35 @@ class Profile extends Component {
 		})
 	}
 
-	tokenConfigFiles = () => {
-		// Get token from localstorage
-		const token = localStorage.getItem("token") //authReducer -> localstorage
-		const config = {
-			headers: {
-				"Content-type" : "multipart/form-data"
-			}
-		}
-		// If token, add to headers
-		if (token) {
-			config.headers["Authorization"] = "bearer " + token;
-		}
-		return config
-	}
+	// tokenConfigFiles = () => {
+	// 	// Get token from localstorage
+	// 	const token = localStorage.getItem("token") //authReducer -> localstorage
+	// 	const config = {
+	// 		headers: {
+	// 			"Content-type" : "multipart/form-data"
+	// 		}
+	// 	}
+	// 	// If token, add to headers
+	// 	if (token) {
+	// 		config.headers["Authorization"] = "bearer " + token;
+	// 	}
+	// 	return config
+	// }
 
 	fileUploadHandler = () => {
-		const fd = new FormData();
-		fd.append("avatar", this.state.profileImg, this.state.profileImg.name);
-		console.log(fd);
+		const formData = new FormData();
+		formData.append("avatar", this.state.profileImg, this.state.profileImg.name);
+		console.log(formData);
 
-		axios.put("/api/user/info/avatar", fd, this.tokenConfigFiles())
-			.then(res => {
-				console.log(res);
-			})
-			.then(() => {
-				window.location.reload(true)
-			})
+		updateAvatar(formData)
+
+		// axios.put("/api/user/info/avatar", fd, this.tokenConfigFiles())
+		// 	.then(res => {
+		// 		console.log(res);
+		// 	})
+		// 	.then(() => {
+		// 		window.location.reload(true)
+		// 	})
 	}
 
 	render () {

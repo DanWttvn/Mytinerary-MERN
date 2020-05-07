@@ -31,7 +31,7 @@ const upload = multer({
 
 
 
-//* WORKS *//
+
 // @route    GET api/itinearies/ 
 // @desc     Get all itineraries
 // @access   Public
@@ -48,7 +48,7 @@ router.get("/", (req, res) => { // = itinearies/all
 
 
 
-//* WORKS *//
+
 // @route    GET api/itinearies/city/:city 
 // @desc     Get itineraries by city
 // @access   Public
@@ -65,7 +65,7 @@ router.get("/city/:city", (req, res) => { // : dice que cualquier otra cosa
 
 
 
-//* WORKS *//
+
 // @route    GET api/itineraries/:id 
 // @desc     Get itineraries by id 
 // @access   Public
@@ -88,9 +88,9 @@ router.get("/:id", (req, res) => {
 
 
 
-//* WORKS *//
+
 // @route    POST api/itineraries
-// @desc     Create an itinerary with img
+// @desc     Add an itinerary with img
 // @access   Private
 router.post("/", upload.single("img"), passport.authenticate("jwt", {session: false}), (req, res) => {
 	//todo: add validation de todo ?
@@ -139,12 +139,12 @@ router.post("/", upload.single("img"), passport.authenticate("jwt", {session: fa
 
 
 
-//* WORKS *//
-//- ponerlo a parte. en el UI: al añadir itin, redirigir a la pagina propia de ese itin.
+
+//* ponerlo a parte. en el UI: al añadir itin, redirigir a la pagina propia de ese itin.
 // @route    POST api/itineraries/activity/:itin_id
 // @desc     Add activity to an itinerary with img
 // @access   Private
-router.post("/activity/:itin_id", upload.single("img"), [passport.authenticate("jwt", {session: false}), [
+router.put("/activity/:itin_id", upload.single("img"), [passport.authenticate("jwt", {session: false}), [
 	check("title", "Title is required").not().isEmpty()
 	// check("img", "Img is required") // vale para img?
 	// 	.not().isEmpty()
@@ -185,7 +185,6 @@ router.post("/activity/:itin_id", upload.single("img"), [passport.authenticate("
 
 
 
-//* WORKS *//
 // @route    DELETE api/itineraries/activity/:itin_id/:activity_id
 // @desc     Delete activity
 // @access   Private
@@ -207,7 +206,7 @@ router.delete("/activity/:itin_id/:activity_id", passport.authenticate("jwt", {s
 
 
 
-//* WORKS *//
+
 // @route    DELETE api/itineraries/:id 
 // @desc     Delete an itinerary if yours
 // @access   Private
@@ -239,8 +238,7 @@ router.delete("/:id", passport.authenticate("jwt", {session: false}), (req, res)
 
 
 
-//* WORKS *//
-//- las separo en dos. sólo una funcion action y en esa accion hago dos llamadas axios y cada una dispara un type: uno para actualizazr el reducer del user y otro el reducer del itinerary
+//* las separo en dos. sólo una funcion action y en esa accion hago dos llamadas axios y cada una dispara un type: uno para actualizazr el reducer del user y otro el reducer del itinerary
 // @route    PUT /api/itineraries/favorites/:id
 // @desc     Favorite: add to itinerary likes
 // @access   Private
@@ -272,9 +270,8 @@ router.put("/favorites/:id", passport.authenticate("jwt", {session: false}), (re
 
 
 
-//* WORKS *//
 // @route    POST api/itineraries/comment/:itin_id
-// @desc     Comment on an itinerary
+// @desc     Add comment on an itinerary
 // @access   Private
 router.post("/comment/:itin_id", [passport.authenticate("jwt", {session: false}), [
 	check("content", "content is required").not().isEmpty()
@@ -311,7 +308,6 @@ router.post("/comment/:itin_id", [passport.authenticate("jwt", {session: false})
 
 
 
-//* WORKS *//
 // @route    DELETE api/itineraries/comment/:itin_id/:comment_id
 // @desc     Delete a comment
 // @access   Private

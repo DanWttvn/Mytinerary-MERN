@@ -34,7 +34,6 @@ const upload = multer({
 
 
 
-//*WORKS*//
 // @route    GET api/users/
 // @desc     Get all users
 // @access   Public
@@ -51,7 +50,6 @@ router.get("/", (req, res) => {
 
 
 
-//*WORKS*//
 // todo: add comprobation unique name
 // @route    POST api/users
 // @desc     Register user
@@ -120,7 +118,6 @@ router.post("/", [
 
 
 
-//*WORKS*//
 // @route    GET api/users/:id
 // @desc     Get user by id
 // @access   Public
@@ -140,7 +137,7 @@ router.get("/:id", (req, res) => {
 
 
 
-//*WORKS*//
+//* falta FE - d(upd_user)
 // @route    PUT api/users/avatar
 // @desc     Edit avatar
 // @access   Private
@@ -157,11 +154,14 @@ router.put("/avatar", upload.single("avatar"), passport.authenticate("jwt", {ses
 					res.json(userUpdated)
 				})
 		})
+		.catch(err => {
+			console.error(err.message);
+			res.status(500).json("Server error")
+		})
 });
  
 
 
-//*WORKS*//
 // @route    DELETE api/users
 // @desc     Delete user
 // @access   Private
@@ -178,7 +178,6 @@ router.delete("/", passport.authenticate("jwt", {session: false}), (req, res) =>
 
 
 
-//*WORKS*//
 //* las separo en dos. sólo una funcion action y en esa accion hago dos llamadas axios y cada una dispara un type: uno para actualizazr el educer del user y oro el reducer del itineary
 // @route    PUT /users/favorites/:id
 // @desc     Favorite: add to user favs 
@@ -217,11 +216,10 @@ router.put("/favorites/:itin_id", passport.authenticate("jwt", {session: false})
 
 
 
-//*WORKS*//
-// @route    GET /users/favorites
+// @route    GET /users/favorites/f
 // @desc     Get favorites by user
 // @access   Private
-router.get("/favorites/:a", passport.authenticate("jwt", {session: false}), (req, res) => {
+router.get("/favorites/f", passport.authenticate("jwt", {session: false}), (req, res) => {
 
 	userModel.findById(req.user.id)
 		.then(currentUser => {

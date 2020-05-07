@@ -39,7 +39,7 @@ class App extends Component {
 							<Route path="/sign_up" component={SignUpPage} />
 							<Route exact path="/cities" component={CitiesPage} />
 							<Route exact path="/cities/:city" component={CityPage} /> {/* el :city es el this.props.match.*/}
-							<Route exact path="/cities/:city/:itinID" component={ActivitiesPage} /> 
+							<Route exact path="/cities/:city/:itinID" component={ActivitiesPage} />  {/* cambiar a : //! (`/itineraries/${itin_id}`) ?? */}
 							<Route exact path="/profile" component={ProfilePage}/>
 							<Route exact path="/favorites" component={FavoritesPage} />
 						</Switch>

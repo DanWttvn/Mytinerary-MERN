@@ -9,11 +9,9 @@ const userModel = require("../../models/userModel");
 
 
 
-
-//*WORKS*//
-// @route    GET api/auth
+// @route    GET api/auth/user
 // @desc     get User by logged user
-// @access   Public
+// @access   Private
 router.get("/user", passport.authenticate("jwt", {session: false}), (req, res) => {
 	userModel.findById(req.user.id).select("-password")
 		.then(user => {
@@ -24,7 +22,6 @@ router.get("/user", passport.authenticate("jwt", {session: false}), (req, res) =
 
 
 
-//*WORKS*//
 // @route    POST api/auth/login
 // @desc     Authenticate/login user and get token
 // @access   Public

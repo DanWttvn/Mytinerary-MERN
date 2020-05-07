@@ -49,10 +49,10 @@ class AddItineraryModal extends Component {
 
 		console.log(formData);
 		
-		axios.post("/api/itineraries/itinerary", formData, this.tokenConfigFiles())
-			.then(res => {
-				console.log(res);
-			})
+		// axios.post("/api/itineraries/itinerary", formData, this.tokenConfigFiles())
+		// 	.then(res => {
+		// 		console.log(res);
+		// 	})
 	}
 
 	tokenConfigFiles = () => {
