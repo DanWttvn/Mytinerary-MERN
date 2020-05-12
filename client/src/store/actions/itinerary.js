@@ -1,7 +1,7 @@
 import axios from "axios";
 import { GET_ITINERARIES, ITINERARY_ERROR, UPDATE_LIKES, UPDATE_ITINERARY, DELETE_ITINERARY, ADD_ITINERARY, GET_ITINERARY, ADD_COMMENT, REMOVE_COMMENT, CLEAR_ITINERARIES, CLEAR_ITINERARY } from "./types"
 import { setAlert } from "./alert"
-// import {tokenConfig} from "./authActions"
+// import {tokenConfig} from "./auth"
 
 
 // Get all itineraries

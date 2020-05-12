@@ -3,11 +3,11 @@ import { connect } from "react-redux"
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import { faHeart as fasHeart} from '@fortawesome/free-solid-svg-icons'
 // import { faHeart as farHeart} from '@fortawesome/free-regular-svg-icons'
-import { addToFavorites } from "../../store/actions/authActions"
+// import { addToFavorites } from "../../store/actions/auth"
 import { Link } from "react-router-dom"
-import ExtraInfoIcons from "../UI_Components/ExtraInfoIcons"
-import AddItineraryModal from "./AddItineraryModal"
-import Heart from "./Heart"
+import ExtraInfoIcons from "./ExtraInfoIcons"
+import AddItineraryModal from "./AddItinerary"
+import Heart from "../elements/Heart"
 
 
 class Itineraries extends Component {

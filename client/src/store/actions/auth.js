@@ -1,6 +1,6 @@
 import axios from "axios";
 import { setAlert } from "./alert"
-import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, UPDATE_USER, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, UPDATE_FAVORITES } from "./types"
+import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, UPDATE_USER, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, UPDATE_FAVORITES, ACCOUNT_DELETED } from "./types"
 import setAuthToken from "../utils/setAuthToken"
 
 
@@ -59,7 +59,7 @@ export const register = ({ username, email, password }) => dispatch => {
 }
 
 
-//  Log in User
+//  Login User
 export const login = ( email, password ) => dispatch => {
 	const config = {
 		headers: {
@@ -73,8 +73,8 @@ export const login = ( email, password ) => dispatch => {
 			dispatch({
 				type: LOGIN_SUCCESS,
 				payload: res.data // token
-			})
-			dispatch(loadUser())
+			});
+			dispatch(loadUser());
 		})
 		.catch(err => {
 			const errors = err.response.data.errors;
@@ -128,7 +128,7 @@ export const updateFavorites = itin_id => dispatch => {
 
 
 //  Logout and Clear Profile
-export const logout = () => {
+export const logout = () => dispatch => {
 	dispatch({ type: LOGOUT })
 } 
 
@@ -137,7 +137,6 @@ export const logout = () => {
 export const deleteAccount = () => dispatch => {
 	// Confirmation
 	if(window.confirm("Are you sure? This can NOT be undone!")) {
-
 		axios.delete(`/api/users`)
 			.then(() => {
 				dispatch({ type: ACCOUNT_DELETED })
@@ -150,15 +149,13 @@ export const deleteAccount = () => dispatch => {
 					// payload: { msg: err.response.statusText, status: err.response.status }
 				})
 			})
-	
-		}
 	}
 }
 
 //??
 // send token when comes in the URL from Social Media
 // export const sendTokenSM = (tokenURL) => (dispatch, getState) => {
-// 	console.log("sendTokenSM de authActions");
+// 	console.log("sendTokenSM de auth");
 // 	console.log(tokenURL);
 	
 // 	// user loading

@@ -71,7 +71,7 @@ class Profile extends Component {
 		}
 
 		return (
-			<div id="ProfilePage" className="container">
+			<div id="ProfileP" className="container">
 				<Logo/>
 
 				<p className="titlesT mainTitle">Profile</p>

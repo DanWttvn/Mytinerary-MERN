@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as fasHeart} from '@fortawesome/free-solid-svg-icons'
 import { faHeart as farHeart} from '@fortawesome/free-regular-svg-icons'
-import { addToFavorites, getItinerariesByFavs } from "../../store/actions/authActions"
+// import { addToFavorites, getItinerariesByFavs } from "../../store/actions/auth"
 
 
 
@@ -12,7 +12,7 @@ class Heart extends Component {
 	updateFavorites = async (itinID) => {
 		await this.props.addToFavorites(itinID);
 	
-		// ççç solo si esta in FavsPage, update displaye itineraries. se  lo paso desde FavoritesPage
+		// ççç solo si esta in FavsPage, update displaye itineraries. se  lo paso desde FavoritesP
 		if (this.props.inFavsPage) {
 			// refresh favorites page
 			this.props.getItinerariesByFavs()

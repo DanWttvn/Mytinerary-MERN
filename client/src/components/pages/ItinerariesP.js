@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-// import { getAllItineraries } from "../store/actions/itineraryActions"
-import { getItinerariesByCity } from "../store/actions/itineraryActions"
-import Navbar from "../components/UI_Components/Navbar"
-import Logo from "../components/UI_Components/Logo"
-import Itineraries from "../components/display_Components/Itineraries"
+// import { getItinerariesByCity } from "../../store/actions/itinerary"
+import Navbar from "../UI_Components/Navbar"
+import Logo from "../UI_Components/Logo"
+import Itineraries from "../display_Components/Itineraries"
 
-class CityPage extends Component {
+class ItinerariesP extends Component {
 
 	componentDidMount() {
 		// this.props.getAllItineraries()
@@ -15,14 +14,14 @@ class CityPage extends Component {
 		
 		this.props.getItinerariesByCity(this.props.match.params.city) //this comes from the route: :city. that's the city
 		// ççç cambiar metodo traversy
-		setTimeout(() => {document.getElementById("CityPage").removeAttribute("hidden")}, 1000)
+		setTimeout(() => {document.getElementById("ItinerariesP").removeAttribute("hidden")}, 1000)
 		
 	}
 
 	render () {
 		// console.log(this.props.match.params.city);
 		return (
-			<div hidden id="CityPage" className="containerB">
+			<div hidden id="ItinerariesP" className="containerB">
 				<Logo/>
 				<p className="titlesT mainTitle containerPadding">{this.props.match.params.city}</p>
 				<Itineraries itineraries={this.props.itineraries}/>
@@ -45,4 +44,4 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CityPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ItinerariesP);

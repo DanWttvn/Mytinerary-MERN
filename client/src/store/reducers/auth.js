@@ -1,4 +1,4 @@
-import { USER_LOADED, USER_LOADING, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_SUCCESS, REGISTER_FAIL, UPDATE_USER, UPDATE_FAVORITES } from "../actions/types"
+import { USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_SUCCESS, REGISTER_FAIL, UPDATE_USER, UPDATE_FAVORITES, ACCOUNT_DELETED, LOGOUT } from "../actions/types"
 
 const initState = {
 	token: localStorage.getItem("token"), 
@@ -7,7 +7,7 @@ const initState = {
 	user: null
 }
 
-const authReducer = (state = initState, action) => {
+const auth = (state = initState, action) => {
 	const { type, payload } = action;
 
 	switch (type) {
@@ -67,4 +67,4 @@ const authReducer = (state = initState, action) => {
 	}
 }
 
-export default authReducer;
+export default auth;

@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
 import axios from "axios"
-import { getActivities, getItinerary, getComments, addComment } from "../store/actions/itineraryActions"
+import { getActivities, getItinerary, getComments, addComment } from "../store/actions/itinerary"
 import Navbar from "../components/UI_Components/Navbar"
 import Activities from "../components/display_Components/Activities"
 import ExtraInfoIcons from "../components/UI_Components/ExtraInfoIcons"
 import Heart from "../components/display_Components/Heart"
 
 
-class ActivitiesPage extends Component {
+class ActivitiesP extends Component {
 	state = {
 		newComment: "",
 		allUsers: []
@@ -30,7 +30,7 @@ class ActivitiesPage extends Component {
 			})
 			.then(() => {
 				// ÇÇÇ cambiar  METODO TRAVERSY CON REDUX
-				document.getElementById("ActivitiesPage").removeAttribute("hidden")
+				document.getElementById("ActivitiesP").removeAttribute("hidden")
 			})
 	}
 
@@ -91,7 +91,7 @@ class ActivitiesPage extends Component {
 		}
 
 		return (
-			<div hidden id="ActivitiesPage" className="containerB">
+			<div hidden id="ActivitiesP" className="containerB">
 
 				{/* --- ACTIVITIES SECTION --- */}
 				{ this.props.activities.length ?
@@ -161,4 +161,4 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ActivitiesPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ActivitiesP);

@@ -1,11 +1,11 @@
-import { GET_CITIES } from "./types"
+import { GET_CITIES } from "../actions/types"
 
 const initState = {
 	cities: []
 	// citiesDB: [], 
 }
 
-const city = (state = initState, action) => {
+const cities = (state = initState, action) => {
 	const { type, payload } = action;
 
 	switch (type) {
@@ -32,5 +32,5 @@ const city = (state = initState, action) => {
 	}
 }
 
-export default city;
+export default cities;
 

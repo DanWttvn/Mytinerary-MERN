@@ -29,9 +29,8 @@ router.post("/login", [
 	check("email", "Please, include a valid email")
 		.isEmail(),
 	check("password", "Password is required")
-		.exists()
-], async (req, res) => { 
-	// console.log("sending to authenticate and compare passwords");
+		.exists() //! me da error
+], (req, res) => { 
 	const errors = validationResult(req)
 	if(!errors.isEmpty()) { // if there are errors
 		return res.status(400).json({ errors: errors.array() })
@@ -48,7 +47,7 @@ router.post("/login", [
 
 			bcrypt.compare(password, currentUser.password, function(err, isMatch) {
 				if (!isMatch) { // if res = true, the passwords match
-					console.error("password do not match");
+					// console.error("password do not match");
 					return res.status(400).json({ errors: [{ msg: "Invalid credentials" }] })
 				}
 

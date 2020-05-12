@@ -1,58 +1,54 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {BrowserRouter, Route, Switch } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { connect } from "react-redux"
-// import LandingPage from "./components/LandingPage";
-import CitiesPage from "./views/CitiesPage"
-import ProfilePage from "./views/ProfilePage"
-import FavoritesPage from "./views/FavoritesPage"
-import CityPage from "./views/CityPage"
-import LandingPage from "./views/LandingPage"
-import SignInPage from "./views/SignInPage"
-import SignUpPage from "./views/SignUpPage"
-import { loadUser } from './store/actions/authActions';
+import Alert from "./components/elements/Alert"
+import LandingP from "./components/pages/LandingP"
+import SignInP from "./components/pages/SignInP"
+// import CitiesP from "./components/pages/CitiesP"
+// import ProfileP from "./components/pages/ProfileP"
+// import FavoritesP from "./components/pages/FavoritesP"
+// import ItinerariesP from "./components/pages/ItinerariesP"
+// import SignUpP from "./components/pages/SignUpP"
+// import ActivitiesP from './components/pages/ActivitiesP';
+import { loadUser } from './store/actions/auth';
 import store from "./store/store"
-import ActivitiesPage from './views/ActivitiesPage';
+import setAuthToken from "./store/utils/setAuthToken"
 
 
+
+if(localStorage.token) {
+	setAuthToken(localStorage.token)
+}
 
 class App extends Component {
 
-	// CLAVE: a cada cambio va a comprobar si el user esta conectado
 	componentDidMount() {
 		store.dispatch(loadUser());
-		console.log(this.props.isAuthenticated);
 	}
 
 	render() {
 		return (
-				<BrowserRouter>
-					<div className="App">
+			<BrowserRouter>
+				<div className="App">
+					<Fragment>
+						<Alert />
 						<Switch>
-
-							{/* <Route exact path="/" component={LandingPage} /> */}
-							<Route exact path="/" component={LandingPage} />
-							<Route exact path="/auth/:token" component={LandingPage} />
-
-							<Route path="/sign_in" component={SignInPage} />
-							<Route path="/sign_up" component={SignUpPage} />
-							<Route exact path="/cities" component={CitiesPage} />
-							<Route exact path="/cities/:city" component={CityPage} /> {/* el :city es el this.props.match.*/}
-							<Route exact path="/cities/:city/:itinID" component={ActivitiesPage} />  {/* cambiar a : //! (`/itineraries/${itin_id}`) ?? */}
-							<Route exact path="/profile" component={ProfilePage}/>
-							<Route exact path="/favorites" component={FavoritesPage} />
+							<Route exact path="/" component={LandingP} />
+							{/* <Route exact path="/auth/:token" component={LandingP} /> */}
+							<Route path="/sign_in" component={SignInP} />
+							{/* <Route path="/sign_up" component={SignUpP} /> */}
+							{/* <Route exact path="/cities" component={CitiesP} /> */}
+							{/* <Route exact path="/cities/:city" component={ItinerariesP} /> */}
+							{/* <Route exact path="/cities/:city/:itinID" component={ActivitiesP} />   cambiar a : //! (`/itineraries/${itin_id}`) ?? */}
+							{/* <Route exact path="/profile" component={ProfileP}/>
+							<Route exact path="/favorites" component={FavoritesP} /> */}
 						</Switch>
-					</div>
-				</BrowserRouter>
+					</Fragment>
+					
+				</div>
+			</BrowserRouter>
 		);
 	}
 }
 
-const mapStateToProps = (state) => {
-	return {
-		isAuthenticated: state.auth.isAuthenticated
-	}	
-}
-
-export default connect(mapStateToProps,null)(App);
+export default App;

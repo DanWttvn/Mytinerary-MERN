@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-import { logout } from "../../store/actions/authActions"
+// import { logout } from "../../store/actions/auth"
 import PropTypes from "prop-types"
 
 class NewAccount extends Component {

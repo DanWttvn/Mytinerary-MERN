@@ -7,7 +7,7 @@ const initState = {
 	error: {}
 }
 
-const itinerariesReducer = (state = initState, action) => {
+const itineraries = (state = initState, action) => {
 	const { type, payload } = action;
 
 	switch (type) {
@@ -103,4 +103,4 @@ const itinerariesReducer = (state = initState, action) => {
 }
 
 
-export default itinerariesReducer;
+export default itineraries;

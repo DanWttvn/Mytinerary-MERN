@@ -1,14 +1,13 @@
 import React, {Component} from "react"
-import Navbar from "../components/UI_Components/Navbar"
+import Navbar from "../UI_Components/Navbar"
 import { connect } from "react-redux"
-import { getItinerariesByFavs } from "../store/actions/authActions"
-// import Favorites from "../components/Favorites"
-import Logo from "../components/UI_Components/Logo"
-import Itineraries from "../components/display_Components/Itineraries"
-import BtnSignInInside from "../components/UI_Components/BtnSignInInside"
+// import { getItinerariesByFavs } from "../../store/actions/auth"
+import Logo from "../UI_Components/Logo"
+import Itineraries from "../display_Components/Itineraries"
+import BtnSignInInside from "../UI_Components/BtnSignInInside"
 
 
-class FavoritesPage extends Component {
+class FavoritesP extends Component {
 
 	componentDidMount() {
 		this.props.getItinerariesByFavs()
@@ -17,7 +16,7 @@ class FavoritesPage extends Component {
 	render () {		
 
 		return (
-			<div id="FavoritesPage" className="">
+			<div id="FavoritesP" className="">
 				<Logo/>
 				<p className="titlesT mainTitle containerPadding">My favorites</p>
 				{ this.props.isAuthenticated ? 
@@ -46,4 +45,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(FavoritesPage);
+export default connect(mapStateToProps, mapDispatchToProps)(FavoritesP);

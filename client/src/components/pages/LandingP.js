@@ -1,18 +1,19 @@
 import React, { Component } from "react"
 import {NavLink} from "react-router-dom"
-import LandingBg from "../components/UI_Components/LandingBg"
+import LandingBg from "../elements/LandingBg"
 import { connect } from "react-redux"
+import { loadUser, 
+	//* falta sendTokenSM
+ } from '../../store/actions/auth';
 
-import { loadUser, sendTokenSM } from '../store/actions/authActions';
 
-
-class LandingPage extends Component {
+class LandingP extends Component {
 
 	componentDidMount() {
 		const tokenURL = this.props.match.params.token
 		if(tokenURL) {
 			console.log("updating token in compoennt:", tokenURL);	
-			this.props.sendTokenSM(tokenURL)
+			this.props.sendTokenSM(tokenURL) //*
 		}
 	}
 	
@@ -55,9 +56,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		loadUser: () => dispatch(loadUser()),
-		sendTokenSM: (tokenURL) => dispatch(sendTokenSM(tokenURL)),
+		//* sendTokenSM: (tokenURL) => dispatch(sendTokenSM(tokenURL)), 
 	}
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LandingP);

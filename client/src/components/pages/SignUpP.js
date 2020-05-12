@@ -3,13 +3,12 @@ import { connect } from "react-redux"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-regular-svg-icons'
 import PropTypes from "prop-types"
-import { register } from "../store/actions/authActions"
+// import { register } from "../../store/actions/auth"
 import { clearErrors } from "../store/actions/errorActions"
-import LandingBg from "../components/UI_Components/LandingBg"
-import SignInSM from "../components/UI_Components/SignInSM"
-// import NewAccount from "../components/NewAccount"
+import LandingBg from "../UI_Components/LandingBg"
+import SignInSM from "../UI_Components/SignInSM"
 
-class SignUpPage extends Component {
+class SignUpP extends Component {
 	state = {
 		username: "",
 		password: "",
@@ -153,4 +152,4 @@ const mapDispatchToProps = (dispatch) => {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignUpPage);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpP);

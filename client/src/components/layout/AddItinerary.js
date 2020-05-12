@@ -1,12 +1,12 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Modal } from "reactstrap";
-import BtnSignInInside from "../UI_Components/BtnSignInInside"
+import BtnSignInInside from "../elements/BtnSignInInside"
 import axios from "axios"
 import ImageUploader from "react-images-upload"
 
 
-class AddItineraryModal extends Component {
+class AddItinerary extends Component {
 	state = {
 		isOpen: false,
 		city: "",
@@ -129,10 +129,9 @@ class AddItineraryModal extends Component {
 }
 
 const mapStateToProps = (state) => {
-	// console.log(state);
 	return {
 		auth: state.auth //state. el reducer que quiero. la var que quiero
 	}
 }
 
-export default connect(mapStateToProps, null)(AddItineraryModal);
+export default connect(mapStateToProps, null)(AddItinerary);
