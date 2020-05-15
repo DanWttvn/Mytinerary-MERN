@@ -13,7 +13,7 @@ class ExtraInfoIcons extends Component {
 			<div className="extraInfoIconsBox">
 				<div className="extraInfoIcon">
 					<FontAwesomeIcon icon={faThumbsUp} className="faExtraInfo"/>
-					<span>{itin.likes}</span>
+					<span>{itin.likes.length}</span>
 				</div>
 				<div className="extraInfoIcon">
 					<FontAwesomeIcon icon={faClock} className="faExtraInfo"/>

@@ -1,16 +1,16 @@
 import React, {Component} from "react"
 import { connect } from "react-redux"
-import Navbar from "../components/UI_Components/Navbar"
-import Logo from "../components/UI_Components/Logo"
-import Logout from "../components/UI_Components/BtnLogout"
-import BtnSignInInside from "../components/UI_Components/BtnSignInInside"
+import Navbar from "../elements/Navbar"
+import Logo from "../elements/Logo"
+import LogoutBtn from "../elements/LogoutBtn"
+import SignInBtn from "../elements/SignInBtn"
+// import Spinner from "../elements/Spinner"
 import { Modal } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {faUser} from '@fortawesome/free-regular-svg-icons'
 import {faPen} from '@fortawesome/free-solid-svg-icons'
-import axios from "axios"
 import ImageUploader from "react-images-upload"
-import { updateAvatar } from "../store/actions/auth"
+import { updateAvatar } from "../../store/actions/auth"
 
 
 class Profile extends Component {
@@ -25,58 +25,39 @@ class Profile extends Component {
 		})
 	}
 
-	// ------ PROFILE IMG CONFIG ------ //
 	imgSelectHandler = (pictureFiles, pictureDataURLs) => {
 		this.setState({
 			profileImg: pictureFiles[0]
 		})
 	}
 
-	// tokenConfigFiles = () => {
-	// 	// Get token from localstorage
-	// 	const token = localStorage.getItem("token") //authReducer -> localstorage
-	// 	const config = {
-	// 		headers: {
-	// 			"Content-type" : "multipart/form-data"
-	// 		}
-	// 	}
-	// 	// If token, add to headers
-	// 	if (token) {
-	// 		config.headers["Authorization"] = "bearer " + token;
-	// 	}
-	// 	return config
-	// }
-
 	fileUploadHandler = () => {
 		const formData = new FormData();
 		formData.append("avatar", this.state.profileImg, this.state.profileImg.name);
-		console.log(formData);
 
-		updateAvatar(formData)
-
-		// axios.put("/api/user/info/avatar", fd, this.tokenConfigFiles())
-		// 	.then(res => {
-		// 		console.log(res);
-		// 	})
-		// 	.then(() => {
-		// 		window.location.reload(true)
-		// 	})
+		this.props.updateAvatar(formData)
 	}
 
 	render () {
-		const { isAuthenticated, user } = this.props.auth
+		const { isAuthenticated, user, loading } = this.props.auth
 		let avatar = ""
-		if(isAuthenticated){
-			avatar = user.avatar.startsWith("uploads") ? `/${user.avatar}` : user.avatar;
-		}
+		if(!loading &&
+			isAuthenticated
+				&& user.avatar ){
+		   avatar = user.avatar.startsWith("uploads") ? `/${user.avatar}` : user.avatar;
+	   }
 
 		return (
 			<div id="ProfileP" className="container">
 				<Logo/>
-
 				<p className="titlesT mainTitle">Profile</p>
+
+				{/* {loading ? (
+					<Spinner/>
+				):(
+				)} */}
 				
-				{ isAuthenticated ?
+				{ !loading && isAuthenticated ? (
 					<div className="center">
 						<div className="profileBox">
 							<p className="subtitlesT subtitle">{`Welcome, ${user.username}`}</p>
@@ -107,15 +88,14 @@ class Profile extends Component {
 						</Modal>
 
 						<div className="center">
-							<Logout/>
+							<LogoutBtn/>
 						</div>
 					</div>
-
-					: <BtnSignInInside/>
-				}		
+				):(
+					<SignInBtn/>
+				)}		
 
 				<Navbar/>
-
 			</div>
 		)
 	}
@@ -125,4 +105,11 @@ const mapStateToProps = state => ({
 	auth: state.auth
 })
 
-export default connect(mapStateToProps, null)(Profile);
+const mapDispatchToProps = (dispatch) => {
+	return {
+		updateAvatar: (formData) => dispatch(updateAvatar(formData))
+	}
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

@@ -4,6 +4,7 @@ import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, UPDATE_USER, 
 import setAuthToken from "../utils/setAuthToken"
 
 
+//* WORKS *//
 // Check token and load user
 export const loadUser = () => dispatch => {
 	// Set the token in the call header
@@ -27,7 +28,7 @@ export const loadUser = () => dispatch => {
 }
 
 
-
+//* WORKS *//
 // Register user
 export const register = ({ username, email, password }) => dispatch => {
 	// Headers
@@ -59,6 +60,7 @@ export const register = ({ username, email, password }) => dispatch => {
 }
 
 
+//* WORKS *//
 //  Login User
 export const login = ( email, password ) => dispatch => {
 	const config = {
@@ -88,6 +90,8 @@ export const login = ( email, password ) => dispatch => {
 } 
 
 
+
+//* WORKS *//
 // Update avatar
 export const updateAvatar = formData => dispatch => {
 	const config = {
@@ -112,7 +116,7 @@ export const updateAvatar = formData => dispatch => {
 }
 
 
-// Update avatar
+// Update favorites
 export const updateFavorites = itin_id => dispatch => {
 	axios.put(`/api/users/favorites/${itin_id}`)
 		.then(res => {
@@ -127,7 +131,8 @@ export const updateFavorites = itin_id => dispatch => {
 }
 
 
-//  Logout and Clear Profile
+//* WORKS *//
+//  Logout
 export const logout = () => dispatch => {
 	dispatch({ type: LOGOUT })
 } 

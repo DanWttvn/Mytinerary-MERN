@@ -1,44 +1,21 @@
 import React, { Component } from "react"
+import { Redirect } from "react-router-dom"
 import { connect } from "react-redux"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-regular-svg-icons'
-import PropTypes from "prop-types"
-// import { register } from "../../store/actions/auth"
-import { clearErrors } from "../store/actions/errorActions"
-import LandingBg from "../UI_Components/LandingBg"
-import SignInSM from "../UI_Components/SignInSM"
+import { register } from "../../store/actions/auth"
+import LandingBg from "../elements/LandingBg"
+// import SignInSM from "../elements/SignInSM"
+import { setAlert } from '../../store/actions/alert'
 
 class SignUpP extends Component {
 	state = {
 		username: "",
 		password: "",
-		email: "", 
-		msg: null
+		password2: "",
+		email: ""
 	};
 
-	static propTypes = {
-		isAuthenticated: PropTypes.bool,
-		error: PropTypes.object.isRequired,
-		register: PropTypes.func.isRequired,
-		clearErrors: PropTypes.func.isRequired
-	}
-
-	// TRAVERSY 11 min 17:30
-	componentDidUpdate(prevProps) {
-		const { error } = this.props; // state this.prop.error
-		if(error !== prevProps.error) {
-			// Check for register error
-			if(error.id === "REGISTER_FAIL") {
-				console.log(error.msg); // son dos
-				this.setState({ msg: error.msg.msg })
-			} else {
-				this.setState({ msg: null })
-			}
-		}
-	}
-
-
-	// [e.target.name]: e.target.value
 	handleInput = (e) => {
 		this.setState({
 			[e.target.name]: e.target.value
@@ -47,18 +24,13 @@ class SignUpP extends Component {
 
 	onSubmit = async (e) => {
 		e.preventDefault();
-		console.log("user submited: " + this.state.username + " " + this.state.password + " " +  this.state.email)
-		const { username, email, password } = this.state;
-		
-		//Create user Obj
-		const newUser = {
-			username,
-			email, 
-			password
-		};
-		// Attempt to register
-		await this.props.register(newUser);
-		this.props.clearErrors(); // ? yo. traversy lo pone en el modal
+		const { username, password, password2, email } = this.state
+
+		if(password !== password2) {
+			this.props.setAlert("Passwords do not match", "danger"); //msg, type
+		} else {
+			this.props.register({ username, email, password });
+		}
 	}
 
 	changeVisibility = (e) => {		
@@ -74,17 +46,12 @@ class SignUpP extends Component {
 		}
 	}
 
-	redirect = () => {
-		if (this.props.isAuthenticated) {
-			this.props.history.push("/")
-		}
-	}
 
 	render() {
-		this.redirect();
-
-		console.log("new account:");
-		console.log(localStorage.getItem("token"));
+		//Redirect if logged in
+		if(this.props.isAuthenticated) {
+			return <Redirect to="/"/>
+		}
 				
 		return (
 			<div id="signUp" className="fixedHeight">
@@ -93,20 +60,11 @@ class SignUpP extends Component {
 					
 					<p className="subtitlesT whiteTitle">Create<br/>your account</p>
 
-					{/* --- FORM --- */}	
 					<div  className="formSection">
 						<input onChange={this.handleInput} type="text" name="username" id="user_name" required/>
 						<label htmlFor="user_name"  className="labelBox">
 							<span className="labelContent">User Name</span>
 						</label>
-					</div>
-	
-					<div  className="formSection">
-						<input onChange={this.handleInput} type="password" name="password" id="password" required/>
-						<label htmlFor="password" className="labelBox">
-							<span className="labelContent">Password</span>
-						</label>
-						<FontAwesomeIcon onClick={this.changeVisibility} icon={faEye} className="visibilityIcon" id="visibilityIcon"/>
 					</div>
 	
 					<div className="formSection">
@@ -116,19 +74,31 @@ class SignUpP extends Component {
 						</label>
 					</div>
 	
+					<div className="formSection">
+						<input onChange={this.handleInput} type="password" name="password" id="password" required/>
+						<label htmlFor="password" className="labelBox">
+							<span className="labelContent">Password</span>
+						</label>
+						<FontAwesomeIcon onClick={this.changeVisibility} icon={faEye} className="visibilityIcon" id="visibilityIcon"/>
+					</div>
+
+					<div  className="formSection">
+						<input onChange={this.handleInput} type="password" name="password2" id="password2" required/>
+						<label htmlFor="password2" className="labelBox">
+							<span className="labelContent">Confirm Password</span>
+						</label>
+						<FontAwesomeIcon onClick={this.changeVisibility} icon={faEye} className="visibilityIcon" id="visibilityIcon"/>
+					</div>
+	
 					<div className="btnsBox2">
 						<input className="transparentBtn" type="submit" name="submit" value="Send"></input>
 						<a className="secondaryBtn" href="/sign_in">Log in</a>
 					</div>
-
-					{/* --- SHOW ERRORS --- */}
-					{ this.state.msg ? <p className="errorMsg">{ this.state.msg }</p> : null }
-
 				</form>
 				
-				<SignInSM/>
+				{/* //todo: */}
+				{/* <SignInSM/> */}
 
-	
 				{/* --- BACKGROUND --- */}
 				<div className="mascaraExtra"></div>
 				<LandingBg/>
@@ -138,17 +108,15 @@ class SignUpP extends Component {
 }
 
 const mapStateToProps = (state) => {
-	console.log(state);
 	return {
 		isAuthenticated: state.auth.isAuthenticated,
-		error: state.error //error reducer
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
 		register: (newUser) => dispatch(register(newUser)),
-		clearErrors: (newUser) => dispatch(clearErrors(newUser))
+		setAlert: (msg, alertType) => dispatch(setAlert(msg, alertType))
 	}
 }
 

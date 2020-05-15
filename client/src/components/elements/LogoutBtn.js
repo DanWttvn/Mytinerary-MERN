@@ -1,9 +1,9 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
-// import { logout } from "../../store/actions/auth"
+import { logout } from "../../store/actions/auth"
 import PropTypes from "prop-types"
 
-class NewAccount extends Component {
+class LogoutBtn extends Component {
 	static propTypes = {
 		logout: PropTypes.func.isRequired
 	}
@@ -17,8 +17,8 @@ class NewAccount extends Component {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		logout: (currentUser) => dispatch(logout(currentUser))
+		logout: () => dispatch(logout())
 	}
 }
 
-export default connect(null, mapDispatchToProps)(NewAccount);
+export default connect(null, mapDispatchToProps)(LogoutBtn);

@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 
 
-class BtnSignInInside extends Component {
+class SignInBtn extends Component {
 	render() {
 		return (
 			<div className="btnsBox4 center">
@@ -12,4 +12,4 @@ class BtnSignInInside extends Component {
 	}
 }
 
-export default BtnSignInInside;
+export default SignInBtn;

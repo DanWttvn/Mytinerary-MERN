@@ -4,7 +4,7 @@ import { connect } from "react-redux"
 // import { getItinerariesByFavs } from "../../store/actions/auth"
 import Logo from "../UI_Components/Logo"
 import Itineraries from "../display_Components/Itineraries"
-import BtnSignInInside from "../UI_Components/BtnSignInInside"
+import SignInBtn from "../UI_Components/SignInBtn"
 
 
 class FavoritesP extends Component {
@@ -23,7 +23,7 @@ class FavoritesP extends Component {
 					<div>
 						<Itineraries inFavsPage={"inFavsPage"} itineraries={this.props.favItineraries}/>
 					</div>
-					: <BtnSignInInside/>
+					: <SignInBtn/>
 				}
 				<Navbar/>
 			</div>

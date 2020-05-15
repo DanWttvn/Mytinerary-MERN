@@ -1,21 +1,23 @@
 import React, { Component } from "react"
 import { connect } from "react-redux"
 import { Modal } from "reactstrap";
-import BtnSignInInside from "../elements/BtnSignInInside"
-import axios from "axios"
+import SignInBtn from "../elements/SignInBtn"
 import ImageUploader from "react-images-upload"
+import { addItinerary } from "../../store/actions/itinerary"
+
 
 
 class AddItinerary extends Component {
 	state = {
 		isOpen: false,
 		city: "",
+		country: "",
 		title: "",
 		img: null,
 		summary: "",
 		duration: "",
 		price: "",
-		rating: ""	
+		hashtags: ""	
 	}
 
 	toggle = () => {
@@ -41,33 +43,16 @@ class AddItinerary extends Component {
 		const formData = new FormData();
 		formData.append("img", this.state.img, this.state.img.name);
 		formData.append("city", this.state.city);
+		formData.append("country", this.state.country);
 		formData.append("title", this.state.title);
 		formData.append("summary", this.state.summary);
 		formData.append("duration", this.state.duration);
 		formData.append("price", this.state.price);
-		formData.append("rating", this.state.rating);
+		formData.append("hashtags", this.state.hashtags);
 
-		console.log(formData);
-		
-		// axios.post("/api/itineraries/itinerary", formData, this.tokenConfigFiles())
-		// 	.then(res => {
-		// 		console.log(res);
-		// 	})
-	}
+		this.props.addItinerary(formData)
 
-	tokenConfigFiles = () => {
-		// Get token from localstorage
-		const token = localStorage.getItem("token") //authReducer -> localstorage
-		const config = {
-			headers: {
-				"Content-type" : "multipart/form-data"
-			}
-		}
-		// If token, add to headers
-		if (token) {
-			config.headers["Authorization"] = "bearer " + token;
-		}
-		return config
+		this.toggle();
 	}
 	
 	render() {
@@ -80,20 +65,23 @@ class AddItinerary extends Component {
 					<button className="addNewBtn" onClick={this.toggle}>+</button>
 					<span>Add new itinerary</span>
 				</div>
-	
+
+				{/* //todo: modal no funciona */}
 				<Modal isOpen={this.state.isOpen} toggle={this.toggle}>
 					{ isAuthenticated ? 
-						// { --- ADD CITY --- } 
-						<form className="addItinForm" onSubmit={this.onSubmit}>
+						(<form className="addItinForm" onSubmit={this.handleSubmit}>
 							<p className="sectionTitle">Add a new itinerary</p>
 							<div className="input">
 								
-								<label htmlFor="city">City</label>
-								<input type="text" id="city" onChange={this.handleAddItin} required />
-								
 								<label htmlFor="title">Title</label>
 								<input type="text" id="title" onChange={this.handleAddItin} />
+								
+								<label htmlFor="city">City</label>
+								<input type="text" id="city" onChange={this.handleAddItin} required />
 
+								<label htmlFor="country">Country</label>
+								<input type="text" id="country" onChange={this.handleAddItin} required />
+								
 								<label htmlFor="img">Images</label>
 								<ImageUploader
 									withIcon={true}
@@ -113,14 +101,16 @@ class AddItinerary extends Component {
 								<label htmlFor="price">Price</label>
 								<input type="text" id="price" onChange={this.handleAddItin} required />
 
-								{/* <label htmlFor="rating">Rating</label>
-								<input type="text" id="rating" onChange={this.handleAddItin} required /> */}
+								<label htmlFor="hashtags">Hastags</label>
+								<input type="text" id="hashtags" placeholder="" onChange={this.handleAddItin} required />
+								<small className="form-text">* Please use comma separated values</small>
 
 								<button className="btnInside" onClick={this.handleSubmit}>Add itinerary</button>
 							</div>
 						</form>
-					: <BtnSignInInside/>
-					} 
+					):(
+						<SignInBtn/>
+					)} 
 				</Modal>
 			
 			</div>
@@ -130,8 +120,15 @@ class AddItinerary extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		auth: state.auth //state. el reducer que quiero. la var que quiero
+		auth: state.auth
 	}
 }
 
-export default connect(mapStateToProps, null)(AddItinerary);
+const mapDispatchToProps = (dispatch) => {
+	return {
+		addItinerary: (formData) => dispatch(addItinerary(formData))
+	}
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddItinerary);

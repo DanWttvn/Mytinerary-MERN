@@ -22,7 +22,7 @@ class SignInP extends Component {
 		})
 	}
 
-	onSubmit = async e => {		
+	onSubmit = e => {		
 		e.preventDefault();
 		const { email, password } = this.state;
 
@@ -56,14 +56,14 @@ class SignInP extends Component {
 					<p className="subtitlesT whiteTitle">Log into <br/>your account</p>
 
 					<div className="formSection">
-						<input onChange={this.handleInput} type="email" name="email" id="email" />
+						<input onChange={this.handleInput} type="email" name="email" id="email" required/>
 						<label htmlFor="email" className="labelBox">
 							<span className="labelContent">Contact Email</span>
 						</label>
 					</div>
 			
 					<div  className="formSection">
-						<input onChange={this.handleInput} type="password" name="password" id="password"/>
+						<input onChange={this.handleInput} type="password" name="password" id="password" required/>
 						<label htmlFor="password" className="labelBox">
 							<span className="labelContent">Password</span>
 						</label>

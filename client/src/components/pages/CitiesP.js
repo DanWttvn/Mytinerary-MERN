@@ -1,12 +1,13 @@
-import React, { Component } from "react"
+import React, { Component, Fragment } from "react"
 // import {NavLink} from "react-router-dom"
 import Logo from "../elements/Logo"
 import Navbar from "../elements/Navbar"
 import Searchbar from "../elements/Searchbar"
 import Cities from "../layout/Cities"
-import AddItineraryModal from "../layout/AddItineraryModal"
+import AddItinerary from "../layout/AddItinerary"
 import { connect } from "react-redux"
-// import { getCities, filterCities } from "../../store/actions/city"
+import { getCities, filterCities } from "../../store/actions/city"
+import Spinner from "../elements/Spinner"
 
 
 class ItinerariesP extends Component {
@@ -15,19 +16,27 @@ class ItinerariesP extends Component {
 		this.props.getCities()
 	}
 
-	filterWithSearchTerm = (searchTerm) => {
-		this.props.filterCities(searchTerm);
-	}
+	//todo: figure out without duplicate
+	// filterWithSearchTerm = (searchTerm) => {
+	// 	this.props.filterCities(searchTerm);
+	// }
 
 	render() {
+		const { cities, loading } = this.props.cities
 
 		return (
 			<div id="ItinerariesP" className="container">
 				<Logo/>
-				<p className="titlesT mainTitle">Where are you going?</p>
-				<Searchbar getSearchTerm={this.filterWithSearchTerm} />
-				<Cities cities={this.props.cities} />	
-				<AddItineraryModal /> 
+				{loading ? (
+					<Spinner/>
+				):(
+					<Fragment>
+						<p className="titlesT mainTitle">Where are you going?</p>
+						<Searchbar getSearchTerm={this.filterWithSearchTerm} />
+						<Cities cities={cities} />	
+						<AddItinerary />
+					</Fragment> 
+				)}
 				<Navbar/>
 			</div>
 		)
@@ -35,15 +44,13 @@ class ItinerariesP extends Component {
 }
 
 const mapStateToProps = (state) => {
-	// console.log(state);
 	return {
-		cities: state.cities.cities //state. el reducer que quiero. la var que quiero
+		cities: state.cities
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		// now i can call this function with props.addCity
 		getCities: (cities) => dispatch(getCities(cities)),
 		filterCities: (searchTerm) => dispatch(filterCities(searchTerm))
 	}

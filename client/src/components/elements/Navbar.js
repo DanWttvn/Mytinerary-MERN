@@ -10,9 +10,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 class Navbar extends Component {
 
 	render() {
-		const { isAuthenticated, user } = this.props.auth;
+		const { isAuthenticated, user, loading } = this.props.auth;
 		let avatar = ""
-		if(isAuthenticated){
+		if(!loading &&
+			 isAuthenticated
+			 	&& user.avatar ){
 			avatar = user.avatar.startsWith("uploads") ? `/${user.avatar}` : user.avatar;
 		}
 		

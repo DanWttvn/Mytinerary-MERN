@@ -1,30 +1,31 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from "react"
+import Spinner from "../elements/Spinner"
 import { connect } from "react-redux"
-// import { getItinerariesByCity } from "../../store/actions/itinerary"
-import Navbar from "../UI_Components/Navbar"
-import Logo from "../UI_Components/Logo"
-import Itineraries from "../display_Components/Itineraries"
+import { getItinerariesByCity } from "../../store/actions/itinerary"
+import Navbar from "../elements/Navbar"
+import Logo from "../elements/Logo"
+import Itineraries from "../layout/Itineraries"
 
 class ItinerariesP extends Component {
 
-	componentDidMount() {
-		// this.props.getAllItineraries()
-		// console.log(this.props.getAllItineraries);	
-		// console.log(this.props.match.params.city);
-		
-		this.props.getItinerariesByCity(this.props.match.params.city) //this comes from the route: :city. that's the city
-		// ççç cambiar metodo traversy
-		setTimeout(() => {document.getElementById("ItinerariesP").removeAttribute("hidden")}, 1000)
-		
+	componentDidMount() {	
+		this.props.getItinerariesByCity(this.props.match.params.city)
 	}
 
 	render () {
-		// console.log(this.props.match.params.city);
+		const { itineraries, loading } = this.props.itineraries
+
 		return (
-			<div hidden id="ItinerariesP" className="containerB">
+			<div id="ItinerariesP" className="containerB">
 				<Logo/>
-				<p className="titlesT mainTitle containerPadding">{this.props.match.params.city}</p>
-				<Itineraries itineraries={this.props.itineraries}/>
+				{loading ? (
+					<Spinner/>
+				):(
+					<Fragment>
+						<p className="titlesT mainTitle containerPadding">{this.props.match.params.city}</p>
+						<Itineraries itineraries={itineraries}/>
+					</Fragment> 
+				)}
 				<Navbar/>
 			</div>
 		)
@@ -33,13 +34,12 @@ class ItinerariesP extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		itineraries: state.itineraries.itineraries //nombre del reducer
+		itineraries: state.itineraries
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		// getAllItineraries: () => dispatch(getAllItineraries())
 		getItinerariesByCity: (city) => dispatch(getItinerariesByCity(city))
 	}
 }

@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faHeart as fasHeart} from '@fortawesome/free-solid-svg-icons'
-// import { faHeart as farHeart} from '@fortawesome/free-regular-svg-icons'
-// import { addToFavorites } from "../../store/actions/auth"
+import { updateFavorites } from "../../store/actions/auth"
 import { Link } from "react-router-dom"
 import ExtraInfoIcons from "./ExtraInfoIcons"
 import AddItineraryModal from "./AddItinerary"
@@ -11,66 +8,81 @@ import Heart from "../elements/Heart"
 
 
 class Itineraries extends Component {
-
 	render () {
-		const { user, isAuthenticated } = this.props.auth
-
+		const { 
+			user, //para inFavsPage
+			isAuthenticated } = this.props.auth
 		const isInFavsPage = this.props.inFavsPage
-		
-		let url = isInFavsPage ? "/cities/" : "";
-		let noItinerariesMsg = isInFavsPage ? 
-			<div className="btnsBox3 center">
-				<p>You still have no favorites!</p>
-				<div className="btnInside"><a href="/cities">Explore</a></div>
-			</div>
-			: 	<div className="btnsBox3 center">
+
+
+		// No itineraries message
+		let noItinerariesMsg = isInFavsPage ? (
+				<div className="btnsBox3 center">
+					<p>You still have no favorites!</p>
+					<div className="btnInside"><a href="/cities">Explore</a></div>
+				</div>
+			):( 
+				<div className="btnsBox3 center">
 					<p>There are still no itineraries for this city</p>
 					<br/>
-					{/* add modal */}
 					<AddItineraryModal /> 
-				</div> 
+				</div>
+			)
 
+		//todo: solucionar
 		let areItins = true;
-		if(isInFavsPage) {
-			areItins = user.favorites[0] ? true : false;
-		} else {
-			areItins = this.props.itineraries[0] ? true : false
-		}
+		// if(isInFavsPage) {
+		// 	areItins = user.favorites[0] ? true : false;
+		// } else {
+		// 	areItins = this.props.itineraries[0] ? true : false
+		// }
 
 
 		const itinsCarrousel = this.props.itineraries.map(itin => {
-			// const imgURL = itin.img.startsWith("uploads") ? "url(/api/" + itin.img + ")" : "url(" + itin.img + ")"
-			const imgURL = "url(" + itin.img + ")"
-			const imgURLDisplay = imgURL.replace(/\\/g, "/");  // the \ gives me an error, so i have to change it to /			
+	
+			let itinURL = isInFavsPage ? `/cities/${itin.city}/${itin._id}` : `${itin.city}/${itin._id}`;
+
+			//* Change before deploy? a // const imgURL = "url(" + itin.img + ")"
+			const imgURL = itin.img.startsWith("uploads") ? "url(http://localhost:5000/" + itin.img + ")" : "url(" + itin.img + ")"
+			const imgURLDisplay = imgURL.replace(/\\/g, "/");  // the \ gives me an error, so i have to change it to /
+
+			const avatarURL = itin.avatar.startsWith("uploads") ? "http://localhost:5000/" + itin.avatar : itin.avatar
+			const avatarURLDisplay = avatarURL.replace(/\\/g, "/");
 
 			const hashtags = itin.hashtags.map((hashtag, i) => {
 				return(
 					<span className="hashtag" key={i}>#{hashtag}</span>
 				)
 			})
-			
+
 			return (				
 				<div className="itinBox" key={itin._id}>
 					<div className="itinCard">
-						<Link to={`${url}${itin.city}/${itin._id}`}>
+						<Link to={itinURL}>
+
+							<div className="user-avatar" 
+							// style={
+							// 	{backgroundImage: avatarURLDisplay,
+							// 	backgroundPosition: 'center center', 
+							// 	backgroundSize: 'cover'}}
+							>
+								<img src={avatarURLDisplay} alt=""/>
+							</div>
+
 							<div className="itinImgPrev" style={
-								// {backgroundImage: 'url(\'' + itin.img
-								// + '\')', 
-								// {backgroundImage: imgURL, 
 								{backgroundImage: imgURLDisplay,
 								backgroundPosition: 'center center', 
 								backgroundSize: 'cover'}}>
 							</div>
-					
+
 							<div className="itinInfoPrev">
 								<p className="shortenedSummary">{itin.summary}</p>
 								<div className="mascaraCard"></div>
-
 							</div>
 						</Link>
 						
 						{ isAuthenticated ?
-							<Heart onClick={this.updateFavorites} inFavsPage={isInFavsPage} itin={itin} />
+							<Heart inFavsPage={isInFavsPage} itin={itin} />
 							: null
 						}
 								
@@ -83,19 +95,17 @@ class Itineraries extends Component {
 							{ hashtags }
 						</div>
 					</div>
-
 				</div>
 			)	
 		})
 	
 		return (
 			<div className="itinsCarrousel">
-				
-				{areItins ?
+				{areItins ? (
 					itinsCarrousel 
-					: noItinerariesMsg
-				}
-				
+				):(
+					noItinerariesMsg
+				)}
 			</div>
 		)
 	}
@@ -109,7 +119,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		addToFavorites: (itinID) => dispatch(addToFavorites(itinID)),
+		updateFavorites: (itin_id) => dispatch(updateFavorites(itin_id)),
 	}
 }
 

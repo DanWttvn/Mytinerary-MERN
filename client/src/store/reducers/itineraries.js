@@ -82,21 +82,21 @@ const itineraries = (state = initState, action) => {
 				loading: false
 			};
 
-		//* lo he puesto yo
+		//* lo he puesto yo. pongo el liading true para que espere a la llamada de despues
 		case CLEAR_ITINERARIES:
 			return {
 				...state,
 				itineraries: null,
+				loading: true
 			};
 
 		case CLEAR_ITINERARY:
 			return {
 				...state,
 				itinerary: null,
+				loading: true
 			};
 		
-
-
 		default:
 			return state;			
 	}

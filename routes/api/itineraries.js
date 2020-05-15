@@ -277,6 +277,8 @@ router.post("/comment/:itin_id", [passport.authenticate("jwt", {session: false})
 	check("content", "content is required").not().isEmpty()
 ]], (req, res) => {
 
+	console.log(req.body.content);
+
 	const errors = validationResult(req)
 	if(!errors.isEmpty()) {
 		return res.status(400).json({ errors: errors.array() })

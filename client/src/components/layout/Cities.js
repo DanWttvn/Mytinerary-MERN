@@ -5,13 +5,16 @@ import { Link } from "react-router-dom"
 
 const Cities = ({cities}) => {
 
-	const citiesGallery = cities.map(city => {		
+	const citiesGallery = cities.map(city => {
+		//Uploaded imgs
+		const imgURL = "url(" + city.img + ")"
+		const imgURLDisplay = imgURL.replace(/\\/g, "/");  // the \ gives me an error, so i have to change it to /	
+
 		return (
-			// con las comillas `` !!! aqui hago una ruta variable segun el nombre de la ciudad
 			<Link to={`cities/${city.name}`} key={city._id}> 
 				<div className="cityCard" >
 					<div className="thumbnail" style={
-						{backgroundImage: 'url(\'' + city.img + '\')', 
+						{backgroundImage: imgURLDisplay, 
 						backgroundPosition: 'center center', 
 						backgroundSize: 'cover'}}></div>
 					{/* <img className="thumbnail" src={city.img} alt=""/> lo mismo */}
@@ -24,7 +27,6 @@ const Cities = ({cities}) => {
 	return (
 		<div className="citiesGallery">
 			{citiesGallery}
-
 		</div>
 	)
 }

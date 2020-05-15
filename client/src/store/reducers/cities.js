@@ -1,7 +1,8 @@
 import { GET_CITIES } from "../actions/types"
 
 const initState = {
-	cities: []
+	cities: [],
+	loading: true
 	// citiesDB: [], 
 }
 
@@ -13,7 +14,8 @@ const cities = (state = initState, action) => {
 			return {
 				...state,
 				cities: payload,
-				citiesDB: payload
+				// citiesDB: payload,
+				loading: false
 			}
 
 		//?? mejor filtrar en el FE, no??? sin mess con el BE, sino con lo guardado en el store. a lo mejor un city(como itinerary) en el store?

@@ -26,8 +26,8 @@ const auth = (state = initState, action) => {
 			return {
 				...state,
 				...payload,
-				isAuthenticated: true,
-				loading: false
+				// NO isAuthenticated: true, para que lo ponga al load user
+				// NO loading: false para que espere al loaduser
 			}
 
 		case UPDATE_FAVORITES:
@@ -40,17 +40,34 @@ const auth = (state = initState, action) => {
 				loading: false
 			}
 
-		case ACCOUNT_DELETED:
-		case LOGOUT:
-		case LOGIN_FAIL:
 		case AUTH_ERROR:
+			localStorage.removeItem("token")
+			return {
+				...state,
+				token: null,
+				isAuthenticated: false,
+				loading: false // lo pone enfalse antes del login
+			};
+
+		case ACCOUNT_DELETED:
+		case LOGIN_FAIL:
 		case REGISTER_FAIL:
 			localStorage.removeItem("token")
 			return {
 				...state,
 				token: null,
 				isAuthenticated: false,
-				loading: false
+				loading: false,
+			};
+
+		case LOGOUT:
+			localStorage.removeItem("token")
+			return {
+				...state,
+				token: null,
+				isAuthenticated: false,
+				loading: false,
+				user: null
 			};
 
 		

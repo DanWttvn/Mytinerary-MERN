@@ -1,7 +1,8 @@
 import axios from "axios";
 import { GET_CITIES } from "./types"
 
-// con axios dispatch
+
+//* WORKS *//
 export const getCities = () => dispatch => {
 	axios.get("/api/cities")
 		.then(res => {

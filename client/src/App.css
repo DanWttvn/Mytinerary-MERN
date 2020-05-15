@@ -1,12 +1,21 @@
+
 html, body {
+	margin: 0;
+	padding: 0;
 	box-sizing: border-box;
 	position: relative;
 }
 
+button, a {
+	font: inherit;
+	font-size: inherit;
+	text-decoration: none;
+}
+
 html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, button, pre,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
+del, dfn, em, img, ins, input, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
 dl, dt, dd, ol, ul, li,
@@ -19,10 +28,9 @@ time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	font-size: 100%;
+	font-size: 1rem;
 	font: inherit;
 	vertical-align: baseline;
-	text-decoration: none;
 }
 
 input:focus,
@@ -82,6 +90,8 @@ body {
 }
 h1 {
 	font-family: 'Futura Black';
+	font-size: 2.5rem;
+	margin: 0;
 	z-index: 100;
 	position: relative;
 }
@@ -94,6 +104,12 @@ p {
 	margin: 0;
 	line-height: normal;
 }
+
+small {
+	font-size: 14px;
+	color: rgb(85, 85, 85);
+}
+
 .hugeLetters {
 	font-size: 70px;
 }
@@ -338,14 +354,15 @@ input:-webkit-autofill {
 }
 
 .alert {
-	position: absolute;
+	position: fixed;
 	margin: 0 auto;
 	top: 30px;
+	left: 50%;
+	margin-left: -35%; 	/* half of the width */
 	width: 70%;
 	padding: 0.8rem;
-	margin: 1rem 0;
 	border-radius: 5px;
-	background: rgba(255, 255, 255, 0.7);
+	background: rgba(0, 0, 0, 0.6);
 	color: #fff;
 	z-index: 1000;
 }
@@ -355,11 +372,11 @@ input:-webkit-autofill {
 	color: #fff;
 }
 
-.alert-success {
+/* .alert-success {
 	background: rgba(255, 255, 255, 0.7);
 	color: #fff;
 }
-  
+   */
 
 /* -------- LOGO -------- */
 
@@ -678,6 +695,25 @@ input:-webkit-autofill {
 	overflow: hidden;
 }
 
+.itinCard .user-avatar {
+	position: absolute;
+	width: 55px;
+	height: 55px;
+	left: 30px;
+	top: 28px;
+	border-radius: 50%;
+	overflow: hidden;
+	z-index: 2;
+	
+	-webkit-box-shadow: 2px 3px 16px -2px rgba(0,0,0,0.4); 
+	box-shadow: 2px 3px 16px -2px rgba(0,0,0,0.4);
+}
+
+.itinCard .user-avatar img {
+	width: 100%;
+	height: 100%;
+}
+
 .itinImgPrev {
 	width: 100%;
 	/* ççççç buscar height porque sse esta deformando */
@@ -876,7 +912,7 @@ input:-webkit-autofill {
 	opacity: 0.9;
 }
 
-.allCommentsBox {
+.comments-section {
 	margin-bottom: 80px;
 	width: 100%;
 	margin-top: 10px;
@@ -915,6 +951,12 @@ input:-webkit-autofill {
 	border-radius: 10px;
 	padding: 10px;
 	width: 100%;
+}
+
+.comment-avatar {
+	height: 40px;
+	width: 40px;
+	border-radius: 50%;
 }
 
 .commentName {

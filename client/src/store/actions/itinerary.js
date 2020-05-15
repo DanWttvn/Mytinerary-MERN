@@ -6,7 +6,6 @@ import { setAlert } from "./alert"
 
 // Get all itineraries
 export const getItineraries = () => dispatch => {
-	dispatch({ type: CLEAR_ITINERARIES })
 	axios.get("/api/itineraries")
 		.then(res => {
 			dispatch ({
@@ -23,9 +22,10 @@ export const getItineraries = () => dispatch => {
 }
 
 
+//* WORKS *//
 // Get itineraries by city
 export const getItinerariesByCity = city => dispatch => {
-	dispatch({ type: CLEAR_ITINERARIES })
+	// dispatch({ type: CLEAR_ITINERARIES })
 	axios.get(`/api/itineraries/city/${city}`)
 		.then(res => {
 			dispatch ({
@@ -42,6 +42,7 @@ export const getItinerariesByCity = city => dispatch => {
 }
 
 
+//* WORKS *//
 // Get city by id
 export const getItinerary = id => dispatch => {
 	dispatch({ type: CLEAR_ITINERARY })
@@ -80,6 +81,7 @@ export const getFavorites = () => dispatch => {
 }
 
 
+//* WORKS *//
 // Add itinerary
 export const addItinerary = formData => dispatch => {
 	//! por ser foto ?
@@ -127,11 +129,14 @@ export const deleteItinerary = id => dispatch => {
 
 
 // Update likes
-export const updateLikes = id => dispatch => {
-	axios.put(`/api/itineraries/favorites/${id}`)
-		dispatch({
-			type: UPDATE_LIKES,
-			payload: { id, likes: res.data }
+//todo: itin_id o id?ççççççççççççççç 
+export const updateLikes = itin_id => dispatch => {
+	axios.put(`/api/itineraries/favorites/${itin_id}`)
+		.then(res => {
+			dispatch({
+				type: UPDATE_LIKES,
+				payload: { itin_id, likes: res.data }
+			})
 		})
 		.catch(err => {
 			dispatch({
@@ -142,15 +147,16 @@ export const updateLikes = id => dispatch => {
 }
 
 
+//* WORKS *//
 // Add comment
-export const addComment = (itin_id, formData) => dispatch => {
+export const addComment = (itin_id, content) => dispatch => {
 	const config = {
 		headers: {
 			"Content-type": "application/json"
 		}
 	}
-	
-	axios.post(`api/itineraries/comment/${itin_id}`, formData, config)
+	const body = JSON.stringify({ content })	
+	axios.post(`/api/itineraries/comment/${itin_id}`, body, config)
 		.then(res => {
 			dispatch({
 				type: ADD_COMMENT,
@@ -166,9 +172,10 @@ export const addComment = (itin_id, formData) => dispatch => {
 }
 
 
+//? raro al borrar el ultimo comentario *//
 // Delete comment
 export const deleteComment = (itin_id, comment_id) => dispatch => {
-	axios.delete(`api/itineraries/comment/${itin_id}/${comment_id}`)
+	axios.delete(`/api/itineraries/comment/${itin_id}/${comment_id}`)
 		.then(res => {
 			dispatch({
 				type: REMOVE_COMMENT,
@@ -194,7 +201,7 @@ export const addActivity = (itin_id, formData) => dispatch => {
 	}
 
 	axios.post(`/api/itineraries/activity/${itin_id}`, formData, config)
-		then(res => {
+		.then(res => {
 			dispatch({
 				type: UPDATE_ITINERARY,
 				payload: res.data
@@ -222,7 +229,7 @@ export const deleteActivity = (itin_id, activity_id) => dispatch => {
 		.then(res => {
 			dispatch({
 				type: UPDATE_ITINERARY,
-				payload: { id, likes: res.data } //itinerary updated
+				payload: res.data //?{ id, likes: res.data } comprobar y borrar
 			})
 			dispatch(setAlert("Activity Removed", "success"))
 		})
