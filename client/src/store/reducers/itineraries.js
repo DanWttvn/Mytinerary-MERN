@@ -37,7 +37,7 @@ const itineraries = (state = initState, action) => {
 		case UPDATE_LIKES:
 			return {
 				...state,
-				itineraries: state.itineraries.map(itinerary => (itinerary._id === payload.id ? { // si el itin es el del id, actualiza los likes
+				itineraries: state.itineraries.map(itinerary => (itinerary._id === payload.itin_id ? { // si el itin es el del id, actualiza los likes
 						...itinerary, 
 						likes: payload.likes
 					}:(

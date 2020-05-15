@@ -129,7 +129,6 @@ export const deleteItinerary = id => dispatch => {
 
 
 // Update likes
-//todo: itin_id o id?ççççççççççççççç 
 export const updateLikes = itin_id => dispatch => {
 	axios.put(`/api/itineraries/favorites/${itin_id}`)
 		.then(res => {

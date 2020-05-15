@@ -12,7 +12,7 @@ class Heart extends Component {
 
 	updateFavorites = (itin_id) => {
 		this.props.updateFavorites(itin_id); //user
-		//* */ this.props.updateLikes(itin_id); //itin
+		this.props.updateLikes(itin_id); //itin
 
 		//? solo si esta in FavsPage, update displaye itineraries. se  lo paso desde FavoritesP. manualmente volvia a buscarlos, pero deberia actualizarse al actualizarse el reducer
 		// if (this.props.inFavsPage) {
@@ -24,22 +24,23 @@ class Heart extends Component {
 
 	render () {
 		const itin = this.props.itin //from parent
+		const user = this.props.user
 
-		let isFavorite;
-		// if logged in
-		if(this.props.user) {
-			if (this.props.user.favorites.indexOf(itin._id) !== -1) {
-				isFavorite = true
-			} else {
-				isFavorite = false
-			}
-		}
+		let isFavorite= false
+		if(user) {
+			user.favorites.forEach(fav => {
+				if(fav.itinerary === itin._id) { 
+					isFavorite = true
+				}
+			})
+		}		
 
 		return (
 			<div className="faHeart">
-				{ isFavorite ?
+				{ isFavorite ? (
 					<FontAwesomeIcon icon={fasHeart} onClick={()=>{this.updateFavorites(itin._id)}} className="fas-heart"/>
-					: <FontAwesomeIcon icon={farHeart} onClick={()=>{this.updateFavorites(itin._id)}} className="far-heart"/>
+				):(
+					<FontAwesomeIcon icon={farHeart} onClick={()=>{this.updateFavorites(itin._id)}} className="far-heart"/>)
 				}
 			</div>			
 		)	

@@ -48,6 +48,12 @@ class ActivitiesP extends Component {
 			
 						<ExtraInfoIcons itin={itinerary}/>
 
+						{/* //todo: if users, delete */}
+						{/* {!auth.loading
+							&& user === auth.user._id && (
+								<button onClick={() => deletePost(_id)} type="button" className="btn btn-danger"><i className="fas fa-times"></i></button>
+						)} */}
+
 						<div className="container">
 							<div className="itin-title-box">
 								<h6 className="subtitles-font subtitle">{itinerary.title}</h6>
