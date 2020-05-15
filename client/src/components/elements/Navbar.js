@@ -22,21 +22,21 @@ class Navbar extends Component {
 			<nav id="navbar">
 
 				{ isAuthenticated && user.avatar ?
-					<div className="profileNavbarBox" >
+					<div className="navbar-profile-box" >
 						<NavLink to="/profile"><img src={avatar} alt="profile pic"/></NavLink>
 					</div>
 					: <div>
-						  <NavLink to="/profile"><FontAwesomeIcon icon={faUser} className="faMenuIcon faUserMenu"/></NavLink>
+						  <NavLink to="/profile"><FontAwesomeIcon icon={faUser} className="fa-menu-icon faUserMenu"/></NavLink>
 					  </div>
 				}
 				{/* <div>
-					<NavLink to="/profile"><FontAwesomeIcon icon={faUser} className="faMenuIcon faUserMenu"/></NavLink>
+					<NavLink to="/profile"><FontAwesomeIcon icon={faUser} className="fa-menu-icon faUserMenu"/></NavLink>
 				</div> */}
 				<div>
-					<NavLink to="/cities"><FontAwesomeIcon icon={faSearch} className="faMenuIcon faSearch"/></NavLink>
+					<NavLink to="/cities"><FontAwesomeIcon icon={faSearch} className="fa-menu-icon"/></NavLink>
 				</div>
 				<div>
-					<NavLink to="/favorites"><FontAwesomeIcon icon={faHeart} className="faMenuIcon faHeartMenu"/></NavLink>
+					<NavLink to="/favorites"><FontAwesomeIcon icon={faHeart} className="fa-menu-icon"/></NavLink>
 				</div>
 
 			</nav>

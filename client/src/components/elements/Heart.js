@@ -38,8 +38,8 @@ class Heart extends Component {
 		return (
 			<div className="faHeart">
 				{ isFavorite ?
-					<FontAwesomeIcon icon={fasHeart} onClick={()=>{this.updateFavorites(itin._id)}} className="fasHeart"/>
-					: <FontAwesomeIcon icon={farHeart} onClick={()=>{this.updateFavorites(itin._id)}} className="farHeart"/>
+					<FontAwesomeIcon icon={fasHeart} onClick={()=>{this.updateFavorites(itin._id)}} className="fas-heart"/>
+					: <FontAwesomeIcon icon={farHeart} onClick={()=>{this.updateFavorites(itin._id)}} className="far-heart"/>
 				}
 			</div>			
 		)	

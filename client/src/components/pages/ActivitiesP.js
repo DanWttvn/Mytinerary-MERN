@@ -23,7 +23,7 @@ class ActivitiesP extends Component {
 		//* Change before deploy? a // const imgURL = itin.img		
 		let imgURL = ""
 		if(!loading && 
-				// itinerary && 
+				itinerary &&
 					itinerary.img.startsWith("uploads")) {
 			imgURL = `http://localhost:5000/${itinerary.img}`
 		} else if (!loading) {
@@ -34,22 +34,23 @@ class ActivitiesP extends Component {
 
 		return (
 			<div id="ActivitiesP" className="containerB">
-				{loading ? (
+				{ loading ? (
 					<Spinner/>
 				):(
 					<Fragment>
-						{ itinerary.activities.length !== 0 ?
+						{ itinerary.activities.length !== 0 ? (
 							<Activities activities={itinerary.activities}/>
-							: <div className="activityCard">
-								<img className="activitiesImg" src={imgURLDisplay} alt="activity"/>
+						):(
+							<div className="activity-card">
+								<img className="activities-img" src={imgURLDisplay} alt="activity"/>
 							</div>
-						}
+						)}
 			
 						<ExtraInfoIcons itin={itinerary}/>
 
 						<div className="container">
-							<div className="itinTitleBox">
-								<h6 className="subtitlesT subtitle">{itinerary.title}</h6>
+							<div className="itin-title-box">
+								<h6 className="subtitles-font subtitle">{itinerary.title}</h6>
 								{ this.props.isAuthenticated ?
 									<Heart itin={itinerary} />
 									: null
@@ -60,11 +61,6 @@ class ActivitiesP extends Component {
 
 							<div className="comments-section">
 								<CommentForm itin_id={itinerary._id} />
-								{/* {itinerary.comments.length > 0 ? (
-									itinerary.comments.map(comment => (
-										<CommentItem key={comment._id} comment={comment} itin_id={itinerary._id} />
-									))
-								): null} */}
 								{itinerary.comments.map(comment => (
 									<CommentItem key={comment._id} comment={comment} itin_id={itinerary.id} />
 								))}

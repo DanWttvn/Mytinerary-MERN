@@ -35,14 +35,14 @@ class SignUpP extends Component {
 
 	changeVisibility = (e) => {		
 		const password = document.getElementById("password");
-		const icon = document.getElementById("visibilityIcon");
+		const icon = document.getElementById("visibility-icon");
 
 		if (password.type === "password") {
 			password.type = "text";
-			icon.classList.add("visibilityBlue");
+			icon.classList.add("visibility-blue");
 		} else {
 			password.type = "password";
-			icon.classList.remove("visibilityBlue");
+			icon.classList.remove("visibility-blue");
 		}
 	}
 
@@ -54,45 +54,45 @@ class SignUpP extends Component {
 		}
 				
 		return (
-			<div id="signUp" className="fixedHeight">
+			<div id="signUp" className="fixed-height">
 
-				<form onSubmit={this.onSubmit} className="formBox">
+				<form onSubmit={this.onSubmit} className="form-box">
 					
-					<p className="subtitlesT whiteTitle">Create<br/>your account</p>
+					<p className="subtitles-font title-white">Create<br/>your account</p>
 
-					<div  className="formSection">
+					<div  className="form-section">
 						<input onChange={this.handleInput} type="text" name="username" id="user_name" required/>
-						<label htmlFor="user_name"  className="labelBox">
-							<span className="labelContent">User Name</span>
+						<label htmlFor="user_name"  className="label-box">
+							<span className="label-content">User Name</span>
 						</label>
 					</div>
 	
-					<div className="formSection">
+					<div className="form-section">
 						<input onChange={this.handleInput} type="email" name="email" id="email" required/>
-						<label htmlFor="email" className="labelBox">
-							<span className="labelContent">Contact Email</span>
+						<label htmlFor="email" className="label-box">
+							<span className="label-content">Contact Email</span>
 						</label>
 					</div>
 	
-					<div className="formSection">
+					<div className="form-section">
 						<input onChange={this.handleInput} type="password" name="password" id="password" required/>
-						<label htmlFor="password" className="labelBox">
-							<span className="labelContent">Password</span>
+						<label htmlFor="password" className="label-box">
+							<span className="label-content">Password</span>
 						</label>
-						<FontAwesomeIcon onClick={this.changeVisibility} icon={faEye} className="visibilityIcon" id="visibilityIcon"/>
+						<FontAwesomeIcon onClick={this.changeVisibility} icon={faEye} className="visibility-icon" id="visibility-icon"/>
 					</div>
 
-					<div  className="formSection">
+					<div  className="form-section">
 						<input onChange={this.handleInput} type="password" name="password2" id="password2" required/>
-						<label htmlFor="password2" className="labelBox">
-							<span className="labelContent">Confirm Password</span>
+						<label htmlFor="password2" className="label-box">
+							<span className="label-content">Confirm Password</span>
 						</label>
-						<FontAwesomeIcon onClick={this.changeVisibility} icon={faEye} className="visibilityIcon" id="visibilityIcon"/>
+						<FontAwesomeIcon onClick={this.changeVisibility} icon={faEye} className="visibility-icon" id="visibility-icon"/>
 					</div>
 	
-					<div className="btnsBox2">
-						<input className="transparentBtn" type="submit" name="submit" value="Send"></input>
-						<a className="secondaryBtn" href="/sign_in">Log in</a>
+					<div className="btns-box2">
+						<input className="btn-transparent" type="submit" name="submit" value="Send"></input>
+						<a className="btn-secondary" href="/sign_in">Log in</a>
 					</div>
 				</form>
 				
@@ -100,7 +100,7 @@ class SignUpP extends Component {
 				{/* <SignInSM/> */}
 
 				{/* --- BACKGROUND --- */}
-				<div className="mascaraExtra"></div>
+				<div className="mascara-extra"></div>
 				<LandingBg/>
 			</div>
 		)

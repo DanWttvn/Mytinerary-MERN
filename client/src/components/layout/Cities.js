@@ -12,20 +12,20 @@ const Cities = ({cities}) => {
 
 		return (
 			<Link to={`cities/${city.name}`} key={city._id}> 
-				<div className="cityCard" >
+				<div className="city-card" >
 					<div className="thumbnail" style={
 						{backgroundImage: imgURLDisplay, 
 						backgroundPosition: 'center center', 
 						backgroundSize: 'cover'}}></div>
 					{/* <img className="thumbnail" src={city.img} alt=""/> lo mismo */}
-					<p className="cityNameThumb">{city.name}</p>
+					<p className="city-name-thumb">{city.name}</p>
 				</div>
 			</Link>
 		)
 	})
 
 	return (
-		<div className="citiesGallery">
+		<div className="cities-gallery">
 			{citiesGallery}
 		</div>
 	)

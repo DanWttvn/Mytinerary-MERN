@@ -17,7 +17,7 @@ class ActivitiesP extends Component {
 		document.getElementById("newCommentForm").reset();
 	}
 
-	addCommentInput = (e) => {
+	handleInput = (e) => {
 		this.setState({
 			[e.target.name]: e.target.value
 		})
@@ -25,7 +25,7 @@ class ActivitiesP extends Component {
 
 	// auto-expand comment area
 	autosize = (e) => {
-		const textArea = document.getElementById("addCommentInput");
+		const textArea = document.getElementById("add-comment-input");
 		setTimeout(function(){
 			textArea.style.cssText = 'height:2.75em'; // con esto se vuelve a hacer mas pequeño
 			textArea.style.cssText = 'height:' + textArea.scrollHeight + 'px';
@@ -35,17 +35,17 @@ class ActivitiesP extends Component {
 	render () {
 		return (
 			<Fragment>
-					<p className="sectionTitle">Comments</p>
+					<p className="title-section">Comments</p>
 
 					{ this.props.isAuthenticated ? (
-						<form onSubmit={this.submitComment} id="newCommentForm" className="addCommentBox">
-							<textarea className="addCommentInput" id="addCommentInput" type="text" onChange={this.addCommentInput} onKeyDown={this.autosize} name="content" placeholder="Add comment..." required />
-							<input className="sendCommentBtn" type="submit" name="submit" value=">" />
+						<form onSubmit={this.submitComment} id="newCommentForm" className="add-comment-box">
+							<textarea className="add-comment-input" id="add-comment-input" type="text" onChange={this.handleInput} onKeyDown={this.autosize} name="content" placeholder="Add comment..." required />
+							<input className="send-comment-btn" type="submit" name="submit" value=">" />
 						</form>
 					):(
 						<div className="">
 							<p>Sign in to add comments</p>
-							<a href="/sign_in"><button className="btnInside">Sign in</button></a>
+							<a href="/sign_in"><button className="btn-inside">Sign in</button></a>
 						</div>	
 					)}
 

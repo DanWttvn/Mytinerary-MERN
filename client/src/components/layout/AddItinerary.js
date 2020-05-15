@@ -61,7 +61,7 @@ class AddItinerary extends Component {
 		return (
 			<div id="newItinerary" className="center">
 
-				<div className="addNewBox">
+				<div className="add-new-box">
 					<button className="addNewBtn" onClick={this.toggle}>+</button>
 					<span>Add new itinerary</span>
 				</div>
@@ -69,8 +69,8 @@ class AddItinerary extends Component {
 				{/* //todo: modal no funciona */}
 				<Modal isOpen={this.state.isOpen} toggle={this.toggle}>
 					{ isAuthenticated ? 
-						(<form className="addItinForm" onSubmit={this.handleSubmit}>
-							<p className="sectionTitle">Add a new itinerary</p>
+						(<form className="add-itin-form" onSubmit={this.handleSubmit}>
+							<p className="title-section">Add a new itinerary</p>
 							<div className="input">
 								
 								<label htmlFor="title">Title</label>
@@ -105,7 +105,7 @@ class AddItinerary extends Component {
 								<input type="text" id="hashtags" placeholder="" onChange={this.handleAddItin} required />
 								<small className="form-text">* Please use comma separated values</small>
 
-								<button className="btnInside" onClick={this.handleSubmit}>Add itinerary</button>
+								<button className="btn-inside" onClick={this.handleSubmit}>Add itinerary</button>
 							</div>
 						</form>
 					):(

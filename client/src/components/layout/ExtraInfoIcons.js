@@ -10,16 +10,16 @@ class ExtraInfoIcons extends Component {
 		const itin = this.props.itin
 
 		return (
-			<div className="extraInfoIconsBox">
-				<div className="extraInfoIcon">
+			<div className="extra-info-icons-box">
+				<div className="extra-info-icon">
 					<FontAwesomeIcon icon={faThumbsUp} className="faExtraInfo"/>
 					<span>{itin.likes.length}</span>
 				</div>
-				<div className="extraInfoIcon">
+				<div className="extra-info-icon">
 					<FontAwesomeIcon icon={faClock} className="faExtraInfo"/>
 					<span> {itin.duration}</span>
 				</div>
-				<div className="extraInfoIcon">
+				<div className="extra-info-icon">
 					<span>{itin.price}</span>
 				</div>
 			</div>

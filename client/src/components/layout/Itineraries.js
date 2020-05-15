@@ -17,12 +17,12 @@ class Itineraries extends Component {
 
 		// No itineraries message
 		let noItinerariesMsg = isInFavsPage ? (
-				<div className="btnsBox3 center">
+				<div className="btns-box3 center">
 					<p>You still have no favorites!</p>
-					<div className="btnInside"><a href="/cities">Explore</a></div>
+					<div className="btn-inside"><a href="/cities">Explore</a></div>
 				</div>
 			):( 
-				<div className="btnsBox3 center">
+				<div className="btns-box3 center">
 					<p>There are still no itineraries for this city</p>
 					<br/>
 					<AddItineraryModal /> 
@@ -56,8 +56,8 @@ class Itineraries extends Component {
 			})
 
 			return (				
-				<div className="itinBox" key={itin._id}>
-					<div className="itinCard">
+				<div className="itin-box" key={itin._id}>
+					<div className="itin-card">
 						<Link to={itinURL}>
 
 							<div className="user-avatar" 
@@ -69,15 +69,15 @@ class Itineraries extends Component {
 								<img src={avatarURLDisplay} alt=""/>
 							</div>
 
-							<div className="itinImgPrev" style={
+							<div className="itin-img-prev" style={
 								{backgroundImage: imgURLDisplay,
 								backgroundPosition: 'center center', 
 								backgroundSize: 'cover'}}>
 							</div>
 
-							<div className="itinInfoPrev">
-								<p className="shortenedSummary">{itin.summary}</p>
-								<div className="mascaraCard"></div>
+							<div className="itin-info-prev">
+								<p className="shortened-summary">{itin.summary}</p>
+								<div className="card-mascara"></div>
 							</div>
 						</Link>
 						
@@ -88,10 +88,10 @@ class Itineraries extends Component {
 								
 					</div>	
 
-					<div className="extraInfoBox">
+					<div className="extra-info-box">
 						<ExtraInfoIcons itin={itin}/>
-						<span className="subtitlesT subtitle">{itin.title}</span>
-						<div className="hashtagsBox">
+						<span className="subtitles-font subtitle">{itin.title}</span>
+						<div className="hashtags-box">
 							{ hashtags }
 						</div>
 					</div>
@@ -100,7 +100,7 @@ class Itineraries extends Component {
 		})
 	
 		return (
-			<div className="itinsCarrousel">
+			<div className="itins-carrousel">
 				{areItins ? (
 					itinsCarrousel 
 				):(

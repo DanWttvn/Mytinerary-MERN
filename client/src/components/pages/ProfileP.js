@@ -50,7 +50,7 @@ class Profile extends Component {
 		return (
 			<div id="ProfileP" className="container">
 				<Logo/>
-				<p className="titlesT mainTitle">Profile</p>
+				<p className="titles-font title-main">Profile</p>
 
 				{/* {loading ? (
 					<Spinner/>
@@ -59,22 +59,22 @@ class Profile extends Component {
 				
 				{ !loading && isAuthenticated ? (
 					<div className="center">
-						<div className="profileBox">
-							<p className="subtitlesT subtitle">{`Welcome, ${user.username}`}</p>
-							<div className="avatarBox">
+						<div className="profile-box">
+							<p className="subtitles-font subtitle">{`Welcome, ${user.username}`}</p>
+							<div className="avatar-box">
 								{ user.avatar ? 
 									<img src={avatar} alt="profile pic"/>
-									: <FontAwesomeIcon icon={faUser} className="faProfileIcon"/>
+									: <FontAwesomeIcon icon={faUser} className="fa-profile-icon"/>
 								}
 							</div>
-							<button className="editBtn" onClick={this.toggle}><FontAwesomeIcon icon={faPen} /></button>
+							<button className="edit-btn" onClick={this.toggle}><FontAwesomeIcon icon={faPen} /></button>
 
 							<p>{ user.username }</p>
 							<p>{ user.email }</p>
 						</div>
 						
 						<Modal isOpen={this.state.isOpen} toggle={this.toggle}>
-							<div className="modalProfileBox">
+							<div className="modal-profile-box">
 								<ImageUploader
 									withIcon={true}
 									buttonText="Choose image"
@@ -83,7 +83,7 @@ class Profile extends Component {
 									maxFileSize={10485760}
 									withPreview={true}
 								/>
-								<button className="btnInside" onClick={this.fileUploadHandler}>Upload</button>
+								<button className="btn-inside" onClick={this.fileUploadHandler}>Upload</button>
 							</div>
 						</Modal>
 

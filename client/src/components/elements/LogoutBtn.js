@@ -10,7 +10,7 @@ class LogoutBtn extends Component {
 
 	render() {
 		return (
-			<button className="btnInside" onClick={this.props.logout}>Log out</button>
+			<button className="btn-inside" onClick={this.props.logout}>Log out</button>
 		)
 	}
 }

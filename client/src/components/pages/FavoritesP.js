@@ -18,7 +18,7 @@ class FavoritesP extends Component {
 		return (
 			<div id="FavoritesP" className="">
 				<Logo/>
-				<p className="titlesT mainTitle containerPadding">My favorites</p>
+				<p className="titles-font title-main container-padding">My favorites</p>
 				{ this.props.isAuthenticated ? 
 					<div>
 						<Itineraries inFavsPage={"inFavsPage"} itineraries={this.props.favItineraries}/>

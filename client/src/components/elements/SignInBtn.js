@@ -4,9 +4,9 @@ import React, { Component } from "react"
 class SignInBtn extends Component {
 	render() {
 		return (
-			<div className="btnsBox4 center">
+			<div className="btns-box4 center">
 				<p>Log in to see this</p>
-				<a href="/sign_in"><button className="btnInside">Sign in</button></a>
+				<a href="/sign_in"><button className="btn-inside">Sign in</button></a>
 			</div>
 		)	
 	}

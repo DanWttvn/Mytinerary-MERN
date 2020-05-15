@@ -31,7 +31,7 @@ class ItinerariesP extends Component {
 					<Spinner/>
 				):(
 					<Fragment>
-						<p className="titlesT mainTitle">Where are you going?</p>
+						<p className="titles-font title-main">Where are you going?</p>
 						<Searchbar getSearchTerm={this.filterWithSearchTerm} />
 						<Cities cities={cities} />	
 						<AddItinerary />

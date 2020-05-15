@@ -22,7 +22,7 @@ class ItinerariesP extends Component {
 					<Spinner/>
 				):(
 					<Fragment>
-						<p className="titlesT mainTitle containerPadding">{this.props.match.params.city}</p>
+						<p className="titles-font title-main container-padding">{this.props.match.params.city}</p>
 						<Itineraries itineraries={itineraries}/>
 					</Fragment> 
 				)}

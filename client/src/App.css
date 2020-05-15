@@ -1,4 +1,3 @@
-
 html, body {
 	margin: 0;
 	padding: 0;
@@ -85,7 +84,7 @@ button:focus {
 body {
 	font-family: "Futura Light", sans-serif;
 }
-.titlesT {
+.titles-font {
 	font-family: 'Gotham Black';
 }
 h1 {
@@ -95,7 +94,7 @@ h1 {
 	z-index: 100;
 	position: relative;
 }
-.subtitlesT {
+.subtitles-font {
 	font-family: "Gotham Bold";
 }
 /*  FONT SIZE */
@@ -110,14 +109,14 @@ small {
 	color: rgb(85, 85, 85);
 }
 
-.hugeLetters {
+.huge-letters {
 	font-size: 70px;
 }
-.bigLetters {
+.big-letters {
 	font-size: 55px;
 
 }
-.mainTitle {
+.title-main {
 	font-size: 35px;
 	margin-top: 15px;
 	width: 100%;
@@ -126,10 +125,10 @@ small {
 .subtitle {
 	font-size: 23px;
 }
-.sectionTitle {
+.title-section {
 	font-family: "Gotham Medium";
 }
-.whiteTitle {
+.title-white {
 	font-size: 30px;
 	width: 70%;
 	position: relative;
@@ -144,7 +143,7 @@ small {
 	margin: 5px 0;
 }
 
-.cityNameThumb {
+.city-name-thumb {
     font-size: 17px;
 }
 
@@ -162,11 +161,11 @@ small {
 	/* margin-right: auto;
 	margin-left: auto; */
 }
-.containerPadding {
+.container-padding {
 	padding-right: 25px;
 	padding-left: 25px;
 }
-.fixedHeight {
+.fixed-height {
 	height: 100vh;
 }
 
@@ -175,7 +174,7 @@ a {
 	color: #000;
 }
 
-.btnsBox1 {
+.btns-box1 {
 	align-self: center;
 	position: relative;
 	top: 185px;
@@ -185,7 +184,7 @@ a {
 	align-items: center;
 }
 
-.btnsBox2 {
+.btns-box2 {
 	margin-top: 60px;
 	z-index: 100;
 
@@ -194,7 +193,7 @@ a {
 	align-items: center;
 }
 
-.btnsBox3 {
+.btns-box3 {
 	margin-top: 270px;
 	z-index: 100;
 
@@ -203,20 +202,20 @@ a {
 	align-items: center;
 }
 
-#ProfileP .btnsBox4,
-#FavoritesP .btnsBox4 {
+#ProfileP .btns-box4,
+#FavoritesP .btns-box4 {
 	position: relative;
 	top: 200px;
 }
-.btnsBox4 {
+.btns-box4 {
 	width: fit-content;
 }
-.btnsBox4 button{
+.btns-box4 button {
 	width: 100%;
 
 }
 
-.transparentBtn {
+.btn-transparent {
 	z-index: 100;
 	background: transparent;
 	border: 2px solid #fff;
@@ -226,15 +225,15 @@ a {
 	font-size: 21px;
 }
 
-.transparentBtn:active {
+.btn-transparent:active {
 	background: rgba(255, 255, 255, 0.15);
 }
 
-.transparentBtn a {
+.btn-transparent a {
 	color: #fff;
 }
 
-.secondaryBtn {
+.btn-secondary {
 	z-index: 10;
 	position: relative;
 	top: 7px;
@@ -248,7 +247,7 @@ a {
 	text-align: center;
 	width: 105px;
 }
-.secondaryBtn:active {
+.btn-secondary:active {
 	color: rgb(185, 185, 185)
 }
 
@@ -260,11 +259,11 @@ button:active {
 	text-decoration: none;
 	color: white;
 }
-.btnInside a {
+.btn-inside a {
 	color: white;
 }
 
-.btnInside {
+.btn-inside {
 	margin-top: 10px;
 	background: var(--main-red);
 	font-size: 18px;
@@ -276,7 +275,7 @@ button:active {
 	box-shadow: 2px 3px 5px -2px rgba(0,0,0,0.15);
 }
 
-.editBtn {
+.edit-btn {
 	position: relative;
 	bottom: 35px;
 	left: 40px;
@@ -341,7 +340,7 @@ input:-webkit-autofill {
 	position: absolute;
 }
 
-.mascaraExtra {
+.mascara-extra {
 	width: 100%;
 	height: 100vh;
 	top: 0;
@@ -406,23 +405,23 @@ input:-webkit-autofill {
 	box-shadow: 0px -3px 16px -11px rgba(112,112,112,0.86);
 }
 
-.faMenuIcon {
+.fa-menu-icon {
 	transform: scale(1.25);
 	color: var(--soft-black);
 }
 
-.profileNavbarBox {
+.navbar-profile-box {
 	width: 25px;
 	height: 25px;
 	border-radius: 50%;
 	overflow: hidden;
 }
 
-.profileNavbarBox img {
+.navbar-profile-box img {
 	width: 25px;
 }
 
-.profileNavbarBox .active { 
+.navbar-profile-box .active { 
 	/* no va çç*/
 	/* border: solid 1px red; */
 }
@@ -433,7 +432,7 @@ input:-webkit-autofill {
 
 /* -------- LANDING PAGE -------- */
 
-.textOnTop {
+.text-on-top {
 	position: relative;
 	width: 100%;
 	z-index: 100;
@@ -445,7 +444,7 @@ input:-webkit-autofill {
 	top: 100px;
 }
 
-.landingMsg {
+.landing-msg {
 	/* position: relative; */
 	top: 100px;
 	width: 100%;
@@ -453,7 +452,7 @@ input:-webkit-autofill {
 
 /* -------- SIGN IN FORM -------- */
 
-.formBox {
+.form-box {
 	position: absolute;
 	top: 60px;
 
@@ -467,11 +466,11 @@ input:-webkit-autofill {
 	align-items: center;
 }
 
-#signIn .whiteTitle {
+#sign-inP .title-white {
 	margin-bottom: 30px;
 }
 
-.signInSMBox {
+.sign-in-SM-box {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
@@ -501,18 +500,7 @@ input:-webkit-autofill {
 	background: rgba(90, 94, 250, 0.6);
 }
 
-.errorMsg {
-	background-color: rgba(253, 94, 94, 0.6);
-	width: 50%;
-	padding-top: 2px;
-	padding-bottom: 2px;
-	position: relative;
-	z-index: 100;
-	color: white;
-	text-align: center;
-}
-
-.formSection {
+.form-section {
 	position: relative;
 	height: 80px;
 	width: 70%;
@@ -521,7 +509,7 @@ input:-webkit-autofill {
 	z-index: 200;
 }
 
-.formSection input {
+.form-section input {
 	width: 100%; 
 	height: 100%;
 	/* color: #595f6e; */
@@ -532,7 +520,7 @@ input:-webkit-autofill {
 	background: transparent;
 }
 
-.formSection label {
+.form-section label {
 	position: absolute;
 	color: rgb(185, 185, 185);
 	bottom: 0;
@@ -544,7 +532,7 @@ input:-webkit-autofill {
 	background: transparent;
 }
 
-.formSection label::after {
+.form-section label::after {
 	content: ""; /* puedo añadir cosas extra despues, pero solo querio styles */
 	position: absolute;
 	left: 0;
@@ -557,7 +545,7 @@ input:-webkit-autofill {
 	transition: transform 0.3s ease;
 }
 
-.labelContent {
+.label-content {
 	position: absolute;
 
 	width: 70%;
@@ -567,7 +555,7 @@ input:-webkit-autofill {
 	transition: all 0.3s ease;
 }
 
-.visibilityIcon {
+.visibility-icon {
 	position: absolute;
 	right: 10px;
 	bottom: 20px;
@@ -578,20 +566,20 @@ input:-webkit-autofill {
 	z-index: 100;
 }
 
-.visibilityBlue {
+.visibility-blue {
 	color: var(--form-blue);
 }
 
-.formSection input:focus + .labelBox .labelContent, /* el + indica que el que esté debajo. cuando clickamos en el input, afecta al label así: */
-.formSection input:valid + .labelBox .labelContent { /* cuando se mete info, se queda ahí */
+.form-section input:focus + .label-box .label-content, /* el + indica que el que esté debajo. cuando clickamos en el input, afecta al label así: */
+.form-section input:valid + .label-box .label-content { /* cuando se mete info, se queda ahí */
 	transform: translateY(-120%);
 	font-size: 18px;
 	color: var(--form-blue);
 	background: none;
 }
 
-.formSection input:focus + .labelBox::after,
-.formSection input:valid + .labelBox::after {
+.form-section input:focus + .label-box::after,
+.form-section input:valid + .label-box::after {
 	transform: translateX(0%);
 }
 
@@ -613,7 +601,7 @@ input:-webkit-autofill {
 
 /* -------- CITIES LIST -------- */
 
-.citiesGallery {
+.cities-gallery {
 	display: flex;
 	flex-flow: column wrap;
 	align-items: center;
@@ -622,7 +610,7 @@ input:-webkit-autofill {
 	width: 100%;
 }
 
-.cityCard {
+.city-card {
 	width: 100%;
 	display: flex;
 	flex-flow: row wrap;
@@ -641,7 +629,7 @@ input:-webkit-autofill {
 	border-radius: 10px;
 }
 
-.cityNameThumb {
+.city-name-thumb {
 	align-self: center;
 	margin-left: 20px;
 }
@@ -649,7 +637,7 @@ input:-webkit-autofill {
 
 /* -------- CITY ITINS -------- */
 
-.itinsCarrousel {
+.itins-carrousel {
 	display: flex;
 	overflow-x: auto;
 	-webkit-overflow-scrolling: touch;
@@ -661,11 +649,11 @@ input:-webkit-autofill {
 	padding-top: 30px;
 }
 
-.itinsCarrousel::-webkit-scrollbar {
+.itins-carrousel::-webkit-scrollbar {
 	visibility: hidden;
 }
 
-.itinBox {
+.itin-box {
 	flex-shrink: 0;
 	display: flex;
 	flex-flow: column wrap;
@@ -673,13 +661,13 @@ input:-webkit-autofill {
 	margin-left: 37px;
 	position: relative;
 }
-.itinBox:first-of-type {
+.itin-box:first-of-type {
 	margin-left: 25px;
 }
-.itinBox:last-of-type {
+.itin-box:last-of-type {
 	padding-right: 25px;
 }
-.itinCard {
+.itin-card {
 	position: relative;	
 	/* height: 350px;
 	width: 280px; */
@@ -695,38 +683,38 @@ input:-webkit-autofill {
 	overflow: hidden;
 }
 
-.itinCard .user-avatar {
+.itin-card .user-avatar {
 	position: absolute;
 	width: 55px;
 	height: 55px;
 	left: 30px;
 	top: 28px;
 	border-radius: 50%;
+	/* border: 3px #fff solid; */
 	overflow: hidden;
 	z-index: 2;
 	
-	-webkit-box-shadow: 2px 3px 16px -2px rgba(0,0,0,0.4); 
-	box-shadow: 2px 3px 16px -2px rgba(0,0,0,0.4);
+	-webkit-box-shadow: 2px 3px 16px -2px rgba(0,0,0,1); 
+	box-shadow: 2px 3px 16px -2px rgba(0,0,0,1);
 }
 
-.itinCard .user-avatar img {
+.itin-card .user-avatar img {
 	width: 100%;
 	height: 100%;
 }
 
-.itinImgPrev {
+.itin-img-prev {
 	width: 100%;
-	/* ççççç buscar height porque sse esta deformando */
 	height: 100%;
 	position: absolute;
 }
 
-.itinInfoPrev {
+.itin-info-prev {
 	position: absolute;
 	bottom: 0;
 }
 
-.mascaraCard {
+.card-mascara {
 	background: rgba(0, 0, 0, 0.4);
 	width: 100%;
 	height: 110%;
@@ -738,7 +726,7 @@ input:-webkit-autofill {
 	box-shadow:  0px 0px 30px 20px rgba(0, 0, 0, 0.4);
 }
 
-.itinInfoPrev .shortenedSummary {
+.itin-info-prev .shortened-summary {
 	z-index: 200;
 	overflow: hidden;
 	display: -webkit-box;	
@@ -750,12 +738,12 @@ input:-webkit-autofill {
 	position: relative;
 }
 
-.extraInfoBox {
+.extra-info-box {
 	position: relative;
 	width: 310px;
 }
 
-.extraInfoIconsBox {
+.extra-info-icons-box {
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: space-around;
@@ -763,11 +751,11 @@ input:-webkit-autofill {
 	margin-top: 15px;
 }
 
-.extraInfoIcon {
+.extra-info-icon {
 	color: var(--dark-grey);
 }
 
-.extraInfoBox .subtitle {
+.extra-info-box .subtitle {
 	margin-left: 27px;
 	margin-right: 27px;
 	/* color: black; */
@@ -779,17 +767,17 @@ input:-webkit-autofill {
  	text-overflow: ellipsis;
 }
 
-.extraInfoBox .hashtagsBox {
+.extra-info-box .hashtags-box {
 	margin-left: 27px;
 	display: flex;
 	flex-flow: row wrap;
 }
-.extraInfoBox .hashtag {
+.extra-info-box .hashtag {
 	color: rgb(150, 150, 150);
 	margin-right: 20px;
 }
 
-.itinTitleBox {
+.itin-title-box {
 	position: relative;
 	width: 100%;
 }
@@ -801,7 +789,7 @@ input:-webkit-autofill {
 
 /* -------- HEART ICON -------- */
 
-.itinCard .faHeart {
+.itin-card .faHeart {
 	position: absolute;
 	right: 23px;
 	top: 23px;
@@ -810,7 +798,7 @@ input:-webkit-autofill {
 
 }
 
-.itinCard .faHeart svg {
+.itin-card .faHeart svg {
 	border-radius: 50%;
 	-webkit-box-shadow: 0px 0px 30px 20px rgba(255, 255, 255, 0.3); 
 	box-shadow: 0px 0px 30px 20px rgba(255, 255, 255, 0.3);
@@ -825,16 +813,16 @@ input:-webkit-autofill {
 	transform: scale(1.45);
 }
 
-.farHeart {
+.far-heart {
 	color: var(--soft-black);
 }
-.fasHeart {
+.fas-heart {
 	color: var(--intense-red);
 }
 
 /* -------- ADD NEW -------- */
 
-.addNewBox {
+.add-new-box {
 	margin-bottom: 70px;
 }
 
@@ -850,7 +838,7 @@ input:-webkit-autofill {
 	box-shadow: 2px 3px 5px -2px rgba(0,0,0,0.15);
 }
 
-.addNewBox span {
+.add-new-box span {
 	margin-left: 5px;	
 	font-weight: 400;
 }
@@ -868,35 +856,35 @@ input:-webkit-autofill {
 	margin-top: 20px;
 }
 
-.addItinForm input {
+.add-itin-form input {
 	width: 100%;
 	/* margin-bottom: 20px; */
 	border: none;
 	border-bottom: 1px solid rgb(170,170,170);
 }
-.addItinForm input:focus {
+.add-itin-form input:focus {
 	border-bottom: 1px solid var(--soft-black);
 }
-.addItinForm label {
+.add-itin-form label {
 	margin-top: 20px;
 	margin-bottom: 0;
 }
 
 /* -------- ACTIVITIES -------- */
 
-.activityCard {
+.activity-card {
 	width: 100%;
 	height: 250px;
 	border-bottom-left-radius: 30px;
 	border-bottom-right-radius: 30px;
 	overflow: hidden;
 }
-.activitiesImg {
+.activities-img {
 	width: 100%;
 	min-height: 250px;
 }
 
-.activityTitle {
+.activity-title {
 	font-family: "Gotham Light";
 	font-size: 14px;
 	position: absolute;
@@ -918,7 +906,7 @@ input:-webkit-autofill {
 	margin-top: 10px;
 }
 
-.addCommentBox {
+.add-comment-box {
 	position: relative;
 	margin: 10px 0;
 	border-radius: 10px;
@@ -926,14 +914,14 @@ input:-webkit-autofill {
 	border: 1px #ccc solid;
 }
 
-.addCommentInput {
+.add-comment-input {
 	width: calc(100% - 30px);
 	height: 2.75em; /* initial height */
 	padding: 10px;
 	border: none;
 }
 
-.sendCommentBtn {
+.send-comment-btn {
 	background: var(--soft-black);
 	color: white;
 	font-weight: bold;
@@ -945,7 +933,7 @@ input:-webkit-autofill {
 	/* top: calc(50%); */
 	bottom: 5px;
 }
-.commentBox {
+.comment-box {
 	background: var(--bg-grey);
 	margin-bottom: 10px;
 	border-radius: 10px;
@@ -959,7 +947,7 @@ input:-webkit-autofill {
 	border-radius: 50%;
 }
 
-.commentName {
+.comment-name {
 	font-weight: bold;
 	font-size: 15px;
 	text-align: end;
@@ -967,7 +955,7 @@ input:-webkit-autofill {
 
 /* -------- PROFILE -------- */
 
-.profileBox {
+.profile-box {
 	margin-top: 70px;
 	width: 100%;
 	display: flex;
@@ -975,13 +963,13 @@ input:-webkit-autofill {
 	align-items: center;	
 }
 
-.profileBox p {
+.profile-box p {
 	font-size: 18px;
 	text-align: center;
 	margin-bottom: 10px;
 }
 
-.avatarBox {
+.avatar-box {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -995,21 +983,21 @@ input:-webkit-autofill {
 	background: var(--bg-grey);
 }
 
-.avatarBox .faProfileIcon {
+.avatar-box .fa-profile-icon {
 	width: 130px;
 	height: 130px;
 	color: var(--dark-grey);
 }
 
-.avatarBox img {
+.avatar-box img {
 	width: 150px;
 }
 
-.modalProfileBox input {
+.modal-profile-box input {
 	width: 100%;
 	font-size: 11px;
 }
 
-.modalProfileBox button {
+.modal-profile-box button {
 	width: 100%;
 }

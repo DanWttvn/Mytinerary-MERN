@@ -21,22 +21,22 @@ class LandingP extends Component {
 	render() {
 		const { isAuthenticated, user, loading } = this.props.auth
 		return (
-			<div className="fixedHeight">
-				<div className="textOnTop">
+			<div className="fixed-height">
+				<div className="text-on-top">
 					
 					{ !loading && isAuthenticated ? (
-						<div className="landingMsg">
-							<p className="titlesT bigLetters">{`Welcome, ${user.username}!`}</p>
-							<div className="btnsBox3">
-								<button className="transparentBtn"><NavLink to="/cities">Explore ></NavLink></button>
+						<div className="landing-msg">
+							<p className="titles-font big-letters">{`Welcome, ${user.username}!`}</p>
+							<div className="btns-box3">
+								<button className="btn-transparent"><NavLink to="/cities">Explore ></NavLink></button>
 							</div>
 						</div>
 					):(
-						<div className="landingMsg">
-							<p className="titlesT hugeLetters">Visit,<br/>Explore,<br/>Enjoy!</p>
-							<div className="btnsBox1">
-								<button className="transparentBtn"><NavLink to="/sign_in">Sign in</NavLink></button>
-								<NavLink className="secondaryBtn" to="/cities">Enter as a guest</NavLink>
+						<div className="landing-msg">
+							<p className="titles-font huge-letters">Visit,<br/>Explore,<br/>Enjoy!</p>
+							<div className="btns-box1">
+								<button className="btn-transparent"><NavLink to="/sign_in">Sign in</NavLink></button>
+								<NavLink className="btn-secondary" to="/cities">Enter as a guest</NavLink>
 							</div>
 						</div>
 					)}

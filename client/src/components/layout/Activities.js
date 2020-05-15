@@ -42,9 +42,9 @@ class Activities extends Component {
 		const activitiesCarrousel = this.props.activities.map((activity, i) => {
 			return (
 				<CarouselItem onExiting={() => this.setAnimating(true)} onExited={() => this.setAnimating(false)} key={i}>
-					<div className="activityCard">
-						<img className="activitiesImg" src={activity.img} alt="activity" key={i}/>
-						<span className="activityTitle">{activity.title}</span>
+					<div className="activity-card">
+						<img className="activities-img" src={activity.img} alt="activity" key={i}/>
+						<span className="activity-title">{activity.title}</span>
 					</div>
 				</CarouselItem>
 			)

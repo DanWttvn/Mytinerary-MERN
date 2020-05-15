@@ -11,10 +11,10 @@ const CommentItem = ({ itin_id, comment: {_id, content, username, avatar, user, 
 	const comment_id = _id
 
 	return (
-		<div className="commentBox" key={_id}>			
+		<div className="comment-box" key={_id}>			
 			<div>
 				<img className="comment-avatar" src={avatarURLDisplay} alt=""/>
-				<p className="commentName">{username}</p>
+				<p className="comment-name">{username}</p>
 			</div>
 			<div>
 				<p>{content}</p>
