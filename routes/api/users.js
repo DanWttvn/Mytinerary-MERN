@@ -187,18 +187,13 @@ router.put("/favorites/:itin_id", passport.authenticate("jwt", {session: false})
 
 	userModel.findById(req.user.id)
 		.then(user => {
-
 			// Check if already been like
 			if(user.favorites.filter(favorite => favorite.itinerary.toString() === itin_id).length > 0) { 
-				console.log("Already liked");
-				
 				// Get remove index
 				const removeIndex = user.favorites.map(favorite => favorite.itinerary.toString()).indexOf(itin_id);
-				
 				// 2. modifica el user
 				user.favorites.splice(removeIndex, 1)
 			} else {
-				console.log("Not liked yet");
 				user.favorites.unshift({ itinerary: itin_id })
 			}
 

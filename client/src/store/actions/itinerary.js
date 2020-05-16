@@ -42,6 +42,7 @@ export const getItinerariesByCity = city => dispatch => {
 }
 
 
+
 //* WORKS *//
 // Get city by id
 export const getItinerary = id => dispatch => {
@@ -62,6 +63,8 @@ export const getItinerary = id => dispatch => {
 }
 
 
+
+//* WORKS *// 
 // Get favorites
 export const getFavorites = () => dispatch => {
 	dispatch({ type: CLEAR_ITINERARIES })
@@ -81,10 +84,10 @@ export const getFavorites = () => dispatch => {
 }
 
 
+
 //* WORKS *//
 // Add itinerary
 export const addItinerary = formData => dispatch => {
-	//! por ser foto ?
 	const config = {
 		headers: {
 			"Content-type" : "multipart/form-data"
@@ -128,6 +131,7 @@ export const deleteItinerary = id => dispatch => {
 }
 
 
+//* WORKS *//
 // Update likes
 export const updateLikes = itin_id => dispatch => {
 	axios.put(`/api/itineraries/favorites/${itin_id}`)

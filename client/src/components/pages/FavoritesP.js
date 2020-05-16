@@ -1,31 +1,41 @@
-import React, {Component} from "react"
-import Navbar from "../UI_Components/Navbar"
+import React, {Component, Fragment} from "react"
+import Navbar from "../elements/Navbar"
 import { connect } from "react-redux"
-// import { getItinerariesByFavs } from "../../store/actions/auth"
-import Logo from "../UI_Components/Logo"
-import Itineraries from "../display_Components/Itineraries"
-import SignInBtn from "../UI_Components/SignInBtn"
+import { getFavorites } from "../../store/actions/itinerary"
+import Logo from "../elements/Logo"
+import Itineraries from "../layout/Itineraries"
+import SignInBtn from "../elements/SignInBtn"
+import Spinner from "../elements/Spinner"
 
 
 class FavoritesP extends Component {
 
 	componentDidMount() {
-		this.props.getItinerariesByFavs()
+		this.props.getFavorites()
 	}
 
-	render () {		
+	render () {
+		const { itineraries, loading } = this.props.itineraries
 
 		return (
-			<div id="FavoritesP" className="">
+			<div id="FavoritesP" className="containerB">
+			{/* <Fragment> */}
 				<Logo/>
 				<p className="titles-font title-main container-padding">My favorites</p>
-				{ this.props.isAuthenticated ? 
-					<div>
-						<Itineraries inFavsPage={"inFavsPage"} itineraries={this.props.favItineraries}/>
-					</div>
-					: <SignInBtn/>
-				}
+
+				{loading ? (
+					<Spinner/>
+				):(
+					<Fragment>			
+						{ this.props.isAuthenticated ? (
+							<Itineraries inFavsPage={"inFavsPage"} itineraries={itineraries}/>
+						):(
+							<SignInBtn/>
+						)}
+					</Fragment>
+				)}
 				<Navbar/>
+			{/* </Fragment> */}
 			</div>
 		)
 	}
@@ -34,15 +44,14 @@ class FavoritesP extends Component {
 const mapStateToProps = (state) => {
 	return {
 		isAuthenticated: state.auth.isAuthenticated,
-		favItineraries: state.itineraries.itineraries
+		itineraries: state.itineraries
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		getItinerariesByFavs: () => dispatch(getItinerariesByFavs())
+		getFavorites: () => dispatch(getFavorites())
 	}
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(FavoritesP);

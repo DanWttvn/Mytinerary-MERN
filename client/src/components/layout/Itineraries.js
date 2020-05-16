@@ -9,11 +9,8 @@ import Heart from "../elements/Heart"
 
 class Itineraries extends Component {
 	render () {
-		const { 
-			user, //para inFavsPage
-			isAuthenticated } = this.props.auth
+		const { user, isAuthenticated } = this.props.auth
 		const isInFavsPage = this.props.inFavsPage
-
 
 		// No itineraries message
 		let noItinerariesMsg = isInFavsPage ? (
@@ -31,11 +28,11 @@ class Itineraries extends Component {
 
 		//todo: solucionar
 		let areItins = true;
-		// if(isInFavsPage) {
-		// 	areItins = user.favorites[0] ? true : false;
-		// } else {
-		// 	areItins = this.props.itineraries[0] ? true : false
-		// }
+		if(isInFavsPage) {
+			areItins = user.favorites.length > 0 ? true : false;
+		} else {
+			areItins = this.props.itineraries.length > 0 ? true : false
+		}
 
 
 		const itinsCarrousel = this.props.itineraries.map(itin => {
@@ -44,7 +41,7 @@ class Itineraries extends Component {
 
 			//* Change before deploy? a // const imgURL = "url(" + itin.img + ")"
 			const imgURL = itin.img.startsWith("uploads") ? "url(http://localhost:5000/" + itin.img + ")" : "url(" + itin.img + ")"
-			const imgURLDisplay = imgURL.replace(/\\/g, "/");  // the \ gives me an error, so i have to change it to /
+			const imgURLDisplay = imgURL.replace(/\\/g, "/");
 
 			const avatarURL = itin.avatar.startsWith("uploads") ? "http://localhost:5000/" + itin.avatar : itin.avatar
 			const avatarURLDisplay = avatarURL.replace(/\\/g, "/");
@@ -60,12 +57,7 @@ class Itineraries extends Component {
 					<div className="itin-card">
 						<Link to={itinURL}>
 
-							<div className="user-avatar" 
-							// style={
-							// 	{backgroundImage: avatarURLDisplay,
-							// 	backgroundPosition: 'center center', 
-							// 	backgroundSize: 'cover'}}
-							>
+							<div className="user-avatar">
 								<img src={avatarURLDisplay} alt=""/>
 							</div>
 

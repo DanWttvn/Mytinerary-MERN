@@ -6,6 +6,7 @@ import Activities from "../layout/Activities"
 import ExtraInfoIcons from "../layout/ExtraInfoIcons"
 import Heart from "../elements/Heart"
 import Spinner from '../elements/Spinner'
+import ItineraryOptions from '../elements/ItineraryOptions'
 import CommentForm from '../elements/CommentForm'
 import CommentItem from '../elements/CommentItem'
 
@@ -19,14 +20,16 @@ class ActivitiesP extends Component {
 
 	render () {
 		const { itinerary, loading } = this.props.itineraries
+		const auth = this.props.auth
 		
 		//* Change before deploy? a // const imgURL = itin.img		
 		let imgURL = ""
-		if(!loading && 
-				itinerary &&
-					itinerary.img.startsWith("uploads")) {
+		if(!loading
+				&& itinerary
+					&& itinerary.img.startsWith("uploads")) {
 			imgURL = `http://localhost:5000/${itinerary.img}`
-		} else if (!loading) {
+		} else if (!loading
+						&& itinerary) {
 			imgURL = itinerary.img
 		}		
 		const imgURLDisplay = imgURL.replace(/\\/g, "/");
@@ -34,9 +37,7 @@ class ActivitiesP extends Component {
 
 		return (
 			<div id="ActivitiesP" className="containerB">
-				{ loading ? (
-					<Spinner/>
-				):(
+				{ !loading && itinerary ?  (
 					<Fragment>
 						{ itinerary.activities.length !== 0 ? (
 							<Activities activities={itinerary.activities}/>
@@ -48,11 +49,11 @@ class ActivitiesP extends Component {
 			
 						<ExtraInfoIcons itin={itinerary}/>
 
-						{/* //todo: if users, delete */}
-						{/* {!auth.loading
-							&& user === auth.user._id && (
-								<button onClick={() => deletePost(_id)} type="button" className="btn btn-danger"><i className="fas fa-times"></i></button>
-						)} */}
+						{!auth.loading
+							&& auth.user
+								&& itinerary.user === auth.user._id && (
+								<ItineraryOptions itinerary={itinerary}/>
+						)}
 
 						<div className="container">
 							<div className="itin-title-box">
@@ -73,6 +74,8 @@ class ActivitiesP extends Component {
 							</div>
 						</div>
 					</Fragment>
+				):(
+					<Spinner/>
 				)}
 
 				<Navbar/>
@@ -84,7 +87,7 @@ class ActivitiesP extends Component {
 const mapStateToProps = (state) => {
 	return {
 		itineraries: state.itineraries,
-		isAuthenticated: state.auth.isAuthenticated
+		auth: state.auth
 	}
 }
 

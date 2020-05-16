@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart as fasHeart} from '@fortawesome/free-solid-svg-icons'
 import { faHeart as farHeart} from '@fortawesome/free-regular-svg-icons'
 import { updateFavorites } from "../../store/actions/auth"
-import { updateLikes } from "../../store/actions/itinerary"
+import { updateLikes, getFavorites } from "../../store/actions/itinerary"
 
 
 
@@ -14,11 +14,14 @@ class Heart extends Component {
 		this.props.updateFavorites(itin_id); //user
 		this.props.updateLikes(itin_id); //itin
 
-		//? solo si esta in FavsPage, update displaye itineraries. se  lo paso desde FavoritesP. manualmente volvia a buscarlos, pero deberia actualizarse al actualizarse el reducer
-		// if (this.props.inFavsPage) {
-		// 	// refresh favorites page
-		// 	this.props.getItinerariesByFavs()
-		// }
+		//? REFRESH CUANDO QUITO UNO. hace falta??? solo si esta in FavsPage, update displaye itineraries. se  lo paso desde FavoritesP. manualmente volvia a buscarlos, pero deberia actualizarse al actualizarse el reducer.
+		//* en vez de hacer otra llamada, mejor poner que esste en concreto cambie su display a none
+		if (this.props.inFavsPage) {
+			//? refresh favorites page
+			this.props.getFavorites()
+
+			//? select parent (card) y ponerle display none 
+		}
 	}
 
 
@@ -26,14 +29,10 @@ class Heart extends Component {
 		const itin = this.props.itin //from parent
 		const user = this.props.user
 
-		let isFavorite= false
+		let isFavorite = false
 		if(user) {
-			user.favorites.forEach(fav => {
-				if(fav.itinerary === itin._id) { 
-					isFavorite = true
-				}
-			})
-		}		
+			user.favorites.forEach(fav => { if(fav.itinerary === itin._id) { isFavorite = true }})
+		}
 
 		return (
 			<div className="faHeart">
@@ -56,7 +55,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		updateFavorites: (itin_id) => dispatch(updateFavorites(itin_id)),
-		updateLikes: (itin_id) => dispatch(updateLikes(itin_id))
+		updateLikes: (itin_id) => dispatch(updateLikes(itin_id)),
+		getFavorites: () => dispatch(getFavorites())
 	}
 }
 

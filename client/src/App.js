@@ -6,7 +6,7 @@ import LandingP from "./components/pages/LandingP"
 import SignInP from "./components/pages/SignInP"
 import CitiesP from "./components/pages/CitiesP"
 import ProfileP from "./components/pages/ProfileP"
-// import FavoritesP from "./components/pages/FavoritesP"
+import FavoritesP from "./components/pages/FavoritesP"
 import ItinerariesP from "./components/pages/ItinerariesP"
 import SignUpP from "./components/pages/SignUpP"
 import ActivitiesP from './components/pages/ActivitiesP';
@@ -41,7 +41,7 @@ class App extends Component {
 							<Route exact path="/cities/:city" component={ItinerariesP} />
 							<Route exact path="/cities/:city/:itin_id" component={ActivitiesP} />
 							<Route exact path="/profile" component={ProfileP}/>
-							{/* <Route exact path="/favorites" component={FavoritesP} /> */}
+							<Route exact path="/favorites" component={FavoritesP} />
 						</Switch>
 					</Fragment>
 					
