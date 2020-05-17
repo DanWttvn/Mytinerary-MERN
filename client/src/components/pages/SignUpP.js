@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-regular-svg-icons'
 import { register } from "../../store/actions/auth"
 import LandingBg from "../elements/LandingBg"
-// import SignInSM from "../elements/SignInSM"
+import SignInSM from "../elements/SignInSM"
 import { setAlert } from '../../store/actions/alert'
 
 class SignUpP extends Component {
@@ -54,7 +54,7 @@ class SignUpP extends Component {
 		}
 				
 		return (
-			<div id="signUp" className="fixed-height">
+			<div id="sign-upP" className="--fixed-height">
 
 				<form onSubmit={this.onSubmit} className="form-box">
 					
@@ -97,7 +97,7 @@ class SignUpP extends Component {
 				</form>
 				
 				{/* //todo: */}
-				{/* <SignInSM/> */}
+				<SignInSM/>
 
 				{/* --- BACKGROUND --- */}
 				<div className="mascara-extra"></div>

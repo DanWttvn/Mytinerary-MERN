@@ -49,7 +49,7 @@ class SignInP extends Component {
 		}
 
 		return (
-			<div id="sign-inP" className="fixed-height">
+			<div id="sign-inP" className="--fixed-height">
 				
 				<form onSubmit={this.onSubmit} className="form-box">
 

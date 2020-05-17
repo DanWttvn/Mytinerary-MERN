@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { Component, Fragment } from "react"
 import {NavLink} from "react-router-dom"
 import LandingBg from "../elements/LandingBg"
 import { connect } from "react-redux"
@@ -22,26 +22,30 @@ class LandingP extends Component {
 		const { isAuthenticated, user, loading } = this.props.auth
 		return (
 			<div className="fixed-height">
-				<div className="text-on-top">
-					
+				<Fragment>
+
 					{ !loading && isAuthenticated ? (
-						<div className="landing-msg">
-							<p className="titles-font big-letters">{`Welcome, ${user.username}!`}</p>
-							<div className="btns-box3">
+						<Fragment>
+							<div className="text-on-top">
+								<p className="titles-font big-letters">{`Welcome, ${user.username}!`}</p>
+							</div>
+							<div className="btns-box1">
 								<button className="btn-transparent"><NavLink to="/cities">Explore ></NavLink></button>
 							</div>
-						</div>
+						</Fragment>
 					):(
-						<div className="landing-msg">
-							<p className="titles-font huge-letters">Visit,<br/>Explore,<br/>Enjoy!</p>
+						<Fragment>
+							<div className="text-on-top">
+								<p className="titles-font huge-letters">Visit,<br/>Explore,<br/>Enjoy!</p>
+							</div>
 							<div className="btns-box1">
 								<button className="btn-transparent"><NavLink to="/sign_in">Sign in</NavLink></button>
 								<NavLink className="btn-secondary" to="/cities">Enter as a guest</NavLink>
 							</div>
-						</div>
+						</Fragment>						
 					)}
 
-				</div>
+				</Fragment>
 				<LandingBg/>
 			</div>
 		)

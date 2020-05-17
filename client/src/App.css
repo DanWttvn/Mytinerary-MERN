@@ -39,51 +39,23 @@ body {
 	align-items: center;
 }
 
-/* ? cambiar app por root? y asi le puedo decir que el height sea 100% siempre */
-/* #root {
+.App {
 	width: 450px;
-	height: 812px;
-	overflow: scroll;
-	
-	position: relative;
-	background: #fff;
-}
-.App {
-	width: 100%;
-	height: 100%;
-}
-
-@media (max-width: 450px) {
-	#root {
-		min-width: 100%;
-		height: 100vh;
-		min-height: 100%;
-	}
-	#navbar {
-		position: fixed;
-		bottom: 0;
-		left: 0;
-	}
-} */
-.App {
-	/* width: 100%; */
-	max-width: 470px;
-	min-width: 470px;
-	/* ! çççççç */
-	/* height: 100vh; */
-	height: 812px;
+	/* max-width: 450px;
+	min-width: 450px; */
+	height: 820px;
 	overflow: scroll;
 	border-radius: 30px;
 	
 	position: relative;
 	background: #fff;
-/* çççç */
+
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
+	justify-content: flex-start; /* for the navbar */
 }
 
-@media (max-width: 450px) {
+@media (max-width: 480px) {
 	#root {
 		width: 100%;
 	}
@@ -95,36 +67,13 @@ body {
 		/* min-height: 100vh; */
 		border-radius: 0;
 	}
-	/* .containerB {
-		max-width: 90%;
-	} */
 }
 
 /* *ponerlo con mediaquery >450px */
 .App::-webkit-scrollbar {
 	-webkit-appearance: none;
 	display: none;
-	/* width: 5px; */
 }
-
-/* .App::-webkit-scrollbar:horizontal {
-	display: none;
-} */
-
-/* .App::-webkit-scrollbar-track {
-	background: rgb(220, 220, 220);
-	background: transparent;
-}
-  
-.App::-webkit-scrollbar-thumb {
-	background: #888;
-	border-radius: 5px;
-}
-  
-.App::-webkit-scrollbar-thumb:hover {
-	background: #555;
-}
-
 
 
 /*  COLORS */
@@ -159,10 +108,6 @@ body {
 	font-family: "Futura Black";
 	src: url("./fonts/FutuBd__.ttf");
 }
-/* @font-face {
-	font-family: "Futura Medium";
-	src: url("./fonts/FutuMd__.ttf");
-} */
 @font-face {
 	font-family: "Futura Light";
 	src: url("./fonts/FutuLt__.ttf");
@@ -185,6 +130,7 @@ h1 {
 .subtitles-font {
 	font-family: "Gotham Bold";
 }
+
 /*  FONT SIZE */
 p {
 	font-size: 16px;
@@ -240,8 +186,7 @@ small {
 .container {
 	padding: 0 25px;
 	width: 100%;
-	/* height: 100%; */
-	/* ! ççççççççççççççççççç */
+
 	display: flex;
 	flex-flow: row wrap;
 }
@@ -249,16 +194,17 @@ small {
 .containerB {
 	padding: 0;
 	width: 100%;
-	/* ! ççççççççççççççççççç  no vale, porque se acce grande de mas*/
-	/* height: 100%; */
-	/* position: relative; */
 }
+
 .container-padding {
 	padding-right: 25px;
 	padding-left: 25px;
 }
+
 .fixed-height {
-	height: 100vh;
+	/* ! lo he quitado, comprobar si lo necesito. si no lo he echado en falta, cabiar los sivs.fixed-h por fragments - me ha hecho falta en sign up, aunque valdria con  quitar el div*/
+	/* height: 100vh; */
+	height: 100%;
 }
 
 a {
@@ -267,9 +213,11 @@ a {
 }
 
 .btns-box1 {
-	align-self: center;
-	position: relative;
-	top: 185px;
+	position: absolute;
+	bottom: 20%;
+	margin: 0 auto;
+	left: 50%;
+	margin-left: -65px; /* half of the width */
 
 	display: flex;
 	flex-direction: column;
@@ -298,13 +246,14 @@ a {
 #FavoritesP .btns-box4 {
 	position: relative;
 	top: 200px;
+	/* position: absolute; */
+	/* margin: 0 auto; */
 }
 .btns-box4 {
 	width: fit-content;
 }
 .btns-box4 button {
 	width: 100%;
-
 }
 
 .btn-transparent {
@@ -406,7 +355,7 @@ input:-webkit-autofill {
 
 .bg { 
 	width: 100%;
-	height: 100vh;
+	height: 100%;
 	top: 0;
 	left: 0;
 	position: absolute;
@@ -414,11 +363,9 @@ input:-webkit-autofill {
 }
 
 .bg-img {
-	height: 1200px;	
-	/* height: 100%; */
+	height: 100%;
 	background-image: url(./img/parisBG.jpg);
 	background-size: cover;
-	background-attachment: fixed;
 	background-position: bottom;
 }
 
@@ -428,13 +375,12 @@ input:-webkit-autofill {
 
 	background: #000;
 	opacity: 0.3;
-	/* z-index: 1; */
 	position: absolute;
 }
 
 .mascara-extra {
 	width: 100%;
-	height: 100vh;
+	height: 100%;
 	top: 0;
 	left: 0;
 	position: absolute;
@@ -482,7 +428,6 @@ input:-webkit-autofill {
 /* -------- NAVBAR -------- */
 
 #navbar {
-	/* ! çççççççççç */
 	position: sticky;
 	bottom: 0;
 	left: 0;
@@ -533,25 +478,18 @@ input:-webkit-autofill {
 	position: relative;
 	width: 100%;
 	z-index: 100;
-	padding-left: 7px;
 	color: #fff;
 	display: flex;
 	flex-flow: column wrap;
-	padding: 10px;
+	padding: 20px;
 	top: 100px;
-}
-
-.landing-msg {
-	/* position: relative; */
-	top: 100px;
-	width: 100%;
 }
 
 /* -------- SIGN IN FORM -------- */
 
 .form-box {
-	position: absolute;
-	top: 60px;
+	/* ! chenged from abslute, check if interfeers with the kwyboard */
+	position: relative;
 
 	width: 100%;
 	margin-right: auto;
@@ -563,18 +501,45 @@ input:-webkit-autofill {
 	align-items: center;
 }
 
+#sign-inP .form-box {
+	top: 15%;
+}
+#sign-upP .form-box {
+	top: 6%;
+}
+
 #sign-inP .title-white {
 	margin-bottom: 30px;
 }
 
 .sign-in-SM-box {
+	/* ! so the keyboard doestn mess it up */
+	position: absolute;
+	width: 100%;
+	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
-	width: 100%;
-	position: absolute;
-	margin: 0 auto;
-	/* bottom: 50px; */
-	top: 520px;
+}
+
+#sign-inP .sign-in-SM-box {
+	bottom: 12%;
+}
+#sign-upP .sign-in-SM-box {
+	bottom: 7%;
+}
+
+@media (max-width: 390px) {
+	#sign-upP .form-box {
+		top: 10%;
+	}
+	.btns-box2 {
+		position: relative;
+		margin-top: 20px;
+
+	}
+	#sign-upP .sign-in-SM-box {
+		top: 5%;
+	}
 }
 
 .GFB-btns {
