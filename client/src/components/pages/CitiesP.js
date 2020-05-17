@@ -25,20 +25,20 @@ class ItinerariesP extends Component {
 		const { cities, loading } = this.props.cities
 
 		return (
-			<div id="ItinerariesP" className="container">
+			<Fragment>
 				<Logo/>
 				{loading ? (
 					<Spinner/>
 				):(
-					<Fragment>
+					<div id="CitiesP" className="container">
 						<p className="titles-font title-main">Where are you going?</p>
 						<Searchbar getSearchTerm={this.filterWithSearchTerm} />
 						<Cities cities={cities} />	
 						<AddItinerary />
-					</Fragment> 
+					</div> 
 				)}
 				<Navbar/>
-			</div>
+			</Fragment>
 		)
 	}
 }

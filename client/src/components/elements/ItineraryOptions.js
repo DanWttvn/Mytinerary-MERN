@@ -1,75 +1,106 @@
-import React, { useState, Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import { Button, Modal } from 'reactstrap';
+import ImageUploader from "react-images-upload"
 import { deleteItinerary, addActivity, deleteActivity } from "../../store/actions/itinerary"
 
 //* CAMBIAR CON STATE
 //* dejar modal con hooks
-const ItineraryOptions = ({ itinerary: { id, activities } }) => {
-
-	//* when opt edit open modal
-	const [modal, setModal] = useState(false);
-	const [nestedModal, setNestedModal] = useState(false);
-
-	const [closeAll, setCloseAll] = useState(false);
-
-	const toggle = () => setModal(!modal);
-	const toggleNested = () => {
-		setNestedModal(!nestedModal);
-		setCloseAll(false);
-	}
-	const toggleAll = () => {
-		setNestedModal(!nestedModal);
-		setCloseAll(true);
+//? probar a manita
+class ItineraryOptions extends Component {
+	state = {
+		title: "",
+		img: null
 	}
 
-	// handleAdd = () => {
-	// 	toggleNested
-	// 	addActivity(id, formData)
-	// }
+	handleAddItin = (e) => {
+		this.setState({
+			[e.target.id]: e.target.value
+		})
+	}
+	handleImgSelect = (pictureFiles, pictureDataURLs) => {
+		this.setState({
+			img: pictureFiles[0]
+		})
+	}
+	
+	handleSubmit = (e) => {
+		const { id } = this.props.itinerary
 
-	return (
-		<Fragment>
-			{/* 3 puntitos */}
-			<div className="itin-opt-box">
-				{/* edit activity: open modal */}
-				<button onClick={toggle} className="">Edit Activities</button>
-				<button onClick={() => deleteItinerary(id)} className="">Delete Itinerary</button>
-			</div>
+		e.preventDefault();
+
+		const formData = new FormData();
+		formData.append("img", this.state.img, this.state.img.name);
+		formData.append("title", this.state.title);
+
+		this.props.addActivity(id, formData)
+
+		// this.toggle(); //* con doc.quer
+	}
+
+	render() {
+		const { id, activities } = this.props.itinerary
+
+		return (
+			<Fragment>
+				{/* 3 puntitos */}
+				<div className="itin-opt-box content">
+					{/* edit activity: open modal */}
+					<button onClick={() => document.querySelector(".modal").classList.add("modal-open")}>Edit Activities</button>
+					<button onClick={() => deleteItinerary(id)} className="">Delete Itinerary</button>
+				</div>
 
 
-			<Modal isOpen={modal} toggle={toggle}>
+				<div className="modal">
+					<div className="modal-backdrop" onClick={() => document.querySelector(".modal").classList.remove("modal-open")}></div>
+					<div className="modal-window">
+						{/* Add Activity  */}
+						{/* //* HACER COLLAPSE */}
+						<button >Add Activity</button>
+						<form className="add-itin-form" onSubmit={this.handleSubmit}>
+							<p className="title-section">Add a new activity</p>
+							<div className="input">
+								
+								<label htmlFor="title">Title</label>
+								<input type="text" id="title" onChange={this.handleAddItin} required />
+								
+								<label htmlFor="img">Images</label>
+								<ImageUploader
+									withIcon={true}
+									buttonText="Choose image"
+									onChange={this.handleImgSelect}
+									imgExtension={[".jpg", ".jpeg", ".png"]}
+									maxFileSize={10485760}
+									withPreview={true}
+								/>
+								<button className="btn-inside" onClick={this.handleSubmit}>Add activity</button>
+							</div>
+						</form>
+				
 
-				{/* Add Activity  */}
-				<button onClick={toggleNested}>Add Activity</button>
-				<Modal isOpen={nestedModal} toggle={toggleNested} onClosed={closeAll ? toggle : undefined}>
-					<h4>FOTM ADD ACT</h4>
-					<Button onClick={() => this.handleAdd()}><FontAwesomeIcon icon={faTimes}/></Button>
-					<Button onClick={toggleNested}><FontAwesomeIcon icon={faTimes}/></Button>
-					{/* <Button onClick={toggleAll}>All Done</Button> */}
-				</Modal>
+						{/* Delete Activity  */}
+						{activities.map(activity => {
+							const imgURL = "url(" + activity.img + ")"
+							const imgURLDisplay = imgURL.replace(/\\/g, "/"); 
 
-				{/* Delete Activity  */}
-				{activities.map(activity => {
-					const imgURL = "url(" + activity.img + ")"
-					const imgURLDisplay = imgURL.replace(/\\/g, "/"); 
+							return (
+								<div className="city-card" >
+									<div className="thumbnail" style={
+										{backgroundImage: imgURLDisplay, 
+										backgroundPosition: 'center center', 
+										backgroundSize: 'cover'}}></div>
+									<p className="city-name-thumb">{activity.title}</p>
+									<button onClick={() => deleteActivity(id, activity.id)} type="button" className=""><FontAwesomeIcon icon={faTimes}/></button>
+								</div>
+							)
+						})}
+					</div>
+				</div>
+			</Fragment>
+		)
 
-					return (
-						<div className="city-card" >
-							<div className="thumbnail" style={
-								{backgroundImage: imgURLDisplay, 
-								backgroundPosition: 'center center', 
-								backgroundSize: 'cover'}}></div>
-							<p className="city-name-thumb">{activity.title}</p>
-							<button onClick={() => deleteActivity(id, activity.id)} type="button" className=""><FontAwesomeIcon icon={faTimes}/></button>
-						</div>
-					)
-				})}
-			</Modal>
-		</Fragment>
-	)
+	}
 }
 
 const mapDispatchToProps = (dispatch) => {

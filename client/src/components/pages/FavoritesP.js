@@ -18,25 +18,25 @@ class FavoritesP extends Component {
 		const { itineraries, loading } = this.props.itineraries
 
 		return (
-			<div id="FavoritesP" className="containerB">
-			{/* <Fragment> */}
+			<Fragment>
 				<Logo/>
-				<p className="titles-font title-main container-padding">My favorites</p>
+				<div id="FavoritesP" className="containerB">
+					<p className="titles-font title-main container-padding">My favorites</p>
 
-				{loading ? (
-					<Spinner/>
-				):(
-					<Fragment>			
-						{ this.props.isAuthenticated ? (
-							<Itineraries inFavsPage={"inFavsPage"} itineraries={itineraries}/>
-						):(
-							<SignInBtn/>
-						)}
-					</Fragment>
-				)}
+					{loading ? (
+						<Spinner/>
+					):(
+						<Fragment>			
+							{ this.props.isAuthenticated ? (
+								<Itineraries inFavsPage={"inFavsPage"} itineraries={itineraries}/>
+							):(
+								<SignInBtn/>
+							)}
+						</Fragment>
+					)}
+				</div>
 				<Navbar/>
-			{/* </Fragment> */}
-			</div>
+			</Fragment>
 		)
 	}
 }

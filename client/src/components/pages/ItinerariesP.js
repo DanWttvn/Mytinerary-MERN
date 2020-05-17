@@ -16,18 +16,18 @@ class ItinerariesP extends Component {
 		const { itineraries, loading } = this.props.itineraries
 
 		return (
-			<div id="ItinerariesP" className="containerB">
+			<Fragment>
 				<Logo/>
 				{loading ? (
 					<Spinner/>
 				):(
-					<Fragment>
+					<div id="ItinerariesP" className="containerB">
 						<p className="titles-font title-main container-padding">{this.props.match.params.city}</p>
 						<Itineraries itineraries={itineraries}/>
-					</Fragment> 
+					</div> 
 				)}
 				<Navbar/>
-			</div>
+			</Fragment>
 		)
 	}
 }

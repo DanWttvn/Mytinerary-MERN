@@ -68,8 +68,8 @@ class AddItinerary extends Component {
 
 				{/* //todo: modal no funciona */}
 				<Modal isOpen={this.state.isOpen} toggle={this.toggle}>
-					{ isAuthenticated ? 
-						(<form className="add-itin-form" onSubmit={this.handleSubmit}>
+					{ isAuthenticated ? (
+						<form className="add-itin-form" onSubmit={this.handleSubmit}>
 							<p className="title-section">Add a new itinerary</p>
 							<div className="input">
 								
