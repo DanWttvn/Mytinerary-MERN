@@ -27,10 +27,10 @@ class ActivitiesP extends Component {
 		if(!loading
 				&& itinerary
 					&& itinerary.img.startsWith("uploads")) {
-			imgURL = `http://localhost:5000/${itinerary.img}`
+						imgURL = `/${itinerary.img}`
 		} else if (!loading
 						&& itinerary) {
-			imgURL = itinerary.img
+						imgURL = itinerary.img
 		}		
 		const imgURLDisplay = imgURL.replace(/\\/g, "/");
 		

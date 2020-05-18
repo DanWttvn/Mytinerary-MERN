@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from "react-redux"
 import { addComment } from "../../store/actions/itinerary"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 
 
 class ActivitiesP extends Component {
@@ -40,7 +42,8 @@ class ActivitiesP extends Component {
 					{ this.props.isAuthenticated ? (
 						<form onSubmit={this.submitComment} id="new-comment-form" className="add-comment-box">
 							<textarea className="add-comment-input" id="add-comment-input" type="text" onChange={this.handleInput} onKeyDown={this.autosize} name="content" placeholder="Add comment..." required />
-							<input className="send-comment-btn" type="submit" name="submit" value=">" />
+							{/* <input className="send-comment-btn" type="submit" name="submit" value=">" /> */}
+							<button className="send-comment-btn" type="submit" name="submit" ><FontAwesomeIcon icon={faChevronRight}/></button>
 						</form>
 					):(
 						<div className="">
@@ -48,7 +51,6 @@ class ActivitiesP extends Component {
 							<a href="/sign_in"><button className="btn-inside">Sign in</button></a>
 						</div>	
 					)}
-
 			</Fragment>
 		)
 	}

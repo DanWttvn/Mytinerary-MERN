@@ -5,7 +5,6 @@ import Logo from "../elements/Logo"
 import LogoutBtn from "../elements/LogoutBtn"
 import SignInBtn from "../elements/SignInBtn"
 // import Spinner from "../elements/Spinner"
-import { Modal } from "reactstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {faUser} from '@fortawesome/free-regular-svg-icons'
 import {faPen} from '@fortawesome/free-solid-svg-icons'
@@ -15,14 +14,7 @@ import { updateAvatar } from "../../store/actions/auth"
 
 class Profile extends Component {
 	state = {
-		isOpen: false,
 		profileImg: null
-	}
-
-	toggle = () => {
-		this.setState({
-			isOpen: !this.state.isOpen
-		})
 	}
 
 	imgSelectHandler = (pictureFiles, pictureDataURLs) => {
@@ -44,7 +36,8 @@ class Profile extends Component {
 		if(!loading &&
 			isAuthenticated
 				&& user.avatar ){
-		   avatar = user.avatar.startsWith("uploads") ? `/${user.avatar}` : user.avatar;
+					//! aqui no pone localhost, pero si la /
+				   avatar = user.avatar.startsWith("uploads") ? `/${user.avatar}` : user.avatar;
 	   }
 
 		return (
@@ -53,12 +46,7 @@ class Profile extends Component {
 				<div id="ProfileP" className="container">
 					<p className="titles-font title-main">Profile</p>
 					
-					{/* {loading ? (
-						<Spinner/>
-					):(
-					)} */}
-					
-					{ !loading && isAuthenticated ? (
+					{ !loading && isAuthenticated ? ( //todo: nest loading con isAuth para meter spinner
 						<div className="center">
 							<div className="profile-box">
 								<p className="subtitles-font subtitle">{`Welcome, ${user.username}`}</p>
@@ -68,25 +56,28 @@ class Profile extends Component {
 										: <FontAwesomeIcon icon={faUser} className="fa-profile-icon"/>
 									}
 								</div>
-								<button className="edit-btn" onClick={this.toggle}><FontAwesomeIcon icon={faPen} /></button>
+								<button className="edit-btn" onClick={() => document.querySelector(".modal").classList.add("modal-open")}><FontAwesomeIcon icon={faPen} /></button>
 
 								<p>{ user.username }</p>
 								<p>{ user.email }</p>
 							</div>
 							
-							<Modal isOpen={this.state.isOpen} toggle={this.toggle}>
-								<div className="modal-profile-box">
-									<ImageUploader
-										withIcon={true}
-										buttonText="Choose image"
-										onChange={this.imgSelectHandler}
-										imgExtension={[".jpg", ".jpeg", ".png"]}
-										maxFileSize={10485760}
-										withPreview={true}
-									/>
-									<button className="btn-inside" onClick={this.fileUploadHandler}>Upload</button>
+							<div className="modal">
+								<div className="modal-backdrop" onClick={() => document.querySelector(".modal").classList.remove("modal-open")}></div>
+								<div className="modal-window">
+									<div className="modal-profile-box">
+										<ImageUploader
+											withIcon={true}
+											buttonText="Choose image"
+											onChange={this.imgSelectHandler}
+											imgExtension={[".jpg", ".jpeg", ".png"]}
+											maxFileSize={10485760}
+											withPreview={true}
+										/>
+										<button className="btn-inside" onClick={this.fileUploadHandler}>Upload</button>
+									</div>
 								</div>
-							</Modal>
+							</div>
 
 							<div className="center">
 								<LogoutBtn/>

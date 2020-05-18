@@ -35,9 +35,14 @@ class Activities extends Component {
 
 	render () {
 		const activitiesCards = this.props.activities.map((activity, i) => {
+
+			//? Change before deploy? a // const imgURL = "url(" + activity.img + ")"
+			const imgURL = activity.img.startsWith("uploads") ? "/" + activity.img : activity.img
+			const imgURLDisplay = imgURL.replace(/\\/g, "/");
+
 			return (
 				<div className="activity-card" key={i}>
-					<img className="activities-img" src={activity.img} alt="activity" key={i}/>
+					<img className="activities-img" src={imgURLDisplay} alt="activity" key={i}/>
 					<span className="activity-title">{activity.title}</span>
 				</div>
 			)

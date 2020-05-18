@@ -6,9 +6,7 @@ import {faPen} from '@fortawesome/free-solid-svg-icons'
 import ImageUploader from "react-images-upload"
 import { deleteItinerary, addActivity, deleteActivity } from "../../store/actions/itinerary"
 
-//* CAMBIAR CON STATE
-//* dejar modal con hooks
-//? probar a manita
+
 class ItineraryOptions extends Component {
 	state = {
 		title: "",
@@ -31,7 +29,7 @@ class ItineraryOptions extends Component {
 		this.setState({
 			showAddFrom
 		})
-		const itinOpts = document.querySelector(".add-itin-form")
+		const itinOpts = document.querySelector(".add-form add-itin-form")
 		itinOpts.style.display = showAddFrom ? "block" : "none"
 	}
 
@@ -55,9 +53,8 @@ class ItineraryOptions extends Component {
 		formData.append("title", this.state.title);		
 
 		await this.props.addActivity(_id, formData)
-		// ?  how to empty input field 
-		document.querySelector(".add-itin-form").reset();
-		
+
+		document.querySelector(".add-form add-itin-form").reset();		
 		const imgPreview = document.querySelector(".uploadPictureContainer")
 		imgPreview.parentNode.removeChild(imgPreview);
 	}
@@ -71,8 +68,9 @@ class ItineraryOptions extends Component {
 				{/* Menu */}
 				<div className="opts-wrapper">
 					<button className="edit-itin-btn" onClick={this.showHideOpts}><FontAwesomeIcon icon={faPen} /></button>
-					<ul className="itin-opts-dropdown --content">
+					<ul className="itin-opts-dropdown">
 						<li onClick={() => document.querySelector(".modal").classList.add("modal-open")}>Edit Activities</li>
+						{/* //! falta comprobar: ultimo (poner this.props.delete) */}
 						<li onClick={() => deleteItinerary(_id)} className="">Delete Itinerary</li>
 					</ul>
 				</div>
@@ -81,10 +79,9 @@ class ItineraryOptions extends Component {
 				<div className="modal">
 					<div className="modal-backdrop" onClick={() => document.querySelector(".modal").classList.remove("modal-open")}></div>
 					<div className="modal-window">
-
 						{/* Add Activity */}
 						<p className="title-section" onClick={this.showHideForm}>Add Activity</p>
-						<form className="add-itin-form" onSubmit={this.handleSubmit}>		
+						<form className="add-form add-itin-form" onSubmit={this.handleSubmit}>		
 							<label htmlFor="title">Title</label>
 							<input type="text" id="title" onChange={this.handleAddItin} required />
 							
@@ -102,21 +99,21 @@ class ItineraryOptions extends Component {
 							</div>
 						</form>
 				
-
 						{/* Delete Activity  */}
 						<p className="title-section">Delete Activity</p>
-						{activities.map(activity => {
-							const imgURL = "url(" + activity.img + ")"
-							const imgURLDisplay = imgURL.replace(/\\/g, "/"); 
+						{activities.map((activity, i) => {
+							//? Change before deploy? a // const imgURL = "url(" + activity.img + ")"
+						const imgURL = activity.img.startsWith("uploads") ? `url(/${activity.img})` : `url(${activity.img})`
+						const imgURLDisplay = imgURL.replace(/\\/g, "/");
 
 							return (
-								<div className="city-card" >
+								<div className="city-card" key={i}>
 									<div className="thumbnail" style={
 										{backgroundImage: imgURLDisplay, 
 										backgroundPosition: 'center center', 
 										backgroundSize: 'cover'}}></div>
 									<p className="city-name-thumb">{activity.title}</p>
-									<button onClick={() => deleteActivity(_id, activity._id)} type="button" className=""><FontAwesomeIcon icon={faTimes}/></button>
+									<button onClick={() => this.props.deleteActivity(_id, activity._id)} type="button" className=""><FontAwesomeIcon icon={faTimes}/></button>
 								</div>
 							)
 						})}

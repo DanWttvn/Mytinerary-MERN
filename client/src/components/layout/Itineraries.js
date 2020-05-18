@@ -40,7 +40,7 @@ class Itineraries extends Component {
 			let itinURL = isInFavsPage ? `/cities/${itin.city}/${itin._id}` : `${itin.city}/${itin._id}`;
 
 			//* Change before deploy? a // const imgURL = "url(" + itin.img + ")"
-			const imgURL = itin.img.startsWith("uploads") ? "url(http://localhost:5000/" + itin.img + ")" : "url(" + itin.img + ")"
+			const imgURL = itin.img.startsWith("uploads") ? "url(/" + itin.img + ")" : "url(" + itin.img + ")"
 			const imgURLDisplay = imgURL.replace(/\\/g, "/");
 
 			const avatarURL = itin.avatar.startsWith("uploads") ? "http://localhost:5000/" + itin.avatar : itin.avatar

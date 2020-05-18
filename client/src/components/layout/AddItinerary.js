@@ -9,7 +9,6 @@ import { addItinerary } from "../../store/actions/itinerary"
 
 class AddItinerary extends Component {
 	state = {
-		isOpen: false,
 		city: "",
 		country: "",
 		title: "",
@@ -18,12 +17,6 @@ class AddItinerary extends Component {
 		duration: "",
 		price: "",
 		hashtags: ""	
-	}
-
-	toggle = () => {
-		this.setState({
-			isOpen: !this.state.isOpen
-		})
 	}
 
 	handleAddItin = (e) => {
@@ -62,56 +55,59 @@ class AddItinerary extends Component {
 			<div id="newItinerary" className="center">
 
 				<div className="add-new-box">
-					<button className="addNewBtn" onClick={this.toggle}>+</button>
+					<button className="addNewBtn" onClick={() => document.querySelector(".modal").classList.add("modal-open")}>+</button>
 					<span>Add new itinerary</span>
 				</div>
 
-				{/* //todo: modal no funciona */}
-				<Modal isOpen={this.state.isOpen} toggle={this.toggle}>
-					{ isAuthenticated ? (
-						<form className="add-itin-form" onSubmit={this.handleSubmit}>
-							<p className="title-section">Add a new itinerary</p>
-							<div className="input">
-								
-								<label htmlFor="title">Title</label>
-								<input type="text" id="title" onChange={this.handleAddItin} />
-								
-								<label htmlFor="city">City</label>
-								<input type="text" id="city" onChange={this.handleAddItin} required />
+				{/* //todo: cambiar a mano */}
+				<div className="modal">
+					<div className="modal-backdrop" onClick={() => document.querySelector(".modal").classList.remove("modal-open")}></div>
+					<div className="modal-window">
+						{ isAuthenticated ? (
+							<form className="add-form add-itin-form" onSubmit={this.handleSubmit}>
+								<p className="title-section">Add a new itinerary</p>
+								<div className="input">
+									
+									<label htmlFor="title">Title</label>
+									<input type="text" id="title" onChange={this.handleAddItin} />
+									
+									<label htmlFor="city">City</label>
+									<input type="text" id="city" onChange={this.handleAddItin} required />
 
-								<label htmlFor="country">Country</label>
-								<input type="text" id="country" onChange={this.handleAddItin} required />
-								
-								<label htmlFor="img">Images</label>
-								<ImageUploader
-									withIcon={true}
-									buttonText="Choose image"
-									onChange={this.handleImgSelect}
-									imgExtension={[".jpg", ".jpeg", ".png"]}
-									maxFileSize={10485760}
-									withPreview={true}
-								/>
+									<label htmlFor="country">Country</label>
+									<input type="text" id="country" onChange={this.handleAddItin} required />
+									
+									<label htmlFor="img">Images</label>
+									<ImageUploader
+										withIcon={true}
+										buttonText="Choose image"
+										onChange={this.handleImgSelect}
+										imgExtension={[".jpg", ".jpeg", ".png"]}
+										maxFileSize={10485760}
+										withPreview={true}
+									/>
 
-								<label htmlFor="summary">Summary</label>
-								<input type="text" id="summary" onChange={this.handleAddItin} required />
+									<label htmlFor="summary">Summary</label>
+									<input type="text" id="summary" onChange={this.handleAddItin} required />
 
-								<label htmlFor="duration">Duration</label>
-								<input type="text" id="duration" onChange={this.handleAddItin} required />
+									<label htmlFor="duration">Duration</label>
+									<input type="text" id="duration" onChange={this.handleAddItin} required />
 
-								<label htmlFor="price">Price</label>
-								<input type="text" id="price" onChange={this.handleAddItin} required />
+									<label htmlFor="price">Price</label>
+									<input type="text" id="price" onChange={this.handleAddItin} required />
 
-								<label htmlFor="hashtags">Hastags</label>
-								<input type="text" id="hashtags" placeholder="" onChange={this.handleAddItin} required />
-								<small className="form-text">* Please use comma separated values</small>
+									<label htmlFor="hashtags">Hastags</label>
+									<input type="text" id="hashtags" placeholder="" onChange={this.handleAddItin} required />
+									<small className="form-text">* Please use comma separated values</small>
 
-								<button className="btn-inside" onClick={this.handleSubmit}>Add itinerary</button>
-							</div>
-						</form>
-					):(
-						<SignInBtn/>
-					)} 
-				</Modal>
+									<button className="btn-inside" onClick={this.handleSubmit}>Add itinerary</button>
+								</div>
+							</form>
+						):(
+							<SignInBtn/>
+						)} 
+					</div>
+				</div>
 			
 			</div>
 		)	

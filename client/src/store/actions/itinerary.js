@@ -227,7 +227,7 @@ export const addActivity = (itin_id, formData) => dispatch => {
 
 
 // Delete activity
-export const deleteActivity = (itin_id, activity_id) => dispatch => {
+export const deleteActivity = (itin_id, activity_id) => dispatch => {	
 	axios.delete(`/api/itineraries/activity/${itin_id}/${activity_id}`)
 		.then(res => {
 			dispatch({

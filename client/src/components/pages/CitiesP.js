@@ -34,9 +34,9 @@ class ItinerariesP extends Component {
 						<p className="titles-font title-main">Where are you going?</p>
 						<Searchbar getSearchTerm={this.filterWithSearchTerm} />
 						<Cities cities={cities} />	
-						<AddItinerary />
 					</div> 
 				)}
+				<AddItinerary />
 				<Navbar/>
 			</Fragment>
 		)
