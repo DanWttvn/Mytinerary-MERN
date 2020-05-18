@@ -21,6 +21,7 @@ time, mark, audio, video {
 }
 
 button, a {
+	cursor: pointer;
 	text-decoration: none;
 }
 
@@ -29,50 +30,6 @@ input:focus,
 textarea:focus,
 button:focus {
 	outline: none;
-}
-
-body {
-	background: #999;
-	min-height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.App {
-	width: 450px;
-	/* max-width: 450px;
-	min-width: 450px; */
-	height: 820px;
-	overflow: scroll;
-	border-radius: 30px;
-	
-	position: relative;
-	background: #fff;
-
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start; /* for the navbar */
-}
-
-@media (max-width: 480px) {
-	#root {
-		width: 100%;
-	}
-	.App {
-		width: 100%;
-		min-width: 100%;
-		height: 100vh;
-		min-height: 100%;
-		/* min-height: 100vh; */
-		border-radius: 0;
-	}
-}
-
-/* *ponerlo con mediaquery >450px */
-.App::-webkit-scrollbar {
-	-webkit-appearance: none;
-	display: none;
 }
 
 
@@ -148,7 +105,7 @@ small {
 }
 .big-letters {
 	font-size: 55px;
-
+	
 }
 .title-main {
 	font-size: 35px;
@@ -178,15 +135,59 @@ small {
 }
 
 .city-name-thumb {
-    font-size: 17px;
+	font-size: 17px;
 }
 
 /* -------- GENERAL ELEMENTS -------- */
 
+body {
+	background: #16181c;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.App {
+	width: 450px;
+	/* max-width: 450px;
+	min-width: 450px; */
+	height: 820px;
+	overflow: scroll;
+	border-radius: 30px;
+	
+	position: relative;
+	background: #fff;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start; /* for the navbar */
+}
+
+@media (max-width: 480px) {
+	#root {
+		width: 100%;
+	}
+	.App {
+		width: 100%;
+		min-width: 100%;
+		height: 100vh;
+		min-height: 100%;
+		/* min-height: 100vh; */
+		border-radius: 0;
+	}
+}
+
+/* *ponerlo con mediaquery >450px */
+.App::-webkit-scrollbar {
+	-webkit-appearance: none;
+	display: none;
+}
+
 .container {
 	padding: 0 25px;
 	width: 100%;
-
+	
 	display: flex;
 	flex-flow: row wrap;
 }
@@ -330,6 +331,25 @@ button:active {
 	color: #fff;
 }
 
+.opts-wrapper {
+	position: absolute;
+	top: 230px;
+	right: 27px;
+	display: flex;
+	flex-direction: column;
+}
+
+.edit-itin-btn {
+	align-self: flex-end;
+	width: 40px;
+	height: 40px;
+
+	background: var(--dark-grey);
+	border-radius: 50%;
+	border: solid 1.5px white;
+	color: #fff;
+}
+
 .center {
 	width: fit-content;
 	margin-right: auto;
@@ -463,11 +483,6 @@ input:-webkit-autofill {
 	width: 25px;
 }
 
-.navbar-profile-box .active { 
-	/* no va çç*/
-	/* border: solid 1px red; */
-}
-
 #navbar .active svg { /* por que no funciona?? ççç */
 	color: var(--main-red);
 }
@@ -564,7 +579,7 @@ input:-webkit-autofill {
 
 .form-section {
 	position: relative;
-	height: 80px;
+	height: 70px;
 	width: 70%;
 
 	overflow: hidden; /* para esconder lo que sobra de la linea de subrayado */
@@ -634,7 +649,7 @@ input:-webkit-autofill {
 
 .form-section input:focus + .label-box .label-content, /* el + indica que el que esté debajo. cuando clickamos en el input, afecta al label así: */
 .form-section input:valid + .label-box .label-content { /* cuando se mete info, se queda ahí */
-	transform: translateY(-120%);
+	transform: translateY(-150%);
 	font-size: 18px;
 	color: var(--form-blue);
 	background: none;
@@ -699,7 +714,7 @@ input:-webkit-autofill {
 
 /* -------- CITY ITINS -------- */
 
-.itins-carrousel {
+.itins-carousel {
 	display: flex;
 	overflow-x: auto;
 	-webkit-overflow-scrolling: touch;
@@ -711,7 +726,7 @@ input:-webkit-autofill {
 	padding-top: 30px;
 }
 
-.itins-carrousel::-webkit-scrollbar {
+.itins-carousel::-webkit-scrollbar {
 	visibility: hidden;
 }
 
@@ -858,7 +873,6 @@ input:-webkit-autofill {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	min-height: 100vh;
 	top: 0;
 	left: 0;
 	overflow: hidden;
@@ -881,10 +895,16 @@ input:-webkit-autofill {
 	background: #fff;
 	width: 75%;
 	height: fit-content;
+	max-height: 80%;
+	overflow: scroll;
 	padding: 20px;
 	border-radius: 10px;
 }
 
+.modal .title-section {
+	margin-bottom: 10px;
+	cursor: pointer;
+}
 
 /* -------- HEART ICON -------- */
 
@@ -951,29 +971,58 @@ input:-webkit-autofill {
 	flex-flow: column wrap;
 }
 
+#ActivitiesP .modal-window {
+	min-height: 400px;
+}
+
 .modal-content button {
 	margin-top: 20px;
 }
 
+.add-itin-form {
+	display: none;
+}
+
+.add-itin-form .btn-box {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.add-itin-form .btn-inside {
+	/* float: right; */
+	margin-right: 0;
+	margin-left: auto;
+}
+
 .add-itin-form input {
 	width: 100%;
-	/* margin-bottom: 20px; */
+	margin-bottom: 15px;
 	border: none;
 	border-bottom: 1px solid rgb(170,170,170);
 }
 .add-itin-form input:focus {
 	border-bottom: 1px solid var(--soft-black);
 }
-.add-itin-form label {
-	margin-top: 20px;
-	margin-bottom: 0;
-}
 
 /* -------- ACTIVITIES -------- */
-
-.activity-card {
+.activities-carousel {
 	width: 100%;
 	height: 250px;
+
+	left: 0;
+	
+	flex-shrink: 0;
+	display: flex;
+	flex-flow: column wrap;
+
+	transform: translateX(0);
+	transition: all 1.2s cubic-bezier(0.2, 0, 0.2, 1);
+}
+
+.activity-card {
+	position: relative;
+	width: 100%;
+	height: 100%;
 	border-bottom-left-radius: 30px;
 	border-bottom-right-radius: 30px;
 	overflow: hidden;
@@ -995,9 +1044,24 @@ input:-webkit-autofill {
 	background: rgba(0, 0, 0, 0.4);
 	color: #fff;
 }
-.carousel-control-next, .carousel-control-prev {
-	opacity: 0.9;
+
+.carousel-control {
+	position: absolute;
+	top: 125px;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background: rgba(0, 0, 0, 0.7);
+	color: #fff;
+	cursor: pointer;
+	/* z-index: 100; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
+
+.carousel-control.prev { left: 30px; }
+.carousel-control.next { right: 30px; }
 
 .comments-section {
 	margin-bottom: 80px;
@@ -1050,6 +1114,29 @@ input:-webkit-autofill {
 	font-weight: bold;
 	font-size: 15px;
 	text-align: end;
+}
+
+.itin-opts-dropdown {
+	display: none;
+	list-style: none;
+	background: #fff;
+	border: 1px #ccc solid;
+	border-radius: 5px;
+	z-index: 10;
+	padding: 5px 15px;
+}
+
+.itin-opts-dropdown li {
+	cursor: pointer;
+	/* margin: 7px 0; */
+	padding: 7px 0;
+	/* font-weight: 600; */
+}
+.itin-opts-dropdown li:first-of-type {
+	border-bottom: 1px #ccc solid;
+}
+.itin-opts-dropdown li:hover {
+	color: #ccc;
 }
 
 /* -------- PROFILE -------- */

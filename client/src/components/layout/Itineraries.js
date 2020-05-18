@@ -92,7 +92,7 @@ class Itineraries extends Component {
 		})
 	
 		return (
-			<div className="itins-carrousel">
+			<div className="itins-carousel">
 				{areItins ? (
 					itinsCarrousel 
 				):(

@@ -25,7 +25,7 @@ export const getItineraries = () => dispatch => {
 //* WORKS *//
 // Get itineraries by city
 export const getItinerariesByCity = city => dispatch => {
-	// dispatch({ type: CLEAR_ITINERARIES })
+	dispatch({ type: CLEAR_ITINERARIES })
 	axios.get(`/api/itineraries/city/${city}`)
 		.then(res => {
 			dispatch ({
@@ -196,14 +196,14 @@ export const deleteComment = (itin_id, comment_id) => dispatch => {
 
 
 // Add Activity
-export const addActivity = (itin_id, formData) => dispatch => {
+export const addActivity = (itin_id, formData) => dispatch => {	
 	const config = {
 		headers: {
-			"Content-type": "application/json"
+			"Content-type" : "multipart/form-data"
 		}
 	}
 
-	axios.post(`/api/itineraries/activity/${itin_id}`, formData, config)
+	axios.put(`/api/itineraries/activity/${itin_id}`, formData, config)
 		.then(res => {
 			dispatch({
 				type: UPDATE_ITINERARY,

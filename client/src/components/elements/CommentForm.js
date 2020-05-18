@@ -14,7 +14,7 @@ class ActivitiesP extends Component {
 		const itin_id = this.props.itin_id; //from parent
 		this.props.addComment(itin_id, content);
 		// clear input form
-		document.getElementById("newCommentForm").reset();
+		document.getElementById("new-comment-form").reset();
 	}
 
 	handleInput = (e) => {
@@ -38,7 +38,7 @@ class ActivitiesP extends Component {
 					<p className="title-section">Comments</p>
 
 					{ this.props.isAuthenticated ? (
-						<form onSubmit={this.submitComment} id="newCommentForm" className="add-comment-box">
+						<form onSubmit={this.submitComment} id="new-comment-form" className="add-comment-box">
 							<textarea className="add-comment-input" id="add-comment-input" type="text" onChange={this.handleInput} onKeyDown={this.autosize} name="content" placeholder="Add comment..." required />
 							<input className="send-comment-btn" type="submit" name="submit" value=">" />
 						</form>

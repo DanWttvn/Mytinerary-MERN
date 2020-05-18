@@ -1,63 +1,56 @@
-import React, { Component } from 'react'
-import {
-	Carousel,
-	CarouselItem,
-	CarouselControl
-  } from 'reactstrap';
+import React, { Component, Fragment } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+
 
 class Activities extends Component {
 	state = {
-		activeIndex: 0,
-		animating: false
+		sliderIndex: 0,
+		numEvents: 1
 	}
 
-	setActiveIndex = (activeIndex) => {
+	componentDidMount() {
+		const numEvents = this.props.activities.length
 		this.setState({
-			activeIndex
-		})
-	}
-	setAnimating = (boolean) => {
-		this.setState({
-			animating: boolean
+			numEvents
 		})
 	}
 	
-	next = () => {
-		if (this.animating) return;
-		const nextIndex = (this.state.activeIndex === (this.props.activities.length - 1)) ?
-			0
-			: this.state.activeIndex + 1
-		this.setActiveIndex(nextIndex)			
-	}
+	switchEvent(dir) {
+		let sliderIndex = this.state.sliderIndex
 
-	previous = () => {
-		if (this.animating) return;
-		const nextIndex = (this.state.activeIndex === 0) ?
-			this.props.activities.length - 1
-			: this.state.activeIndex - 1
-		this.setActiveIndex(nextIndex)			
+		if(dir === "next" && sliderIndex === this.setState.numEvents - 1) {
+			sliderIndex = 0;
+		} else if (dir === "prev" && sliderIndex === 0) {
+			sliderIndex = this.state.numEvents - 1
+		} else if (dir === "next") { sliderIndex++ } else { sliderIndex-- }
+
+		this.setState({ sliderIndex })
+
+		const activitiesCarrousel = document.querySelector(".activities-carousel")
+		
+		let leftDistance = - sliderIndex * 100;
+		activitiesCarrousel.style.transform = "translateX(" + leftDistance + "%)";
 	}
 
 	render () {
-		const activitiesCarrousel = this.props.activities.map((activity, i) => {
+		const activitiesCards = this.props.activities.map((activity, i) => {
 			return (
-				<CarouselItem onExiting={() => this.setAnimating(true)} onExited={() => this.setAnimating(false)} key={i}>
-					<div className="activity-card">
-						<img className="activities-img" src={activity.img} alt="activity" key={i}/>
-						<span className="activity-title">{activity.title}</span>
-					</div>
-				</CarouselItem>
+				<div className="activity-card" key={i}>
+					<img className="activities-img" src={activity.img} alt="activity" key={i}/>
+					<span className="activity-title">{activity.title}</span>
+				</div>
 			)
 		})
 		
 		return (
-			<Carousel activeIndex={this.state.activeIndex} 
-			// next={this.next} previous={this.previous} to animate
-			>
-				{activitiesCarrousel}
-				<CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
-				<CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
-			</Carousel>
+			<Fragment>
+				<div className="activities-carousel">
+					{activitiesCards}
+				</div>
+				<div onClick={() => this.switchEvent("prev")} className="carousel-control prev"><FontAwesomeIcon icon={faChevronLeft}/></div>
+				<div onClick={() => this.switchEvent("next")} className="carousel-control next"><FontAwesomeIcon icon={faChevronRight}/></div>
+			</Fragment>
 		)
 	}
 }

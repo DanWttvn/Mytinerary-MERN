@@ -36,50 +36,53 @@ class ActivitiesP extends Component {
 		
 
 		return (
-			<div id="ActivitiesP" className="containerB">
-				{ !loading && itinerary ?  (
-					<Fragment>
-						{ itinerary.activities.length !== 0 ? (
-							<Activities activities={itinerary.activities}/>
-						):(
-							<div className="activity-card">
-								<img className="activities-img" src={imgURLDisplay} alt="activity"/>
+			<Fragment>
+				<div id="ActivitiesP" className="containerB">
+					{ !loading && itinerary ?  (
+						<Fragment>
+							{ itinerary.activities.length !== 0 ? (
+								<Activities activities={itinerary.activities}/>
+								):(
+									<div className="activity-card">
+									<img className="activities-img" src={imgURLDisplay} alt="activity"/>
+								</div>
+							)}
+							
+							{!auth.loading
+								&& auth.user
+									&& itinerary.user === auth.user._id && (
+										<ItineraryOptions itinerary={itinerary}/>
+							)}
+				
+							<ExtraInfoIcons itin={itinerary}/>
+
+
+							<div className="container">
+								<div className="itin-title-box">
+									<h6 className="subtitles-font subtitle">{itinerary.title}</h6>
+									{ auth.isAuthenticated ?
+										<Heart itin={itinerary} />
+										: null
+									}
+								</div>
+		
+								<p className="paragraph">{itinerary.summary}</p>
+
+								<div className="comments-section">
+									<CommentForm itin_id={itinerary._id} />
+									{itinerary.comments.map(comment => (
+										<CommentItem key={comment._id} comment={comment} itin_id={itinerary.id} />
+									))}
+								</div>
 							</div>
-						)}
-			
-						<ExtraInfoIcons itin={itinerary}/>
+						</Fragment>
+					):(
+						<Spinner/>
+					)}
 
-						{!auth.loading
-							&& auth.user
-								&& itinerary.user === auth.user._id && (
-								<ItineraryOptions itinerary={itinerary}/>
-						)}
-
-						<div className="container">
-							<div className="itin-title-box">
-								<h6 className="subtitles-font subtitle">{itinerary.title}</h6>
-								{ this.props.isAuthenticated ?
-									<Heart itin={itinerary} />
-									: null
-								}
-							</div>
-	
-							<p className="paragraph">{itinerary.summary}</p>
-
-							<div className="comments-section">
-								<CommentForm itin_id={itinerary._id} />
-								{itinerary.comments.map(comment => (
-									<CommentItem key={comment._id} comment={comment} itin_id={itinerary.id} />
-								))}
-							</div>
-						</div>
-					</Fragment>
-				):(
-					<Spinner/>
-				)}
-
+				</div>
 				<Navbar/>
-			</div>
+			</Fragment>
 		)
 	}
 }
