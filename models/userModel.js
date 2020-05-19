@@ -43,7 +43,13 @@ const userModel = new mongoose.Schema({
 				return true;
 			}
 		},
-		unique: true
+		unique: function validateUnique() {
+			if(this.googleID || this.facebookID) {
+				return false;
+			} else {
+				return true;
+			}
+		}
 	},
 	avatar: {
 		// data: Buffer,
