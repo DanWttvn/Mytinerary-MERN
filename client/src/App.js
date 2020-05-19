@@ -34,7 +34,7 @@ class App extends Component {
 						<Alert />
 						<Switch>
 							<Route exact path="/" component={LandingP} />
-							{/* <Route exact path="/auth/:token" component={LandingP} /> */}
+							<Route exact path="/auth/:token" component={LandingP} />
 							<Route path="/sign_in" component={SignInP} />
 							<Route path="/sign_up" component={SignUpP} />
 							<Route exact path="/cities" component={CitiesP} />

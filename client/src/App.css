@@ -415,7 +415,7 @@ input:-webkit-autofill {
 .alert {
 	position: fixed;
 	margin: 0 auto;
-	top: 30px;
+	top: 80px;  /* desktop */
 	left: 50%;
 	margin-left: -35%; 	/* half of the width */
 	width: 70%;
@@ -434,8 +434,13 @@ input:-webkit-autofill {
 /* .alert-success {
 	background: rgba(255, 255, 255, 0.7);
 	color: #fff;
+}  */
+
+@media (max-width: 480px) {
+	.alert {
+		top: 30px;
+	}
 }
-   */
 
 /* -------- LOGO -------- */
 
@@ -1245,8 +1250,6 @@ input:-webkit-autofill {
 
 /* -------- React Images uploader -------- */
 .deleteImage {
-	font-size: 20px !important;
-	width: 20px !important;
-	height: 20px !important;
+	font-size: 15px !important;
 }
 

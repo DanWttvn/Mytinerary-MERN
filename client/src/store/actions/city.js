@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_CITIES } from "./types"
+import { GET_CITIES, FILTER_CITIES } from "./types"
 
 
 //* WORKS *//
@@ -16,8 +16,8 @@ export const getCities = () => dispatch => {
 
 export const filterCities = (searchTerm) => dispatch => {
 	dispatch({
-		type: "FILTER_CITIES",
-		searchTerm: searchTerm
+		type: FILTER_CITIES,
+		payload: searchTerm
 	})
 };
 

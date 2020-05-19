@@ -1,6 +1,6 @@
 import axios from "axios";
 import { setAlert } from "./alert"
-import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, UPDATE_USER, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, UPDATE_FAVORITES, ACCOUNT_DELETED } from "./types"
+import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, UPDATE_USER, LOGIN_FAIL, LOGIN_SUCCESS, LOGOUT, UPDATE_FAVORITES, ACCOUNT_DELETED, USER_SM_LOADING } from "./types"
 import setAuthToken from "../utils/setAuthToken"
 
 
@@ -106,9 +106,6 @@ export const updateAvatar = formData => dispatch => {
 				type: UPDATE_USER,
 				payload: res.data
 			})
-			.then(() => {
-				window.location.reload(true)
-			})
 		})
 		.catch(err => {
 			dispatch(setAlert(err.msg, "danger"))
@@ -159,53 +156,17 @@ export const deleteAccount = () => dispatch => {
 
 //??
 // send token when comes in the URL from Social Media
-// export const sendTokenSM = (tokenURL) => (dispatch, getState) => {
-// 	console.log("sendTokenSM de auth");
-// 	console.log(tokenURL);
+export const sendTokenSM = (tokenURL) => (dispatch, getState) => {
+	console.log("sendTokenSM de auth");
+	// console.log(tokenURL);
 	
-// 	// user loading
-// 	dispatch({
-// 		type: "USER_SM_LOADING", //is loading to true
-// 		payload: tokenURL
-// 	});
-// }
-
-
-// ??
-// -- GET FAVS
-// export const getItinerariesByFavs = ()  => (dispatch, getState) => {
-// 	axios.get("/api/user/favorites", tokenConfig(getState)) 
-// 		.then(res => {
-// 			// console.log("favorites by user", res.data);
-// 			dispatch ({
-// 				type: "GET_ITINERARIES", /// me vale el mismo reducer
-// 				payload: res.data
-// 		});
-// 	})
-// }
-
-
-// ??
-// export const addToFavorites = (id) => (dispatch, getState) => {
-// 	// console.log("id:", id);
-// 	const body = JSON.stringify({ id }); // lo que .stringify es un obj. como el mio no lo es, le pongo {}
-// 	// console.log("body:", body);
-	
-// 	axios.put("/api/user/favorites", body, tokenConfig(getState))
-
-// 		.then(res => {
-// 			// me llega en res todo el user modificado con nuevos FAVS
-// 			// console.log("lo que me llega del BackEndPUT:", res.data);
-// 			dispatch({
-// 				type: "UPDATE_FAVORITES",
-// 				payload: res.data
-// 			})
-// 			// console.log("despues de dispatch");
-// 		})
-// }
-
-
-
+	// user loading
+	dispatch({
+		type: USER_SM_LOADING, //is loading to true
+		payload: tokenURL
+	})
+	// dispatch(loadUser())
+}
 
 
 

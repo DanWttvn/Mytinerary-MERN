@@ -10,7 +10,7 @@ const userModel = require("../../models/userModel");
 
 
 // @route    GET api/auth/user
-// @desc     get User by logged user
+// @desc     get User by logged user. load user
 // @access   Private
 router.get("/user", passport.authenticate("jwt", {session: false}), (req, res) => {
 	userModel.findById(req.user.id).select("-password")
@@ -87,12 +87,18 @@ router.get("/google", passport.authenticate("google", {
 // callback route for google to redirect
 // @route POST 5000/auth/google/redirect
 router.get("/google/redirect", passport.authenticate("google", {session: false}), (req, res) => { // esta vez que autentificamos con google, ya tenemos un code en el url. passport entende que entonces ya hemos pasado por la primera pagina. fires the cb function en pass-setup
-	// console.log("redirected page");
-	// console.log(req.user);
+	console.log("redirected page");
+	console.log(req.user);
 	
 	const payload = { 
-		id: req.user.id
+			id: req.user.id
 	};
+
+	// const payload = { 
+	// 	user: {
+	// 		id: req.user.id
+	// 	}
+	// };
 
 	jwt.sign (
 		payload, 

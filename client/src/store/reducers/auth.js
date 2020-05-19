@@ -1,4 +1,4 @@
-import { USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_SUCCESS, REGISTER_FAIL, UPDATE_USER, UPDATE_FAVORITES, ACCOUNT_DELETED, LOGOUT } from "../actions/types"
+import { USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, REGISTER_SUCCESS, REGISTER_FAIL, UPDATE_USER, UPDATE_FAVORITES, ACCOUNT_DELETED, LOGOUT, USER_SM_LOADING } from "../actions/types"
 
 const initState = {
 	token: localStorage.getItem("token"), 
@@ -20,6 +20,15 @@ const auth = (state = initState, action) => {
 				user: payload
 			}
 		
+		case USER_SM_LOADING:
+			console.log("action.payload en user_sm_oading:");
+			localStorage.setItem("token", payload);
+			return {
+				...state, 
+				loading: true,
+				token: payload
+			};
+
 		case LOGIN_SUCCESS:
 		case REGISTER_SUCCESS:
 			localStorage.setItem("token", payload.token)
@@ -69,15 +78,6 @@ const auth = (state = initState, action) => {
 				loading: false,
 				user: null
 			};
-
-		
-		//??
-		// case "UPDATE_FAVORITES": 
-		// 	// console.log("modifyinf favs", payload);
-		// 	return {
-		// 		...state,
-		// 		user: payload
-		// 	}
 			
 		default:
 			return state;

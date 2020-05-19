@@ -16,13 +16,12 @@ class ItinerariesP extends Component {
 		this.props.getCities()
 	}
 
-	//todo: figure out without duplicate
-	// filterWithSearchTerm = (searchTerm) => {
-	// 	this.props.filterCities(searchTerm);
-	// }
+	filterWithSearchTerm = (searchTerm) => {
+		this.props.filterCities(searchTerm);
+	}
 
 	render() {
-		const { cities, loading } = this.props.cities
+		const { filteredCities, loading } = this.props.cities
 
 		return (
 			<Fragment>
@@ -33,7 +32,7 @@ class ItinerariesP extends Component {
 					<div id="CitiesP" className="container">
 						<p className="titles-font title-main">Where are you going?</p>
 						<Searchbar getSearchTerm={this.filterWithSearchTerm} />
-						<Cities cities={cities} />	
+						<Cities cities={filteredCities} />	
 					</div> 
 				)}
 				<AddItinerary />

@@ -87,7 +87,8 @@ opts.secretOrKey = keys.secretOrKey;
 
 module.exports = passport.use(
 	new JwtStrategy(opts, (jwt_payload, done) => {
-		userModel.findById(jwt_payload.user.id) // check if decoded token matches a user. payload el que he puesto al guardar el obj
+		//* estaba como user.id y por eso no funcionaba. mi payload solo tiene el hijo id
+		userModel.findById(jwt_payload.id) // check if decoded token matches a user. payload el que he puesto al guardar el obj
 			.then(user => {
 				// Token matches
 				if (user) { 

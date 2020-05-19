@@ -1,9 +1,9 @@
-import { GET_CITIES } from "../actions/types"
+import { GET_CITIES, FILTER_CITIES } from "../actions/types"
 
 const initState = {
 	cities: [],
-	loading: true
-	// citiesDB: [], 
+	loading: true,
+	filteredCities: [], 
 }
 
 const cities = (state = initState, action) => {
@@ -14,19 +14,16 @@ const cities = (state = initState, action) => {
 			return {
 				...state,
 				cities: payload,
-				// citiesDB: payload,
+				filteredCities: payload,
 				loading: false
 			}
 
 		//?? mejor filtrar en el FE, no??? sin mess con el BE, sino con lo guardado en el store. a lo mejor un city(como itinerary) en el store?
-		case "FILTER_CITIES":
-			// console.log("filtering ACTION", action.searchTerm);
-			let cities = state.citiesDB
-			cities = state.citiesDB.filter(city => city.name.toLowerCase().startsWith(action.searchTerm));
-			// console.log("Ciudades filtradas: ", cities)
+		case FILTER_CITIES:
+			let filteredCities = state.cities.filter(city => city.name.toLowerCase().startsWith(payload));
 			return {
 				...state,
-				cities
+				filteredCities
 			}
 			
 		default:
