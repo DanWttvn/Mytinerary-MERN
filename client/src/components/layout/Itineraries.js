@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from "react-redux"
 import { updateFavorites } from "../../store/actions/auth"
 import { Link } from "react-router-dom"
@@ -10,47 +10,27 @@ import Heart from "../elements/Heart"
 class Itineraries extends Component {
 	render () {
 		const { user, isAuthenticated } = this.props.auth
+		const loading = this.props.itineraries.loading
 		const isInFavsPage = this.props.inFavsPage
 
-		// No itineraries message
-		let noItinerariesMsg = isInFavsPage ? (
-				<div className="btns-box3 center">
-					<p>You still have no favorites!</p>
-					<div className="btn-inside"><a href="/cities">Explore</a></div>
-				</div>
-			):( 
-				<div className="btns-box3 center">
-					<p>There are still no itineraries for this city</p>
-					<br/>
-					<AddItineraryModal /> 
-				</div>
-			)
-
-		//todo: solucionar
 		let areItins = true;
-		if(isInFavsPage) {
-			areItins = user.favorites.length > 0 ? true : false;
-		} else {
+		if(isInFavsPage && user) {
+					areItins = user.favorites.length > 0 ? true : false;
+		} else if (this.props.itineraries) {
 			areItins = this.props.itineraries.length > 0 ? true : false
 		}
 
-
-		const itinsCarrousel = this.props.itineraries.map(itin => {
-	
+		const itinsCarrousel = this.props.itineraries ? this.props.itineraries.map(itin => {
 			let itinURL = isInFavsPage ? `/cities/${itin.city}/${itin._id}` : `${itin.city}/${itin._id}`;
 
 			//* Change before deploy? a // const imgURL = "url(" + itin.img + ")"
 			const imgURL = itin.img.startsWith("uploads") ? "url(/" + itin.img + ")" : "url(" + itin.img + ")"
 			const imgURLDisplay = imgURL.replace(/\\/g, "/");
 
-			const avatarURL = itin.avatar.startsWith("uploads") ? "http://localhost:5000/" + itin.avatar : itin.avatar
+			const avatarURL = itin.avatar.startsWith("uploads") ? "/" + itin.avatar : itin.avatar
 			const avatarURLDisplay = avatarURL.replace(/\\/g, "/");
 
-			const hashtags = itin.hashtags.map((hashtag, i) => {
-				return(
-					<span className="hashtag" key={i}>#{hashtag}</span>
-				)
-			})
+			const hashtags = itin.hashtags.map((hashtag, i) => <span className="hashtag" key={i}>#{hashtag}</span>)
 
 			return (				
 				<div className="itin-box" key={itin._id}>
@@ -89,23 +69,42 @@ class Itineraries extends Component {
 					</div>
 				</div>
 			)	
-		})
+		}) : null
 	
 		return (
-			<div className="itins-carousel">
-				{areItins ? (
-					itinsCarrousel 
-				):(
-					noItinerariesMsg
-				)}
-			</div>
+			<Fragment>
+				{ !loading ? 
+					<div className="itins-carousel">
+						{areItins ? (
+							itinsCarrousel 
+						):(
+							// no itineraries message
+							<div className="btns-box3 center">
+								{ isInFavsPage ? (
+									<Fragment>
+										<p>You still have no favorites!</p>
+										<div className="btn-inside"><a href="/cities">Explore</a></div>
+									</Fragment>
+								):(
+									<Fragment>
+										<p>There are still no itineraries for this city</p>
+										<br/>
+										<AddItineraryModal />
+									</Fragment> 
+								)}
+							</div>
+						)}
+					</div> : null
+				}
+			</Fragment>
 		)
 	}
 }
 
 const mapStateToProps = state => {
 	return {
-		auth: state.auth
+		auth: state.auth,
+		loading: state.itineraries.loading
 	}
 }
 

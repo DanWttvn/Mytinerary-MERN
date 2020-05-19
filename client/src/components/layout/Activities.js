@@ -18,17 +18,16 @@ class Activities extends Component {
 	
 	switchEvent(dir) {
 		let sliderIndex = this.state.sliderIndex
+		let numEvents = this.state.numEvents
 
-		if(dir === "next" && sliderIndex === this.setState.numEvents - 1) {
-			sliderIndex = 0;
+		if(dir === "next" && sliderIndex === (numEvents - 1)) {
+			sliderIndex = 0
 		} else if (dir === "prev" && sliderIndex === 0) {
-			sliderIndex = this.state.numEvents - 1
-		} else if (dir === "next") { sliderIndex++ } else { sliderIndex-- }
-
+			sliderIndex = 0
+		} else if (dir === "next") { sliderIndex++ } else {	sliderIndex-- }
 		this.setState({ sliderIndex })
 
 		const activitiesCarrousel = document.querySelector(".activities-carousel")
-		
 		let leftDistance = - sliderIndex * 100;
 		activitiesCarrousel.style.transform = "translateX(" + leftDistance + "%)";
 	}
@@ -53,8 +52,12 @@ class Activities extends Component {
 				<div className="activities-carousel">
 					{activitiesCards}
 				</div>
-				<div onClick={() => this.switchEvent("prev")} className="carousel-control prev"><FontAwesomeIcon icon={faChevronLeft}/></div>
-				<div onClick={() => this.switchEvent("next")} className="carousel-control next"><FontAwesomeIcon icon={faChevronRight}/></div>
+				{this.props.activities.length > 1 ? (
+					<Fragment>
+						<div onClick={() => this.switchEvent("prev")} className="carousel-control prev"><FontAwesomeIcon icon={faChevronLeft}/></div>
+						<div onClick={() => this.switchEvent("next")} className="carousel-control next"><FontAwesomeIcon icon={faChevronRight}/></div>
+					</Fragment>
+				):( null )}
 			</Fragment>
 		)
 	}

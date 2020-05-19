@@ -36,7 +36,7 @@ class Profile extends Component {
 		if(!loading &&
 			isAuthenticated
 				&& user.avatar ){
-					//! aqui no pone localhost, pero si la /
+					//* aqui no pone localhost, pero si la /
 				   avatar = user.avatar.startsWith("uploads") ? `/${user.avatar}` : user.avatar;
 	   }
 

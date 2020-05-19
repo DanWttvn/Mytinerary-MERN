@@ -7,7 +7,7 @@ const Cities = ({cities}) => {
 
 	const citiesGallery = cities.map(city => {
 		//Uploaded imgs
-		const imgURL = "url(" + city.img + ")"
+		const imgURL = city.img.startsWith("uploads") ? "url(/" + city.img + ")" : "url(" + city.img + ")"
 		const imgURLDisplay = imgURL.replace(/\\/g, "/");  // the \ gives me an error, so i have to change it to /	
 
 		return (

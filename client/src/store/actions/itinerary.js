@@ -87,7 +87,7 @@ export const getFavorites = () => dispatch => {
 
 //* WORKS *//
 // Add itinerary
-export const addItinerary = formData => dispatch => {
+export const addItinerary = (formData, history) => dispatch => {
 	const config = {
 		headers: {
 			"Content-type" : "multipart/form-data"
@@ -101,8 +101,13 @@ export const addItinerary = formData => dispatch => {
 				payload: res.data
 			});
 			dispatch(setAlert("Itinerary Created", "success"));
+			history.push(`/cities/${res.data.city}/${res.data._id}`)
 		})
 		.catch(err => {
+			const errors = err.response.data.errors; 
+			if(errors) {
+				errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
+			}
 			dispatch({
 				type: ITINERARY_ERROR,
 				payload: { msg: err.response.statusText, status: err.response.status }
@@ -112,7 +117,7 @@ export const addItinerary = formData => dispatch => {
 
 
 // Delete itinerary
-export const deleteItinerary = id => dispatch => { 
+export const deleteItinerary = (id, history) => dispatch => { 
 	axios.delete(`/api/itineraries/${id}`)
 		.then(res => {
 			dispatch({
@@ -120,7 +125,7 @@ export const deleteItinerary = id => dispatch => {
 				payload: id
 			});
 			dispatch(setAlert("Itinerary Removed", "success"));
-			// ! history push si estou dentro del itinerary?
+			history.push(`/cities`)
 		})
 		.catch(err => {
 			dispatch({

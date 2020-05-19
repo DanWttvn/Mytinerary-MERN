@@ -6,7 +6,7 @@ import Activities from "../layout/Activities"
 import ExtraInfoIcons from "../layout/ExtraInfoIcons"
 import Heart from "../elements/Heart"
 import Spinner from '../elements/Spinner'
-import ItineraryOptions from '../elements/ItineraryOptions'
+import ItineraryOptions from '../layout/ItineraryOptions'
 import CommentForm from '../elements/CommentForm'
 import CommentItem from '../elements/CommentItem'
 

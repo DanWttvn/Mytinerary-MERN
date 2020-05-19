@@ -1,10 +1,9 @@
 import React, { Component } from "react"
+import { withRouter } from 'react-router-dom'
 import { connect } from "react-redux"
-import { Modal } from "reactstrap";
 import SignInBtn from "../elements/SignInBtn"
 import ImageUploader from "react-images-upload"
 import { addItinerary } from "../../store/actions/itinerary"
-
 
 
 class AddItinerary extends Component {
@@ -43,9 +42,9 @@ class AddItinerary extends Component {
 		formData.append("price", this.state.price);
 		formData.append("hashtags", this.state.hashtags);
 
-		this.props.addItinerary(formData)
-
-		this.toggle();
+		//todo: redireccionar pag itin
+		this.props.addItinerary(formData, this.props.history)
+		// document.querySelector(".modal").classList.remove("modal-open");
 	}
 	
 	render() {
@@ -122,9 +121,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		addItinerary: (formData) => dispatch(addItinerary(formData))
+		addItinerary: (formData, history) => dispatch(addItinerary(formData, history))
 	}
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddItinerary);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AddItinerary)); //to use hitory we have to connect withrouter

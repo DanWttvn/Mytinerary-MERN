@@ -792,6 +792,7 @@ input:-webkit-autofill {
 .itin-info-prev {
 	position: absolute;
 	bottom: 0;
+	width: 100%;
 }
 
 .card-mascara {
@@ -1052,9 +1053,7 @@ input:-webkit-autofill {
 .activities-carousel {
 	width: 100%;
 	height: 250px;
-
 	left: 0;
-	overflow: hidden;
 	
 	flex-shrink: 0;
 	display: flex;
@@ -1240,3 +1239,14 @@ input:-webkit-autofill {
 .modal-profile-box button {
 	width: 100%;
 }
+
+
+
+
+/* -------- React Images uploader -------- */
+.deleteImage {
+	font-size: 20px !important;
+	width: 20px !important;
+	height: 20px !important;
+}
+

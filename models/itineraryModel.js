@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 
 const itineraryModel = new mongoose.Schema({
 	city: {
-		type: String, //lo que acepta
-		required: true //obligatorio
+		type: String,
+		required: true
 	},
 	country: {
-		type: String, //lo que acepta
-		required: true //obligatorio
+		type: String,
+		required: true
 	},
 	title: {
 		type: String,

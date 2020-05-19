@@ -12,7 +12,7 @@ const storage = multer.diskStorage({ // storage config
 		cb(null, "./uploads/") // aqui se va a store las pics
 	}, 
 	filename: function(req, file, cb) {
-		cb(null, new Date().toISOString().replace(/:/g, "-") + "_" + file.originalname) // this syntaxis to avoid errors in windows
+		cb(null, new Date().toISOString().replace(/:/g, "-") + "_" + Math.round(Math.random() * 1000000).toString()) // this syntaxis to avoid errors in windows
 	}
 });
 const fileFilter = (req, file, cb) => {
@@ -110,8 +110,16 @@ router.post("/", upload.single("img"), passport.authenticate("jwt", {session: fa
 					: req.body.hashtags.split(",").map(hashtag => "" + hashtag.trim()),
 				user: req.user.id,
 				username: user.username,
-				avatar: user.avatar				
+				avatar: user.avatar,
+				activities: []			
 			});
+
+			// Add photo and title as first activity
+			const newActivity = {
+				title: req.body.title,
+				img: req.file.path
+			}
+			newItin.activities.unshift(newActivity)
 
 			newItin.save()
 				// Add city to db if it doesnt exist
@@ -139,8 +147,6 @@ router.post("/", upload.single("img"), passport.authenticate("jwt", {session: fa
 
 
 
-
-//* ponerlo a parte. en el UI: al añadir itin, redirigir a la pagina propia de ese itin.
 // @route    POST api/itineraries/activity/:itin_id
 // @desc     Add activity to an itinerary with img
 // @access   Private
@@ -172,7 +178,7 @@ router.put("/activity/:itin_id", upload.single("img"), [passport.authenticate("j
 				return res.status(401).json({ msg: "User not authorized" })
 			}
 
-			itinerary.activities.unshift(newActivity)
+			itinerary.activities.shift(newActivity)
 
 			itinerary.save()
 				.then(() => res.json(itinerary))

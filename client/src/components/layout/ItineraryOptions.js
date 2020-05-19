@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { withRouter } from 'react-router-dom'
 import { connect } from "react-redux"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
@@ -54,7 +55,7 @@ class ItineraryOptions extends Component {
 
 		await this.props.addActivity(_id, formData)
 
-		document.querySelector(".add-form add-itin-form").reset();		
+		document.querySelector(".add-form add-itin-form #title").reset();		
 		const imgPreview = document.querySelector(".uploadPictureContainer")
 		imgPreview.parentNode.removeChild(imgPreview);
 	}
@@ -71,7 +72,7 @@ class ItineraryOptions extends Component {
 					<ul className="itin-opts-dropdown">
 						<li onClick={() => document.querySelector(".modal").classList.add("modal-open")}>Edit Activities</li>
 						{/* //! falta comprobar: ultimo (poner this.props.delete) */}
-						<li onClick={() => deleteItinerary(_id)} className="">Delete Itinerary</li>
+						<li onClick={() => this.props.deleteItinerary(_id, this.props.history)} className="">Delete Itinerary</li>
 					</ul>
 				</div>
 
@@ -127,10 +128,10 @@ class ItineraryOptions extends Component {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		deleteItinerary: (itin_id) => dispatch(deleteItinerary(itin_id)),
+		deleteItinerary: (itin_id, history) => dispatch(deleteItinerary(itin_id, history)),
 		addActivity: (itin_id, formData) => dispatch(addActivity(itin_id, formData)),
 		deleteActivity: (itin_id, activity_id) => dispatch(deleteActivity(itin_id, activity_id))
 	}
 }
 
-export default connect(null, mapDispatchToProps)(ItineraryOptions);
+export default connect(null, mapDispatchToProps)(withRouter(ItineraryOptions));
