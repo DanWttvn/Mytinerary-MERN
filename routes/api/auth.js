@@ -51,10 +51,8 @@ router.post("/login", [
 					return res.status(400).json({ errors: [{ msg: "Invalid credentials" }] })
 				}
 
-				const payload = {
-					user: {
-						id: currentUser.id
-					}
+				const payload = { //* this is whaat the jwt is gonna check for
+					id: currentUser.id
 				};
 
 				jwt.sign (
@@ -76,7 +74,7 @@ router.post("/login", [
 
 
 
-//! CHECK //
+//* works //
 // @route    GET api/auth/google
 // @desc     Login by Google
 // @access   Public
@@ -91,14 +89,8 @@ router.get("/google/redirect", passport.authenticate("google", {session: false})
 	console.log(req.user);
 	
 	const payload = { 
-			id: req.user.id
+		id: req.user.id
 	};
-
-	// const payload = { 
-	// 	user: {
-	// 		id: req.user.id
-	// 	}
-	// };
 
 	jwt.sign (
 		payload, 

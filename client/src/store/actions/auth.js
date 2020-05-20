@@ -130,8 +130,9 @@ export const updateFavorites = itin_id => dispatch => {
 
 //* WORKS *//
 //  Logout
-export const logout = () => dispatch => {
+export const logout = history => dispatch => {
 	dispatch({ type: LOGOUT })
+	history.push(`/`)
 } 
 
 

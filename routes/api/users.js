@@ -91,9 +91,7 @@ router.post("/", [
 						// Return jsonwebtoken 
 						.then(newUser => {
 							const payload = {
-								user: {
-									id: newUser.id
-								}
+								id: newUser.id
 							};
 							
 							jwt.sign (

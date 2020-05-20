@@ -12,21 +12,19 @@ const CommentItem = ({ itin_id, comment: {_id, content, username, avatar, user, 
 
 	return (
 		<div className="comment-box" key={_id}>			
-			<div>
+			<div className="comment-avatar-box">
 				<img className="comment-avatar" src={avatarURLDisplay} alt=""/>
+			</div>
+			<div className="comment-content">
 				<p className="comment-name">{username}</p>
-			</div>
-			<div>
 				<p>{content}</p>
-				<p className="comment-date">Posted on <Moment format="YYYY/MM/DD">{date}</Moment></p>
-				{!auth.loading 
-					&& auth.isAuthenticated
-						&& user === auth.user.id && (
-							<button onClick={() => deleteComment(itin_id, comment_id)} type="button" className="">
-								<FontAwesomeIcon icon={faTimes}/>
-							</button>
-				)}
+				<p className="comment-date"><Moment format="YYYY/MM/DD">{date}</Moment></p>
 			</div>
+			{!auth.loading 
+				&& auth.isAuthenticated
+					&& user === auth.user._id && (
+						<button onClick={() => deleteComment(itin_id, comment_id)} type="button" className="delete-btn"><FontAwesomeIcon icon={faTimes}/></button>
+			)}
 		</div>
 	)
 }

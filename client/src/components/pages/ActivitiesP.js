@@ -33,6 +33,17 @@ class ActivitiesP extends Component {
 						imgURL = itinerary.img
 		}		
 		const imgURLDisplay = imgURL.replace(/\\/g, "/");
+
+		let avatarURL = ""
+		if(!loading
+				&& itinerary
+					&& itinerary.avatar.startsWith("uploads")) {
+						avatarURL = `/${itinerary.avatar}`
+		} else if (!loading
+						&& itinerary) {
+						avatarURL = itinerary.avatar
+		}		
+		const avatarURLDisplay = avatarURL.replace(/\\/g, "/");
 		
 
 		return (
@@ -40,8 +51,13 @@ class ActivitiesP extends Component {
 				<div id="ActivitiesP" className="containerB">
 					{ !loading && itinerary ?  (
 						<Fragment>
+							
+							<div className="user-avatar">
+								<img src={avatarURLDisplay} alt=""/>
+							</div>
+
 							{ itinerary.activities.length !== 0 ? (
-								<Activities activities={itinerary.activities}/>
+									<Activities activities={itinerary.activities}/>
 								):(
 									<div className="activity-card">
 									<img className="activities-img" src={imgURLDisplay} alt="activity"/>
@@ -61,9 +77,7 @@ class ActivitiesP extends Component {
 								<div className="itin-title-box">
 									<h6 className="subtitles-font subtitle">{itinerary.title}</h6>
 									{ auth.isAuthenticated ?
-										<Heart itin={itinerary} />
-										: null
-									}
+										<Heart itin={itinerary} /> : null }
 								</div>
 		
 								<p className="paragraph">{itinerary.summary}</p>
@@ -79,7 +93,6 @@ class ActivitiesP extends Component {
 					):(
 						<Spinner/>
 					)}
-
 				</div>
 				<Navbar/>
 			</Fragment>

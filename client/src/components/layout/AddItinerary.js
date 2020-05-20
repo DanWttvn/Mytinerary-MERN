@@ -42,9 +42,8 @@ class AddItinerary extends Component {
 		formData.append("price", this.state.price);
 		formData.append("hashtags", this.state.hashtags);
 
-		//todo: redireccionar pag itin
+		// redirect to itinerary page
 		this.props.addItinerary(formData, this.props.history)
-		// document.querySelector(".modal").classList.remove("modal-open");
 	}
 	
 	render() {

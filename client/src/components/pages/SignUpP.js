@@ -91,7 +91,7 @@ class SignUpP extends Component {
 					</div>
 	
 					<div className="btns-box2">
-						<input className="btn-transparent" type="submit" name="submit" value="Send"></input>
+						<input className="btn-transparent" type="submit" name="submit" value="Sign Un"></input>
 						<a className="btn-secondary" href="/sign_in">Log in</a>
 					</div>
 				</form>

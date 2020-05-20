@@ -119,6 +119,7 @@ router.post("/", upload.single("img"), passport.authenticate("jwt", {session: fa
 				title: req.body.title,
 				img: req.file.path
 			}
+			
 			newItin.activities.unshift(newActivity)
 
 			newItin.save()
@@ -178,7 +179,7 @@ router.put("/activity/:itin_id", upload.single("img"), [passport.authenticate("j
 				return res.status(401).json({ msg: "User not authorized" })
 			}
 
-			itinerary.activities.shift(newActivity)
+			itinerary.activities.push(newActivity)
 
 			itinerary.save()
 				.then(() => res.json(itinerary))

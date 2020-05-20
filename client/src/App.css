@@ -358,6 +358,10 @@ button:active {
 	margin-left: auto;
 }
 
+.mb-small {
+	margin-bottom: 20px;
+}
+
 /* autocomplete transparent background */
 @keyframes autofill {
     0%,100% {
@@ -415,10 +419,14 @@ input:-webkit-autofill {
 .alert {
 	position: fixed;
 	margin: 0 auto;
-	top: 80px;  /* desktop */
 	left: 50%;
-	margin-left: -35%; 	/* half of the width */
 	width: 70%;
+	
+	/* desktop */
+	top: 100px;  
+	margin-left: -200px; 	/* half of the width */
+	max-width: 400px;
+
 	padding: 0.8rem;
 	border-radius: 5px;
 	background: rgba(0, 0, 0, 0.6);
@@ -439,6 +447,7 @@ input:-webkit-autofill {
 @media (max-width: 480px) {
 	.alert {
 		top: 30px;
+		margin-left: -35%;
 	}
 }
 
@@ -768,24 +777,33 @@ input:-webkit-autofill {
 	overflow: hidden;
 }
 
-.itin-card .user-avatar {
-	position: absolute;
+.user-avatar {
 	width: 55px;
 	height: 55px;
-	left: 30px;
-	top: 28px;
 	border-radius: 50%;
-	/* border: 3px #fff solid; */
 	overflow: hidden;
-	z-index: 2;
 	
 	-webkit-box-shadow: 2px 3px 16px -2px rgba(0,0,0,1); 
 	box-shadow: 2px 3px 16px -2px rgba(0,0,0,1);
 }
 
-.itin-card .user-avatar img {
+.user-avatar img {
 	width: 100%;
 	height: 100%;
+}
+
+.itin-card .user-avatar {
+	position: absolute;
+	left: 30px;
+	top: 28px;
+	z-index: 2;
+}
+
+#ActivitiesP .user-avatar {
+	position: absolute;
+	left: 30px;
+	top: 28px;
+	z-index: 2;
 }
 
 .itin-img-prev {
@@ -1025,13 +1043,11 @@ input:-webkit-autofill {
 	min-height: 400px;
 }
 
-/* .modal-content button {
-	margin-top: 20px;
-} */
 
-.add-activity-form {
+/* .add-activity-form {
+	open
 	display: none;
-}
+} */
 
 .add-activity-form .btn-box {
 	display: flex;
@@ -1053,6 +1069,10 @@ input:-webkit-autofill {
 .add-form input:focus {
 	border-bottom: 1px solid var(--soft-black);
 }
+
+/* .add-form .btn-inside {
+	float: right;
+} */
 
 /* -------- ACTIVITIES -------- */
 .activities-carousel {
@@ -1148,17 +1168,27 @@ input:-webkit-autofill {
 }
 .send-comment-btn svg {
 	position: relative;
-	left: 1px;
+	left: 0px;
 	/* top: 1px; */
 }
 
 
 .comment-box {
+	position: relative;
 	background: var(--bg-grey);
 	margin-bottom: 10px;
 	border-radius: 10px;
-	padding: 10px;
+	padding: 12px;
 	width: 100%;
+
+	display: flex;
+	flex-flow: row nowrap;
+	justify-content: flex-start; align-items: flex-start;
+}
+
+.comment-avatar-box {
+	height: 100%;
+	width: fit-content;
 }
 
 .comment-avatar {
@@ -1167,10 +1197,31 @@ input:-webkit-autofill {
 	border-radius: 50%;
 }
 
+.comment-content {
+	width: 100%;
+	margin: 0 10px 0 15px;
+}
+
 .comment-name {
+	width: fit-content;
 	font-weight: bold;
 	font-size: 15px;
 	text-align: end;
+}
+
+.comment-date {
+	float: right;
+	margin-top: 8px;
+	font-size: 0.8em;
+	color: rgb(85, 85, 85);
+	margin-left: auto;
+}
+
+.comment-box .delete-btn {
+	position: absolute;
+	right: 12px;
+	top: 10px;
+	color: #888;
 }
 
 .itin-opts-dropdown {
@@ -1251,5 +1302,6 @@ input:-webkit-autofill {
 /* -------- React Images uploader -------- */
 .deleteImage {
 	font-size: 15px !important;
+	background: var(--intense-red) !important;
 }
 

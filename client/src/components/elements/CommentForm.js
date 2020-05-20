@@ -46,7 +46,7 @@ class ActivitiesP extends Component {
 							<button className="send-comment-btn" type="submit" name="submit" ><FontAwesomeIcon icon={faChevronRight}/></button>
 						</form>
 					):(
-						<div className="">
+						<div className="mb-small">
 							<p>Sign in to add comments</p>
 							<a href="/sign_in"><button className="btn-inside">Sign in</button></a>
 						</div>	

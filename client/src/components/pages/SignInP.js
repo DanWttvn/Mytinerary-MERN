@@ -49,7 +49,7 @@ class SignInP extends Component {
 		}
 
 		return (
-			<div id="sign-inP" className="--fixed-height">
+			<div id="sign-inP">
 				
 				<form onSubmit={this.onSubmit} className="form-box">
 
@@ -71,7 +71,7 @@ class SignInP extends Component {
 					</div>
 	
 					<div className="btns-box2">
-						<input className="btn-transparent" type="submit" name="submit" value="Send"></input>
+						<input className="btn-transparent" type="submit" name="submit" value="Sign In"></input>
 						<a className="btn-secondary" href="/sign_up">Create Account</a>
 					</div>				
 				</form>

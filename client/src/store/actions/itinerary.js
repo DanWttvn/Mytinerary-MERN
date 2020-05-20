@@ -209,13 +209,12 @@ export const addActivity = (itin_id, formData) => dispatch => {
 	}
 
 	axios.put(`/api/itineraries/activity/${itin_id}`, formData, config)
-		.then(res => {
+		.then(res => {			
 			dispatch({
 				type: UPDATE_ITINERARY,
 				payload: res.data
 			});
 			dispatch(setAlert("Activity added", "success"));
-			// history.push(`/itineraries/${itin_id}`) no porque va a ser un modal
 		})
 		.catch(err => {
 			const errors = err.response.data.errors; 

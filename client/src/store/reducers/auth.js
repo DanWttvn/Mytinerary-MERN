@@ -21,7 +21,6 @@ const auth = (state = initState, action) => {
 			}
 		
 		case USER_SM_LOADING:
-			console.log("action.payload en user_sm_oading:");
 			localStorage.setItem("token", payload);
 			return {
 				...state, 

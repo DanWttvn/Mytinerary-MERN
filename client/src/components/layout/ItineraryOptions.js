@@ -3,9 +3,11 @@ import { withRouter } from 'react-router-dom'
 import { connect } from "react-redux"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import {faPen} from '@fortawesome/free-solid-svg-icons'
+import { faPen } from '@fortawesome/free-solid-svg-icons'
 import ImageUploader from "react-images-upload"
 import { deleteItinerary, addActivity, deleteActivity } from "../../store/actions/itinerary"
+import { setAlert } from '../../store/actions/alert'
+
 
 
 class ItineraryOptions extends Component {
@@ -13,7 +15,6 @@ class ItineraryOptions extends Component {
 		title: "",
 		img: null,
 		showOpts: false,
-		showAddFrom: false
 	}
 
 	showHideOpts = () => {
@@ -25,13 +26,9 @@ class ItineraryOptions extends Component {
 		itinOpts.style.display = showOpts ? "block" : "none"
 	}
 
-	showHideForm = () => {
-		let showAddFrom = !this.state.showAddFrom
-		this.setState({
-			showAddFrom
-		})
-		const itinOpts = document.querySelector(".add-form add-itin-form")
-		itinOpts.style.display = showAddFrom ? "block" : "none"
+	openModal = () => {
+		document.querySelector(".modal").classList.add("modal-open") 
+		document.querySelector(".itin-opts-dropdown").style.display = "none"
 	}
 
 	handleAddItin = (e) => {
@@ -40,24 +37,32 @@ class ItineraryOptions extends Component {
 		})
 	}
 	handleImgSelect = (pictureFiles, pictureDataURLs) => {
+		// console.log(pictureFiles.length);
+		//todo: read doc, see how to delete a photo
+		const lastIndex = pictureFiles.length-1
 		this.setState({
-			img: pictureFiles[0]
+			img: pictureFiles[lastIndex]
 		})
 	}
 	
 	handleSubmit = async e => {
 		e.preventDefault();
-		const { _id } = this.props.itinerary
+		const { _id } = this.props.itinerary		
 
-		const formData = new FormData();
-		formData.append("img", this.state.img, this.state.img.name);
-		formData.append("title", this.state.title);		
+		if(this.state.img && this.state.title) {
+			const formData = new FormData();
+			formData.append("img", this.state.img, this.state.img.name);
+			formData.append("title", this.state.title);		
 
-		await this.props.addActivity(_id, formData)
+			await this.props.addActivity(_id, formData)
 
-		document.querySelector(".add-form add-itin-form #title").reset();		
-		const imgPreview = document.querySelector(".uploadPictureContainer")
-		imgPreview.parentNode.removeChild(imgPreview);
+			document.querySelector("#title").value = "";
+			// tengo que borrar la img antreior
+			const imgPreview = document.querySelector(".uploadPictureContainer")
+			imgPreview.parentNode.removeChild(imgPreview);
+		} else {
+			this.props.setAlert("Please, set a photo and a title", "danger"); //msg, type
+		}
 	}
 
 	render() {
@@ -70,8 +75,7 @@ class ItineraryOptions extends Component {
 				<div className="opts-wrapper">
 					<button className="edit-itin-btn" onClick={this.showHideOpts}><FontAwesomeIcon icon={faPen} /></button>
 					<ul className="itin-opts-dropdown">
-						<li onClick={() => document.querySelector(".modal").classList.add("modal-open")}>Edit Activities</li>
-						{/* //! falta comprobar: ultimo (poner this.props.delete) */}
+						<li onClick={() => this.openModal()}>Edit Activities</li>
 						<li onClick={() => this.props.deleteItinerary(_id, this.props.history)} className="">Delete Itinerary</li>
 					</ul>
 				</div>
@@ -81,8 +85,8 @@ class ItineraryOptions extends Component {
 					<div className="modal-backdrop" onClick={() => document.querySelector(".modal").classList.remove("modal-open")}></div>
 					<div className="modal-window">
 						{/* Add Activity */}
-						<p className="title-section" onClick={this.showHideForm}>Add Activity</p>
-						<form className="add-form add-itin-form" onSubmit={this.handleSubmit}>		
+						<p className="title-section">Add Activity</p>
+						<form className="add-form add-activity-form" onSubmit={this.handleSubmit}>		
 							<label htmlFor="title">Title</label>
 							<input type="text" id="title" onChange={this.handleAddItin} required />
 							
@@ -122,7 +126,6 @@ class ItineraryOptions extends Component {
 				</div>
 			</Fragment>
 		)
-
 	}
 }
 
@@ -130,7 +133,8 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		deleteItinerary: (itin_id, history) => dispatch(deleteItinerary(itin_id, history)),
 		addActivity: (itin_id, formData) => dispatch(addActivity(itin_id, formData)),
-		deleteActivity: (itin_id, activity_id) => dispatch(deleteActivity(itin_id, activity_id))
+		deleteActivity: (itin_id, activity_id) => dispatch(deleteActivity(itin_id, activity_id)),
+		setAlert: (msg, alertType) => dispatch(setAlert(msg, alertType))
 	}
 }
 

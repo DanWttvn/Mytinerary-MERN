@@ -47,7 +47,7 @@ class Profile extends Component {
 				<div id="ProfileP" className="container">
 					<p className="titles-font title-main">Profile</p>
 					
-					{ loading ? ( //todo: nest loading con isAuth para meter spinner
+					{ loading ? (
 							<Spinner/>
 						):(
 							<div className="center">
